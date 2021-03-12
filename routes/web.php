@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\ResiduoController;
+use App\Http\Controllers\Admin\CompanhiaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('admin')->name('admin.')->group(function() {
+    Route::resource('residuo', ResiduoController::class);
+    Route::resource('companhia', CompanhiaController::class);
+});
+

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Address extends Migration
+class CreateResiduosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class Address extends Migration
      */
     public function up()
     {
-        Schema::create('address', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('address');
-            $table->string('number');
-            $table->string('neighborhood');
-            $table->string('county');
-            $table->string('zone');
+        Schema::create('residuos', function (Blueprint $table) {
+            $table->id();
+            $table->string('nome');
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ class Address extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('residuos');
     }
 }
