@@ -25,7 +25,7 @@ class CreateCompanhiasTable extends Migration
             $table->string('vicepresidente');
             $table->string('fonevicepresidente');
             $table->string('endereco');
-            $table->string('numero');
+            $table->string('numero')->nullable();
             $table->string('bairro');
             $table->string('complemento')->nullable();
             $table->string('cidade');

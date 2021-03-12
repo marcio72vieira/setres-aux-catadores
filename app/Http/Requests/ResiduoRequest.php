@@ -24,7 +24,7 @@ class ResiduoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => "bail|required|min:3|unique:residuos,nome,$this->id"
+            'nome' => "bail|required|min:3|unique:residuos,nome,".$this->id
         ];
     }
 }
