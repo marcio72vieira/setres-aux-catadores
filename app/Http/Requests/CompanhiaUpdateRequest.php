@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CompanhiaRequest extends FormRequest
+class CompanhiaUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class CompanhiaRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -25,7 +25,7 @@ class CompanhiaRequest extends FormRequest
     {
         return [
             'nome' => 'bail|required|min:3',
-            'cnpj' => 'bail|required|min:10|unique:companhias,cnpj',
+            'cnpj' => 'bail|required|min:10',
             'fundacao' => 'bail|required',
             'foneum' => 'bail|required_without_all:celular,recado|regex:/^\([0-9]{3}\) [0-9][0-9]{3,4}\-[0-9]{4}$/',
             //'fonedois' => 'bail|required_without_all:celular,recado|regex:/^\([1-9]{2}\) [2-9][0-9]{3,4}\-[0-9]{4}$/',

@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ResiduoRequest;
+use App\Http\Requests\ResiduoUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\Residuo;
+
+use Illuminate\Support\Facades\Validator;   //Validação unique
+use Illuminate\Validation\Rule;             //Validação unique
 
 class ResiduoController extends Controller
 {
@@ -50,9 +54,19 @@ class ResiduoController extends Controller
     }
 
 
-    public function update($id, ResiduoRequest $request)
+    public function update($id, ResiduoUpdateRequest $request)
     {
         $residuo = Residuo::find($id);
+
+        // Validação unique
+        Validator::make($request->all(), [
+            'nome' => [
+                'required',
+                Rule::unique('residuos')->ignore($residuo->id),
+            ],
+        ]);
+
+
         $residuo->update($request->all());
 
         $request->session()->flash('sucesso', 'Registro atualizado com sucesso!');

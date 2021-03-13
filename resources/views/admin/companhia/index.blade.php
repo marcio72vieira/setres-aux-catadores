@@ -27,6 +27,8 @@
             <tr>
             <th scope="col">Id</th>
             <th scope="col">Nome</th>
+            <th scope="col">Telefone(s)</th>
+            <th scope="col">Presidente/Fone</th>
             <th scope="col">Ação</th>
             </tr>
         </thead>
@@ -35,6 +37,8 @@
             <tr>
                 <th scope="row">{{$companhia->id}}</th>
                 <td>{{$companhia->nome}}</td>
+                <td>{{$companhia->foneum}} / {{$companhia->fonedois}}</td>
+                <td>{{$companhia->presidente}} <br> {{$companhia->fonepresidente}}</td>
                 <td>
                 <a class="btn btn-warning" href="{{route('admin.companhia.show', $companhia->id)}}" role="button">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">

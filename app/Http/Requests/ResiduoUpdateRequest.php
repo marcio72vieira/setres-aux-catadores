@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ResiduoRequest extends FormRequest
+class ResiduoUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class ResiduoRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => 'bail|required|min:3|unique:residuos,nome'
+            'nome' => 'bail|required|min:3'
         ];
     }
 }

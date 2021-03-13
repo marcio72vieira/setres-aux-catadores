@@ -7,6 +7,9 @@ use App\Http\Requests\CompanhiaRequest;
 use Illuminate\Http\Request;
 use App\Models\Companhia;
 
+use Illuminate\Support\Facades\Validator;   //Validação unique
+use Illuminate\Validation\Rule;             //Validação unique
+
 class CompanhiaController extends Controller
 {
 
@@ -38,7 +41,9 @@ class CompanhiaController extends Controller
 
     public function show($id)
     {
-        //
+        $companhia = Companhia::find($id);
+
+        return view('admin.companhia.show', compact('companhia'));
     }
 
 
