@@ -27,7 +27,7 @@ class CompanhiaRequest extends FormRequest
             'nome' => 'bail|required|min:3',
             'cnpj' => 'bail|required|min:10|unique:companhias,cnpj',
             'fundacao' => 'bail|required',
-            'foneum' => 'bail|required_without_all:celular,recado|regex:/^\([0-9]{3}\) [0-9][0-9]{3,4}\-[0-9]{4}$/',
+            'foneum' => 'bail|required|regex:/^\([0-9]{3}\) [0-9][0-9]{3,4}\-[0-9]{4}$/',
             //'fonedois' => 'bail|required_without_all:celular,recado|regex:/^\([1-9]{2}\) [2-9][0-9]{3,4}\-[0-9]{4}$/',
             'presidente' => 'bail|required|min:3',
             'fonepresidente' => 'bail|required|regex:/^\([0-9]{3}\) [0-9][0-9]{3,4}\-[0-9]{4}$/',

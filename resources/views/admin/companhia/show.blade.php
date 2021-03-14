@@ -3,18 +3,18 @@
 @section('conteudo-principal')
 
     <div class="container">
-        <h2>Companhia</h2>
+        <h2>Companhia: {{$companhia->nome}}</h2>
     </div>
 
     <div class="container">
-    <form class="bg-light">
+    <form class="bg-light" style="padding: 10px; border:1px solid #000000">
         @csrf
 
         <div class="row">
             {{-- nome --}}
             <div class="col-7">
                 <div class="form-group">
-                    <label for="nome" class="col-form-label">Nome</label>
+                    <label for="nome" class="col-form-label"><strong>Nome</strong></label>
                     <input class="form-control" name="nome" type="text" value="{{$companhia->nome}}" id="nome" readonly>
                 </div>
                 @error('nome')
@@ -25,7 +25,7 @@
             {{-- cnpj --}}
             <div class="col-3">
                 <div class="form-group">
-                    <label for="cnpj" class="col-form-label">CNPJ</label>
+                    <label for="cnpj" class="col-form-label"><strong>CNPJ</strong></label>
                     <input class="form-control" name="cnpj" type="text" value="{{$companhia->cnpj}}" id="cnpj" readonly>
                 </div>
                 @error('cnpj')
@@ -37,7 +37,7 @@
             {{-- fundacao --}}
             <div class="col-2">
                 <div class="form-group">
-                    <label for="fundacao" class="col-form-label">Fundação</label>
+                    <label for="fundacao" class="col-form-label"><strong>Fundação</strong></label>
                     <input class="form-control" name="fundacao" type="date" value="{{$companhia->fundacao}}" id="fundacao" readonly>
                 </div>
                 @error('fundacao')
@@ -50,7 +50,7 @@
             {{-- foneum --}}
             <div class="col-4">
                 <div class="form-group">
-                    <label for="foneum" class="col-form-label">Telefone</label>
+                    <label for="foneum" class="col-form-label"><strong>Telefone</strong></label>
                     <input class="form-control" name="foneum" type="text" value="{{$companhia->foneum}}" id="foneum" readonly>
                 </div>
                 @error('foneum')
@@ -61,7 +61,7 @@
             {{-- fonedois --}}
             <div class="col-3">
                 <div class="form-group">
-                    <label for="fonedois" class="col-form-label">Telefone (opcional)</label>
+                    <label for="fonedois" class="col-form-label"><strong>Telefone (opcional)</strong></label>
                     <input class="form-control" name="fonedois" type="text" value="{{$companhia->fonedois}}" id="fonedois" readonly>
                 </div>
             </div>
@@ -71,7 +71,7 @@
             {{-- presidente --}}
             <div class="col-7">
                 <div class="form-group">
-                    <label for="presidente" class="col-form-label">Presidente</label>
+                    <label for="presidente" class="col-form-label"><strong>Presidente</strong></label>
                     <input class="form-control" name="presidente" type="text" value="{{$companhia->presidente}}" id="presidente" readonly>
                 </div>
                 @error('presidente')
@@ -82,7 +82,7 @@
             {{-- fonepresidente --}}
             <div class="col-5">
                 <div class="form-group">
-                    <label for="fonepresidente" class="col-form-label">Telefone</label>
+                    <label for="fonepresidente" class="col-form-label"><strong>Telefone</strong></label>
                     <input class="form-control" name="fonepresidente" type="text" value="{{$companhia->fonepresidente}}" id="fonepresidente" readonly>
                 </div>
                 @error('fonepresidente')
@@ -95,7 +95,7 @@
             {{-- vicepresidente --}}
             <div class="col-7">
                 <div class="form-group">
-                    <label for="vicepresidente" class="col-form-label">Vice-presidente</label>
+                    <label for="vicepresidente" class="col-form-label"><strong>Vice-presidente</strong></label>
                     <input class="form-control" name="vicepresidente" type="text" value="{{$companhia->vicepresidente}}" id="vicepresidente" readonly>
                 </div>
                 @error('vicepresidente')
@@ -106,7 +106,7 @@
             {{-- fonevicepresidente --}}
             <div class="col-5">
                 <div class="form-group">
-                    <label for="fonevicepresidente" class="col-form-label">Telefone</label>
+                    <label for="fonevicepresidente" class="col-form-label"><strong>Telefone</strong></label>
                     <input class="form-control" name="fonevicepresidente" type="text" value="{{$companhia->fonevicepresidente}}" id="fonevicepresidente" readonly>
                 </div>
                 @error('fonevicepresidente')
@@ -115,7 +115,7 @@
             </div>
         </div>
 
-        <hr style="margin-top: 50px;">
+        <hr style="margin-top: 50px; border: 5px solid green;">
 
         <h5>Enderço</h5>
 
@@ -123,7 +123,7 @@
             {{-- endereco --}}
             <div class="col-7">
                 <div class="form-group">
-                    <label for="endereco" class="col-form-label">Rua; Av; Trav; etc...</label>
+                    <label for="endereco" class="col-form-label"><strong>Rua; Av; Trav; etc...</strong></label>
                     <input class="form-control" name="endereco" type="text" value="{{$companhia->endereco}}" id="endereco" readonly>
                 </div>
                 @error('endereco')
@@ -134,7 +134,7 @@
             {{-- numero --}}
             <div class="col-1">
                 <div class="form-group">
-                    <label for="numero" class="col-form-label">Número</label>
+                    <label for="numero" class="col-form-label"><strong>Número</strong></label>
                     <input class="form-control" name="numero" type="text" value="{{$companhia->numero}}" id="numero" readonly>
                 </div>
             </div>
@@ -142,7 +142,7 @@
             {{-- bairro --}}
             <div class="col-4">
                 <div class="form-group">
-                    <label for="bairro" class="col-form-label">Bairro</label>
+                    <label for="bairro" class="col-form-label"><strong>Bairro</strong></label>
                     <input class="form-control" name="bairro" type="text" value="{{$companhia->bairro}}" id="bairro" readonly>
                 </div>
                 @error('bairro')
@@ -156,7 +156,7 @@
             {{-- complemento --}}
             <div class="col-4">
                 <div class="form-group">
-                    <label for="complemento" class="col-form-label">Complemento</label>
+                    <label for="complemento" class="col-form-label"><strong>Complemento</strong></label>
                     <input class="form-control" name="complemento" type="text" value="{{$companhia->complemento}}" id="complemento" readonly>
                 </div>
             </div>
@@ -164,7 +164,7 @@
             {{-- cidade --}}
             <div class="col-3">
                 <div class="form-group">
-                    <label for="cidade" class="col-form-label">Cidade</label>
+                    <label for="cidade" class="col-form-label"><strong>Cidade</strong></label>
                     <input class="form-control" name="cidade" type="text" value="{{$companhia->cidade}}" id="cidade" readonly>
                 </div>
                 @error('cidade')
@@ -175,14 +175,14 @@
             {{-- zona --}}
             <div class="col-5 align-self-end">
                 <div class="form-group">
-                    <label for="zona" class="col-form-label" style="margin-top: 5px">Zona</label>
+                    <label for="zona" class="col-form-label" style="margin-top: 5px"><strong>Zona</strong></label>
                     <br>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="zona" id="zonarural" {{$companhia->zona == 'rural' ? 'checked' : ''}} disabled>
+                        <input class="form-check-input" type="radio" name="zona" id="zonaurbana" {{$companhia->zona == 'urbana' ? 'checked' : ''}} disabled>
                         <label class="form-check-label" for="zonarural">Urbana</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="zona" id="zonaurbana" {{$companhia->zona == 'urbana' ? 'checked' : ''}} disabled>
+                        <input class="form-check-input" type="radio" name="zona" id="zonarural" {{$companhia->zona == 'rural' ? 'checked' : ''}} disabled>
                         <label class="form-check-label" for="zonaurbana">Rural</label>
                     </div>
                 </div>
@@ -192,11 +192,9 @@
             </div>
         </div>
 
-
-        <br><br><br>
-
-        <a class="btn btn-primary" href="{{route('admin.companhia.index')}}" role="button">Cancelar</a>
-
+        <div style="text-align: right; margin-top: 10px; margin-bottom: 10px">
+            <a class="btn btn-primary" href="{{route('admin.companhia.index')}}" role="button">Retornar</a>
+        </div>
       </form>
     </div>
 

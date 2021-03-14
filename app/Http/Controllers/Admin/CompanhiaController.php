@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanhiaRequest;
+use App\Http\Requests\CompanhiaUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\Companhia;
 
-use Illuminate\Support\Facades\Validator;   //Validação unique
-use Illuminate\Validation\Rule;             //Validação unique
+use Illuminate\Support\Facades\Validator;   //Validação unique para cnpj na atualização
+use Illuminate\Validation\Rule;             //Validação unique para cnpm na atualização
 
 class CompanhiaController extends Controller
 {
@@ -49,18 +50,38 @@ class CompanhiaController extends Controller
 
     public function edit($id)
     {
-        //
+        $companhia = Companhia::find($id);
+        return view('admin.companhia.edit', compact('companhia'));
     }
 
 
-    public function update(Request $request, $id)
+    public function update($id, CompanhiaUpdateRequest $request)
     {
-        //
+        $companhia = Companhia::find($id);
+
+        // Validação unique para cnpj na atualização
+        Validator::make($request->all(), [
+            'cnpj' => [
+                'required',
+                Rule::unique('companhias')->ignore($companhia->id),
+            ],
+        ]);
+
+
+        $companhia->update($request->all());
+
+        $request->session()->flash('sucesso', 'Registro atualizado com sucesso!');
+
+        return redirect()->route('admin.companhia.index');
     }
 
 
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+        Companhia::destroy($id);
+
+        $request->session()->flash('sucesso', 'Registro excluído com sucesso!');
+
+        return redirect()->route('admin.companhia.index');
     }
 }

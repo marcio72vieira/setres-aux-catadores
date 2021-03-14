@@ -18,7 +18,7 @@
               </div>
 
               <br><br><br>
-              <a class="btn btn-primary" href="{{route('admin.residuo.index')}}" role="button">Voltar</a>
+              <a class="btn btn-primary" href="{{route('admin.residuo.index')}}" role="button">Retornar</a>
 
         </form>
 
