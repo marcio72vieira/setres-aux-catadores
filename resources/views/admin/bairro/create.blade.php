@@ -3,14 +3,14 @@
 @section('conteudo-principal')
 
     <div class="container">
-        <h2>CADASTRO DE BAIRROS</h2>
+        <h2>CADASTRAR BAIRROS</h2>
 
         <br><br>
         <form action="{{route('admin.bairro.store')}}" method="POST">
             @csrf
 
             <div class="form-group">
-                <label for="exampleInputEmail1">Resíduo</label>
+                <label for="exampleInputEmail1">Bairro</label>
                 <input type="text" class="form-control" id="name" name="nome" value="{{old('nome')}}" required>
                 @error('nome')
                     <small style="color: red">{{$message}}</small>

@@ -13,7 +13,7 @@ class AssociadoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,24 @@ class AssociadoRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nome' => 'bail|required|min:3',
+            'nascimento' => 'bail|required',
+            'rg' => 'bail|required|min:3',
+            'rgorgaoemissor' => 'bail|required|min:3',
+            'cpf' => 'bail|required|min:10|unique:associado,cpf',
+            'sexo' => 'bail|required',
+            'racacor' => 'bail|required',
+            'filiacao' => 'bail|required',
+            'quantidade' => 'bail|required',
+            'endereco' => 'bail|required|min:3',
+            //'numero' => 'bail|required',
+            'bairro' => 'bail|required|min:3',
+            //'complemento' => 'required',
+            'cidade' => 'bail|required',
+            'zona' => 'bail|required',
+            'foneum' => 'bail|required|regex:/^\([0-9]{3}\) [0-9][0-9]{3,4}\-[0-9]{4}$/',
+            //'fonedois' => 'bail|required_without_all:celular,recado|regex:/^\([1-9]{2}\) [2-9][0-9]{3,4}\-[0-9]{4}$/',
+            'companhia_id' => 'bail|required',
         ];
     }
 }

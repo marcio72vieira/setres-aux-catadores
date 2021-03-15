@@ -26,4 +26,8 @@ class Companhia extends Model
         'cidade',
         'zona',
     ];
+
+    public function associados() {
+        return $this->hasMany(Associado::class);
+    }
 }

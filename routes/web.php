@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AssociadoController;
 use App\Http\Controllers\Admin\ResiduoController;
 use App\Http\Controllers\Admin\CompanhiaController;
 use App\Http\Controllers\Admin\BairroController;
@@ -24,5 +25,6 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::resource('residuo', ResiduoController::class);
     Route::resource('companhia', CompanhiaController::class);
     Route::resource('bairro', BairroController::class);
+    Route::resource('associado', AssociadoController::class);
 });
 
