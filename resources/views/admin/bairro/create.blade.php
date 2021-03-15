@@ -3,10 +3,10 @@
 @section('conteudo-principal')
 
     <div class="container">
-        <h2>CADASTRAR RESÍDUO SÓLIDO</h2>
+        <h2>CADASTRO DE BAIRROS</h2>
 
         <br><br>
-        <form action="{{route('admin.residuo.store')}}" method="POST">
+        <form action="{{route('admin.bairro.store')}}" method="POST">
             @csrf
 
             <div class="form-group">
@@ -18,7 +18,7 @@
               </div>
 
               <div style="text-align: right; margin-top: 10px; margin-bottom: 10px">
-                <a class="btn btn-primary" href="{{route('admin.residuo.index')}}" role="button">Cancelar</a>
+                <a class="btn btn-primary" href="{{route('admin.bairro.index')}}" role="button">Cancelar</a>
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
             </div>
 

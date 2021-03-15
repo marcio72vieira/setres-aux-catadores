@@ -27,10 +27,11 @@
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Tabelas
+                  Gerenciar
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="{{route('admin.residuo.index')}}">Residuos</a></li>
+                  <li><a class="dropdown-item" href="{{route('admin.bairro.index')}}">Bairros</a></li>
                   <li><a class="dropdown-item" href="{{route('admin.companhia.index')}}">Companhias</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="#">Something else here</a></li>

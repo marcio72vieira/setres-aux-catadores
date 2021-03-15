@@ -3,7 +3,7 @@
 @section('conteudo-principal')
 
     <div class="container">
-        <h2>LISTA DE COMPANHIAS</h2>
+        <h2>COMPANHIAS</h2>
 
 
     <a class="btn btn-primary" href="{{route('admin.companhia.create')}}" role="button">

@@ -3,7 +3,7 @@
 @section('conteudo-principal')
 
     <div class="container">
-        <h2>Companhia: {{$companhia->nome}}</h2>
+        <h5>COMPANHIA: {{$companhia->nome}}</h5>
     </div>
 
     <div class="container">

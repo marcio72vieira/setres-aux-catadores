@@ -3,7 +3,7 @@
 @section('conteudo-principal')
 
     <div class="container">
-        <h2>Cadastrar Companhia</h2>
+        <h5>CADASTRAR COMPANHIA</h5>
     </div>
 
     <div class="container">
