@@ -58,7 +58,7 @@
             {{-- rg --}}
             <div class="col-2">
                 <div class="form-group">
-                    <label for="rg" class="col-form-label"><strong>rg</strong></label>
+                    <label for="rg" class="col-form-label"><strong>RG</strong></label>
                     <input class="form-control" name="rg" type="text" value="{{old('rg')}}" id="rg">
                 </div>
                 @error('rg')
@@ -92,13 +92,13 @@
             <div class="col-2">
                 <div class="form-group">
                     <label for="racacor" class="col-form-label"><strong>Raça / Cor</strong></label>
-                    <select class="form-control" id="racacor">
-                        <option value="" disabled>Escolha ...</option>
-                        <option value="branca">Branca</option>
-                        <option value="preta">Preta</option>
-                        <option value="parda">Parda</option>
-                        <option value="amarela">Amarela</option>
-                        <option value="indigena">Indígena</option>
+                    <select name="racacor" id="racacor" class="form-control">
+                        <option value="" selected disabled>Escolha ...</option>
+                        <option value="branca" {{old('racacor') == 'branca' ? 'selected' : ''}}>Branca</option>
+                        <option value="preta" {{old('racacor') == 'preta' ? 'selected' : ''}}>Preta</option>
+                        <option value="parda" {{old('racacor') == 'parda' ? 'selected' : ''}}>Parda</option>
+                        <option value="amarela" {{old('racacor') == 'amarela' ? 'selected' : ''}}>Amarela</option>
+                        <option value="indigena" {{old('racacor') == 'indigena' ? 'selected' : ''}}>Indígena</option>
                     </select>
                 </div>
                 @error('racacor')
@@ -120,69 +120,49 @@
         </div>
 
         <div class="row">
-            {{-- foneum --}}
-            <div class="col-4">
+            {{-- companhia_id --}}
+            <div class="col-7">
                 <div class="form-group">
-                    <label for="foneum" class="col-form-label"><strong>Telefone</strong></label>
-                    <input class="form-control" name="foneum" type="text" value="{{old('foneum')}}" id="foneum">
+                    <label for="companhia_id" class="col-form-label"><strong>Companhia / Associação</strong></label>
+                    <select name="companhia_id" id="companhia_id" class="form-control">
+                        <option value="" selected disabled>Escolha uma Companhia / Associação ...</option>
+                        @foreach($companhias  as $companhia)
+                            <option value="{{$companhia->id}}" {{old('companhia_id') == $companhia->id ? 'selected' : ''}}>{{$companhia->nome}}</option>
+                        @endforeach
+                    </select>
                 </div>
-                @error('foneum')
+                @error('companhia_id')
                     <small style="color: red">{{$message}}</small>
                 @enderror
             </div>
 
-            {{-- fonedois --}}
+            {{-- bairros --}}
             <div class="col-3">
                 <div class="form-group">
-                    <label for="fonedois" class="col-form-label"><strong>Telefone (opcional)</strong></label>
-                    <input class="form-control" name="fonedois" type="text" value="{{old('fonedois')}}" id="fonedois">
+                    <label for="bairros" class="col-form-label"><strong>Área de Atuação</strong></label>
+                    <select name="bairros[]" id="bairros" class="form-control" multiple>
+                        <option value="" disabled>Escolha a(s) área(s)...</option>
+                        @foreach($bairros  as $bairro)
+                            <option value="{{$bairro->id}}"
+                                @if(old('bairros'))
+                                    {{in_array($bairro->id, old('bairros')) ? 'selected' : ''}}
+                                @endif
+                            >{{$bairro->nome}}</option>
+                        @endforeach
+                    </select>
                 </div>
-            </div>
-        </div>
-
-        <div class="row">
-            {{-- presidente --}}
-            <div class="col-7">
-                <div class="form-group">
-                    <label for="presidente" class="col-form-label"><strong>Presidente</strong></label>
-                    <input class="form-control" name="presidente" type="text" value="{{old('presidente')}}" id="presidente">
-                </div>
-                @error('presidente')
+                @error('bairros')
                     <small style="color: red">{{$message}}</small>
                 @enderror
             </div>
 
-            {{-- fonepresidente --}}
-            <div class="col-5">
+            {{-- quantidade --}}
+            <div class="col-1">
                 <div class="form-group">
-                    <label for="fonepresidente" class="col-form-label"><strong>Telefone</strong></label>
-                    <input class="form-control" name="fonepresidente" type="text" value="{{old('fonepresidente')}}" id="fonepresidente">
+                    <label for="quantidade" class="col-form-label"><strong>kg</strong></label>
+                    <input class="form-control" name="quantidade" type="number" value="{{old('quantidade')}}" id="quantidade">
                 </div>
-                @error('fonepresidente')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-        </div>
-
-        <div class="row">
-            {{-- vicepresidente --}}
-            <div class="col-7">
-                <div class="form-group">
-                    <label for="vicepresidente" class="col-form-label"><strong>Vice-presidente</strong></label>
-                    <input class="form-control" name="vicepresidente" type="text" value="{{old('vicepresidente')}}" id="vicepresidente">
-                </div>
-                @error('vicepresidente')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-
-            {{-- fonevicepresidente --}}
-            <div class="col-5">
-                <div class="form-group">
-                    <label for="fonevicepresidente" class="col-form-label"><strong>Telefone</strong></label>
-                    <input class="form-control" name="fonevicepresidente" type="text" value="{{old('fonevicepresidente')}}" id="fonevicepresidente">
-                </div>
-                @error('fonevicepresidente')
+                @error('quantidade')
                     <small style="color: red">{{$message}}</small>
                 @enderror
             </div>
@@ -260,6 +240,30 @@
                     </div>
                 </div>
                 @error('zona')
+                    <small style="color: red">{{$message}}</small>
+                @enderror
+            </div>
+        </div>
+
+        <div class="row">
+            {{-- foneum --}}
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="foneum" class="col-form-label"><strong>Telefone</strong></label>
+                    <input class="form-control" name="foneum" type="text" value="{{old('foneum')}}" id="foneum">
+                </div>
+                @error('foneum')
+                    <small style="color: red">{{$message}}</small>
+                @enderror
+            </div>
+
+            {{-- fonedois --}}
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="fonedois" class="col-form-label"><strong>Telefone</strong></label>
+                    <input class="form-control" name="fonedois" type="text" value="{{old('fonedois')}}" id="fonedois">
+                </div>
+                @error('fonedois')
                     <small style="color: red">{{$message}}</small>
                 @enderror
             </div>

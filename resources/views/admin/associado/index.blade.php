@@ -28,6 +28,7 @@
             <th scope="col">Nome</th>
             <th scope="col">Telefone(s)</th>
             <th scope="col">Companhia</th>
+            <th scope="col">Áreas</th>
             <th scope="col">Ação</th>
             </tr>
         </thead>
@@ -37,7 +38,8 @@
                     <th scope="row">{{$associado->id}}</th>
                     <td>{{$associado->nome}}</td>
                     <td>{{$associado->foneum}} / {{$associado->fonedois}}</td>
-                    <td>{{$associado->companhia}}</td>
+                    <td>{{$associado->companhia->nome}}</td>
+                    <td>@foreach($associado->bairros as $bairro) {{$bairro->nome}}; @endforeach </td>
                     <td>
                         <a class="btn btn-warning" href="{{route('admin.associado.show', $associado->id)}}" role="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">

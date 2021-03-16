@@ -35,4 +35,8 @@ class Associado extends Model
     public function companhia() {
         return $this->belongsTo(Companhia::class);
     }
+
+    public function bairros() {
+        return $this->belongsToMany(Bairro::class)->withTimestamps();
+    }
 }

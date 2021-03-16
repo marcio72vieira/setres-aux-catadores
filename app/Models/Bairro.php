@@ -12,4 +12,8 @@ class Bairro extends Model
     protected $fillable = [
         'nome'
     ];
+
+    public function associados() {
+        return $this->belongsToMany(Associado::class)->withTimestamps();
+    }
 }
