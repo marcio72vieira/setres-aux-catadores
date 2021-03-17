@@ -7,8 +7,7 @@
     </div>
 
     <div class="container">
-    <form action="{{route('admin.associado.store')}}" method="POST" class="bg-light" style="padding: 10px; border:1px solid #000000">
-        @csrf
+    <form action="" method="" class="bg-light" style="padding: 10px; border:1px solid #000000">
 
         <div class="row">
             {{-- nome --}}
@@ -143,7 +142,7 @@
                     <select name="bairros[]" id="bairros" class="form-control" multiple disabled>
                         <option value="">Escolha a(s) área(s)...</option>
                         @foreach($bairros as $bairro)
-                            <option value="{{$bairro->id}}"{{$associado->bairros->contains($bairro->id) ? 'selected' : ''}}>{{$bairro->nome}}</option>
+                            <option value="{{$bairro->id}}" {{$associado->bairros->contains($bairro->id) ? 'selected' : ''}}>{{$bairro->nome}}</option>
                         @endforeach
                     </select>
                 </div>
