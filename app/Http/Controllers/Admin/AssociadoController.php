@@ -54,7 +54,10 @@ class AssociadoController extends Controller
 
     public function show($id)
     {
-        //
+        $associado = Associado::with(['companhia', 'bairros'])->find($id);
+        $companhias = Companhia::all();
+        $bairros = Bairro::all();
+        return view('admin.associado.show', compact('associado', 'companhias','bairros'));
     }
 
 
