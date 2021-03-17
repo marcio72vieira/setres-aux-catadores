@@ -33,6 +33,7 @@
                   <li><a class="dropdown-item" href="{{route('admin.residuo.index')}}">Residuos</a></li>
                   <li><a class="dropdown-item" href="{{route('admin.bairro.index')}}">Bairros</a></li>
                   <li><a class="dropdown-item" href="{{route('admin.companhia.index')}}">Companhias</a></li>
+                  <li><a class="dropdown-item" href="{{route('admin.pontocoleta.index')}}">Pontos de Coleta</a></li>
                   <li><a class="dropdown-item" href="{{route('admin.associado.index')}}">Associados</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="#">Something else here</a></li>

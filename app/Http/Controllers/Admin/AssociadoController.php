@@ -103,8 +103,14 @@ class AssociadoController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        echo "Registro DELETADO!";
+        Associado::destroy($id);
+
+        $request->session()->flash('sucesso', 'Registro excluido com sucesso!');
+
+        return redirect()->route('admin.associado.index');
+
+
     }
 }

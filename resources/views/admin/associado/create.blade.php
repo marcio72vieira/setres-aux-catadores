@@ -168,7 +168,7 @@
             </div>
         </div>
 
-        <hr style="margin-top: 50px; border: 5px solid green;">
+        <hr style="margin-top: 50px; border: 2px solid #999797;">
 
         <h5>Enderço</h5>
 
