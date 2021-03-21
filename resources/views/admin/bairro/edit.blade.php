@@ -1,29 +1,60 @@
-@extends('admin.layoutmaster')
+@extends('template.layoutmaster')
 
 @section('conteudo-principal')
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Gerenciar / Bairros / Editar</h1>
 
-    <div class="container">
-        <h2>EDITAR BAIRRO: {{$bairro->nome }}</h2>
+    <div class="row">
 
-        <br><br>
-        <form action="{{route('admin.bairro.update', $bairro->id )}}" method="POST">
-            @csrf
-            @method('PUT')
+        <div class="col-lg-12 order-lg-1">
 
-            <div class="form-group">
-                <label for="exampleInputEmail1">Resíduo</label>
-                <input type="text" class="form-control" id="name" name="nome" value="{{old('nome', $bairro->nome)}}" required>
-                @error('nome')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-              </div>
+            <div class="card shadow mb-4">
 
-              <div style="text-align: right; margin-top: 10px; margin-bottom: 10px">
-                <a class="btn btn-primary" href="{{route('admin.bairro.index')}}" role="button">Cancelar</a>
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        {{$bairro->nome}}<br>
+                        <span class="small text-secondary">Campo marcado com * é de preenchimento obrigatório!</span>
+                    </h6>
+                </div>
+
+                <div class="card-body">
+
+                    <form action="{{route('admin.bairro.update', $bairro->id )}}" method="POST" autocomplete="off">
+                        @csrf
+                        @method('PUT')
+
+
+
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="nome">Nome<span class="small text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="nome" name="nome" value="{{old('nome', $bairro->nome)}}" required>
+                                        @error('nome')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Button -->
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <a class="btn btn-primary" href="{{route('admin.bairro.index')}}" role="button">Cancelar</a>
+                                    <button type="submit" class="btn btn-primary" style="width: 95px;"> Salvar </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
             </div>
-        </form>
 
+        </div>
 
     </div>
 
