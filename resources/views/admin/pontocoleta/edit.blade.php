@@ -1,106 +1,140 @@
-@extends('admin.layoutmaster')
+@extends('template.layoutmaster')
 
 @section('conteudo-principal')
 
-    <div class="container">
-        <h5>EDITAR PONTO DE COLETA: {{$pontocoleta->nome}}</h5>
-    </div>
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Gerenciar / Pontos de Coleta / Editar</h1>
 
-    <div class="container">
-    <form action="{{route('admin.pontocoleta.update', $pontocoleta->id)}}" method="POST" class="bg-light" style="padding: 10px; border:1px solid #000000">
-        @csrf
-        @method('PUT')
+    <div class="row">
 
-        <div class="row">
-            {{-- nome --}}
-            <div class="col-12">
-                <div class="form-group">
-                    <label for="nome" class="col-form-label"><strong>Nome</strong></label>
-                    <input class="form-control" name="nome" type="text" value="{{old('nome', $pontocoleta->nome)}}" id="nome">
+        <div class="col-lg-12 order-lg-1">
+
+            <div class="card shadow mb-4">
+
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        {{$pontocoleta->nome}}<br>
+                        <span class="small text-secondary">Campo marcado com * é de preenchimento obrigatório!</span>
+                    </h6>
                 </div>
-                @error('nome')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
+
+                <div class="card-body">
+
+                    <form method="POST" action="{{route('admin.pontocoleta.update', $pontocoleta->id)}}" autocomplete="off">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                {{-- nome --}}
+                                <div class="col-lg-12">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="nome">Nome<span class="small text-danger">*</span></label>
+                                        <input type="text" id="nome" class="form-control" name="nome" value="{{old('nome', $pontocoleta->nome)}}" required>
+                                        @error('nome')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                {{-- endereco --}}
+                                <div class="col-lg-7">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="endereco">Rua; Av; Travessa, etc...<span class="small text-danger">*</span></label>
+                                        <input type="text" id="endereco" class="form-control" name="endereco" value="{{old('endereco', $pontocoleta->endereco)}}" required>
+                                        @error('endereco')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- numero --}}
+                                <div class="col-lg-1">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="numero">Número<span class="small text-danger">*</span></label>
+                                        <input type="text" id="numero" class="form-control" name="numero" value="{{old('numero', $pontocoleta->numero)}}">
+                                        @error('numero')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- bairro --}}
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="bairro">Bairro<span class="small text-danger">*</span></label>
+                                        <input type="text" id="bairro" class="form-control" name="bairro" value="{{old('bairro', $pontocoleta->bairro)}}" required>
+                                        @error('bairro')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                {{-- complemento --}}
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="complemento">Complemento</label>
+                                        <input type="text" id="complemento" class="form-control" name="complemento" value="{{old('complemento', $pontocoleta->complemento)}}">
+                                        @error('complemento')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- cidade --}}
+                                <div class="col-lg-3">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="cidade">Cidade<span class="small text-danger">*</span></label>
+                                        <input type="text" id="cidade" class="form-control" name="cidade" value="{{old('cidade', $pontocoleta->cidade)}}" required>
+                                        @error('cidade')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- zona --}}
+                                <div class="col-lg-5">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="zona" style="margin-top: 5px">Zona<span class="small text-danger">*</span></label>
+                                        <br>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="zona" id="zonaurbana" value="urbana" {{old('zona', $pontocoleta->zona) == 'urbana' ? 'checked' : ''}} required>
+                                            <label class="form-check-label" for="zonaurbana">Urbana</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="zona" id="zonarural" value="rural" {{old('zona', $pontocoleta->zona) == 'rural' ? 'checked' : ''}} required>
+                                            <label class="form-check-label" for="zonarural">Rural</label>
+                                        </div>
+                                        @error('zona')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Button -->
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <a class="btn btn-primary" href="{{route('admin.pontocoleta.index')}}" role="button">Cancelar</a>
+                                    <button type="submit" class="btn btn-primary" style="width: 95px;"> Salvar </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
             </div>
+
         </div>
 
-        <div class="row">
-            {{-- endereco --}}
-            <div class="col-7">
-                <div class="form-group">
-                    <label for="endereco" class="col-form-label"><strong>Rua; Av; Trav; etc...</strong></label>
-                    <input class="form-control" name="endereco" type="text" value="{{old('endereco', $pontocoleta->endereco)}}" id="endereco">
-                </div>
-                @error('endereco')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-
-            {{-- numero --}}
-            <div class="col-1">
-                <div class="form-group">
-                    <label for="numero" class="col-form-label"><strong>Número</strong></label>
-                    <input class="form-control" name="numero" type="text" value="{{old('numero', $pontocoleta->numero)}}" id="numero">
-                </div>
-            </div>
-
-            {{-- bairro --}}
-            <div class="col-4">
-                <div class="form-group">
-                    <label for="bairro" class="col-form-label"><strong>Bairro</strong></label>
-                    <input class="form-control" name="bairro" type="text" value="{{old('bairro', $pontocoleta->bairro)}}" id="bairro">
-                </div>
-                @error('bairro')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-        </div>
-
-        <div class="row">
-            {{-- complemento --}}
-            <div class="col-4">
-                <div class="form-group">
-                    <label for="complemento" class="col-form-label"><strong>Complemento</strong></label>
-                    <input class="form-control" name="complemento" type="text" value="{{old('complemento', $pontocoleta->complemento)}}" id="complemento">
-                </div>
-            </div>
-
-            {{-- cidade --}}
-            <div class="col-3">
-                <div class="form-group">
-                    <label for="cidade" class="col-form-label"><strong>Cidade</strong></label>
-                    <input class="form-control" name="cidade" type="text" value="{{old('cidade', $pontocoleta->cidade)}}" id="cidade">
-                </div>
-                @error('cidade')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-
-            {{-- zona --}}
-            <div class="col-5 align-self-end">
-                <div class="form-group">
-                    <label for="zona" class="col-form-label" style="margin-top: 5px"><strong>Zona</strong></label>
-                    <br>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="zona" id="zonaurbana" value="urbana" {{old('zona', $pontocoleta->zona) =="urbana" ? 'checked': ''}}>
-                        <label class="form-check-label" for="zonaurbana">Urbana</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="zona" id="zonarural" value="rural" {{old('zona', $pontocoleta->zona) =="rural" ? 'checked': ''}}>
-                        <label class="form-check-label" for="zonarural">Rural</label>
-                    </div>
-                </div>
-                @error('zona')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-        </div>
-
-        <div style="text-align: right; margin-top: 10px; margin-bottom: 10px">
-            <a class="btn btn-primary" href="{{route('admin.pontocoleta.index')}}" role="button">Cancelar</a>
-            <button type="submit" class="btn btn-primary">Salvar</button>
-        </div>
-      </form>
     </div>
 
 @endsection

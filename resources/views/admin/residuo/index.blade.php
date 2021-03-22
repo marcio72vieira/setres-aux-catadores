@@ -3,7 +3,7 @@
 @section('conteudo-principal')
 
     <div class="container">
-        <h2>RESÍDUOS SÓLIDOS</h2>
+        <h2>Resíduos Sólidos</h2>
 
         <a class="btn btn-primary" href="{{route('admin.residuo.create')}}" role="button">
             <i class="fas fa-plus-circle"></i>

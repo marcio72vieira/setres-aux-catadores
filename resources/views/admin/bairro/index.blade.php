@@ -3,7 +3,7 @@
 @section('conteudo-principal')
 
     <div class="container">
-        <h2>BAIRROS</h2>
+        <h2>Bairros</h2>
 
         <a class="btn btn-primary" href="{{route('admin.bairro.create')}}" role="button">
             <i class="fas fa-plus-circle"></i>
