@@ -1,281 +1,304 @@
-@extends('admin.layoutmaster')
+@extends('template.layoutmaster')
 
 @section('conteudo-principal')
 
-    <div class="container">
-        <h5>EDITAR ASSOCIADO: {{$associado->nome}}</h5>
-    </div>
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Gerenciar / Associado / Editar</h1>
 
-    <div class="container">
-    <form action="{{route('admin.associado.update', $associado->id)}}" method="POST" class="bg-light" style="padding: 10px; border:1px solid #000000">
-        @csrf
-        @method('PUT')
+    <div class="row">
 
-        <div class="row">
-            {{-- nome --}}
-            <div class="col-7">
-                <div class="form-group">
-                    <label for="nome" class="col-form-label"><strong>Nome</strong></label>
-                    <input class="form-control" name="nome" type="text" value="{{old('nome',$associado->nome)}}" id="nome">
+        <div class="col-lg-12 order-lg-1">
+
+            <div class="card shadow mb-4">
+
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        {{$associado->nome}}<br>
+                        <span class="small text-secondary">Campo marcado com * é de preenchimento obrigatório!</span>
+                    </h6>
                 </div>
-                @error('nome')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
 
-            {{-- nascimento --}}
-            <div class="col-2">
-                <div class="form-group">
-                    <label for="nascimento" class="col-form-label"><strong>Data de Nascimento</strong></label>
-                    <input class="form-control" name="nascimento" type="date" value="{{old('nascimento', $associado->nascimento)}}" id="nascimento">
-                </div>
-                @error('nascimento')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
+                <div class="card-body">
 
-            {{-- sexo --}}
-            <div class="col-3">
-                <div class="form-group">
-                    <label for="sexo" class="col-form-label"><strong>Sexo</strong></label>
-                    <br>
-                    <div class="form-check form-check-inline" style="margin-top: 5px;">
-                        <input class="form-check-input" type="radio" name="sexo" id="sexom" value="M" {{old('sexo', $associado->sexo) =="M" ? 'checked': ''}}>
-                        <label class="form-check-label" for="sexom">Masculino</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sexo" id="sexof" value="F" {{old('sexo', $associado->sexo) =="F" ? 'checked': ''}}>
-                        <label class="form-check-label" for="sexof">Feminino</label>
-                    </div>
+                    <form method="POST" action="{{route('admin.associado.update', $associado->id)}}" autocomplete="off">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                {{-- nome --}}
+                                <div class="col-lg-7">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="nome">Nome<span class="small text-danger">*</span></label>
+                                        <input type="text" id="nome" class="form-control" name="nome" value="{{old('nome', $associado->nome)}}" required>
+                                        @error('nome')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- nascimento --}}
+                                <div class="col-lg-2">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="nascimento">Data de Nascimento<span class="small text-danger">*</span></label>
+                                        <input type="date" id="nascimento" class="form-control" name="nascimento" value="{{old('nascimento', $associado->nascimento)}}" required>
+                                        @error('nascimento')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- sexo --}}
+                                <div class="col-lg-3">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="sexo">Sexo<span class="small text-danger">*</span></label>
+                                        <br>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="sexo" id="sexom" value="m" {{old('sexo', $associado->sexo) == 'm' ? 'checked' : ''}} required>
+                                            <label class="form-check-label" for="sexom">Masculino</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="sexo" id="sexof" value="f" {{old('sexo', $associado->sexo) == 'f' ? 'checked' : ''}} required>
+                                            <label class="form-check-label" for="sexof">Feminino</label>
+                                        </div>
+                                        @error('sexo')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                {{-- rg --}}
+                                <div class="col-lg-2">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="rg">RG<span class="small text-danger">*</span></label>
+                                        <input type="text" id="rg" class="form-control" name="rg" value="{{old('rg', $associado->rg)}}" required>
+                                        @error('rg')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- rgorgaoemissor --}}
+                                <div class="col-lg-3">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="rgorgaoemissor">Orgão Emissor</label>
+                                        <input type="text" id="rgorgaoemissor" class="form-control" name="rgorgaoemissor" value="{{old('rgorgaoemissor', $associado->rgorgaoemissor)}}" required>
+                                        @error('rgorgaoemissor')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- cpf --}}
+                                <div class="col-lg-2">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="cpf">CPF<span class="small text-danger">*</span></label>
+                                        <input type="text" id="cpf" class="form-control" name="cpf" value="{{old('cpf', $associado->cpf)}}" required>
+                                        @error('cpf')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- racacor --}}
+                                <div class="col-lg-2">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="racacor">Raça / Cor<span class="small text-danger">*</span></label>
+                                        <select name="racacor" id="racacor" class="form-control" required>
+                                            <option value="" selected disabled>Escolha ...</option>
+                                            <option value="branca" {{old('racacor', $associado->racacor) == 'branca' ? 'selected' : ''}}>Branca</option>
+                                            <option value="preta" {{old('racacor', $associado->racacor) == 'preta' ? 'selected' : ''}}>Preta</option>
+                                            <option value="parda" {{old('racacor', $associado->racacor) == 'parda' ? 'selected' : ''}}>Parda</option>
+                                            <option value="amarela" {{old('racacor', $associado->racacor) == 'amarela' ? 'selected' : ''}}>Amarela</option>
+                                            <option value="indigena" {{old('racacor', $associado->racacor) == 'indigena' ? 'selected' : ''}}>Indígena</option>
+                                        </select>
+                                        @error('racacor')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- filiacao --}}
+                                <div class="col-lg-2">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="filiacao">Data de filiacao<span class="small text-danger">*</span></label>
+                                        <input type="date" id="filiacao" class="form-control" name="filiacao" value="{{old('filiacao', $associado->filiacao)}}" required>
+                                        @error('filiacao')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                {{-- companhia_id --}}
+                                <div class="col-lg-7">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="companhia_id">Companhia / Associação<span class="small text-danger">*</span></label>
+                                        <select name="companhia_id" id="companhia_id" class="form-control" required>
+                                            <option value="" selected disabled>Escolha uma Companhia / Associação ...</option>
+                                            @foreach($companhias  as $companhia)
+                                                <option value="{{$companhia->id}}" {{old('companhia_id', $associado->companhia_id) == $companhia->id ? 'selected' : ''}}>{{$companhia->nome}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('companhia_id')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- bairros --}}
+                                <div class="col-lg-2">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="bairros">Área de Atuação<span class="small text-danger">*</span></label>
+                                        <select name="bairros[]" id="bairros" class="form-control" multiple required>
+                                            <option value="" disabled>Escolha o(s) Bairro(s) onde atua...</option>
+                                            @foreach($bairros  as $bairro)
+                                                <option value="{{$bairro->id}}"
+                                                    @if(old('bairros'))
+                                                        {{in_array($bairro->id, old('bairros')) ? 'selected' : ''}}
+                                                    @else
+                                                        {{$associado->bairros->contains($bairro->id) ? 'selected' : ''}}
+                                                    @endif
+                                                >{{$bairro->nome}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('bairros')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- quantidade --}}
+                                <div class="col-lg-2">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="quantidade">Qtd. média Coletada (Kg)<span class="small text-danger">*</span></label>
+                                        <input type="number" id="quantidade" class="form-control" name="quantidade" value="{{old('quantidade', $associado->quantidade)}}" required>
+                                        @error('quantidade')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr>
+                            <h5>Endereço</h5>
+
+                            <div class="row">
+                                {{-- endereco --}}
+                                <div class="col-lg-7">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="endereco">Rua; Av; Travessa, etc...<span class="small text-danger">*</span></label>
+                                        <input type="text" id="endereco" class="form-control" name="endereco" value="{{old('endereco', $associado->endereco)}}" required>
+                                        @error('endereco')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- numero --}}
+                                <div class="col-lg-1">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="numero">Número<span class="small text-danger">*</span></label>
+                                        <input type="text" id="numero" class="form-control" name="numero" value="{{old('numero', $associado->numero)}}">
+                                        @error('numero')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- bairro --}}
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="bairro">Bairro<span class="small text-danger">*</span></label>
+                                        <input type="text" id="bairro" class="form-control" name="bairro" value="{{old('bairro', $associado->bairro)}}" required>
+                                        @error('bairro')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                {{-- complemento --}}
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="complemento">Complemento</label>
+                                        <input type="text" id="complemento" class="form-control" name="complemento" value="{{old('complemento', $associado->complemento)}}">
+                                        @error('complemento')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- cidade --}}
+                                <div class="col-lg-3">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="cidade">Cidade<span class="small text-danger">*</span></label>
+                                        <input type="text" id="cidade" class="form-control" name="cidade" value="{{old('cidade', $associado->cidade)}}" required>
+                                        @error('cidade')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- zona --}}
+                                <div class="col-lg-5">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="zona" style="margin-top: 5px">Zona<span class="small text-danger">*</span></label>
+                                        <br>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="zona" id="zonaurbana" value="urbana" {{old('zona', $associado->zona) == 'urbana' ? 'checked' : ''}} required>
+                                            <label class="form-check-label" for="zonaurbana">Urbana</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="zona" id="zonarural" value="rural" {{old('zona', $associado->zona) == 'rural' ? 'checked' : ''}} required>
+                                            <label class="form-check-label" for="zonarural">Rural</label>
+                                        </div>
+                                        @error('zona')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                {{-- foneum --}}
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="foneum">Telefone 1</label>
+                                        <input type="text" id="foneum" class="form-control" name="foneum" placeholder="(99) 9999-9999" value="{{old('foneum', $associado->foneum)}}" required>
+                                        @error('foneum')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- fonedois --}}
+                                <div class="col-lg-3">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="fonedois">Telefone 2 (opcional)</label>
+                                        <input type="text" id="fonedois" class="form-control" name="fonedois"  placeholder="(99) 9999-9999" value="{{old('fonedois', $associado->fonedois)}}">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Button -->
+                        <div class="pl-lg-4">
+                            <div class="row">
+                                <div class="col text-center">
+                                    <a class="btn btn-primary" href="{{route('admin.associado.index')}}" role="button">Cancelar</a>
+                                    <button type="submit" class="btn btn-primary" style="width: 95px;"> Salvar </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                @error('sexo')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
             </div>
         </div>
-
-        <div class="row">
-
-            {{-- rg --}}
-            <div class="col-2">
-                <div class="form-group">
-                    <label for="rg" class="col-form-label"><strong>RG</strong></label>
-                    <input class="form-control" name="rg" type="text" value="{{old('rg', $associado->rg)}}" id="rg">
-                </div>
-                @error('rg')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-
-            {{-- rgorgaoemissor --}}
-            <div class="col-3">
-                <div class="form-group">
-                    <label for="rgorgaoemissor" class="col-form-label"><strong>Orgão Emissor</strong></label>
-                    <input class="form-control" name="rgorgaoemissor" type="text" value="{{old('rgorgaoemissor', $associado->rgorgaoemissor)}}" id="rgorgaoemissor">
-                </div>
-                @error('rgorgaoemissor')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-
-            {{-- cpf --}}
-            <div class="col-2">
-                <div class="form-group">
-                    <label for="cpf" class="col-form-label"><strong>CPF</strong></label>
-                    <input class="form-control" name="cpf" type="text" value="{{old('cpf', $associado->cpf)}}" id="cpf">
-                </div>
-                @error('cpf')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-
-            {{-- racacor --}}
-            <div class="col-2">
-                <div class="form-group">
-                    <label for="racacor" class="col-form-label"><strong>Raça / Cor</strong></label>
-                    <select name="racacor" id="racacor" class="form-control">
-                        <option value="" disabled>Escolha ...</option>
-                        <option value="branca" {{old('racacor', $associado->racacor) == 'branca' ? 'selected' : ''}} >Branca</option>
-                        <option value="preta" {{old('racacor', $associado->racacor) == 'preta' ? 'selected' : ''}}>Preta</option>
-                        <option value="parda" {{old('racacor', $associado->racacor) == 'parda' ? 'selected' : ''}}>Parda</option>
-                        <option value="amarela" {{old('racacor', $associado->racacor) == 'amarela' ? 'selected' : ''}}>Amarela</option>
-                        <option value="indigena" {{old('racacor', $associado->racacor) == 'indigena' ? 'selected' : ''}}>Indígena</option>
-                    </select>
-                </div>
-                @error('racacor')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-
-
-            {{-- filiacao --}}
-            <div class="col-2">
-                <div class="form-group">
-                    <label for="filiacao" class="col-form-label"><strong>Data de Filiação</strong></label>
-                    <input class="form-control" name="filiacao" type="date" value="{{old('filiacao', $associado->filiacao)}}" id="filiacao">
-                </div>
-                @error('filiacao')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-        </div>
-
-        <div class="row">
-            {{-- companhia_id --}}
-            <div class="col-7">
-                <div class="form-group">
-                    <label for="companhia_id" class="col-form-label"><strong>Companhia / Associação</strong></label>
-                    <select name="companhia_id" id="companhia_id" class="form-control">
-                        <option value="" disabled>Escolha uma Companhia / Associação ...</option>
-                        @foreach($companhias  as $companhia)
-                            <option value="{{$companhia->id}}" {{old('companhia_id', $associado->companhia_id) == $companhia->id ? 'selected' : ''}}>{{$companhia->nome}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                @error('companhia_id')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-
-            {{-- bairros --}}
-            <div class="col-3">
-                <div class="form-group">
-                    <label for="bairros" class="col-form-label"><strong>Área de Atuação</strong></label>
-                    <select name="bairros[]" id="bairros" class="form-control" multiple >
-                        <option value="" disabled>Escolha a(s) área(s)...</option>
-                        @foreach($bairros as $bairro)
-                            <option value="{{$bairro->id}}"
-                                @if(old('bairros'))
-                                    {{in_array($bairro->id, old('bairros')) ? 'selected' : ''}}
-                                @else
-                                    {{$associado->bairros->contains($bairro->id) ? 'selected' : ''}}
-                                @endif
-                            >{{$bairro->nome}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                @error('bairros')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-
-            {{-- quantidade --}}
-            <div class="col-1">
-                <div class="form-group">
-                    <label for="quantidade" class="col-form-label"><strong>kg</strong></label>
-                    <input class="form-control" name="quantidade" type="number" value="{{old('quantidade', $associado->quantidade)}}" id="quantidade">
-                </div>
-                @error('quantidade')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-        </div>
-
-        <hr style="margin-top: 50px; border: 2px solid #999797;">
-
-        <h5>Enderço</h5>
-
-        <div class="row">
-            {{-- endereco --}}
-            <div class="col-7">
-                <div class="form-group">
-                    <label for="endereco" class="col-form-label"><strong>Rua; Av; Trav; etc...</strong></label>
-                    <input class="form-control" name="endereco" type="text" value="{{old('endereco', $associado->endereco)}}" id="endereco">
-                </div>
-                @error('endereco')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-
-            {{-- numero --}}
-            <div class="col-1">
-                <div class="form-group">
-                    <label for="numero" class="col-form-label"><strong>Número</strong></label>
-                    <input class="form-control" name="numero" type="text" value="{{old('numero', $associado->numero)}}" id="numero">
-                </div>
-            </div>
-
-            {{-- bairro --}}
-            <div class="col-4">
-                <div class="form-group">
-                    <label for="bairro" class="col-form-label"><strong>Bairro</strong></label>
-                    <input class="form-control" name="bairro" type="text" value="{{old('bairro', $associado->bairro)}}" id="bairro">
-                </div>
-                @error('bairro')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-        </div>
-
-
-        <div class="row">
-            {{-- complemento --}}
-            <div class="col-4">
-                <div class="form-group">
-                    <label for="complemento" class="col-form-label"><strong>Complemento</strong></label>
-                    <input class="form-control" name="complemento" type="text" value="{{$associado->complemento}}" id="complemento">
-                </div>
-            </div>
-
-            {{-- cidade --}}
-            <div class="col-3">
-                <div class="form-group">
-                    <label for="cidade" class="col-form-label"><strong>Cidade</strong></label>
-                    <input class="form-control" name="cidade" type="text" value="{{old('cidade', $associado->cidade)}}" id="cidade">
-                </div>
-                @error('cidade')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-
-            {{-- zona --}}
-            <div class="col-5 align-self-end">
-                <div class="form-group">
-                    <label for="zona" class="col-form-label" style="margin-top: 5px"><strong>Zona</strong></label>
-                    <br>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="zona" id="zonaurbana" value="urbana" {{old('zona', $associado->zona) =="urbana" ? 'checked': ''}}>
-                        <label class="form-check-label" for="zonaurbana">Urbana</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="zona" id="zonarural" value="rural" {{old('zona', $associado->zona) =="rural" ? 'checked': ''}}>
-                        <label class="form-check-label" for="zonarural">Rural</label>
-                    </div>
-                </div>
-                @error('zona')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-        </div>
-
-        <div class="row">
-            {{-- foneum --}}
-            <div class="col-4">
-                <div class="form-group">
-                    <label for="foneum" class="col-form-label"><strong>Telefone</strong></label>
-                    <input class="form-control" name="foneum" type="text" value="{{old('foneum', $associado->foneum)}}" id="foneum">
-                </div>
-                @error('foneum')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-
-            {{-- fonedois --}}
-            <div class="col-3">
-                <div class="form-group">
-                    <label for="fonedois" class="col-form-label"><strong>Telefone</strong></label>
-                    <input class="form-control" name="fonedois" type="text" value="{{old('fonedois', $associado->fonedois)}}" id="fonedois">
-                </div>
-                @error('fonedois')
-                    <small style="color: red">{{$message}}</small>
-                @enderror
-            </div>
-        </div>
-
-        <div style="text-align: right; margin-top: 10px; margin-bottom: 10px">
-            <a class="btn btn-primary" href="{{route('admin.associado.index')}}" role="button">Retornar</a>
-            <button type="submit" class="btn btn-primary">Editar</button>
-        </div>
-      </form>
     </div>
 @endsection

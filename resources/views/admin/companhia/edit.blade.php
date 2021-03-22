@@ -30,7 +30,7 @@
                                 <div class="col-lg-7">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="nome">Nome<span class="small text-danger">*</span></label>
-                                        <input type="text" id="nome" class="form-control" name="nome" value="{{old('nome', $companhia->nome)}}">
+                                        <input type="text" id="nome" class="form-control" name="nome" value="{{old('nome', $companhia->nome)}}" required>
                                         @error('nome')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
@@ -41,7 +41,7 @@
                                 <div class="col-lg-3">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="cnpj">CNPJ<span class="small text-danger">*</span></label>
-                                        <input type="text" id="cnpj" class="form-control" name="cnpj" value="{{old('cnpj', $companhia->cnpj)}}">
+                                        <input type="text" id="cnpj" class="form-control" name="cnpj" value="{{old('cnpj', $companhia->cnpj)}}" required>
                                         @error('cnpj')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
@@ -52,7 +52,7 @@
                                 <div class="col-lg-2">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="fundacao">Fundação<span class="small text-danger">*</span></label>
-                                        <input type="date" id="fundacao" class="form-control" name="fundacao" value="{{old('fundacao', $companhia->fundacao)}}">
+                                        <input type="date" id="fundacao" class="form-control" name="fundacao" value="{{old('fundacao', $companhia->fundacao)}}" required>
                                         @error('fundacao')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
@@ -65,7 +65,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="foneum">Telefone<span class="small text-danger">*</span></label>
-                                        <input type="text" id="foneum" class="form-control" name="foneum" placeholder="(99) 9999-9999" value="{{old('foneum', $companhia->foneum)}}">
+                                        <input type="text" id="foneum" class="form-control" name="foneum" placeholder="(99) 9999-9999" value="{{old('foneum', $companhia->foneum)}}" required>
                                         @error('foneum')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
@@ -89,7 +89,7 @@
                                 <div class="col-lg-7">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="presidente">Presidente<span class="small text-danger">*</span></label>
-                                        <input type="text" id="presidente" class="form-control" name="presidente" value="{{old('presidente', $companhia->presidente)}}">
+                                        <input type="text" id="presidente" class="form-control" name="presidente" value="{{old('presidente', $companhia->presidente)}}" required>
                                         @error('presidente')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
@@ -100,7 +100,7 @@
                                 <div class="col-lg-5">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="fonepresidente">Telefone<span class="small text-danger">*</span></label>
-                                        <input type="text" id="fonepresidente" class="form-control" name="fonepresidente" placeholder="(99) 9999-9999" value="{{old('fonepresidente', $companhia->fonepresidente)}}">
+                                        <input type="text" id="fonepresidente" class="form-control" name="fonepresidente" placeholder="(99) 9999-9999" value="{{old('fonepresidente', $companhia->fonepresidente)}}" required>
                                         @error('fonepresidente')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
@@ -113,7 +113,7 @@
                                 <div class="col-lg-7">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="vicepresidente">Vice-Presidente<span class="small text-danger">*</span></label>
-                                        <input type="text" id="vicepresidente" class="form-control" name="vicepresidente" value="{{old('vicepresidente', $companhia->vicepresidente)}}">
+                                        <input type="text" id="vicepresidente" class="form-control" name="vicepresidente" value="{{old('vicepresidente', $companhia->vicepresidente)}}" required>
                                         @error('vicepresidente')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
@@ -124,7 +124,7 @@
                                 <div class="col-lg-5">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="fonevicepresidente">Telefone<span class="small text-danger">*</span></label>
-                                        <input type="text" id="fonevicepresidente" class="form-control" name="fonevicepresidente" placeholder="(99) 9999-9999" value="{{old('fonevicepresidente', $companhia->fonevicepresidente)}}">
+                                        <input type="text" id="fonevicepresidente" class="form-control" name="fonevicepresidente" placeholder="(99) 9999-9999" value="{{old('fonevicepresidente', $companhia->fonevicepresidente)}}" required>
                                         @error('fonevicepresidente')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
@@ -140,7 +140,7 @@
                                 <div class="col-lg-7">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="endereco">Rua; Av; Travessa, etc...<span class="small text-danger">*</span></label>
-                                        <input type="text" id="endereco" class="form-control" name="endereco" value="{{old('endereco', $companhia->endereco)}}">
+                                        <input type="text" id="endereco" class="form-control" name="endereco" value="{{old('endereco', $companhia->endereco)}}" required>
                                         @error('endereco')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
@@ -162,7 +162,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="bairro">Bairro<span class="small text-danger">*</span></label>
-                                        <input type="text" id="bairro" class="form-control" name="bairro" value="{{old('bairro', $companhia->bairro)}}">
+                                        <input type="text" id="bairro" class="form-control" name="bairro" value="{{old('bairro', $companhia->bairro)}}" required>
                                         @error('bairro')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
@@ -186,7 +186,7 @@
                                 <div class="col-lg-3">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="cidade">Cidade<span class="small text-danger">*</span></label>
-                                        <input type="text" id="cidade" class="form-control" name="cidade" value="{{old('cidade', $companhia->cidade)}}">
+                                        <input type="text" id="cidade" class="form-control" name="cidade" value="{{old('cidade', $companhia->cidade)}}" required>
                                         @error('cidade')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
@@ -199,11 +199,11 @@
                                         <label class="form-control-label" for="zona" style="margin-top: 5px">Zona<span class="small text-danger">*</span></label>
                                         <br>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="zona" id="zonaurbana" value="urbana" {{old('zona', $companhia->zona) == 'urbana' ? 'checked' : ''}}>
+                                            <input class="form-check-input" type="radio" name="zona" id="zonaurbana" value="urbana" {{old('zona', $companhia->zona) == 'urbana' ? 'checked' : ''}} required>
                                             <label class="form-check-label" for="zonaurbana">Urbana</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="zona" id="zonarural" value="rural" {{old('zona', $companhia->zona) == 'rural' ? 'checked' : ''}}>
+                                            <input class="form-check-input" type="radio" name="zona" id="zonarural" value="rural" {{old('zona', $companhia->zona) == 'rural' ? 'checked' : ''}} required>
                                             <label class="form-check-label" for="zonarural">Rural</label>
                                         </div>
                                         @error('zona')
