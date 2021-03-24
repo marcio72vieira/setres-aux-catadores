@@ -347,7 +347,9 @@
         <script src="{{ URL::asset('template/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
         <!-- Este trecho de código se encontrava antes no final de cada página index.blade.php -->
+        <script src="{{asset('template/js/my_scripts.js')}}"></script>
         <script type="text/javascript">
+            /*
             $(document).ready(function () {
               $('#dataTable').dataTable({
                 "ordering": false,
@@ -365,6 +367,7 @@
                 }
               })
             });
+            */
         </script>
 
         <!-- Page level custom scripts -->
