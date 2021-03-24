@@ -63,7 +63,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="foneum">Telefone<span class="small text-danger">*</span></label>
-                                        <input type="text" id="foneum" class="form-control" name="foneum" placeholder="(99) 9999-9999" value="{{old('foneum')}}" required>
+                                        <input type="text" id="foneum" class="form-control phone" name="foneum" placeholder="(99) 9999-9999" value="{{old('foneum')}}" required>
                                         @error('foneum')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
@@ -74,7 +74,7 @@
                                 <div class="col-lg-3">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="fonedois">Telefone (opcional)</label>
-                                        <input type="text" id="fonedois" class="form-control" name="fonedois" placeholder="(99) 9999-9999" value="{{old('fonedois')}}">
+                                        <input type="text" id="fonedois" class="form-control phone" name="fonedois" placeholder="(99) 9999-9999" value="{{old('fonedois')}}">
                                         @error('fonedois')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
@@ -98,7 +98,7 @@
                                 <div class="col-lg-5">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="fonepresidente">Telefone<span class="small text-danger">*</span></label>
-                                        <input type="text" id="fonepresidente" class="form-control" name="fonepresidente" placeholder="(99) 9999-9999" value="{{old('fonepresidente')}}" required>
+                                        <input type="text" id="fonepresidente" class="form-control phone" name="fonepresidente" placeholder="(99) 9999-9999" value="{{old('fonepresidente')}}" required>
                                         @error('fonepresidente')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
@@ -122,7 +122,7 @@
                                 <div class="col-lg-5">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="fonevicepresidente">Telefone<span class="small text-danger">*</span></label>
-                                        <input type="text" id="fonevicepresidente" class="form-control" name="fonevicepresidente" placeholder="(99) 9999-9999" value="{{old('fonevicepresidente')}}" required>
+                                        <input type="text" id="fonevicepresidente" class="form-control phone" name="fonevicepresidente" placeholder="(99) 9999-9999" value="{{old('fonevicepresidente')}}" required>
                                         @error('fonevicepresidente')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror

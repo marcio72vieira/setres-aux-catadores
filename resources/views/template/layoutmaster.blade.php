@@ -23,6 +23,10 @@
         <link href="{{ URL::asset('template/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
          <!-- Bootstrap core JavaScript-->
          {{--
+            A inclusão destes scripts causa um conflito entre o lancamento do modal do perfil/logout e a tradução
+            livre do datatables no final de cada script. Por isso eles foram suprimidos e a tradução foi retirada
+            do final de cada página index e colocada no final deste arquivo: layoutmaster.blade.php
+
             <script src="{{ URL::asset('template/vendor/jquery/jquery.min.js') }}"></script>
             <script src="{{ URL::asset('template/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         --}}
@@ -342,11 +346,32 @@
         <script src="{{ URL::asset('template/vendor/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ URL::asset('template/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
+        <!-- Este trecho de código se encontrava antes no final de cada página index.blade.php -->
+        <script type="text/javascript">
+            $(document).ready(function () {
+              $('#dataTable').dataTable({
+                "ordering": false,
+                language: {
+                    "lengthMenu": "Mostrar _MENU_ registos",
+                    "search": "Procurar:",
+                    "info": "Mostrando os registros _START_ a _END_ num total de _TOTAL_",
+                    "paginate": {
+                        "first": "Primeiro",
+                        "previous": "Anterior",
+                        "next": "Seguinte",
+                        "last": "Último"
+                    },
+                    "zeroRecords": "Não foram encontrados resultados",
+                }
+              })
+            });
+        </script>
+
         <!-- Page level custom scripts -->
         <script src="{{ URL::asset('template/js/demo/datatables-demo.js') }}"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
-        <script src="{{ URL::asset('js/mascaras.js') }}"></script>
+        <script src="{{ URL::asset('template/js/mascaras.js') }}"></script>
 
     <!-- fim add marcio -->
 
