@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ResiduoRequest;
 use App\Http\Requests\ResiduoUpdateRequest;
 use Illuminate\Http\Request;
+USE Illuminate\Support\Facades\Auth;
 use App\Models\Residuo;
 
 use Illuminate\Support\Facades\Validator;   //Validação unique

@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    //return view('welcome');
     return redirect()->route('admin.residuo.index');
 });
 
@@ -31,10 +30,10 @@ Route::get('/front/logout', [MainController::class, 'logout'])->name('front.logo
 
 
 Route::prefix('admin')->name('admin.')->group(function() {
-    Route::resource('residuo', ResiduoController::class);
-    Route::resource('companhia', CompanhiaController::class);
-    Route::resource('bairro', BairroController::class);
-    Route::resource('associado', AssociadoController::class);
-    Route::resource('pontocoleta', PontocoletaController::class);
+    Route::resource('residuo', ResiduoController::class)->middleware(['auth']);
+    Route::resource('companhia', CompanhiaController::class)->middleware(['auth']);
+    Route::resource('bairro', BairroController::class)->middleware(['auth']);
+    Route::resource('associado', AssociadoController::class)->middleware(['auth']);
+    Route::resource('pontocoleta', PontocoletaController::class)->middleware(['auth']);
 });
 

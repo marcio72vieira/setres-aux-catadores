@@ -41,18 +41,20 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Longin</h1>
                                     </div>
-                                        <form class="user" action="{{route('front.check')}}" method="POST">
+                                        <form class="user" action="{{route('front.check')}}" method="POST" autocomplete="off" >
                                             @csrf
 
-                                            @if(Session::get('falha'))
-                                                <div class="alert alert-danger">
-                                                    {{ Session::get('falha')}}
-                                                </div>
+                                            @if($errors->all())
+                                                @foreach($errors->all() as $erro)
+                                                    <div class="alert alert-danger" role="alert">
+                                                        {{$erro}}
+                                                  </div>
+                                                @endforeach
                                             @endif
 
                                             <div class="form-group">
                                                 <input type="email" class="form-control form-control-user"
-                                                    id="exampleInputEmail" name="email"
+                                                    id="email" name="email"
                                                     placeholder="Usuário" value="{{old('email')}}">
                                                     <span class="text-danger">
                                                         @error('email')
@@ -62,7 +64,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <input type="password" class="form-control form-control-user"
-                                                    id="exampleInputPassword" name="password" placeholder="Senha" value="{{old('password')}}">
+                                                    id="password" name="password" placeholder="Senha" value="{{old('password')}}">
                                                     <span class="text-danger">
                                                         @error('password')
                                                             {{$message}}
