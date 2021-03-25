@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\Admin\AssociadoController;
 use App\Http\Controllers\Admin\ResiduoController;
 use App\Http\Controllers\Admin\CompanhiaController;
@@ -22,6 +24,11 @@ Route::get('/', function () {
     //return view('welcome');
     return redirect()->route('admin.residuo.index');
 });
+
+Route::get('/front/login', [MainController::class, 'login'])->name('front.login');
+Route::post('/front/check', [MainController::class, 'check'])->name('front.check');
+Route::get('/front/logout', [MainController::class, 'logout'])->name('front.logout');
+
 
 Route::prefix('admin')->name('admin.')->group(function() {
     Route::resource('residuo', ResiduoController::class);
