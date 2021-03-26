@@ -99,7 +99,32 @@
                                 </div>
                             </div>
 
+                            <br>
+                            <hr>
+
+                            <fieldset>
+                                <legend>Resíduos recolhidos</legend>
+                                    <div class="row">
+                                        @foreach ($residuos as $residuo )
+                                            <div class="col-lg-4">
+                                                <div>
+                                                    <input disabled type="checkbox" id="residuo_{{$residuo->id}}" name="residuos[]" value="{{$residuo->id}}"
+                                                    @if(old('residuos'))
+                                                        {{in_array($residuo->id, old('residuos')) ? 'checked' : ''}}
+                                                    @else
+                                                        {{$pontocoleta->residuos->contains($residuo->id) ? 'checked' : ''}}
+                                                    @endif
+                                                    >
+                                                    <label for="residuo_{{$residuo->id}}">{{$residuo->nome}}</label>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                            </fieldset>
+
                         </div>
+
+                        <br>
 
                         <!-- Button -->
                         <div class="pl-lg-4">

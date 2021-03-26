@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PontocoletaRequest;
 use App\Http\Requests\PontocoletaUpdateRequest;
 use App\Models\Pontocoleta;
+use App\Models\Residuo;
+use Illuminate\Support\Facades\DB;
 
 
 class PontocoletaController extends Controller
@@ -22,14 +24,23 @@ class PontocoletaController extends Controller
 
     public function create()
     {
-        return view('admin.pontocoleta.create');
+        $residuos = Residuo::all();
+
+        return view('admin.pontocoleta.create', compact('residuos'));
     }
 
 
     public function store(PontocoletaRequest $request)
     {
+        //dd($request->all());
 
-        $pontocoleta = Pontocoleta::create($request->all());
+        DB::beginTransaction();
+            $pontocoleta = Pontocoleta::create($request->all());
+
+            if($request->has('residuos')){
+                $pontocoleta->residuos()->sync($request->residuos);
+            }
+        DB::commit();
 
         $request->session()->flash('sucesso', 'Registro incluído com sucesso!');
         return redirect()->route('admin.pontocoleta.index');
@@ -39,16 +50,18 @@ class PontocoletaController extends Controller
     public function show($id)
     {
         $pontocoleta = Pontocoleta::find($id);
+        $residuos = Residuo::all();
 
-        return view('admin.pontocoleta.show', compact('pontocoleta'));
+        return view('admin.pontocoleta.show', compact('pontocoleta','residuos'));
     }
 
 
     public function edit($id)
     {
         $pontocoleta = Pontocoleta::find($id);
+        $residuos = Residuo::all();
 
-        return view('admin.pontocoleta.edit',compact('pontocoleta'));
+        return view('admin.pontocoleta.edit',compact('pontocoleta', 'residuos'));
     }
 
 
@@ -56,7 +69,13 @@ class PontocoletaController extends Controller
     {
         $pontocoleta = Pontocoleta::find($id);
 
-        $pontocoleta->update($request->all());
+        DB::beginTransaction();
+            $pontocoleta->update($request->all());
+
+            if($request->has('residuos')){
+                $pontocoleta->residuos()->sync($request->residuos);
+            }
+        DB::commit();
 
         $request->session()->flash('sucesso', 'Registro editado com sucesso!');
         return redirect()->route('admin.pontocoleta.index');

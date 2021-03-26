@@ -12,4 +12,8 @@ class Residuo extends Model
     protected $fillable = [
         'nome'
     ];
+
+    public function pontoscoleta(){
+        return $this->belongsToMany(Pontocoleta::class)->withTimestamps();
+    }
 }

@@ -18,4 +18,8 @@ class Pontocoleta extends Model
         'cidade',
         'zona',
     ];
+
+    public function residuos(){
+        return $this->belongsToMany(Residuo::class)->withTimestamps();
+    }
 }
