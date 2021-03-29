@@ -264,6 +264,10 @@
                                         <input type="text" id="fonedois" class="form-control" name="fonedois"  placeholder="(99) 9999-9999" value="{{old('fonedois', $associado->fonedois)}}" readonly>
                                     </div>
                                 </div>
+
+                                <div class="col-lg-5" style="text-align: center">
+                                    <img src="{{$associado->imagem}}" width="200" height="150">
+                                </div>
                             </div>
 
                         </div>

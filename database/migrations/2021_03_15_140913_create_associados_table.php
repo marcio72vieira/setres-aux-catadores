@@ -32,6 +32,7 @@ class CreateAssociadosTable extends Migration
             $table->string('zona');
             $table->string('foneum');
             $table->string('fonedois')->nullable();
+            $table->longText('imagem')->nullable();
 
             $table->foreignId('companhia_id')->constrained()->onDelete('cascade');
 

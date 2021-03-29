@@ -127,7 +127,7 @@
                                                     @if(old('residuos'))
                                                         {{in_array($residuo->id, old('residuos')) ? 'checked' : ''}}
                                                     @endif
-                                                    required>
+                                                    >
                                                     <label for="residuo_{{$residuo->id}}">{{$residuo->nome}}</label>
                                                 </div>
                                             </div>
