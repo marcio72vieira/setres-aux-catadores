@@ -10,13 +10,7 @@ class MainController extends Controller
 {
     public function login()
     {
-        /*
-        $user = new User;
-        $user->name = 'Administradr';
-        $user->email = 'admin@setres.com';
-        $user->password = bcrypt('123456');
-        $user->save();
-        */
+        /* $user = new User; $user->name = 'Administradr'; $user->email = 'marcio@setres.com'; $user->password = bcrypt('123456'); $user->save(); */
 
         return view('front.login');
     }

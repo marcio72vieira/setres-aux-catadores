@@ -285,6 +285,50 @@
                                 </div>
                             </div>
 
+                            <!-- INICIO TIRAR FOTO -->
+                            <fieldset>
+
+                                <legend>Foto</legend>
+
+                                <div class="row" style="padding: 10px; border: 1px solid #dcdcdc" >
+                                    <div class="col-lg-4">
+                                        <div class="area">
+                                            <p style="margin-left: 120px;"><strong>dicas</strong></p>
+                                                <ul style="margin-top: 30px;">
+                                                    <li style="text-align: justify">Assegure-se que haja uma boa <strong>iluminação</strong> para captar o <strong>alvo</strong>;</li>
+                                                    <li style="text-align: justify">Clique no botão <strong>"ligar câmera</strong> e <strong>permita</strong> que o navegador utilize sua <strong>câmera</strong>;</li>
+                                                    <li style="text-align: justify">Posicione o "alvo" no <strong>centro</strong> da Câmera;</li>
+                                                    <li style="text-align: justify">Click no botão capturar foto;</li>
+                                                    <li style="text-align: justify">Verifique o resultado em <strong>Prévia</strong>;</li>
+                                                    <li style="text-align: justify">Se o resultado for satisfatório, click no botão <strong>Salvar esta Imagem</strong>, caso contrário, ajuste novamente o alvo no centro da câmera e repita os passos anteriores;</li>
+                                                </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                            <p style="margin-left: 120px;"><strong>webcam</strong></p>
+                                            <video autoplay="true" id="webCamera" playsinline="" width="320" height="240"></video>
+                                            <div style="margin-left: 7%">
+                                            <button type="button" class="btn btn-secondary" onclick="loadCamera()"><i class="fas fa-camera"></i> ligar câmera</button>
+                                            <button type="button" class="btn btn-secondary" onclick="takeSnapShot()"><i class="fas fa-portrait"></i> captura foto</button>
+                                            </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <p style="margin-left: 120px;"><strong>prévia</strong></p>
+                                        <div id="results"><img src="{{$associado->imagem}}"/></div>
+                                        <input type="hidden" id="imagemassociadobase64" name="imagem" value="{{$associado->imagem ?? ''}}">
+                                        <textarea id="base_img" name="base_img" style="display: none"></textarea>
+                                        <p id="caminhoImagem" class="caminho-imagem"><a href="" target="_blank"></a></p>
+                                    </div>
+
+                                </div>
+                            </fieldset>
+                            <br>
+                            <br>
+                            <br>
+                            <hr>
+
                         </div>
 
                         <!-- Button -->

@@ -7,6 +7,8 @@ use App\Http\Requests\CompanhiaRequest;
 use App\Http\Requests\CompanhiaUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\Companhia;
+use App\Models\Residuo;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Validator;   //Validação unique para cnpj na atualização
 use Illuminate\Validation\Rule;             //Validação unique para cnpm na atualização
@@ -24,7 +26,9 @@ class CompanhiaController extends Controller
 
     public function create()
     {
-        return view('admin.companhia.create');
+        $residuos = Residuo::all();
+
+        return view('admin.companhia.create', compact('residuos'));
     }
 
 
@@ -32,10 +36,15 @@ class CompanhiaController extends Controller
     {
         //dd($request->all());
 
-        Companhia::create($request->all());
+        DB::beginTransaction();
+            $companhia = Companhia::create($request->all());
+
+            if($request->has('residuos')){
+                $companhia->residuos()->sync($request->residuos);
+            }
+        DB::commit();
 
         $request->session()->flash('sucesso', 'Registro incluído com sucesso!');
-
         return redirect()->route('admin.companhia.index');
     }
 
@@ -43,15 +52,18 @@ class CompanhiaController extends Controller
     public function show($id)
     {
         $companhia = Companhia::find($id);
+        $residuos = Residuo::all();
 
-        return view('admin.companhia.show', compact('companhia'));
+        return view('admin.companhia.show', compact('companhia', 'residuos'));
     }
 
 
     public function edit($id)
     {
         $companhia = Companhia::find($id);
-        return view('admin.companhia.edit', compact('companhia'));
+        $residuos = Residuo::all();
+
+        return view('admin.companhia.edit', compact('companhia', 'residuos'));
     }
 
 
@@ -67,8 +79,13 @@ class CompanhiaController extends Controller
             ],
         ]);
 
+        DB::beginTransaction();
+            $companhia->update($request->all());
 
-        $companhia->update($request->all());
+            if($request->has('residuos')){
+                $companhia->residuos()->sync($request->residuos);
+            }
+        DB::commit();
 
         $request->session()->flash('sucesso', 'Registro atualizado com sucesso!');
 

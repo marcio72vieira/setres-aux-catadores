@@ -30,4 +30,8 @@ class Companhia extends Model
     public function associados() {
         return $this->hasMany(Associado::class);
     }
+
+    public function residuos(){
+        return $this->belongsToMany(Residuo::class)->withTimestamps();
+    }
 }

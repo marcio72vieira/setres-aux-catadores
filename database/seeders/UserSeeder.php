@@ -19,7 +19,12 @@ class UserSeeder extends Seeder
 	    $user->name = "Administrador";
 	    $user->email = "admin@setres.com";
 	    $user->password = Hash::make('123456');
+	    $user->save();
 
+        $user2 = new User();
+        $user->name = "Operador";
+	    $user->email = "operador@setres.com";
+	    $user->password = Hash::make('123456');
 	    $user->save();
     }
 }

@@ -16,4 +16,8 @@ class Residuo extends Model
     public function pontoscoleta(){
         return $this->belongsToMany(Pontocoleta::class)->withTimestamps();
     }
+
+    public function companhia(){
+        return $this->belongsToMany(Companhia::class)->withTimestamps();
+    }
 }
