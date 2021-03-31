@@ -37,3 +37,6 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::resource('pontocoleta', PontocoletaController::class)->middleware(['auth']);
 });
 
+// Relatórios PDF
+Route::get('admin/residuo/pdf/relatorioresiduo', [ResiduoController::class, 'relatorioresiduo'])->name('admin.residuo.relatorio');
+

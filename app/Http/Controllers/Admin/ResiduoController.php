@@ -84,4 +84,35 @@ class ResiduoController extends Controller
 
         return redirect()->route('admin.residuo.index');
     }
+
+    public function relatorioresiduo()
+    {
+        $residuos = Residuo::all();
+
+        $fileName = ('Residuos_lista.pdf');
+
+        $mpdf = new \Mpdf\Mpdf([
+            'margin_left' => 10,
+            'margin_right' => 10,
+            'margin_top' => 15,
+            'margin_bottom' => 20,
+            'margin-header' => 10,
+            'margin_footer' => 10
+        ]);
+
+        //$html = \View::make('admin.residuo.pdf.pdfresiduogeral')->with('residuos', $residuos);
+        $html = \View::make('admin.residuo.pdf.pdfresiduogeral', compact('residuos'));
+        $html = $html->render();
+
+        $mpdf->SetHeader('Resíduos| Lista de Resíduos| {PAGENO}');
+        $mpdf->setFooter('São Luis(MA) '.date('d/m/Y'));
+
+        //$stylesheet = asset('/pdf/mpdf.css');
+        //$mpdf->WriteHTML($stylesheet, 1);
+
+        $mpdf->WriteHTML($html);
+        $mpdf->Output($fileName, 'I');
+
+        //return view('admin.residuo.pdf.pdfresiduogeral', compact('residuos'));
+    }
 }
