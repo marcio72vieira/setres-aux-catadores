@@ -38,5 +38,5 @@ Route::prefix('admin')->name('admin.')->group(function() {
 });
 
 // Relatórios PDF
-Route::get('admin/residuo/pdf/relatorioresiduo', [ResiduoController::class, 'relatorioresiduo'])->name('admin.residuo.relatorio');
+Route::get('admin/residuo/pdf/relatorioresiduo', [ResiduoController::class, 'relatorioresiduo'])->name('admin.residuo.relatorio')->middleware(['auth']);
 

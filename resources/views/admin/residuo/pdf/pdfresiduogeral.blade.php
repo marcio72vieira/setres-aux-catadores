@@ -4,29 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!--<link href="{{asset('pdf/mpdf.css')}}" rel="stylesheet" type="text/css">-->
-
-    <title>Resíduo</title>
+    <title>SETRES - Resíduo</title>
 </head>
 
 
 <body>
-    <table class="blueTable">
+    <table class="table-corpo-" style="width: 100%">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>RES&Iacute;DUO</th>
+                <th colspan="2" style="text-align: center; font-family:'helvetica'; font-size: 10px">RESÍDUOS SÓLIDOS</th>
+            </tr>
+            <tr>
+                <td style="width: 30px">ID</td>
+                <td>RES&Iacute;DUO</td>
             </tr>
         </thead>
-        <tfoot>
-            <tr>
-                <td colspan="2">FOOTER DA TABELA</td>
-            </tr>
-        </tfoot>
         <tbody>
             @foreach ($residuos as $residuo)
             <tr>
-                <td>{{$residuo->id}}</td>
+                <td style="width: 30px">{{$residuo->id}}</td>
                 <td>{{$residuo->nome}}</td>
             </tr>
             @endforeach

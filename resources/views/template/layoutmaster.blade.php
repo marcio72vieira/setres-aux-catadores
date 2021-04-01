@@ -43,7 +43,8 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin.residuo.index')}}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin.residuo.index')}}"  style="margin-top: 20px; margin-bottom: 20px ">
+                <div class="sidebar-brand-text mx-3"><img src="{{asset('images/logo-ma.png')}}" width="100" /></div>
                 <div class="sidebar-brand-text mx-3">SETRES</div>
             </a>
 

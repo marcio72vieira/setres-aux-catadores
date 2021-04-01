@@ -85,6 +85,7 @@ class ResiduoController extends Controller
         return redirect()->route('admin.residuo.index');
     }
 
+    // Configuração de Relatórios PDFs
     public function relatorioresiduo()
     {
         $residuos = Residuo::all();
@@ -94,21 +95,44 @@ class ResiduoController extends Controller
         $mpdf = new \Mpdf\Mpdf([
             'margin_left' => 10,
             'margin_right' => 10,
-            'margin_top' => 15,
-            'margin_bottom' => 20,
+            'margin_top' => 25,
+            'margin_bottom' => 15,
             'margin-header' => 10,
-            'margin_footer' => 10
+            'margin_footer' => 5
         ]);
 
-        //$html = \View::make('admin.residuo.pdf.pdfresiduogeral')->with('residuos', $residuos);
+        $mpdf->SetHTMLHeader('
+            <table class="tabela-header">
+                <tr>
+                    <td style="width: 80px">
+                        <img src="images/logo-ma.png" width="80"/>
+                    </td>
+                    <td class="header-page">
+                        Governo do Estado do Maranhão<br>
+                        Secretaria de Governo<br>
+                        Secreatia Adjunta de Tecnologia da Informação/SEATI<br>
+                        Secretaria do Trabalho e Economia Solidaria/SETRES
+                    </td>
+                </tr>
+            </table>
+        ');
+
+        $mpdf->SetHTMLFooter('
+            <table class="tabela-footer">
+                <tr>
+                    <td width="33%">São Luis(MA) {DATE d/m/Y}</td>
+                    <td width="33%" align="center"></td>
+                    <td width="33%" style="text-align: right;">{PAGENO}/{nbpg}</td>
+                </tr>
+            </table>
+        ');
+
+
         $html = \View::make('admin.residuo.pdf.pdfresiduogeral', compact('residuos'));
         $html = $html->render();
 
-        $mpdf->SetHeader('Resíduos| Lista de Resíduos| {PAGENO}');
-        $mpdf->setFooter('São Luis(MA) '.date('d/m/Y'));
-
-        //$stylesheet = asset('/pdf/mpdf.css');
-        //$mpdf->WriteHTML($stylesheet, 1);
+        $stylesheet = file_get_contents('pdf/mpdf.css');
+        $mpdf->WriteHTML($stylesheet, 1);
 
         $mpdf->WriteHTML($html);
         $mpdf->Output($fileName, 'I');
