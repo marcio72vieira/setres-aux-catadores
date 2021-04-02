@@ -37,6 +37,11 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::resource('pontocoleta', PontocoletaController::class)->middleware(['auth']);
 });
 
+// Retrato
+Route::get('admin/associado/{id}/retrato', [AssociadoController::class, 'retrato'])->name('admin.associado.retrato')->middleware(['auth']);
+Route::match(['get', 'post'], 'ajax-canvas-upload', [AssociadoController::class, 'salvaretrato']);
+
+
 // Relatórios PDF
 Route::get('admin/residuo/pdf/relatorioresiduo', [ResiduoController::class, 'relatorioresiduo'])->name('admin.residuo.relatorio')->middleware(['auth']);
 

@@ -40,4 +40,8 @@ class Associado extends Model
     public function bairros() {
         return $this->belongsToMany(Bairro::class)->withTimestamps();
     }
+
+    public function foto() {
+        return $this->hasOne(Foto::class);
+    }
 }

@@ -9,24 +9,15 @@
 
 
 <body>
-    <table class="table-corpo-" style="width: 100%">
-        <thead>
+    <table style="width: 100%">
+
+        @foreach ($residuos as $residuo)
             <tr>
-                <th colspan="2" style="text-align: center; font-family:'helvetica'; font-size: 10px">RESÍDUOS SÓLIDOS</th>
+                <td class="dados" style="width: 10%">{{$residuo->id}}</td>
+                <td class="dados" style="width: 90%">{{$residuo->nome}}</td>
             </tr>
-            <tr>
-                <td style="width: 30px">ID</td>
-                <td>RES&Iacute;DUO</td>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($residuos as $residuo)
-            <tr>
-                <td style="width: 30px">{{$residuo->id}}</td>
-                <td>{{$residuo->nome}}</td>
-            </tr>
-            @endforeach
-        </tbody>
+        @endforeach
+
     </table>
 </body>
 </html>

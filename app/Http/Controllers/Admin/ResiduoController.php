@@ -95,24 +95,33 @@ class ResiduoController extends Controller
         $mpdf = new \Mpdf\Mpdf([
             'margin_left' => 10,
             'margin_right' => 10,
-            'margin_top' => 25,
+            'margin_top' => 32,
             'margin_bottom' => 15,
             'margin-header' => 10,
             'margin_footer' => 5
         ]);
 
         $mpdf->SetHTMLHeader('
-            <table class="tabela-header">
+            <table class="line-primary">
                 <tr>
-                    <td style="width: 80px">
+                    <td class="section-left">
                         <img src="images/logo-ma.png" width="80"/>
                     </td>
-                    <td class="header-page">
+                    <td class="section-center">
                         Governo do Estado do Maranhão<br>
                         Secretaria de Governo<br>
                         Secreatia Adjunta de Tecnologia da Informação/SEATI<br>
                         Secretaria do Trabalho e Economia Solidaria/SETRES
                     </td>
+                    <td class="section-right">
+                        LISTA DE RESÍDUOS SÓLIDOS
+                    </td>
+                </tr>
+            </table>
+            <table class="line-seconday">
+                <tr>
+                    <td class="col-header-table" style="width: 10%">ID</td>
+                    <td class="col-header-table" style="width: 90%">NOME</td>
                 </tr>
             </table>
         ');

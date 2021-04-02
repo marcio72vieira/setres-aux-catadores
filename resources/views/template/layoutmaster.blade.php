@@ -369,6 +369,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
         <script src="{{ URL::asset('template/js/mascaras.js') }}"></script>
 
+
+        @yield('scripts')
+
     <!-- fim add marcio -->
 
 

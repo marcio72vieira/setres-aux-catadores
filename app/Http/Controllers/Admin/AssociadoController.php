@@ -10,6 +10,7 @@ use App\Models\Companhia;
 use App\Models\Bairro;
 use App\Models\Associado;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\Validator;   //Validação unique para cnpj na atualização
 use Illuminate\Validation\Rule;             //Validação unique para cnpm na atualização
@@ -38,6 +39,7 @@ class AssociadoController extends Controller
     }
 
 
+    /* MÉTODO OROGINAL
     public function store(AssociadoRequest $request)
     {
         //dd($request->all());
@@ -53,6 +55,27 @@ class AssociadoController extends Controller
         $request->session()->flash('sucesso', 'Registro incluído com sucesso!');
         return redirect()->route('admin.associado.index');
     }
+    */
+
+    public function store(AssociadoRequest $request)
+    {
+        //dd($request->all());
+
+        DB::beginTransaction();
+            $associado = Associado::create($request->all());
+
+            if($request->has('bairros')){
+                $associado->bairros()->sync($request->bairros);
+            }
+        DB::commit();
+
+        // Obtendo o id do associado que acabou de ser inserido no banco de dados
+        $associadoId = $associado->id;
+
+        $request->session()->flash('sucesso', 'Registro incluído com sucesso!');
+        return redirect()->route('admin.associado.retrato', $associadoId);
+    }
+
 
 
     public function show($id)
@@ -113,4 +136,60 @@ class AssociadoController extends Controller
 
 
     }
+
+    public function retrato($id)
+    {
+        $associado   = Associado::find($id);
+        $titulo         = "RETRATO do(a) Sr(a): ";
+
+        return view('admin.associado.retrato', compact('associado', 'titulo'));
+    }
+
+
+    public function salvaretrato(Request $request)
+    {
+        $img                = $request['base64image'];
+        $idassociado        = $request['id'];
+        $nomeassociado      = $request['nome'];
+        $cpfassociado       = $request['cpf'];
+        $companhiaassociado = $request['companhia'];
+
+        // Deletando qualquer foto existente no banco que seja do profissional corrente
+        DB::table('fotos')->where('associado_id', '=', $idassociado)->delete();
+
+        $img = str_replace('data:image/png;base64,', '', $img);
+        $img = str_replace(' ', '+', $img);
+        $data = base64_decode($img);
+
+        $file = "public/fotos/coletor". $idassociado . '.png';
+        $path = "fotos/coletor". $idassociado . '.png';
+        $success = Storage::put($file, $data);
+
+
+        //Inserindo os dados na tabela fotos. Esta tabela pode ser suprimida, uma vez que o campo imagem na tabela
+        // associados será atualizado com o caminho da foto salva na pasta storage/public/fotos
+        if($success){
+            DB::table('fotos')->insert([
+                'associado_id' => $idassociado,
+                'nome' => $nomeassociado,
+                'cpf' => $cpfassociado,
+                'companhia' => $companhiaassociado,
+                'foto' => $path,
+                'created_at' => today(),
+                'updated_at' => today() ]);
+
+                // Atualizando apenas o campo image na tabela associados (este campo fica fica vazio na criação do associado)
+                Associado::where('id', $idassociado)->update(array('imagem' => $path));
+
+            return  "Foto salva com sucesso!";
+
+        } else {
+
+            return  "Não foi possível salvar a imagem capturada.";
+        }
+    }
+
+
+
+
 }

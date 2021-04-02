@@ -101,3 +101,5 @@
         });
     </script>
 @endsection
+
+{{-- @section('scripts') <script> alert('OK!, ESTOU AQUI'); </script> @endsection --}}
