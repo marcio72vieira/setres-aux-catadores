@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ResiduoRequest;
 use App\Http\Requests\ResiduoUpdateRequest;
 use Illuminate\Http\Request;
-USE Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Residuo;
+use App\Exports\ResiduoExport;
+use Excel;
 
 use Illuminate\Support\Facades\Validator;   //Validação unique
 use Illuminate\Validation\Rule;             //Validação unique
@@ -147,5 +149,20 @@ class ResiduoController extends Controller
         $mpdf->Output($fileName, 'I');
 
         //return view('admin.residuo.pdf.pdfresiduogeral', compact('residuos'));
+    }
+
+    // Relatório Excel
+    public function relatorioresiduoexcel()
+    {
+        return Excel::download(new ResiduoExport,'residuos.xlsx');
+
+    }
+
+
+    // Relatório CSV
+    public function relatorioresiduocsv()
+    {
+        return Excel::download(new ResiduoExport,'residuos.csv');
+
     }
 }

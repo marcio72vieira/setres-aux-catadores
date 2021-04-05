@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Residuo extends Model
 {
@@ -19,5 +20,11 @@ class Residuo extends Model
 
     public function companhia(){
         return $this->belongsToMany(Companhia::class)->withTimestamps();
+    }
+
+    // relatorio excel
+    public static function getResiduos(){
+        $records = DB::table('residuos')->select('id', 'nome')->get()->toArray();
+        return $records;
     }
 }

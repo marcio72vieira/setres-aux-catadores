@@ -42,6 +42,10 @@ Route::get('admin/associado/{id}/retrato', [AssociadoController::class, 'retrato
 Route::match(['get', 'post'], 'ajax-canvas-upload', [AssociadoController::class, 'salvaretrato']);
 
 
+
+// RELATÓRIOS RESÍDUOS
 // Relatórios PDF
 Route::get('admin/residuo/pdf/relatorioresiduo', [ResiduoController::class, 'relatorioresiduo'])->name('admin.residuo.relatorio')->middleware(['auth']);
+Route::get('admin/residuo/excel/relatorioresiduo', [ResiduoController::class, 'relatorioresiduoexcel'])->name('admin.residuo.relatorioexcel')->middleware(['auth']);
+Route::get('admin/residuo/csv/relatorioresiduo', [ResiduoController::class, 'relatorioresiduocsv'])->name('admin.residuo.relatoriocsv')->middleware(['auth']);
 
