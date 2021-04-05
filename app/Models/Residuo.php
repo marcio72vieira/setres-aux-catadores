@@ -22,7 +22,7 @@ class Residuo extends Model
         return $this->belongsToMany(Companhia::class)->withTimestamps();
     }
 
-    // relatorio excel
+    // relatorio excel e csv
     public static function getResiduos(){
         $records = DB::table('residuos')->select('id', 'nome')->get()->toArray();
         return $records;

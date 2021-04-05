@@ -42,7 +42,13 @@
           @foreach($associados as $associado)
              <tr>
                 <td scope="row">{{$associado->id}}</th>
-                <td> <img src="{{ asset('storage/'.$associado->imagem) }}" width="40"></td>
+                <td style="text-align: center">
+                    @if($associado->imagem != "")
+                        <img src="{{ asset('storage/'.$associado->imagem) }}" width="40">
+                    @else
+                        <img src="{{ asset('images/avatar.png') }}" width="40">
+                    @endif
+                </td>
                 <td>{{$associado->nome}}</td>
                 <td>{{$associado->foneum}} / {{$associado->fonedois}}</td>
                 <td>{{$associado->companhia->nome}}</td>

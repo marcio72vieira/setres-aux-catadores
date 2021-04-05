@@ -44,8 +44,14 @@ Route::match(['get', 'post'], 'ajax-canvas-upload', [AssociadoController::class,
 
 
 // RELATÓRIOS RESÍDUOS
-// Relatórios PDF
 Route::get('admin/residuo/pdf/relatorioresiduo', [ResiduoController::class, 'relatorioresiduo'])->name('admin.residuo.relatorio')->middleware(['auth']);
 Route::get('admin/residuo/excel/relatorioresiduo', [ResiduoController::class, 'relatorioresiduoexcel'])->name('admin.residuo.relatorioexcel')->middleware(['auth']);
 Route::get('admin/residuo/csv/relatorioresiduo', [ResiduoController::class, 'relatorioresiduocsv'])->name('admin.residuo.relatoriocsv')->middleware(['auth']);
 
+// RELATÓRIOS BAIRROS
+Route::get('admin/bairro/pdf/relatoriobairro', [BairroController::class, 'relatoriobairro'])->name('admin.bairro.relatorio')->middleware(['auth']);
+Route::get('admin/bairro/excel/relatoriobairro', [BairroController::class, 'relatoriobairroexcel'])->name('admin.bairro.relatorioexcel')->middleware(['auth']);
+Route::get('admin/bairro/csv/relatoriobairro', [BairroController::class, 'relatoriobairrocsv'])->name('admin.bairro.relatoriocsv')->middleware(['auth']);
+
+// RELATÓRIOS COMPANHIAS
+Route::get('admin/companhia/pdf/relatoriocompanhia', [CompanhiaController::class, 'relatoriocompanhia'])->name('admin.companhia.relatorio')->middleware(['auth']);

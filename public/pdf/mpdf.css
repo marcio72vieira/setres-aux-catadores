@@ -96,6 +96,11 @@ table.blueTable {
     border-collapse: collapse;
   }
 
+  table.line-seconday-landscape{
+    width: 780px;
+    border-collapse: collapse;
+  }
+
   td.col-header-table {
     background-color: #e3e3e3;
     border: 0.5px solid #000000;
@@ -103,6 +108,7 @@ table.blueTable {
     font-size: 10px;
     padding: 5px;
   }
+
 
 
   /* FOOTER */

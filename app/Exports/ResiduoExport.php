@@ -17,6 +17,13 @@ class ResiduoExport implements FromCollection,WithHeadings
     // Comando para gerar este export:
     // php artisan make:export ResiduoExport --model=App\Models\Residuo
 
+    // Criar o método getResiduos() no model Residuo
+    // No model Residuo inserir a Facades DB
+    // Colocar a treat ,WithHeadings no início dessa classe
+
+    // No controle ResidoController, importar: use App\Exports\ResiduoExport;
+    // No controle ResidoController, importar: use Excel;
+
     public function headings():array{
         return[
             'id',
