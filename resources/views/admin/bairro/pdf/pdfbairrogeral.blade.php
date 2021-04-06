@@ -9,12 +9,12 @@
 
 
 <body>
-    <table style="width: 100%">
+    <table style="width: 717px; border-collapse: collapse;">
 
         @foreach ($bairros as $bairro)
-            <tr>
-                <td class="dados" style="width: 10%">{{$bairro->id}}</td>
-                <td class="dados" style="width: 90%">{{$bairro->nome}}</td>
+            <tr @if($loop->even) style="background-color: #e3e3e3;" @endif>
+                <td style="width: 50px;" class="dados-lista">{{$bairro->id}}</td>
+                <td style="width: 667px;" class="dados-lista">{{$bairro->nome}}</td>
             </tr>
         @endforeach
 

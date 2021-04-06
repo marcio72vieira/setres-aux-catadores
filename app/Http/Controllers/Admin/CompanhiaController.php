@@ -121,42 +121,42 @@ class CompanhiaController extends Controller
         ]);
 
         $mpdf->SetHTMLHeader('
-            <table class="line-primary">
+            <table style="width:1080px; border-bottom: 1px solid #000000; margin-bottom: 3px;">
                 <tr>
-                    <td class="section-left">
+                    <td style="width: 108px">
                         <img src="images/logo-ma.png" width="80"/>
                     </td>
-                    <td class="section-center">
+                    <td style="width: 432px; font-size: 10px; font-family: Arial, Helvetica, sans-serif;">
                         Governo do Estado do Maranhão<br>
                         Secretaria de Governo<br>
                         Secreatia Adjunta de Tecnologia da Informação/SEATI<br>
                         Secretaria do Trabalho e Economia Solidaria/SETRES
                     </td>
-                    <td class="section-right">
-                        LISTA DE COMPANHIAS
+                    <td style="width: 540px;" class="titulo-rel">
+                        COMPANHIAS
                     </td>
                 </tr>
             </table>
-            <table class="line-seconday-landscape">
+            <table style="width:1080px; border-collapse: collapse;">
                 <tr>
-                    <td class="col-header-table" style="width: 50px;">ID</td>
-                    <td class="col-header-table" style="width: 250px;">NOME</td>
-                    <td class="col-header-table" style="width: 110px;">CNPJ</td>
-                    <td class="col-header-table" style="width: 90px;">TELEFFONE</td>
-                    <td class="col-header-table" style="width: 200px;">PRESIDENTE</td>
-                    <td class="col-header-table" style="width: 90px;">TELEFONE</td>
-                    <td class="col-header-table" style="width: 200px;">VICE-PRESIDETE</td>
-                    <td class="col-header-table" style="width: 90px;">TELEFONE</td>
+                    <td width="50px" class="col-header-table">ID</td>
+                    <td width="250px" class="col-header-table">NOME</td>
+                    <td width="110px" class="col-header-table">CNPJ</td>
+                    <td width="90px" class="col-header-table">TELEFFONE</td>
+                    <td width="200px" class="col-header-table">PRESIDENTE</td>
+                    <td width="90px" class="col-header-table">TELEFONE</td>
+                    <td width="200px" class="col-header-table">VICE-PRESIDETE</td>
+                    <td width="90px" class="col-header-table">TELEFONE</td>
                 </tr>
             </table>
         ');
 
         $mpdf->SetHTMLFooter('
-            <table class="tabela-footer">
+            <table style="width:1080px; border-top: 1px solid #000000; font-size: 10px; font-family: Arial, Helvetica, sans-serif;">
                 <tr>
-                    <td width="33%">São Luis(MA) {DATE d/m/Y}</td>
-                    <td width="33%" align="center"></td>
-                    <td width="33%" style="text-align: right;">{PAGENO}/{nbpg}</td>
+                    <td width="360px">São Luis(MA) {DATE d/m/Y}</td>
+                    <td width="360px" align="center"></td>
+                    <td width="360px" align="right">{PAGENO}/{nbpg}</td>
                 </tr>
             </table>
         ');

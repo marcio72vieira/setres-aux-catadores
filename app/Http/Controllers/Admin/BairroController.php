@@ -105,36 +105,36 @@ class BairroController extends Controller
         ]);
 
         $mpdf->SetHTMLHeader('
-            <table class="line-primary">
+            <table style="width:717px; border-bottom: 1px solid #000000; margin-bottom: 3px;">
                 <tr>
-                    <td class="section-left">
+                    <td style="width: 83px">
                         <img src="images/logo-ma.png" width="80"/>
                     </td>
-                    <td class="section-center">
+                    <td style="width: 282px; font-size: 10px; font-family: Arial, Helvetica, sans-serif;">
                         Governo do Estado do Maranhão<br>
                         Secretaria de Governo<br>
                         Secreatia Adjunta de Tecnologia da Informação/SEATI<br>
                         Secretaria do Trabalho e Economia Solidaria/SETRES
                     </td>
-                    <td class="section-right">
-                        LISTA DE BAIRROS
+                    <td style="width: 352px;" class="titulo-rel">
+                        BAIRROS
                     </td>
                 </tr>
             </table>
-            <table class="line-seconday">
+            <table style="width:717px; border-collapse: collapse;">
                 <tr>
-                    <td class="col-header-table" style="width: 10%">ID</td>
-                    <td class="col-header-table" style="width: 90%">NOME</td>
+                    <td width="50px" class="col-header-table">ID</td>
+                    <td width="667px" class="col-header-table">NOME</td>
                 </tr>
             </table>
         ');
 
         $mpdf->SetHTMLFooter('
-            <table class="tabela-footer">
+            <table style="width:717px; border-top: 1px solid #000000; font-size: 10px; font-family: Arial, Helvetica, sans-serif;">
                 <tr>
-                    <td width="33%">São Luis(MA) {DATE d/m/Y}</td>
-                    <td width="33%" align="center"></td>
-                    <td width="33%" style="text-align: right;">{PAGENO}/{nbpg}</td>
+                    <td width="239px">São Luis(MA) {DATE d/m/Y}</td>
+                    <td width="239px" align="center"></td>
+                    <td width="239px" align="right">{PAGENO}/{nbpg}</td>
                 </tr>
             </table>
         ');

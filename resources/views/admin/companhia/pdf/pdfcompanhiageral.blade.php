@@ -9,18 +9,18 @@
 
 
 <body>
-    <table style="width: 1080px">
+    <table style="width: 1080px;  border-collapse: collapse; font-size: 10px; font-family: Arial, Helvetica, sans-serif;">
 
         @foreach ($companhias as $companhia)
             <tr @if($loop->even) style="background-color: #e3e3e3;" @endif>
-                <td class="dados" style="width: 50px;">{{$companhia->id}}</td>
-                <td class="dados" style="width: 250px;">{{$companhia->nome}}</td>
-                <td class="dados" style="width: 110px;">{{$companhia->cnpj}}</td>
-                <td class="dados" style="width: 90px;">{{$companhia->foneum}}</td>
-                <td class="dados" style="width: 200px;">{{$companhia->presidente}}</td>
-                <td class="dados" style="width: 90px;">{{$companhia->fonepresidente}}</td>
-                <td class="dados" style="width: 200px;">{{$companhia->vicepresidente}}</td>
-                <td class="dados" style="width: 90px;">{{$companhia->fonevicepresidente}}</td>
+                <td style="width: 50px;" class="dados-lista">{{$companhia->id}}</td>
+                <td style="width: 250px;" class="dados-lista">{{$companhia->nome}}</td>
+                <td style="width: 110px;" class="dados-lista">{{$companhia->cnpj}}</td>
+                <td style="width: 90px;" class="dados-lista">{{$companhia->foneum}}</td>
+                <td style="width: 200px;" class="dados-lista">{{$companhia->presidente}}</td>
+                <td style="width: 90px;" class="dados-lista">{{$companhia->fonepresidente}}</td>
+                <td style="width: 200px;" class="dados-lista">{{$companhia->vicepresidente}}</td>
+                <td style="width: 90px;" class="dados-lista">{{$companhia->fonevicepresidente}}</td>
             </tr>
         @endforeach
 
