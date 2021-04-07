@@ -19,7 +19,7 @@ class ResiduoExport implements FromCollection,WithHeadings
 
     // Criar o método getResiduos() no model Residuo
     // No model Residuo inserir a Facades DB
-    // Colocar a treat ,WithHeadings no início dessa classe
+    // Colocar a "treat" ,WithHeadings no início desta classe
 
     // No controle ResidoController, importar: use App\Exports\ResiduoExport;
     // No controle ResidoController, importar: use Excel;

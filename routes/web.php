@@ -55,4 +55,7 @@ Route::get('admin/bairro/csv/relatoriobairro', [BairroController::class, 'relato
 
 // RELATÓRIOS COMPANHIAS
 Route::get('admin/companhia/pdf/relatoriocompanhia', [CompanhiaController::class, 'relatoriocompanhia'])->name('admin.companhia.relatorio')->middleware(['auth']);
+Route::get('admin/companhia/excel/relatoriocompanhia', [CompanhiaController::class, 'relatoriocompanhiaexcel'])->name('admin.companhia.relatorioexcel')->middleware(['auth']);
+Route::get('admin/companhia/csv/relatoriocompanhia', [CompanhiaController::class, 'relatoriocompanhiacsv'])->name('admin.companhia.relatoriocsv')->middleware(['auth']);
+
 Route::get('admin/companhia/pdf/{id}/ficha', [CompanhiaController::class, 'ficha'])->name('admin.companhia.ficha')->middleware(['auth']);

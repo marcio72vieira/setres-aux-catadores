@@ -7,7 +7,7 @@
   }
 
   td.titulo-secao{
-    background-color: #e3e3e3;
+    background-color: #a9a9a9;
     border: 0.5px solid #000000;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 10px;
@@ -40,7 +40,7 @@
       padding: 5px;
       border-left: 0.5px solid #000000;
       border-top: 0.5px solid #000000;
-      border-right: 1px solid #000000;
+      border-right: 0.5px solid #000000;
     }
 
     td.dados-ficha {
@@ -52,7 +52,7 @@
     }
 
     td.close-ficha {
-        border-top: 1px solid #000000;
+        border-top: 0.5px solid #000000;
       }
 
 

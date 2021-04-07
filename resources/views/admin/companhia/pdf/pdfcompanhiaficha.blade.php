@@ -75,14 +75,30 @@
 
     <table style="width: 717px; border-collapse: collapse;">
         <tr>
+            <td style="width: 717px;" class="label-ficha">RESÍDUOS COM QUE TRABALHA</td>
+        </tr>
+        <tr>
+            <td style="width: 717px;" class="dados-ficha">
+                @foreach ($companhia->residuos as $residuo)
+                    {{$residuo->nome}};&nbsp;&nbsp;
+                @endforeach
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4" style="width:717px;" class="close-ficha"></td>
+        </tr>
+    </table>
+
+    <table style="width: 717px; border-collapse: collapse;">
+        <tr>
             <td colspan="2" style="width: 717px" class="titulo-secao">ASSOCIADOS</td>
         </tr>
         <tr>
-            <td style="width: 50px;" class="label-ficha">ID</td>
-            <td style="width: 667px;" class="label-ficha">NOME</td>
+            <td style="width: 50px;" class="label-ficha col-header-table">ID</td>
+            <td style="width: 667px;" class="label-ficha col-header-table">NOME</td>
         </tr>
         @foreach ($companhia->associados as $associado)
-            <tr>
+            <tr @if($loop->even) style="background-color: #e3e3e3;" @endif>
                 <td style="width: 50px;" class="dados-ficha">{{$associado->id}}</td>
                 <td style="width: 667px;" class="dados-ficha">{{$associado->nome}}</td>
             </tr>

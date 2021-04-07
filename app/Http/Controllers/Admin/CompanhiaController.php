@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use App\Models\Companhia;
 use App\Models\Residuo;
 use Illuminate\Support\Facades\DB;
+use App\Exports\CompanhiaExport;
+use Excel;
 
 use Illuminate\Support\Facades\Validator;   //Validação unique para cnpj na atualização
 use Illuminate\Validation\Rule;             //Validação unique para cnpm na atualização
@@ -172,6 +174,20 @@ class CompanhiaController extends Controller
         $mpdf->Output($fileName, 'I');
 
         //return view('admin.residuo.pdf.pdfresiduogeral', compact('residuos'));
+    }
+
+    // Relatório Excel
+    public function relatoriocompanhiaexcel()
+    {
+        return Excel::download(new CompanhiaExport,'companhias.xlsx');
+
+    }
+
+    // Relatório CSV
+    public function relatoriocompanhiacsv()
+    {
+        return Excel::download(new CompanhiaExport,'companhias.csv');
+
     }
 
 
