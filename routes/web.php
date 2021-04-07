@@ -55,3 +55,4 @@ Route::get('admin/bairro/csv/relatoriobairro', [BairroController::class, 'relato
 
 // RELATÓRIOS COMPANHIAS
 Route::get('admin/companhia/pdf/relatoriocompanhia', [CompanhiaController::class, 'relatoriocompanhia'])->name('admin.companhia.relatorio')->middleware(['auth']);
+Route::get('admin/companhia/pdf/{id}/ficha', [CompanhiaController::class, 'ficha'])->name('admin.companhia.ficha')->middleware(['auth']);

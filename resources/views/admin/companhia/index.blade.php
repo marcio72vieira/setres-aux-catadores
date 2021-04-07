@@ -47,6 +47,7 @@
                 <td>
                     <a href="{{route('admin.companhia.show', $companhia->id)}}" title="exibir"><i class="fas fa-eye text-warning mr-2"></i></a>
                     <a href="{{route('admin.companhia.edit', $companhia->id)}}" title="editar"><i class="fas fa-edit text-info mr-2"></i></a>
+                    <a href="{{route('admin.companhia.ficha', $companhia->id)}}" title="ficha" target="_blank"><i class="far fa-file-pdf text-danger mr-2"></i></a>
                     <a href="" data-toggle="modal" data-target="#formDelete{{$companhia->id}}" title="excluir"><i class="fas fa-trash text-danger mr-2"></i></a>
 
                     <!-- MODAL FormDelete OBS: O id da modal para cada registro tem que ser diferente, senão ele pega apenas o primeiro registro-->
