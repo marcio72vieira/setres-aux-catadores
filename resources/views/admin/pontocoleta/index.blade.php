@@ -9,6 +9,21 @@
             Adicionar
         </a>
 
+        <a class="btn btn-primary btn-danger" href="{{route('admin.pontocoleta.relatorio')}}" role="button" style="margin-bottom: 10px" target="_blank">
+            <i class="far fa-file-pdf"></i>
+            pdf
+        </a>
+
+        <a class="btn btn-primary btn-success" href="{{route('admin.pontocoleta.relatorioexcel')}}" role="button" style="margin-bottom: 10px">
+            <i class="far fa-file-excel"></i>
+            xlsx
+        </a>
+
+        <a class="btn btn-primary btn-warning" href="{{route('admin.pontocoleta.relatoriocsv')}}" role="button" style="margin-bottom: 10px">
+            <i class="fas fa-file-csv"></i>
+            csv
+        </a>
+
 
         @if(session('sucesso'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">

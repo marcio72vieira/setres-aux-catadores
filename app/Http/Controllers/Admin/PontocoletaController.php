@@ -90,4 +90,59 @@ class PontocoletaController extends Controller
         return redirect()->route('admin.pontocoleta.index');
 
     }
+
+    public function relatoriopontocoleta()
+    {
+        $pontoscoleta = Pontocoleta::all();
+
+        $fileName = ('Pontoscoleta_lista.pdf');
+
+        $mpdf = new \Mpdf\Mpdf([
+            'margin_left' => 10,
+            'margin_right' => 10,
+            'margin_top' => 25,
+            'margin_bottom' => 15,
+            'margin-header' => 10,
+            'margin_footer' => 5
+        ]);
+
+        $mpdf->SetHTMLHeader('
+            <table style="width:717px; border-bottom: 1px solid #000000; margin-bottom: 3px;">
+                <tr>
+                    <td style="width: 83px">
+                        <img src="images/logo-ma.png" width="80"/>
+                    </td>
+                    <td style="width: 282px; font-size: 10px; font-family: Arial, Helvetica, sans-serif;">
+                        Governo do Estado do Maranhão<br>
+                        Secretaria de Governo<br>
+                        Secreatia Adjunta de Tecnologia da Informação/SEATI<br>
+                        Secretaria do Trabalho e Economia Solidaria/SETRES
+                    </td>
+                    <td style="width: 352px;" class="titulo-rel">
+                        PONTOS DE COLETA
+                    </td>
+                </tr>
+            </table>
+        ');
+
+        $mpdf->SetHTMLFooter('
+            <table style="width:717px; border-top: 1px solid #000000; font-size: 10px; font-family: Arial, Helvetica, sans-serif;">
+                <tr>
+                    <td width="239px">São Luis(MA) {DATE d/m/Y}</td>
+                    <td width="239px" align="center"></td>
+                    <td width="239px" align="right">{PAGENO}/{nbpg}</td>
+                </tr>
+            </table>
+        ');
+
+
+        $html = \View::make('admin.pontocoleta.pdf.pdfpontocoletageral', compact('pontoscoleta'));
+        $html = $html->render();
+
+        $stylesheet = file_get_contents('pdf/mpdf.css');
+        $mpdf->WriteHTML($stylesheet, 1);
+
+        $mpdf->WriteHTML($html);
+        $mpdf->Output($fileName, 'I');
+    }
 }
