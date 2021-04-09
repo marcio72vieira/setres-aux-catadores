@@ -10,6 +10,7 @@
 
 <body>
     @foreach ($pontoscoleta as $pontocoleta )
+        <div @if($loop->even) style="background-color: #e3e3e3;" @endif>
         <table style="width: 717px; border-collapse: collapse;">
             <tr>
                 <td colspan="3" style="width: 717px;" class="label-ficha">NOME</td>
@@ -54,7 +55,12 @@
                 <td colspan="3" style="width:717px;" class="close-ficha"></td>
             </tr>
         </table>
+        </div>
         <br>
+        @if($loop->iteration % 6 == 0)
+        <pagebreak />
+        {{-- <barcode code="978-0-9542246-0" type="ISBN" height="0.66" text="1" />--}}
+        @endif
     @endforeach
 
 </body>

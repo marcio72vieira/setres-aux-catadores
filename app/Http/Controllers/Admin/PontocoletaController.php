@@ -10,6 +10,9 @@ use App\Models\Pontocoleta;
 use App\Models\Residuo;
 use Illuminate\Support\Facades\DB;
 
+use App\Exports\PontocoletaExport;
+use Excel;
+
 
 class PontocoletaController extends Controller
 {
@@ -142,7 +145,36 @@ class PontocoletaController extends Controller
         $stylesheet = file_get_contents('pdf/mpdf.css');
         $mpdf->WriteHTML($stylesheet, 1);
 
+        /*
+        Marca D'agua com imagem. Tem que ser posicionado depois do header e footer
+        $mpdf->showWatermarkImage = true;
+        $mpdf->WriteHTML(
+            '<watermarkimage src="images/logo-brasil.png" alpha="0.1" size="100,100" />'
+        );
+        */
+
+        /*
+        Marca D'água com texto. Tem que ser posicionado depois do header e footer
+        $mpdf->SetWatermarkText('SEATI', 0.1);
+        $mpdf->showWatermarkText = true;
+        */
+
         $mpdf->WriteHTML($html);
         $mpdf->Output($fileName, 'I');
+    }
+
+    // Relatório Excel
+    public function relatoriopontocoletaexcel()
+    {
+        return Excel::download(new PontocoletaExport,'pontoscoleta.xlsx');
+
+    }
+
+
+    // Relatório CSV
+    public function relatoriopontocoletacsv()
+    {
+        return Excel::download(new PontocoletaExport,'pontoscoleta.csv');
+
     }
 }

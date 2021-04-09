@@ -60,7 +60,7 @@ Route::get('admin/companhia/csv/relatoriocompanhia', [CompanhiaController::class
 Route::get('admin/companhia/pdf/{id}/ficha', [CompanhiaController::class, 'ficha'])->name('admin.companhia.ficha')->middleware(['auth']);
 
 
-// RELATÓRIOS COMPANHIAS
+// RELATÓRIOS PONTOSCOLETA
 Route::get('admin/pontocoleta/pdf/relatoriopontocoleta', [PontocoletaController::class, 'relatoriopontocoleta'])->name('admin.pontocoleta.relatorio')->middleware(['auth']);
 Route::get('admin/pontocoleta/excel/relatoriopontocoleta', [PontocoletaController::class, 'relatoriopontocoletaexcel'])->name('admin.pontocoleta.relatorioexcel')->middleware(['auth']);
 Route::get('admin/pontocoleta/csv/relatoriopontocoleta', [PontocoletaController::class, 'relatoriopontocoletacsv'])->name('admin.pontocoleta.relatoriocsv')->middleware(['auth']);
