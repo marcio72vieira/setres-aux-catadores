@@ -195,7 +195,7 @@ class AssociadoController extends Controller
     // Configuração de Relatórios PDFs
     public function relatorioassociado()
     {
-        $associados = Associado::all();
+        $associados = Associado::orderBy('nome', 'ASC')->get();
 
         $fileName = ('Associados_lista.pdf');
 
