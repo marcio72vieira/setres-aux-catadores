@@ -263,12 +263,14 @@
                                         <label class="form-control-label" for="fonedois">Telefone 2 (opcional)</label>
                                         <input type="text" id="fonedois" class="form-control" name="fonedois"  placeholder="(99) 9999-9999" value="{{old('fonedois', $associado->fonedois)}}" readonly>
                                     </div>
+                                    <h6><strong>Tempo de associado: {{mrc_calc_time($associado->filiacao)}}</strong></h6>
                                 </div>
 
                                 <div class="col-lg-5" style="text-align: center">
                                     {{-- <img src="{{$associado->imagem}}" width="200" height="150"> modo anterior com dados binários--}}
                                     <img src="{{ asset('storage/'.$associado->imagem) }}" width="200">
                                 </div>
+
                             </div>
 
                         </div>
