@@ -14,6 +14,17 @@
             pdf
         </a>
 
+        <a class="btn btn-primary btn-success" href="{{route('admin.associado.relatorioexcel')}}" role="button" style="margin-bottom: 10px">
+            <i class="far fa-file-excel"></i>
+            xlsx
+        </a>
+
+        <a class="btn btn-primary btn-warning" href="{{route('admin.associado.relatoriocsv')}}" role="button" style="margin-bottom: 10px">
+            <i class="fas fa-file-csv"></i>
+            csv
+        </a>
+
+
 
         @if(session('sucesso'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">

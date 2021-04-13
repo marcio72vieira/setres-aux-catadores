@@ -11,7 +11,7 @@ use App\Models\Bairro;
 use App\Models\Associado;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use App\Exports\CompanhiaExport;
+use App\Exports\AssociadoExport;
 use Excel;
 
 use Illuminate\Support\Facades\Validator;   //Validação unique para cnpj na atualização
@@ -258,6 +258,21 @@ class AssociadoController extends Controller
 
         $mpdf->WriteHTML($html);
         $mpdf->Output($fileName, 'I');
+
+    }
+
+
+    // Relatório Excel
+    public function relatorioassociadoexcel()
+    {
+        return Excel::download(new AssociadoExport,'associados.xlsx');
+
+    }
+
+    // Relatório CSV
+    public function relatorioassociadocsv()
+    {
+        return Excel::download(new AssociadoExport,'associados.csv');
 
     }
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Associado extends Model
 {
@@ -43,5 +44,11 @@ class Associado extends Model
 
     public function foto() {
         return $this->hasOne(Foto::class);
+    }
+
+    // relatorio excel e csv
+    public static function getAssociados(){
+        $records = DB::table('associados')->select('id', 'nome', 'nascimento', 'rg', 'rgorgaoemissor', 'cpf', 'sexo', 'racacor', 'filiacao', 'quantidade', 'endereco', 'numero', 'bairro', 'complemento', 'cidade', 'zona', 'foneum', 'fonedois', 'companhia_id', 'imagem')->get()->toArray();
+        return $records;
     }
 }
