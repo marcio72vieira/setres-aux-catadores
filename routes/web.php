@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\Admin\AssociadoController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ResiduoController;
 use App\Http\Controllers\Admin\CompanhiaController;
 use App\Http\Controllers\Admin\BairroController;
@@ -35,6 +36,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::resource('bairro', BairroController::class)->middleware(['auth']);
     Route::resource('associado', AssociadoController::class)->middleware(['auth']);
     Route::resource('pontocoleta', PontocoletaController::class)->middleware(['auth']);
+    Route::resource('user', userController::class)->middleware(['auth']);
 });
 
 // Retrato

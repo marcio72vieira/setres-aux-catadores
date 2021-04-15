@@ -66,6 +66,7 @@
                         <a class="collapse-item" href="{{route('admin.companhia.index')}}">Companhias</a>
                         <a class="collapse-item" href="{{route('admin.pontocoleta.index')}}">Pontos de Coleta</a>
                         <a class="collapse-item" href="{{route('admin.associado.index')}}">Associados</a>
+                        <a class="collapse-item" href="{{route('admin.user.index')}}">Usuários</a>
                         <a class="collapse-item" href="">Outros...</a>
                     </div>
                 </div>
