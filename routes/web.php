@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ResiduoController;
 use App\Http\Controllers\Admin\CompanhiaController;
 use App\Http\Controllers\Admin\BairroController;
+use App\Http\Controllers\Admin\MunicipioController;
 use App\Http\Controllers\Admin\PontocoletaController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,8 +33,9 @@ Route::get('/front/logout', [MainController::class, 'logout'])->name('front.logo
 
 Route::prefix('admin')->name('admin.')->group(function() {
     Route::resource('residuo', ResiduoController::class)->middleware(['auth']);
-    Route::resource('companhia', CompanhiaController::class)->middleware(['auth']);
     Route::resource('bairro', BairroController::class)->middleware(['auth']);
+    Route::resource('municipio', MunicipioController::class)->middleware(['auth']);
+    Route::resource('companhia', CompanhiaController::class)->middleware(['auth']);
     Route::resource('associado', AssociadoController::class)->middleware(['auth']);
     Route::resource('pontocoleta', PontocoletaController::class)->middleware(['auth']);
     Route::resource('user', userController::class)->middleware(['auth']);
@@ -54,6 +56,11 @@ Route::get('admin/residuo/csv/relatorioresiduo', [ResiduoController::class, 'rel
 Route::get('admin/bairro/pdf/relatoriobairro', [BairroController::class, 'relatoriobairro'])->name('admin.bairro.relatorio')->middleware(['auth']);
 Route::get('admin/bairro/excel/relatoriobairro', [BairroController::class, 'relatoriobairroexcel'])->name('admin.bairro.relatorioexcel')->middleware(['auth']);
 Route::get('admin/bairro/csv/relatoriobairro', [BairroController::class, 'relatoriobairrocsv'])->name('admin.bairro.relatoriocsv')->middleware(['auth']);
+
+// RELATÓRIOS MUNICÍPIOS
+Route::get('admin/municipio/pdf/relatoriomunicipio', [MunicipioController::class, 'relatoriomunicipio'])->name('admin.municipio.relatorio')->middleware(['auth']);
+Route::get('admin/municipio/excel/relatoriomunicipio', [MunicipioController::class, 'relatoriomunicipioexcel'])->name('admin.municipio.relatorioexcel')->middleware(['auth']);
+Route::get('admin/municipio/csv/relatoriomunicipio', [MunicipioController::class, 'relatoriomunicipiocsv'])->name('admin.municipio.relatoriocsv')->middleware(['auth']);
 
 // RELATÓRIOS COMPANHIAS
 Route::get('admin/companhia/pdf/relatoriocompanhia', [CompanhiaController::class, 'relatoriocompanhia'])->name('admin.companhia.relatorio')->middleware(['auth']);

@@ -63,6 +63,7 @@
 
                         <a class="collapse-item" href="{{route('admin.residuo.index')}}">Residuos Sólidos</a>
                         <a class="collapse-item" href="{{route('admin.bairro.index')}}">Bairros</a>
+                        <a class="collapse-item" href="{{route('admin.municipio.index')}}">Municipios</a>
                         <a class="collapse-item" href="{{route('admin.companhia.index')}}">Companhias</a>
                         <a class="collapse-item" href="{{route('admin.pontocoleta.index')}}">Pontos de Coleta</a>
                         <a class="collapse-item" href="{{route('admin.associado.index')}}">Associados</a>

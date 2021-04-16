@@ -18,7 +18,7 @@
             <th>Companhia</th>
             <th>Áreas de Atuação</th>
             <th>Imagem</th>
-            {{--<th>FOTO</th>--}}
+            {{-- EXIBE A FOTO NA PLANILHA DO EXCEL <th>FOTO</th>--}}
         </tr>
     </thead>
     <tbody>
