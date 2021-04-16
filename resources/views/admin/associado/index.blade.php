@@ -14,7 +14,15 @@
             pdf
         </a>
 
+        {{--
         <a class="btn btn-primary btn-success" href="{{route('admin.associado.relatorioexcel')}}" role="button" style="margin-bottom: 10px">
+            <i class="far fa-file-excel"></i>
+            xlsx
+        </a>
+        --}}
+
+        {{-- RELATÓRIO EXCEL A PARTIR DE UMA VIEW BLADE --}}
+        <a class="btn btn-primary btn-success" href="{{route('admin.associado.relatorioexceldois')}}" role="button" style="margin-bottom: 10px">
             <i class="far fa-file-excel"></i>
             xlsx
         </a>
@@ -23,6 +31,8 @@
             <i class="fas fa-file-csv"></i>
             csv
         </a>
+
+
 
 
 
@@ -45,7 +55,7 @@
           <thead>
             <tr>
                 <th>Id</th>
-                <th>foto</th>
+                {{--<th>foto</th>--}}
                 <th>Nome</th>
                 <th>Telefone(s)</th>
                 <th>Companhia</th>
@@ -57,7 +67,8 @@
           <tbody>
           @foreach($associados as $associado)
              <tr>
-                <td scope="row">{{$associado->id}}</th>
+                <td scope="row">{{$associado->id}}</td>
+                {{--
                 <td style="text-align: center">
                     @if($associado->imagem != "")
                         <img src="{{ asset('storage/'.$associado->imagem) }}" width="40">
@@ -65,6 +76,7 @@
                         <img src="{{ asset('images/avatar.png') }}" width="40">
                     @endif
                 </td>
+                --}}
                 <td>{{$associado->nome}}</td>
                 <td>{{$associado->foneum}} / {{$associado->fonedois}}</td>
                 <td>{{$associado->companhia->nome}}</td>

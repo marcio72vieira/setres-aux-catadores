@@ -72,3 +72,4 @@ Route::get('admin/pontocoleta/csv/relatoriopontocoleta', [PontocoletaController:
 Route::get('admin/associado/pdf/relatorioassociado', [AssociadoController::class, 'relatorioassociado'])->name('admin.associado.relatorio')->middleware(['auth']);
 Route::get('admin/associado/excel/relatorioassociado', [AssociadoController::class, 'relatorioassociadoexcel'])->name('admin.associado.relatorioexcel')->middleware(['auth']);
 Route::get('admin/associado/csv/relatorioassociado', [AssociadoController::class, 'relatorioassociadocsv'])->name('admin.associado.relatoriocsv')->middleware(['auth']);
+Route::get('admin/associado/excel/relatorioassociadodois', [AssociadoController::class, 'relatorioassociadoexceldois'])->name('admin.associado.relatorioexceldois')->middleware(['auth']);

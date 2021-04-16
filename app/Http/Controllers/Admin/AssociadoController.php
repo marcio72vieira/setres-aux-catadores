@@ -12,6 +12,7 @@ use App\Models\Associado;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Exports\AssociadoExport;
+use App\Exports\AssociadoExportDois;
 use Excel;
 
 use Illuminate\Support\Facades\Validator;   //Validação unique para cnpj na atualização
@@ -273,6 +274,13 @@ class AssociadoController extends Controller
     public function relatorioassociadocsv()
     {
         return Excel::download(new AssociadoExport,'associados.csv');
+
+    }
+
+    // Relatório HTML to Excel
+    public function relatorioassociadoexceldois()
+    {
+        return Excel::download(new AssociadoExportDois,'associadosdois.xlsx');
 
     }
 

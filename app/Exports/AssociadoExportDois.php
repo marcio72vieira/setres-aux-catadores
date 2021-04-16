@@ -8,9 +8,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
-
-class AssociadoExport implements FromCollection,WithHeadings
-//class AssociadoExport implements FromView
+class AssociadoExportDois implements WithHeadings,FromView
 {
 
     public function headings():array{
@@ -35,26 +33,14 @@ class AssociadoExport implements FromCollection,WithHeadings
             'fonedois',
             'companhia_id',
             'imagem'
-            //foto
         ];
     }
 
-
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
-    {
-        //return AppModelsCompanhia::all();
-        return collect(Associado::getAssociados());
-    }
-
-
-    /*
     // Exportar a partir de uma view
     public function view(): View
     {
         return view('admin.associado.listaassociados', ['associados' => Associado::all()]);
     }
-    */
+
+
 }
