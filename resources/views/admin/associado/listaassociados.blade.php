@@ -26,12 +26,12 @@
              <tr>
                 <td>{{$associado->id}}</td>
                 <td>{{$associado->nome}}</td>
-                <td>{{$associado->nascimento}}</td>
+                <td>{{mrc_turn_data($associado->nascimento)}}</td>
                 <td>{{$associado->rg }} / {{$associado->rgorgaoemissor}}</td>
                 <td>{{$associado->cpf}}</td>
                 <td>{{$associado->sexo}}</td>
                 <td>{{$associado->racacor}}</td>
-                <td>{{$associado->filiacao }}</td>
+                <td>{{mrc_turn_data($associado->filiacao)}}</td>
                 <td>{{$associado->quantidade}}</td>
                 <td>{{$associado->endereco}}</td>
                 <td>{{$associado->numero}}</td>
@@ -41,7 +41,7 @@
                 <td>{{$associado->companhia->nome}}</td>
                 <td>@foreach($associado->bairros as $bairro) {{$bairro->nome}}; @endforeach </td>
                 <td>{{$associado->imagem }}</td>
-                {{-- <th><img src="{{ base_path().'/storage/app/public/'.$associado->imagem }}" width="40"></th> --}}
+                {{-- EXIBE A FOTO NA PLANILHA DO EXCEL <th><img src="{{ base_path().'/storage/app/public/'.$associado->imagem }}" width="40"></th> --}}
              </tr>
         @endforeach
     </tbody>

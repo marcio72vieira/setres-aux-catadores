@@ -18,3 +18,13 @@ if (!function_exists('mrc_calc_time')) {
         return $years. " anos, ". $months. " meses " . "e ". $days. " dia(s)";
     }
 }
+
+
+if (!function_exists('mrc_turn_data')) {
+
+    function mrc_turn_data($dataBd)
+    {
+        $dataTurn = implode('/', array_reverse(array_merge(explode('-', $dataBd))));
+        return $dataTurn;
+    }
+}
