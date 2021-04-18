@@ -65,7 +65,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="foneum">Telefone<span class="small text-danger">*</span></label>
-                                        <input type="text" id="foneum" class="form-control" name="foneum" placeholder="(99) 9999-9999" value="{{old('foneum', $companhia->foneum)}}" required>
+                                        <input type="text" id="foneum" class="form-control phone" name="foneum" placeholder="(99) 9999-9999" value="{{old('foneum', $companhia->foneum)}}" required>
                                         @error('foneum')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
@@ -76,7 +76,7 @@
                                 <div class="col-lg-3">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="fonedois">Telefone (opcional)</label>
-                                        <input type="text" id="fonedois" class="form-control" name="fonedois" placeholder="(99) 9999-9999" value="{{old('fonedois', $companhia->fonedois)}}">
+                                        <input type="text" id="fonedois" class="form-control phone" name="fonedois" placeholder="(99) 9999-9999" value="{{old('fonedois', $companhia->fonedois)}}">
                                         @error('fonedois')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
@@ -100,7 +100,7 @@
                                 <div class="col-lg-5">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="fonepresidente">Telefone<span class="small text-danger">*</span></label>
-                                        <input type="text" id="fonepresidente" class="form-control" name="fonepresidente" placeholder="(99) 9999-9999" value="{{old('fonepresidente', $companhia->fonepresidente)}}" required>
+                                        <input type="text" id="fonepresidente" class="form-control phone" name="fonepresidente" placeholder="(99) 9999-9999" value="{{old('fonepresidente', $companhia->fonepresidente)}}" required>
                                         @error('fonepresidente')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
@@ -124,7 +124,7 @@
                                 <div class="col-lg-5">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="fonevicepresidente">Telefone<span class="small text-danger">*</span></label>
-                                        <input type="text" id="fonevicepresidente" class="form-control" name="fonevicepresidente" placeholder="(99) 9999-9999" value="{{old('fonevicepresidente', $companhia->fonevicepresidente)}}" required>
+                                        <input type="text" id="fonevicepresidente" class="form-control phone" name="fonevicepresidente" placeholder="(99) 9999-9999" value="{{old('fonevicepresidente', $companhia->fonevicepresidente)}}" required>
                                         @error('fonevicepresidente')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
@@ -158,12 +158,29 @@
                                     </div>
                                 </div>
 
-                                {{-- bairro --}}
+                                {{-- bairro
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="bairro">Bairro<span class="small text-danger">*</span></label>
                                         <input type="text" id="bairro" class="form-control" name="bairro" value="{{old('bairro', $companhia->bairro)}}" required>
                                         @error('bairro')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                 --}}
+
+                                {{-- bairro_id --}}
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="bairro_id">Bairro<span class="small text-danger">*</span></label>
+                                        <select name="bairro_id" id="bairro_id" class="form-control" required>
+                                            <option value="" selected disabled>Escolha...</option>
+                                            @foreach($bairros  as $bairro)
+                                                <option value="{{$bairro->id}}" {{old('bairro_id', $companhia->bairro_id) == $bairro->id ? 'selected' : ''}}>{{$bairro->nome}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('bairro_id')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
                                     </div>
@@ -182,12 +199,29 @@
                                     </div>
                                 </div>
 
-                                {{-- cidade --}}
+                                {{-- cidade
                                 <div class="col-lg-3">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="cidade">Cidade<span class="small text-danger">*</span></label>
                                         <input type="text" id="cidade" class="form-control" name="cidade" value="{{old('cidade', $companhia->cidade)}}" required>
                                         @error('cidade')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                 --}}
+
+                                {{-- municipio_id --}}
+                                <div class="col-lg-3">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="municipio_id">Bairro<span class="small text-danger">*</span></label>
+                                        <select name="municipio_id" id="municipio_id" class="form-control" required>
+                                            <option value="" selected disabled>Escolha...</option>
+                                            @foreach($municipios  as $municipio)
+                                                <option value="{{$municipio->id}}" {{old('municipio_id', $companhia->municipio_id) == $municipio->id ? 'selected' : ''}}>{{$municipio->nome}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('municipio_id')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
                                     </div>

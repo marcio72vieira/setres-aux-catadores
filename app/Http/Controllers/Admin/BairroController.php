@@ -7,9 +7,12 @@ use App\Http\Requests\BairroRequest;
 use App\Http\Requests\BairroUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\Bairro;
+use App\Models\Area;
+use App\Models\Municipio;
+use Illuminate\Support\Facades\DB;
 use App\Exports\BairroExport;
 use Excel;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;   //Validação unique
 use Illuminate\Validation\Rule;             //Validação unique
 
@@ -18,7 +21,11 @@ class BairroController extends Controller
 
     public function index()
     {
-        $bairros = Bairro::all();
+        if(Auth::user()->id == 1){
+            $bairros = Bairro::all();
+        } else {
+            $bairros = Bairro::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
+        }
 
         return view('admin.bairro.index', compact('bairros'));
     }
@@ -26,13 +33,17 @@ class BairroController extends Controller
 
     public function create()
     {
-        return view('admin.bairro.create');
+        $municipios = Municipio::orderBy('nome', 'ASC')->get();
+        return view('admin.bairro.create', compact('municipios'));
     }
 
 
     public function store(BairroRequest $request)
     {
-        Bairro::create($request->all());
+        DB::beginTransaction();
+            Bairro::create($request->all());
+            Area::create($request->all());
+        DB::commit();
 
         $request->session()->flash('sucesso', 'Registro incluído com sucesso!');
 
@@ -43,8 +54,9 @@ class BairroController extends Controller
     public function show($id)
     {
         $bairro = Bairro::find($id);
+        $municipios = Municipio::orderBy('nome', 'ASC')->get();
 
-        return view('admin.bairro.show', compact('bairro'));
+        return view('admin.bairro.show', compact('bairro', 'municipios'));
 
 
     }
@@ -53,14 +65,16 @@ class BairroController extends Controller
     public function edit($id)
     {
         $bairro = Bairro::find($id);
+        $municipios = Municipio::orderBy('nome', 'ASC')->get();
 
-        return view('admin.bairro.edit', compact('bairro'));
+        return view('admin.bairro.edit', compact('bairro', 'municipios'));
     }
 
 
     public function update($id, BairroUpdateRequest $request)
     {
         $bairro = Bairro::find($id);
+        $area = Area::find($id);
 
         // Validação unique
         Validator::make($request->all(), [
@@ -70,8 +84,10 @@ class BairroController extends Controller
             ],
         ]);
 
-
-        $bairro->update($request->all());
+        DB::beginTransaction();
+            $bairro->update($request->all());
+            $area->update($request->all());
+        DB::commit();
 
         $request->session()->flash('sucesso', 'Registro atualizado com sucesso!');
 
@@ -81,7 +97,10 @@ class BairroController extends Controller
 
     public function destroy($id, Request $request)
     {
-        Bairro::destroy($id);
+        DB::beginTransaction();
+            Bairro::destroy($id);
+            Area::destroy($id);
+        DB::commit();
 
         $request->session()->flash('sucesso', 'Registro excluído com sucesso!');
 

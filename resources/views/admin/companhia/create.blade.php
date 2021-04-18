@@ -156,12 +156,29 @@
                                     </div>
                                 </div>
 
-                                {{-- bairro --}}
+                                {{-- bairro
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="bairro">Bairro<span class="small text-danger">*</span></label>
                                         <input type="text" id="bairro" class="form-control" name="bairro" value="{{old('bairro')}}" required>
                                         @error('bairro')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                --}}
+
+                                {{-- bairro_id --}}
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="bairro_id">Bairro<span class="small text-danger">*</span></label>
+                                        <select name="bairro_id" id="bairro_id" class="form-control" required>
+                                            <option value="" selected disabled>Escolha...</option>
+                                            @foreach($bairros  as $bairro)
+                                                <option value="{{$bairro->id}}" {{old('bairro_id') == $bairro->id ? 'selected' : ''}}>{{$bairro->nome}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('bairro_id')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
                                     </div>
@@ -180,12 +197,29 @@
                                     </div>
                                 </div>
 
-                                {{-- cidade --}}
+                                {{-- cidade
                                 <div class="col-lg-3">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="cidade">Cidade<span class="small text-danger">*</span></label>
                                         <input type="text" id="cidade" class="form-control" name="cidade" value="{{old('cidade')}}" required>
                                         @error('cidade')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                --}}
+
+                                {{-- municipio_id --}}
+                                <div class="col-lg-3">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="municipio_id">Cidade<span class="small text-danger">*</span></label>
+                                        <select name="municipio_id" id="municipio_id" class="form-control" required>
+                                            <option value="" selected disabled>Escolha...</option>
+                                            @foreach($municipios  as $municipio)
+                                                <option value="{{$municipio->id}}" {{old('municipio_id') == $municipio->id ? 'selected' : ''}}>{{$municipio->nome}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('municipio_id')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
                                     </div>

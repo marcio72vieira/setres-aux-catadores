@@ -45,6 +45,8 @@
             <tr>
               <th>Id</th>
               <th>Nome</th>
+              <th>Município</th>
+              <th>Resíduos</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -54,6 +56,8 @@
              <tr>
                 <td>{{$companhia->id}}</td>
                 <td>{{$companhia->nome}}</td>
+                <td>{{$companhia->municipio->nome}}</td>
+                <td>@foreach($companhia->residuos as $residuo) <small style="font-size: 9px; font-weight:bold">{{ $residuo->nome}} </small>;@endforeach</td>
                 <td>
                     <a href="{{route('admin.companhia.show', $companhia->id)}}" title="exibir"><i class="fas fa-eye text-warning mr-2"></i></a>
                     <a href="{{route('admin.companhia.edit', $companhia->id)}}" title="editar"><i class="fas fa-edit text-info mr-2"></i></a>

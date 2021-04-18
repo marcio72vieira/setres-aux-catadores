@@ -11,12 +11,26 @@ class Bairro extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nome'
+        'nome',
+        'municipio_id'
     ];
+
+    public function municipio(){
+        return $this->belongsTo(Municipio::class);
+    }
 
     public function associados() {
         return $this->belongsToMany(Associado::class)->withTimestamps();
     }
+
+    public function companhias(){
+        return $this->hasMany(Companhia::class);
+    }
+
+    public function pontocoletas(){
+        return $this->hasMany(Pontocoleta::class);
+    }
+
 
     // relatorio excel e csv
     public static function getBairros(){

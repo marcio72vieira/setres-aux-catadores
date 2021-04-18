@@ -120,11 +120,28 @@
                                     </div>
                                 </div>
 
-                                {{-- bairro --}}
+                                {{-- bairro
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="bairro">Bairro</label>
                                         <input type="text" id="bairro" class="form-control" name="bairro" placeholder="Name" value="{{$companhia->bairro}}" readonly>
+                                    </div>
+                                </div>
+                                --}}
+
+                                {{-- bairro_id --}}
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="bairro_id">Bairro</label>
+                                        <select name="bairro_id" id="bairro_id" class="form-control" disabled>
+                                            <option value="" selected disabled>Escolha ...</option>
+                                            @foreach($bairros  as $bairro)
+                                                <option value="{{$bairro->id}}" {{old('bairro_id', $companhia->bairro_id) == $bairro->id ? 'selected' : ''}}>{{$bairro->nome}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('bairro_id')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -138,11 +155,28 @@
                                     </div>
                                 </div>
 
-                                {{-- cidade --}}
+                                {{-- cidade
                                 <div class="col-lg-3">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="cidade">Cidade</label>
                                         <input type="text" id="cidade" class="form-control" name="cidade" placeholder="Name" value="{{$companhia->cidade}}" readonly>
+                                    </div>
+                                </div>
+                                --}}
+
+                                {{-- municipio_id --}}
+                                <div class="col-lg-3">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="municipio_id">Cidade</label>
+                                        <select name="municipio_id" id="municipio_id" class="form-control" disabled>
+                                            <option value="" selected disabled>Escolha ...</option>
+                                            @foreach($municipios  as $municipio)
+                                                <option value="{{$municipio->id}}" {{old('municipio_id', $companhia->municipio_id) == $municipio->id ? 'selected' : ''}}>{{$municipio->nome}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('municipio_id')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
                                     </div>
                                 </div>
 

@@ -21,10 +21,27 @@
 
                         <div class="pl-lg-4">
                             <div class="row">
-                                <div class="col-lg-12">
+                                {{-- nome --}}
+                                <div class="col-lg-6">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="nome">Nome</label>
                                         <input type="text" id="nome" class="form-control" name="nome" placeholder="Nome" value="{{$bairro->nome}}" readonly>
+                                    </div>
+                                </div>
+
+                                {{-- municipio_id --}}
+                                <div class="col-lg-6">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="municipio_id">Municipio</label>
+                                        <select name="municipio_id" id="municipio_id" class="form-control" disabled>
+                                            <option value="" selected disabled>Escolha ...</option>
+                                            @foreach($municipios  as $municipio)
+                                                <option value="{{$municipio->id}}" {{old('municipio_id', $bairro->municipio_id) == $municipio->id ? 'selected' : ''}}>{{$municipio->nome}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('municipio_id')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>

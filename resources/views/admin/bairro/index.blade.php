@@ -45,6 +45,7 @@
             <tr>
               <th>Id</th>
               <th>Nome</th>
+              <th>Município</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -54,6 +55,7 @@
              <tr>
                 <td>{{$bairro->id}}</td>
                 <td>{{$bairro->nome}}</td>
+                <td>{{$bairro->municipio->nome}}</td>
                 <td>
                     <a href="{{route('admin.bairro.show', $bairro->id)}}" title="exibir"><i class="fas fa-eye text-warning mr-2"></i></a>
                     <a href="{{route('admin.bairro.edit', $bairro->id)}}" title="editar"><i class="fas fa-edit text-info mr-2"></i></a>

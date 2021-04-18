@@ -8,6 +8,8 @@ use App\Http\Requests\CompanhiaUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\Companhia;
 use App\Models\Residuo;
+use App\Models\Bairro;
+use App\Models\Municipio;
 use Illuminate\Support\Facades\DB;
 use App\Exports\CompanhiaExport;
 use Excel;
@@ -28,9 +30,11 @@ class CompanhiaController extends Controller
 
     public function create()
     {
-        $residuos = Residuo::all();
+        $residuos = Residuo::orderBy('nome', 'ASC')->get();
+        $bairros = Bairro::orderBy('nome', 'ASC')->get();
+        $municipios = Municipio::orderBy('nome', 'ASC')->get();
 
-        return view('admin.companhia.create', compact('residuos'));
+        return view('admin.companhia.create', compact('residuos', 'bairros', 'municipios'));
     }
 
 
@@ -54,18 +58,23 @@ class CompanhiaController extends Controller
     public function show($id)
     {
         $companhia = Companhia::find($id);
-        $residuos = Residuo::all();
 
-        return view('admin.companhia.show', compact('companhia', 'residuos'));
+        $residuos = Residuo::orderBy('nome', 'ASC')->get();
+        $bairros = Bairro::orderBy('nome', 'ASC')->get();
+        $municipios = Municipio::orderBy('nome', 'ASC')->get();
+
+        return view('admin.companhia.show', compact('companhia', 'residuos', 'bairros', 'municipios'));
     }
 
 
     public function edit($id)
     {
         $companhia = Companhia::find($id);
-        $residuos = Residuo::all();
+        $residuos = Residuo::orderBy('nome', 'ASC')->get();
+        $bairros = Bairro::orderBy('nome', 'ASC')->get();
+        $municipios = Municipio::orderBy('nome', 'ASC')->get();
 
-        return view('admin.companhia.edit', compact('companhia', 'residuos'));
+        return view('admin.companhia.edit', compact('companhia', 'residuos', 'bairros', 'municipios'));
     }
 
 

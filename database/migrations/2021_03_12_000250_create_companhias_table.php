@@ -26,10 +26,12 @@ class CreateCompanhiasTable extends Migration
             $table->string('fonevicepresidente');
             $table->string('endereco');
             $table->string('numero')->nullable();
-            $table->string('bairro');
             $table->string('complemento')->nullable();
-            $table->string('cidade');
             $table->string('zona');
+
+            $table->foreignId('bairro_id')->constrained()->onDelete('cascade');
+            $table->foreignId('municipio_id')->constrained()->onDelete('cascade');
+
             $table->timestamps();
         });
     }

@@ -22,6 +22,14 @@ class Municipio extends Model
         return $this->hasMany(Associado::class);
     }
 
+    public function bairros(){
+        return $this->hasMany(Bairro::class);
+    }
+
+    public function pontocoletas(){
+        return $this->hasMany(Pontocoleta::class);
+    }
+
     // relatorio excel e csv
     public static function getMunicipios(){
         $records = DB::table('municipios')->select('id', 'nome')->get()->toArray();

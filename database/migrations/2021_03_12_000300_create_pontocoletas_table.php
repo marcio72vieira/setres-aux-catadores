@@ -22,6 +22,11 @@ class CreatePontocoletasTable extends Migration
             $table->string('complemento')->nullable();
             $table->string('cidade');
             $table->string('zona');
+
+            $table->foreignId('companhia_id')->constrained()->onDelete('cascade');
+            $table->foreignId('bairro_id')->constrained()->onDelete('cascade');
+            $table->foreignId('municipio_id')->constrained()->onDelete('cascade');
+
             $table->timestamps();
         });
     }

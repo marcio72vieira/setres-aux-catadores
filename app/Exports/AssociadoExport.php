@@ -13,29 +13,35 @@ class AssociadoExport implements FromCollection,WithHeadings
 //class AssociadoExport implements FromView
 {
 
+    /*
+    // Cabeçalho para arquivos xlsx e csv a partir dos ASSOCIADOS sem relacionamento
     public function headings():array{
         return[
-            'id',
-            'nome',
-            'nascimento',
-            'rg',
-            'rgorgaoemissor',
-            'cpf',
-            'sexo',
-            'racacor',
-            'filiacao',
-            'quantidade',
-            'endereco',
-            'numero',
-            'bairro',
-            'complemento',
-            'cidade',
-            'zona',
-            'foneum',
-            'fonedois',
-            'companhia_id',
-            'imagem'
-            //foto
+            'id', 'nome', 'nascimento', 'rg', 'rgorgaoemissor', 'cpf', 'sexo', 'racacor', 'filiacao', 'quantidade',
+            'endereco', 'numero', 'bairro', 'complemento', 'cidade', 'zona', 'foneum', 'fonedois', 'imagem', 'companhia_id',
+             //foto // Se eu quiser mostrar a coluna foto no excel;
+        ];
+    }
+    */
+
+    /*
+    // Cabeçalho para arquivos xlsx e csv a partir dos dados dos ASSOCIADOS e COMPANHIAS
+    public function headings():array{
+        return[
+            'id', 'nome', 'nascimento', 'rg', 'rgorgaoemissor', 'cpf', 'sexo', 'racacor', 'filiacao', 'quantidade',
+            'endereco', 'numero', 'bairro', 'complemento', 'cidade', 'zona', 'foneum', 'fonedois', 'imagem', 'companhia_id',
+            'nomecompanhia'
+        ];
+    }
+    */
+
+    //Cabeçalho para arquivos xlsx e csv a partir da dos dados dos ASSOCIADOS e COMPANHIAS e BAIRROS
+    public function headings():array{
+        return[
+            'id', 'nome', 'nascimento', 'rg', 'rgorgaoemissor', 'cpf', 'sexo', 'racacor', 'filiacao', 'quantidade',
+            'endereco', 'numero', 'bairro', 'complemento', 'cidade', 'zona', 'foneum', 'fonedois', 'imagem', 'companhia_id',
+            'nomecompanhia',
+            'areaatuacao'
         ];
     }
 

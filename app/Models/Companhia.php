@@ -22,9 +22,9 @@ class Companhia extends Model
         'fonevicepresidente',
         'endereco',
         'numero',
-        'bairro',
+        'bairro_id',
         'complemento',
-        'cidade',
+        'municipio_id',
         'zona',
     ];
 
@@ -34,6 +34,18 @@ class Companhia extends Model
 
     public function residuos(){
         return $this->belongsToMany(Residuo::class)->withTimestamps();
+    }
+
+    public function bairro(){
+        return $this->belongsTo(Bairro::class);
+    }
+
+    public function municipio(){
+        return $this->belongsTo(Municipio::class);
+    }
+
+    public function pontocoletas(){
+        return $this->hasMany(Pontocoleta::class);
     }
 
     // relatorio excel e csv

@@ -24,7 +24,8 @@ class BairroUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => 'bail|required|min:3'
+            'nome' => 'bail|required|min:3',
+            'municipio_id' => 'bail|required'
         ];
     }
 }

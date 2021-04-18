@@ -35,9 +35,9 @@ class CompanhiaUpdateRequest extends FormRequest
             'fonevicepresidente' => 'bail|required|regex:/^\([0-9]{2}\) [0-9][0-9]{3,4}\-[0-9]{4}$/',
             'endereco' => 'bail|required|min:3',
             //'numero' => 'bail|required',
-            'bairro' => 'bail|required|min:3',
+            'bairro_id' => 'bail|required',
             //'complemento' => 'required',
-            'cidade' => 'bail|required',
+            'municipio_id' => 'bail|required',
             'zona' => 'bail|required',
         ];
     }

@@ -24,12 +24,13 @@ class PontocoletaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome' => 'bail|required|min:3|unique:pontocoletas,nome',
+            'nome' => 'bail|required|min:3',
+            'municipio_id' => 'bail|required',
             'endereco' => 'bail|required|min:3',
             //'numero' => 'bail|required',
-            'bairro' => 'bail|required|min:3',
+            'bairro_id' => 'bail|required',
             //'complemento' => 'required',
-            'cidade' => 'bail|required',
+            'municipio_id' => 'bail|required',
             'zona' => 'bail|required',
         ];
     }

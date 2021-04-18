@@ -24,8 +24,24 @@
 
                         <div class="pl-lg-4">
                             <div class="row">
+                                {{-- companhia_id --}}
+                                <div class="col-lg-7">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="companhia_id">Companhia / Associação<span class="small text-danger">*</span></label>
+                                        <select name="companhia_id" id="companhia_id" class="form-control" required>
+                                            <option value="" selected disabled>Escolha...</option>
+                                            @foreach($companhias  as $companhia)
+                                                <option value="{{$companhia->id}}" {{old('companhia_id') == $companhia->id ? 'selected' : ''}}>{{$companhia->nome}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('companhia_id')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
                                 {{-- nome --}}
-                                <div class="col-lg-12">
+                                <div class="col-lg-5">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="nome">Nome<span class="small text-danger">*</span></label>
                                         <input type="text" id="nome" class="form-control" name="nome" value="{{old('nome')}}" required>
@@ -34,6 +50,7 @@
                                         @enderror
                                     </div>
                                 </div>
+
                             </div>
 
                             <div class="row">
@@ -59,12 +76,29 @@
                                     </div>
                                 </div>
 
-                                {{-- bairro --}}
+                                {{-- bairro
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="bairro">Bairro<span class="small text-danger">*</span></label>
                                         <input type="text" id="bairro" class="form-control" name="bairro" value="{{old('bairro')}}" required>
                                         @error('bairro')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                --}}
+
+                                {{-- bairro_id --}}
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="bairro_id">Bairro<span class="small text-danger">*</span></label>
+                                        <select name="bairro_id" id="bairro_id" class="form-control" required>
+                                            <option value="" selected disabled>Escolha...</option>
+                                            @foreach($bairros  as $bairro)
+                                                <option value="{{$bairro->id}}" {{old('bairro_id') == $bairro->id ? 'selected' : ''}}>{{$bairro->nome}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('bairro_id')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
                                     </div>
@@ -83,12 +117,29 @@
                                     </div>
                                 </div>
 
-                                {{-- cidade --}}
+                                {{-- cidade
                                 <div class="col-lg-3">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="cidade">Cidade<span class="small text-danger">*</span></label>
                                         <input type="text" id="cidade" class="form-control" name="cidade" value="{{old('cidade')}}" required>
                                         @error('cidade')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                --}}
+
+                                {{-- municipio_id --}}
+                                <div class="col-lg-3">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="municipio_id">Município<span class="small text-danger">*</span></label>
+                                        <select name="municipio_id" id="municipio_id" class="form-control" required>
+                                            <option value="" selected disabled>Escolha...</option>
+                                            @foreach($municipios  as $municipio)
+                                                <option value="{{$municipio->id}}" {{old('municipio_id') == $municipio->id ? 'selected' : ''}}>{{$municipio->nome}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('municipio_id')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
                                     </div>

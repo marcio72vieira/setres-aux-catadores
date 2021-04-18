@@ -12,13 +12,26 @@ class Pontocoleta extends Model
 
     protected $fillable = [
         'nome',
+        'companhia_id',
         'endereco',
         'numero',
-        'bairro',
+        'bairro_id',
         'complemento',
-        'cidade',
+        'municipio_id',
         'zona',
     ];
+
+    public function companhia(){
+        return $this->belongsTo(Companhia::class);
+    }
+
+    public function bairro(){
+        return $this->belongsTo(Bairro::class);
+    }
+
+    public function municipio(){
+        return $this->belongsTo(Municipio::class);
+    }
 
     public function residuos(){
         return $this->belongsToMany(Residuo::class)->withTimestamps();

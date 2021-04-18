@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests\PontocoletaRequest;
 use App\Http\Requests\PontocoletaUpdateRequest;
 use App\Models\Pontocoleta;
+use App\Models\Companhia;
+use App\Models\Bairro;
+use App\Models\Municipio;
 use App\Models\Residuo;
+
 use Illuminate\Support\Facades\DB;
 
 use App\Exports\PontocoletaExport;
@@ -27,9 +31,12 @@ class PontocoletaController extends Controller
 
     public function create()
     {
+        $companhias = Companhia::orderBy('nome', 'ASC')->get();
+        $bairros = Bairro::orderBy('nome', 'ASC')->get();
+        $municipios = Municipio::orderBy('nome', 'ASC')->get();
         $residuos = Residuo::all();
 
-        return view('admin.pontocoleta.create', compact('residuos'));
+        return view('admin.pontocoleta.create', compact('companhias','bairros','municipios','residuos'));
     }
 
 
@@ -53,18 +60,24 @@ class PontocoletaController extends Controller
     public function show($id)
     {
         $pontocoleta = Pontocoleta::find($id);
+        $companhias = Companhia::orderBy('nome', 'ASC')->get();
+        $bairros = Bairro::orderBy('nome', 'ASC')->get();
+        $municipios = Municipio::orderBy('nome', 'ASC')->get();
         $residuos = Residuo::all();
 
-        return view('admin.pontocoleta.show', compact('pontocoleta','residuos'));
+        return view('admin.pontocoleta.show', compact('pontocoleta','companhias','bairros','municipios','residuos'));
     }
 
 
     public function edit($id)
     {
         $pontocoleta = Pontocoleta::find($id);
+        $companhias = Companhia::orderBy('nome', 'ASC')->get();
+        $bairros = Bairro::orderBy('nome', 'ASC')->get();
+        $municipios = Municipio::orderBy('nome', 'ASC')->get();
         $residuos = Residuo::all();
 
-        return view('admin.pontocoleta.edit',compact('pontocoleta', 'residuos'));
+        return view('admin.pontocoleta.edit',compact('pontocoleta', 'companhias','bairros','municipios','residuos'));
     }
 
 
