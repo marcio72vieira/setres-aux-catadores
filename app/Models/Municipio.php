@@ -26,6 +26,10 @@ class Municipio extends Model
         return $this->hasMany(Bairro::class);
     }
 
+    public function areas(){
+        return $this->hasMany(Areas::class);
+    }
+
     public function pontocoletas(){
         return $this->hasMany(Pontocoleta::class);
     }

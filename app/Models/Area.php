@@ -17,4 +17,8 @@ class Area extends Model
     public function municipio(){
         return $this->belongsTo(Municipio::class);
     }
+
+    public function associados() {
+        return $this->belongsToMany(Associado::class)->withTimestamps();
+    }
 }

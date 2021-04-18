@@ -7,8 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests\AssociadoRequest;
 use App\Http\Requests\AssociadoUpdateRequest;
 use App\Models\Companhia;
+use App\Models\Area;
 use App\Models\Bairro;
+use App\Models\Municipio;
 use App\Models\Associado;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Exports\AssociadoExport;
@@ -33,16 +36,26 @@ class AssociadoController extends Controller
 
     public function create()
     {
-        $companhias = Companhia::all();
-        $bairros = Bairro::all();
+        // Visualiza todos as companhias, áreas, bairros e municípios
+        if(Auth::user()->id == 1){
+            $companhias = Companhia::all();
+            $areas = Area::all();
+            $bairros = Bairro::all();
+            $municipios = Municipio::all();
+        } else {
+            // Só visualiza as companhias, áreas, bairros e municípios do seu município
+            $companhias = Companhia::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
+            $areas = Area::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
+            $bairros = Bairro::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
+            $municipios = Municipio::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
+        }
 
-
-        return view('admin.associado.create', compact('companhias','bairros'));
+        return view('admin.associado.create', compact('companhias','areas','bairros','municipios'));
 
     }
 
 
-    /* MÉTODO OROGINAL
+    /* 1° MÉTODO OROGINAL SEM CAPTURAR FOTO
     public function store(AssociadoRequest $request)
     {
         //dd($request->all());
@@ -60,6 +73,7 @@ class AssociadoController extends Controller
     }
     */
 
+    /* 2° MÉTODO OROGINAL CAPTURANDO FOTO
     public function store(AssociadoRequest $request)
     {
         //dd($request->all());
@@ -78,26 +92,64 @@ class AssociadoController extends Controller
         $request->session()->flash('sucesso', 'Registro incluído com sucesso!');
         return redirect()->route('admin.associado.retrato', $associadoId);
     }
+    */
+
+
+    public function store(AssociadoRequest $request)
+    {
+        DB::beginTransaction();
+            $associado = Associado::create($request->all());
+
+            if($request->has('areas')){
+                $associado->areas()->sync($request->areas);
+            }
+        DB::commit();
+
+        // Obtendo o id do associado que acabou de ser inserido no banco de dados
+        $associadoId = $associado->id;
+
+        $request->session()->flash('sucesso', 'Registro incluído com sucesso!');
+        return redirect()->route('admin.associado.retrato', $associadoId);
+    }
 
 
 
     public function show($id)
     {
-        $associado = Associado::with(['companhia', 'bairros'])->find($id);
-        $companhias = Companhia::all();
-        $bairros = Bairro::all();
+        //$associado = Associado::with(['companhia', 'bairros'])->find($id);
+        $associado = Associado::with(['companhia', 'areas', 'bairro', 'municipio'])->find($id);
 
-        return view('admin.associado.show', compact('associado', 'companhias','bairros'));
+        $companhias = Companhia::all();
+        $areas = Area::all();
+        $bairros = Bairro::all();
+        $municipios = Municipio::all();
+
+
+        return view('admin.associado.show', compact('associado', 'companhias','areas','bairros','municipios'));
     }
 
 
     public function edit($id)
     {
-        $associado = Associado::with(['companhia', 'bairros'])->find($id);
-        $companhias = Companhia::all();
-        $bairros = Bairro::all();
+        //$associado = Associado::with(['companhia', 'bairros'])->find($id);
+        $associado = Associado::with(['companhia', 'areas', 'bairro', 'municipio'])->find($id);
 
-        return view('admin.associado.edit', compact('associado', 'companhias','bairros'));
+        // Visualiza todos as companhias, áreas, bairros e municípios
+        if(Auth::user()->id == 1){
+            $companhias = Companhia::all();
+            $areas = Area::all();
+            $bairros = Bairro::all();
+            $municipios = Municipio::all();
+        } else {
+            // Só visualiza as companhias, áreas, bairros e municípios do seu município
+            $companhias = Companhia::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
+            $areas = Area::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
+            $bairros = Bairro::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
+            $municipios = Municipio::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
+        }
+
+
+        return view('admin.associado.edit', compact('associado', 'companhias','areas','bairros','municipios'));
     }
 
 
@@ -118,8 +170,8 @@ class AssociadoController extends Controller
         DB::beginTransaction();
             $associado->update($request->all());
 
-            if($request->has('bairros')){
-                $associado->bairros()->sync($request->bairros);
+            if($request->has('areas')){
+                $associado->areas()->sync($request->areas);
             }
         DB::commit();
 

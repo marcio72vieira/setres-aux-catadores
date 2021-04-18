@@ -19,8 +19,9 @@ class Bairro extends Model
         return $this->belongsTo(Municipio::class);
     }
 
+
     public function associados() {
-        return $this->belongsToMany(Associado::class)->withTimestamps();
+        return $this->hasMany(Associado::class);
     }
 
     public function companhias(){
@@ -30,6 +31,14 @@ class Bairro extends Model
     public function pontocoletas(){
         return $this->hasMany(Pontocoleta::class);
     }
+
+    /*
+    public function associados() {
+        return $this->belongsToMany(Associado::class)->withTimestamps();
+    }
+    */
+
+
 
 
     // relatorio excel e csv

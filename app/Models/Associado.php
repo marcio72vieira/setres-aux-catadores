@@ -23,9 +23,9 @@ class Associado extends Model
         'quantidade',
         'endereco',
         'numero',
-        'bairro',
+        'bairro_id',
         'complemento',
-        'cidade',
+        'municipio_id',
         'zona',
         'foneum',
         'fonedois',
@@ -38,13 +38,31 @@ class Associado extends Model
         return $this->belongsTo(Companhia::class);
     }
 
-    public function bairros() {
-        return $this->belongsToMany(Bairro::class)->withTimestamps();
+
+    public function municipio(){
+        return $this->belongsTo(Municipio::class);
     }
+
+    public function bairro(){
+        return $this->belongsTo(Bairro::class);
+    }
+
+    public function areas() {
+        return $this->belongsToMany(Area::class)->withTimestamps();
+    }
+
 
     public function foto() {
         return $this->hasOne(Foto::class);
     }
+
+    /*
+    public function bairros() {
+        return $this->belongsToMany(Bairro::class)->withTimestamps();
+    }
+    */
+
+
 
     // relatorio excel e csv
     public static function getAssociados(){
@@ -67,7 +85,7 @@ class Associado extends Model
         */
 
 
-        /* Cabeçalho para arquivos xlsx e csv a partir da dos dados dos ASSOCIADOS e COMPANHIAS e BAIRROS */
+        /* Dados para arquivos xlsx e csv a partir da dos dados dos ASSOCIADOS e COMPANHIAS e BAIRROS */
         $records = DB::table('associados')
                     ->join('companhias', 'companhias.id', '=', 'associados.companhia_id')
                     ->join('associado_bairro', 'associado_bairro.associado_id', '=', 'associados.id')

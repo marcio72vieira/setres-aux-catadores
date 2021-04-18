@@ -19,6 +19,7 @@ class PontocoletaExport implements FromCollection,WithHeadings
             'complemento',
             'cidade',
             'zona',
+            'companhia',
             'residuo'
         ];
     }

@@ -26,15 +26,17 @@ class CreateAssociadosTable extends Migration
             $table->integer('quantidade');
             $table->string('endereco');
             $table->string('numero')->nullable();
-            $table->string('bairro');
+            //$table->string('bairro');
             $table->string('complemento')->nullable();
-            $table->string('cidade');
+            //$table->string('cidade');
             $table->string('zona');
             $table->string('foneum');
             $table->string('fonedois')->nullable();
             $table->longText('imagem')->nullable();
 
             $table->foreignId('companhia_id')->constrained()->onDelete('cascade');
+            $table->foreignId('bairro_id')->constrained()->onDelete('cascade');
+            $table->foreignId('municipio_id')->constrained()->onDelete('cascade');
 
             $table->timestamps();
         });

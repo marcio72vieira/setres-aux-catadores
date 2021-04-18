@@ -25,8 +25,9 @@ class CompanhiaExport implements FromCollection,WithHeadings
             'numero',
             'bairro',
             'complemento',
-            'cidade',
-            'zona'
+            'municipio',
+            'zona',
+            'residuo'
         ];
     }
 

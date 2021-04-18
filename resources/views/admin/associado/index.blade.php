@@ -80,7 +80,7 @@
                 <td>{{$associado->nome}}</td>
                 <td>{{$associado->foneum}} / {{$associado->fonedois}}</td>
                 <td>{{$associado->companhia->nome}}</td>
-                <td>@foreach($associado->bairros as $bairro) {{$bairro->nome}}; @endforeach </td>
+                <td>@foreach($associado->areas as $area) {{$area->nome}}; @endforeach </td>
                 <td>
                     <a href="{{route('admin.associado.show', $associado->id)}}" title="exibir"><i class="fas fa-eye text-warning mr-2"></i></a>
                     <a href="{{route('admin.associado.edit', $associado->id)}}" title="editar"><i class="fas fa-edit text-info mr-2"></i></a>

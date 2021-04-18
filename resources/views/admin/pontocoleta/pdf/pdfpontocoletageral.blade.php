@@ -13,10 +13,12 @@
         <div @if($loop->even) style="background-color: #e3e3e3;" @endif>
         <table style="width: 717px; border-collapse: collapse;">
             <tr>
-                <td colspan="3" style="width: 717px;" class="label-ficha">NOME</td>
+                <td style="width: 450;" class="label-ficha">NOME</td>
+                <td colspan="2" style="width: 267px;" class="label-ficha">COMPANHIA</td>
             </tr>
             <tr>
-                <td colspan="3" style="width: 717px;" class="dados-ficha">{{$pontocoleta->nome}}</td>
+                <td style="width: 450px;" class="dados-ficha">{{$pontocoleta->nome}}</td>
+                <td colspan="2" style="width: 267px;" class="dados-ficha">{{$pontocoleta->companhia->nome}}</td>
             </tr>
             <tr>
                 <td style="width: 450px;" class="label-ficha">ENDEREÇO</td>
@@ -26,7 +28,7 @@
             <tr>
                 <td style="width: 450px;" class="dados-ficha">{{$pontocoleta->endereco}}</td>
                 <td style="width: 50px;" class="dados-ficha">{{$pontocoleta->numero}}</td>
-                <td style="width: 217px;" class="dados-ficha">{{$pontocoleta->bairro}}</td>
+                <td style="width: 217px;" class="dados-ficha">{{$pontocoleta->bairro->nome}}</td>
             </tr>
         </table>
 
@@ -38,7 +40,7 @@
             </tr>
             <tr>
                 <td style="width: 300px;" class="dados-ficha">{{$pontocoleta->complemento}}</td>
-                <td style="width: 300px;" class="dados-ficha">{{$pontocoleta->cidade}}</td>
+                <td style="width: 300px;" class="dados-ficha">{{$pontocoleta->municipio->nome}}</td>
                 <td style="width: 117px;" class="dados-ficha">{{$pontocoleta->zona}}</td>
             </tr>
             <tr>

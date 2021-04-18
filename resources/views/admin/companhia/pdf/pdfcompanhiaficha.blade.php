@@ -51,20 +51,20 @@
         <tr>
             <td style="width: 450px;" class="dados-ficha">{{$companhia->endereco}}</td>
             <td style="width: 50px;" class="dados-ficha">{{$companhia->numero}}</td>
-            <td style="width: 217px;" class="dados-ficha">{{$companhia->bairro}}</td>
+            <td style="width: 217px;" class="dados-ficha">{{$companhia->bairro->nome}}</td>
         </tr>
     </table>
 
     <table style="width: 717px; border-collapse: collapse;">
         <tr>
             <td style="width: 200px;" class="label-ficha">COMPLEMENTO</td>
-            <td style="width: 200px;" class="label-ficha">CIDADE</td>
+            <td style="width: 200px;" class="label-ficha">MUNICÍPIO</td>
             <td style="width: 100px;" class="label-ficha">ZONA</td>
             <td style="width: 217px;" class="label-ficha">TELEFONE(S)</td>
         </tr>
         <tr>
             <td style="width: 200px;" class="dados-ficha">{{$companhia->complemento}}</td>
-            <td style="width: 200px;" class="dados-ficha">{{$companhia->cidade}}</td>
+            <td style="width: 200px;" class="dados-ficha">{{$companhia->municipio->nome}}</td>
             <td style="width: 100px;" class="dados-ficha">{{$companhia->zona}}</td>
             <td style="width: 217px;" class="dados-ficha">{{$companhia->foneum}} ;  {{$companhia->fonedois}}</td>
         </tr>
@@ -86,6 +86,30 @@
         </tr>
         <tr>
             <td colspan="4" style="width:717px;" class="close-ficha"></td>
+        </tr>
+    </table>
+
+    <table style="width: 717px; border-collapse: collapse;">
+        <tr>
+            <td colspan="3" style="width: 717px" class="titulo-secao">PONTOS DE COLETA</td>
+        </tr>
+        <tr>
+            <td style="width: 50px;" class="label-ficha col-header-table">ID</td>
+            <td style="width: 100px;" class="label-ficha col-header-table">NOME</td>
+            <td style="width: 567px;" class="label-ficha col-header-table">ENDEREÇO</td>
+        </tr>
+        @foreach ($companhia->pontocoletas as $pontocoleta)
+            <tr @if($loop->even) style="background-color: #e3e3e3;" @endif>
+                <td style="width: 50px;" class="dados-ficha">{{$pontocoleta->id}}</td>
+                <td style="width: 100px;" class="dados-ficha">{{$pontocoleta->nome}}</td>
+                <td style="width: 567px;" class="dados-ficha">
+                    {{$pontocoleta->endereco}},  {{$pontocoleta->numero}}, {{$pontocoleta->bairro->nome}},
+                    {{$pontocoleta->complemento}} em {{$pontocoleta->municipio->nome}} na zona: {{$pontocoleta->zona}}
+                </td>
+            </tr>
+        @endforeach
+        <tr>
+            <td colspan="3" style="width:717px;" class="close-ficha"></td>
         </tr>
     </table>
 
