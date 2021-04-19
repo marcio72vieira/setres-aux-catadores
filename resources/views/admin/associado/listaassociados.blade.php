@@ -12,7 +12,8 @@
             <th>Quantidade</th>
             <th>Endereço</th>
             <th>Número</th>
-            <th>Cidade</th>
+            <th>Bairro</th>
+            <th>Municipio</th>
             <th>Zona</th>
             <th>Telefone(s)</th>
             <th>Companhia</th>
@@ -35,11 +36,12 @@
                 <td>{{$associado->quantidade}}</td>
                 <td>{{$associado->endereco}}</td>
                 <td>{{$associado->numero}}</td>
-                <td>{{$associado->cidade}}</td>
+                <td>{{$associado->bairro->nome}}</td>
+                <td>{{$associado->municipio->nome}}</td>
                 <td>{{$associado->zona}}</td>
                 <td>{{$associado->foneum}} / {{$associado->fonedois}}</td>
                 <td>{{$associado->companhia->nome}}</td>
-                <td>@foreach($associado->bairros as $bairro) {{$bairro->nome}}; @endforeach </td>
+                <td>@foreach($associado->areas as $area) {{$area->nome}}; @endforeach </td>
                 <td>{{$associado->imagem }}</td>
                 {{-- EXIBE A FOTO NA PLANILHA DO EXCEL <th><img src="{{ base_path().'/storage/app/public/'.$associado->imagem }}" width="40"></th> --}}
              </tr>

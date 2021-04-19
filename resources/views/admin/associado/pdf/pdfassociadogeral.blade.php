@@ -24,7 +24,7 @@
                 <td style="width: 180px;" class="dados-lista">{{$associado->foneum}}; {{$associado->foneum}} </td>
                 <td style="width: 200px;" class="dados-lista">{{$associado->companhia->nome}}</td>
                 <td style="width: 200px;" class="dados-lista">
-                    @foreach($associado->bairros as $bairro) {{$bairro->nome}}; @endforeach
+                    @foreach($associado->areas as $area) {{$area->nome}}; @endforeach
                 </td>
             </tr>
         @endforeach

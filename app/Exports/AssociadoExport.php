@@ -39,9 +39,7 @@ class AssociadoExport implements FromCollection,WithHeadings
     public function headings():array{
         return[
             'id', 'nome', 'nascimento', 'rg', 'rgorgaoemissor', 'cpf', 'sexo', 'racacor', 'filiacao', 'quantidade',
-            'endereco', 'numero', 'bairro', 'complemento', 'cidade', 'zona', 'foneum', 'fonedois', 'imagem', 'companhia_id',
-            'nomecompanhia',
-            'areaatuacao'
+            'endereco', 'numero', 'bairro', 'complemento', 'municipio', 'zona', 'foneum', 'fonedois', 'companhia', 'area', 'imagem',
         ];
     }
 

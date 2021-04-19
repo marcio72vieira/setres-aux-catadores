@@ -80,3 +80,4 @@ Route::get('admin/associado/pdf/relatorioassociado', [AssociadoController::class
 Route::get('admin/associado/excel/relatorioassociado', [AssociadoController::class, 'relatorioassociadoexcel'])->name('admin.associado.relatorioexcel')->middleware(['auth']);
 Route::get('admin/associado/csv/relatorioassociado', [AssociadoController::class, 'relatorioassociadocsv'])->name('admin.associado.relatoriocsv')->middleware(['auth']);
 Route::get('admin/associado/excel/relatorioassociadodois', [AssociadoController::class, 'relatorioassociadoexceldois'])->name('admin.associado.relatorioexceldois')->middleware(['auth']);
+Route::get('admin/associado/pdf/{id}/fichaassociado', [AssociadoController::class, 'ficha'])->name('admin.associado.ficha')->middleware(['auth']);

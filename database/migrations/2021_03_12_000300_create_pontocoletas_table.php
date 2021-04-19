@@ -18,9 +18,7 @@ class CreatePontocoletasTable extends Migration
             $table->string('nome');
             $table->string('endereco');
             $table->string('numero')->nullable();
-            $table->string('bairro');
             $table->string('complemento')->nullable();
-            $table->string('cidade');
             $table->string('zona');
 
             $table->foreignId('companhia_id')->constrained()->onDelete('cascade');

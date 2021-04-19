@@ -85,7 +85,7 @@ class Associado extends Model
         */
 
 
-        /* Dados para arquivos xlsx e csv a partir da dos dados dos ASSOCIADOS e COMPANHIAS e BAIRROS */
+        /* Dados para arquivos xlsx e csv a partir da dos dados dos ASSOCIADOS e COMPANHIAS e BAIRROS
         $records = DB::table('associados')
                     ->join('companhias', 'companhias.id', '=', 'associados.companhia_id')
                     ->join('associado_bairro', 'associado_bairro.associado_id', '=', 'associados.id')
@@ -114,6 +114,40 @@ class Associado extends Model
                         'companhias.nome AS nomecompanhia',
                         'bairros.nome AS nomebairro')
                     ->orderBy('associados.nome', 'ASC')
+                    ->get();
+        */
+
+        $records = DB::table('associados')
+                    ->join('companhias', 'companhias.id', '=', 'associados.companhia_id')
+                    ->join('municipios', 'municipios.id', '=', 'associados.municipio_id')
+                    ->join('bairros', 'bairros.id', '=', 'associados.bairro_id')
+                    ->join('area_associado', 'area_associado.associado_id', '=', 'associados.id')
+                    ->join('areas', 'areas.id', '=', 'area_associado.area_id')
+                    ->select(
+                        'associados.id',
+                        'associados.nome',
+                        'associados.nascimento',
+                        'associados.rg',
+                        'associados.rgorgaoemissor',
+                        'associados.cpf',
+                        'associados.sexo',
+                        'associados.racacor',
+                        'associados.filiacao',
+                        'associados.quantidade',
+                        'associados.endereco',
+                        'associados.numero',
+                        'bairros.nome AS nomebairro',
+                        'associados.complemento',
+                        'municipios.nome AS nomemunicipio',
+                        'associados.zona',
+                        'associados.foneum',
+                        'associados.fonedois',
+                        'companhias.nome AS nomecompanhia',
+                        'areas.nome AS nomearea',
+                        'associados.imagem'
+                    )
+                    ->orderBy('associados.nome', 'ASC')
+                    ->orderBy('areas.nome', 'ASC')
                     ->get();
 
         return $records;

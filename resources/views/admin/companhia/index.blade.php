@@ -46,6 +46,7 @@
               <th>Id</th>
               <th>Nome</th>
               <th>Município</th>
+              <th>Pontos de Coletas</th>
               <th>Resíduos</th>
               <th>Ações</th>
             </tr>
@@ -57,6 +58,7 @@
                 <td>{{$companhia->id}}</td>
                 <td>{{$companhia->nome}}</td>
                 <td>{{$companhia->municipio->nome}}</td>
+                <td>@foreach($companhia->pontocoletas as $pontocoleta) <small style="font-size: 9px; font-weight:bold">{{ $pontocoleta->nome}} </small>;@endforeach</td>
                 <td>@foreach($companhia->residuos as $residuo) <small style="font-size: 9px; font-weight:bold">{{ $residuo->nome}} </small>;@endforeach</td>
                 <td>
                     <a href="{{route('admin.companhia.show', $companhia->id)}}" title="exibir"><i class="fas fa-eye text-warning mr-2"></i></a>

@@ -4,43 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>SETRES - Companhia</title>
+    <title>SETRES - Associado</title>
 </head>
 
 
 <body>
     <table style="width: 717px; border-collapse: collapse;">
         <tr>
-            <td style="width: 500px;" class="label-ficha">NOME</td>
-            <td style="width: 117px;" class="label-ficha">CNPJ</td>
-            <td style="width: 100px;" class="label-ficha">FUNDAÇÃO</td>
+            <td style="width: 567px;" class="label-ficha">NOME</td>
+            <td style="width: 100px;" class="label-ficha">DATA DE NASCIMENTO</td>
+            <td style="width: 50px;" class="label-ficha">SEXO</td>
         </tr>
         <tr>
-            <td style="width: 500px;" class="dados-ficha">{{$companhia->nome}}</td>
-            <td style="width: 117px;" class="dados-ficha">{{$companhia->cnpj}}</td>
-            <?php $date=date_create($companhia->fundacao); $companhiafundacao = date_format($date,"d/m/Y"); ?>
-            <td style="width: 100px;" class="dados-ficha">{{$companhiafundacao}}</td>
+            <td style="width: 567px;" class="dados-ficha">{{$associado->nome}}</td>
+            <td style="width: 100px;" class="dados-ficha">{{mrc_turn_data($associado->nascimento)}}</td>
+            <td style="width: 50px;" class="dados-ficha">{{Str::upper($associado->sexo)}}</td>
         </tr>
     </table>
 
     <table style="width: 717px; border-collapse: collapse;">
         <tr>
-            <td style="width: 500px;" class="label-ficha">PRESIDENTE</td>
-            <td style="width: 217px;" class="label-ficha">TELEFONE</td>
+            <td style="width: 300px;" class="label-ficha">RG (ÓRGÃO EMISSOR)</td>
+            <td style="width: 150px;" class="label-ficha">CPF</td>
+            <td style="width: 117px;" class="label-ficha">RAÇA / COR</td>
+            <td style="width: 150px;" class="label-ficha">DATA DE FILIAÇÃO</td>
         </tr>
         <tr>
-            <td style="width: 500px;" class="dados-ficha">{{$companhia->presidente}}</td>
-            <td style="width: 217px;" class="dados-ficha">{{$companhia->fonepresidente}}</td>
-        </tr>
-        <tr>
-            <td style="width: 500px;" class="label-ficha">VICE-PRESIDENTE</td>
-            <td style="width: 217px;" class="label-ficha">TELEFONE</td>
-        </tr>
-        <tr>
-            <td style="width: 500px;" class="dados-ficha">{{$companhia->vicepresidente}}</td>
-            <td style="width: 217px;" class="dados-ficha">{{$companhia->fonevicepresidente}}</td>
+            <td style="width: 300px;" class="dados-ficha">{{$associado->rg}} {{$associado->rgorgaoemissor}}</td>
+            <td style="width: 150px;" class="dados-ficha">{{$associado->cpf}}</td>
+            <td style="width: 117px;" class="dados-ficha">{{Str::upper($associado->racacor)}}</td>
+            <td style="width: 150px;" class="dados-ficha">{{mrc_turn_data($associado->filiacao)}}</td>
         </tr>
     </table>
+
+    <table style="width: 717px; border-collapse: collapse;">
+        <tr>
+            <td style="width: 450px;" class="label-ficha">COMPANHIA</td>
+            <td style="width: 117px;" class="label-ficha">ÁREAS DE ATUAÇÃO</td>
+            <td style="width: 150px;" class="label-ficha">QTD. COLETADA(S)</td>
+        </tr>
+        <tr>
+            <td style="width: 450px;" class="dados-ficha">{{$associado->companhia->nome}}</td>
+            <td style="width: 117px;" class="dados-ficha"></td>
+            <td style="width: 150px;" class="dados-ficha">{{$associado->quantidade}}</td>
+        </tr>
+    </table>
+
 
     <table style="width: 717px; border-collapse: collapse;">
         <tr>
@@ -49,24 +58,25 @@
             <td style="width: 217px;" class="label-ficha">BAIRRO</td>
         </tr>
         <tr>
-            <td style="width: 450px;" class="dados-ficha">{{$companhia->endereco}}</td>
-            <td style="width: 50px;" class="dados-ficha">{{$companhia->numero}}</td>
-            <td style="width: 217px;" class="dados-ficha">{{$companhia->bairro}}</td>
+            <td style="width: 450px;" class="dados-ficha">{{$associado->endereco}}</td>
+            <td style="width: 50px;" class="dados-ficha">{{$associado->numero}}</td>
+            <td style="width: 217px;" class="dados-ficha">{{$associado->bairro->nome}}</td>
         </tr>
     </table>
+
 
     <table style="width: 717px; border-collapse: collapse;">
         <tr>
             <td style="width: 200px;" class="label-ficha">COMPLEMENTO</td>
-            <td style="width: 200px;" class="label-ficha">CIDADE</td>
+            <td style="width: 200px;" class="label-ficha">MUNICÍPIO</td>
             <td style="width: 100px;" class="label-ficha">ZONA</td>
             <td style="width: 217px;" class="label-ficha">TELEFONE(S)</td>
         </tr>
         <tr>
-            <td style="width: 200px;" class="dados-ficha">{{$companhia->complemento}}</td>
-            <td style="width: 200px;" class="dados-ficha">{{$companhia->cidade}}</td>
-            <td style="width: 100px;" class="dados-ficha">{{$companhia->zona}}</td>
-            <td style="width: 217px;" class="dados-ficha">{{$companhia->foneum}} ;  {{$companhia->fonedois}}</td>
+            <td style="width: 200px;" class="dados-ficha">{{$associado->complemento}}</td>
+            <td style="width: 200px;" class="dados-ficha">{{$associado->municipio->nome}}</td>
+            <td style="width: 100px;" class="dados-ficha">{{Str::upper($associado->zona)}}</td>
+            <td style="width: 217px;" class="dados-ficha">{{$associado->foneum}} ;  {{$associado->fonedois}}</td>
         </tr>
         <tr>
             <td colspan="4" style="width:717px;" class="close-ficha"></td>
@@ -75,12 +85,12 @@
 
     <table style="width: 717px; border-collapse: collapse;">
         <tr>
-            <td style="width: 717px;" class="label-ficha">RESÍDUOS COM QUE TRABALHA</td>
+            <td style="width: 717px;" class="label-ficha">ÁREAS DE ATUAÇÃO</td>
         </tr>
         <tr>
             <td style="width: 717px;" class="dados-ficha">
-                @foreach ($companhia->residuos as $residuo)
-                    {{$residuo->nome}};&nbsp;&nbsp;
+                @foreach ($associado->areas as $area)
+                    {{$area->nome}};&nbsp;&nbsp;
                 @endforeach
             </td>
         </tr>
@@ -89,22 +99,9 @@
         </tr>
     </table>
 
-    <table style="width: 717px; border-collapse: collapse;">
+    <table>
         <tr>
-            <td colspan="2" style="width: 717px" class="titulo-secao">ASSOCIADOS</td>
-        </tr>
-        <tr>
-            <td style="width: 50px;" class="label-ficha col-header-table">ID</td>
-            <td style="width: 667px;" class="label-ficha col-header-table">NOME</td>
-        </tr>
-        @foreach ($companhia->associados as $associado)
-            <tr @if($loop->even) style="background-color: #e3e3e3;" @endif>
-                <td style="width: 50px;" class="dados-ficha">{{$associado->id}}</td>
-                <td style="width: 667px;" class="dados-ficha">{{$associado->nome}}</td>
-            </tr>
-        @endforeach
-        <tr>
-            <td colspan="2" style="width:717px;" class="close-ficha"></td>
+            <td style="width: 200px;" class="dados-lista"><img src="{{ base_path().'/storage/app/public/'.$associado->imagem}}" width="100"/ ></td>
         </tr>
     </table>
 </body>
