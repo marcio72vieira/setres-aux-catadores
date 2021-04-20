@@ -9,48 +9,54 @@
 
 
 <body>
-    <table style="width: 717px; border-collapse: collapse;">
-        <tr>
-            <td style="width: 567px;" class="label-ficha">NOME</td>
-            <td style="width: 100px;" class="label-ficha">DATA DE NASCIMENTO</td>
-            <td style="width: 50px;" class="label-ficha">SEXO</td>
-        </tr>
-        <tr>
-            <td style="width: 567px;" class="dados-ficha">{{$associado->nome}}</td>
-            <td style="width: 100px;" class="dados-ficha">{{mrc_turn_data($associado->nascimento)}}</td>
-            <td style="width: 50px;" class="dados-ficha">{{Str::upper($associado->sexo)}}</td>
-        </tr>
-    </table>
+    <div style="width: 90px; float: left; text-align: center;" >
+        <img src="{{ base_path().'/storage/app/public/'.$associado->imagem}}" width="90" style="padding: 2px;">
+    </div>
 
-    <table style="width: 717px; border-collapse: collapse;">
-        <tr>
-            <td style="width: 300px;" class="label-ficha">RG (ÓRGÃO EMISSOR)</td>
-            <td style="width: 150px;" class="label-ficha">CPF</td>
-            <td style="width: 117px;" class="label-ficha">RAÇA / COR</td>
-            <td style="width: 150px;" class="label-ficha">DATA DE FILIAÇÃO</td>
-        </tr>
-        <tr>
-            <td style="width: 300px;" class="dados-ficha">{{$associado->rg}} {{$associado->rgorgaoemissor}}</td>
-            <td style="width: 150px;" class="dados-ficha">{{$associado->cpf}}</td>
-            <td style="width: 117px;" class="dados-ficha">{{Str::upper($associado->racacor)}}</td>
-            <td style="width: 150px;" class="dados-ficha">{{mrc_turn_data($associado->filiacao)}}</td>
-        </tr>
-    </table>
+    <div>
+        <table style="width: 627px; border-collapse: collapse;">
+            <tr>
+                <td style="width: 477px;" class="label-ficha">NOME</td>
+                <td style="width: 100px;" class="label-ficha">DATA DE NASCIMENTO</td>
+                <td style="width: 50px;" class="label-ficha">SEXO</td>
+            </tr>
+            <tr>
+                <td style="width: 477px;" class="dados-ficha">{{$associado->nome}}</td>
+                <td style="width: 100px;" class="dados-ficha">{{mrc_turn_data($associado->nascimento)}}</td>
+                <td style="width: 50px;" class="dados-ficha">{{Str::upper($associado->sexo)}}</td>
+            </tr>
+        </table>
 
-    <table style="width: 717px; border-collapse: collapse;">
-        <tr>
-            <td style="width: 450px;" class="label-ficha">COMPANHIA</td>
-            <td style="width: 117px;" class="label-ficha">ÁREAS DE ATUAÇÃO</td>
-            <td style="width: 150px;" class="label-ficha">QTD. COLETADA(S)</td>
-        </tr>
-        <tr>
-            <td style="width: 450px;" class="dados-ficha">{{$associado->companhia->nome}}</td>
-            <td style="width: 117px;" class="dados-ficha"></td>
-            <td style="width: 150px;" class="dados-ficha">{{$associado->quantidade}}</td>
-        </tr>
-    </table>
+        <table style="width: 627px; border-collapse: collapse;">
+            <tr>
+                <td style="width: 210px;" class="label-ficha">RG (ÓRGÃO EMISSOR)</td>
+                <td style="width: 150px;" class="label-ficha">CPF</td>
+                <td style="width: 117px;" class="label-ficha">RAÇA / COR</td>
+                <td style="width: 150px;" class="label-ficha">DATA DE FILIAÇÃO</td>
+            </tr>
+            <tr>
+                <td style="width: 210px;" class="dados-ficha">{{$associado->rg}} {{$associado->rgorgaoemissor}}</td>
+                <td style="width: 150px;" class="dados-ficha">{{$associado->cpf}}</td>
+                <td style="width: 117px;" class="dados-ficha">{{Str::upper($associado->racacor)}}</td>
+                <td style="width: 150px;" class="dados-ficha">{{mrc_turn_data($associado->filiacao)}}</td>
+            </tr>
+        </table>
 
+        <table style="width: 627px; border-collapse: collapse;">
+            <tr>
+                <td style="width: 360px;" class="label-ficha">COMPANHIA</td>
+                <td style="width: 117px;" class="label-ficha">ÁREAS DE ATUAÇÃO</td>
+                <td style="width: 150px;" class="label-ficha">QTD. COLETADA(S)</td>
+            </tr>
+            <tr>
+                <td style="width: 360px;" class="dados-ficha">{{$associado->companhia->nome}}</td>
+                <td style="width: 117px;" class="dados-ficha"></td>
+                <td style="width: 150px;" class="dados-ficha">{{$associado->quantidade}}</td>
+            </tr>
+        </table>
+    </div>
 
+    <div style="clear: both">
     <table style="width: 717px; border-collapse: collapse;">
         <tr>
             <td style="width: 450px;" class="label-ficha">ENDEREÇO</td>
@@ -98,11 +104,8 @@
             <td colspan="4" style="width:717px;" class="close-ficha"></td>
         </tr>
     </table>
+    </div>
 
-    <table>
-        <tr>
-            <td style="width: 200px;" class="dados-lista"><img src="{{ base_path().'/storage/app/public/'.$associado->imagem}}" width="100"/ ></td>
-        </tr>
-    </table>
+
 </body>
 </html>
