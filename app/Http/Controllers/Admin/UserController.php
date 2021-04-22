@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Municipio;
 
 class UserController extends Controller
 {
@@ -19,18 +22,24 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('admin.user.create');
+        $municipios = Municipio::all();
+
+        return view('admin.user.create', compact('municipios'));
     }
 
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
 
         $user = new User();
 
-        $user->name = $request->name;
+        $user->fullname = $request->fullname;
         $user->cpf = $request->cpf;
+        $user->telefone = $request->telefone;
+        $user->name = $request->name;
         $user->email = $request->email;
+        $user->perfil = $request->perfil;
+        $user->municipio_id = $request->municipio_id;
         $user->password = bcrypt($request->password);
 
         $user->save();

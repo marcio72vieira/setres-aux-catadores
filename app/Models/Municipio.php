@@ -34,6 +34,10 @@ class Municipio extends Model
         return $this->hasMany(Pontocoleta::class);
     }
 
+    public function users(){
+        return $this->hasMany(User::class);
+    }
+
     // relatorio excel e csv
     public static function getMunicipios(){
         $records = DB::table('municipios')->select('id', 'nome')->get()->toArray();
