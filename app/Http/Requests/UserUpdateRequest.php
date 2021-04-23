@@ -24,15 +24,15 @@ class UserUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'fullname'          => 'bail|required|string',
-            'cpf'               => 'required',
-            'telefone'          => 'required',
-            'name'              => 'bail|required|string',  // é o campo usuário
-            'email'             => 'bail|required|string|email|unique:users',
-            'perfil'            => 'bail|required',
-            'municipio_id'      => 'bail|required',
-            'password'          => 'bail|required_with:confirmpassword|string|confirmed',
-            'confirpassword'    => 'bail|required',
+            'fullname'              => 'bail|required|string',
+            'cpf'                   => 'required',
+            'telefone'              => 'required',
+            'name'                  => 'bail|required|string',  // é o campo usuário
+            'email'                 => 'bail|required|string|email',
+            'perfil'                => 'bail|required',
+            'municipio_id'          => 'bail|required',
+            //'password'              => '',
+            //'password_confirmation' => 'bail|required',
         ];
     }
 }

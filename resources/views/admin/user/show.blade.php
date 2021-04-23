@@ -22,19 +22,17 @@
                     <form method="" action="">
                         <div class="pl-lg-4">
                             <div class="row">
-                                {{-- name --}}
-                                <div class="col-lg-2">
+                                {{-- fullname --}}
+                                <div class="col-lg-4">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="name">Nome<span class="small text-danger">*</span></label>
-                                        <input type="text" id="name" class="form-control" name="name" value="{{$user->name}}" readonly>
-                                        @error('name')
+                                        <label class="form-control-label" for="fullname">Nome Completo<span class="small text-danger">*</span></label>
+                                        <input type="text" id="fullname" class="form-control" name="fullname" value="{{$user->fullname}}" readonly>
+                                        @error('fullname')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
                                 {{-- cpf --}}
                                 <div class="col-lg-2">
                                     <div class="form-group focused">
@@ -45,15 +43,70 @@
                                         @enderror
                                     </div>
                                 </div>
+
+
+                                {{-- telefone --}}
+                                <div class="col-lg-2">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="telefone">Telefone<span class="small text-danger">*</span></label>
+                                        <input type="text" id="telefone" class="form-control" name="telefone" value="{{$user->telefone}}" readonly>
+                                        @error('telefone')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
 
+
                             <div class="row">
+                                {{-- name --}}
+                                <div class="col-lg-2">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="name">Usuário<span class="small text-danger">*</span></label>
+                                        <input type="text" id="name" class="form-control" name="name" value="{{$user->name}}" readonly>
+                                        @error('name')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
                                 {{-- email --}}
                                 <div class="col-lg-2">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="cpf">E-mail<span class="small text-danger">*</span></label>
+                                        <label class="form-control-label" for="email">E-mail<span class="small text-danger">*</span></label>
                                         <input type="email" id="email" class="form-control" name="email" value="{{$user->email}}" readonly>
                                         @error('email')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- perfil --}}
+                                <div class="col-lg-2">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="perfil">Perfil<span class="small text-danger">*</span></label>
+                                        <select name="perfil" id="perfil" class="form-control" disabled>
+                                            <option value="" selected disabled>Escolha ...</option>
+                                            <option value="adm" {{old('perfil', $user->perfil) == 'adm' ? 'selected' : ''}}>Administrador</option>
+                                            <option value="ope" {{old('perfil', $user->perfil) == 'ope' ? 'selected' : ''}}>Operador</option>
+                                        </select>
+                                        @error('perfil')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                {{-- municipio_id --}}
+                                <div class="col-lg-3">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="municipio_id">Cidade</label>
+                                        <select name="municipio_id" id="municipio_id" class="form-control" disabled>
+                                            <option value="" selected disabled>Escolha ...</option>
+                                            @foreach($municipios  as $municipio)
+                                                <option value="{{$municipio->id}}" {{old('municipio_id', $user->municipio_id) == $municipio->id ? 'selected' : ''}}>{{$municipio->nome}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('municipio_id')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
                                     </div>

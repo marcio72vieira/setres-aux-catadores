@@ -16,9 +16,13 @@ class UserSeeder extends Seeder
     public function run()
     {
         $user = new User();
-	    $user->name = "Marcio Vieira";
-	    $user->email = "admin@setres.com";
+        $user->fullname = "Marcio Nonato F Vieira";
         $user->cpf = "471.183.423-11";
+        $user->telefone = "(98) 98702-3329";
+	    $user->name = "Marcio Vieira";
+	    $user->email = "marcio@seati.ma.gov.br";
+        $user->perfil = "adm";
+        $user->municipio_id = 1;
 	    $user->password = Hash::make('123456');
 	    $user->save();
     }

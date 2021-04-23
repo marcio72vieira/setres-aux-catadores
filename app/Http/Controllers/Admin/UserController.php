@@ -8,6 +8,7 @@ use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Municipio;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -53,22 +54,57 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
+        $municipios = Municipio::all();
 
-        return view('admin.user.show', compact('user'));
+        return view('admin.user.show', compact('user', 'municipios'));
     }
 
 
     public function edit($id)
     {
         $user = User::find($id);
+        $municipios = Municipio::all();
 
-        return view('admin.user.edit', compact('user'));
+        $usuario = User::find($id);
+
+        return view('admin.user.edit', compact('user', 'municipios'));
+    }
+
+    public function atualizarmeusdados()
+    {
+        $usuario = User::find(Auth::user()->id);
+        $acao = "Atualização";
+        $id = Auth::user()->id;
+
+        return view('admin.usuario.editar', compact('usuario', 'acao', 'id'));
+
     }
 
 
-    public function update(Request $request, $id)
+    public function update($id, UserUpdateRequest $request)
     {
-        //
+        $user = User::find($id);
+
+        $user->fullname     = $request->fullname;
+        $user->cpf          = $request->cpf;
+        $user->telefone     = $request->telefone;
+        $user->name         = $request->name;
+        $user->email        = $request->email;
+        $user->perfil       = $request->perfil;
+        $user->municipio_id = $request->municipio_id;
+
+        if($request->password == ''){
+            $user->password = $request->old_password_hidden;
+        }else{
+            $user->password = bcrypt($request->password);
+        }
+
+        $user->save();
+
+        $request->session()->flash('sucesso', 'Registro incluído com sucesso!');
+
+        return redirect()->route('admin.user.index');
+
     }
 
 
