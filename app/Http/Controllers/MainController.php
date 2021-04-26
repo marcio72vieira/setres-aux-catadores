@@ -33,7 +33,8 @@ class MainController extends Controller
             $request->session()->put('nameUsuarioLogado', $userInfo->name);
             $request->session()->put('emailUsuarioLogado', $userInfo->email);
 
-            return redirect()->route('admin.residuo.index');
+            //return redirect()->route('admin.residuo.index');
+            return redirect()->route('admin.bairro.index');
         }
 
         return redirect()->back()->withInput()->withErrors(['Usuário e/ou Senha não conferem!']);

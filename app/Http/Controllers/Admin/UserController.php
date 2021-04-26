@@ -111,6 +111,21 @@ class UserController extends Controller
 
     public function updateprofile($id, UserUpdateProfileRequest $request)
     {
+        //dd($request->session()->all());
+
+        /* if ($request->fails()) {
+            $request->session()->put('errorEdicaoPerfil', 'true');
+        } */
+
+
+        /*
+        if (isset($request->validator) && $request->validator->fails()) {
+            $request->session()->put('erroPerfil', true);
+        }else{
+            $request->session()->forget('erroPerfil');
+        }
+        */
+
             $user = User::find($id);
 
             //dd($request->all());
