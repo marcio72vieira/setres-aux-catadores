@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class UserUpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,14 +25,14 @@ class UserRequest extends FormRequest
     {
         return [
             'fullname'              => 'bail|required|string',
-            'cpf'                   => 'required|unique:users,cpf',
+            'cpf'                   => 'required',
             'telefone'              => 'required',
             'name'                  => 'bail|required|string',  // é o campo usuário
-            'email'                 => 'bail|required|string|email|unique:users,email',
+            'email'                 => 'bail|required|string|email',
             'perfil'                => 'bail|required',
             'municipio_id'          => 'bail|required',
-            'password'              => 'bail|required|confirmed',
-            'password_confirmation' => 'bail|required',
+            'password'              => 'bail|required_with:password_confirmation|confirmed',
+            'password_confirmation' => 'bail|required_with:password',
         ];
     }
 }

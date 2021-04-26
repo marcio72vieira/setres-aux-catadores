@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\UserUpdateProfileRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Municipio;
@@ -104,6 +105,34 @@ class UserController extends Controller
         $request->session()->flash('sucesso', 'Registro incluído com sucesso!');
 
         return redirect()->route('admin.user.index');
+
+    }
+
+
+    public function updateprofile($id, UserUpdateProfileRequest $request)
+    {
+            $user = User::find($id);
+
+            //dd($request->all());
+
+            $user->fullname     = $request->fullname;
+            $user->cpf          = $request->cpf;
+            $user->telefone     = $request->telefone;
+            $user->name         = $request->name;
+            $user->email        = $request->email;
+            $user->perfil       = $request->perfil;         // não é alterado pelo usuário
+            $user->municipio_id = $request->municipio_id;   // não é alterado pelo usuário
+
+            if($request->password == ''){
+                $user->password = $request->password_hidden;
+            }else{
+                $user->password = bcrypt($request->password);
+            }
+
+            $user->save();
+
+            return redirect()->route('front.logout');
+
 
     }
 

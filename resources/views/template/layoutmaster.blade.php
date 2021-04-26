@@ -247,9 +247,9 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#ModalPerfil">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                                    Editar Perfil
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -319,6 +319,132 @@
         </div>
     </div>
 
+
+    <!--  Modal Perfil-->
+    <div class="modal fade" id="ModalPerfil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Perfil</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12 order-lg-1">
+                        <div class="card shadow mb-4">
+                            <form id="form-perfil" method="POST" action="{{route('admin.user.updateprofile', Auth()->user()->id)}}">
+                                @csrf
+                                @method('PUT')
+
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <label >Nome Completo</label>
+                                                <input value="{{old('fullname', Auth()->user()->fullname)}}" type="text" class="form-control" id="fullname" name="fullname">
+                                                @error('fullname')
+                                                    <small style="color: red">{{$message}}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label >CPF</label>
+                                                <input value="{{old('cpf', Auth()->user()->cpf)}}" type="text" class="form-control" id="cpf" name="cpf">
+                                                @error('cpf')
+                                                    <small style="color: red">{{$message}}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label >Telefone</label>
+                                                <input value="{{old('telefone', Auth()->user()->telefone)}}" type="text" class="form-control fone" id="telefone" name="telefone">
+                                                @error('telefone')
+                                                    <small style="color: red">{{$message}}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label >Usuário</label>
+                                                <input value="{{old('name', Auth()->user()->name)}}" type="text" class="form-control" id="name" name="name">
+                                                @error('name')
+                                                    <small style="color: red">{{$message}}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label >Email</label>
+                                                <input value="{{old('email', Auth()->user()->email)}}" type="text" class="form-control" id="email" name="email">
+                                                @error('email')
+                                                    <small style="color: red">{{$message}}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label >Senha</label>
+                                                <input value="" type="password" class="form-control" id="password" name="password">
+                                                @error('password')
+                                                    <small style="color: red">{{$message}}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label >Confirmar Senha</label>
+                                                <input value="" type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+                                                @error('password_confirmation')
+                                                    <small style="color: red">{{$message}}</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <input type="hidden" name="password_hidden" value="{{Auth()->user()->password}}">
+                                    <input type="text" name="perfil" value="{{Auth()->user()->perfil}}" style="display: none">
+                                    <input type="text" name="municipio_id" value="{{Auth()->user()->municipio_id}}" style="display: none">
+
+                                    {{-- Exibe os erros se houver
+                                    @foreach ($errors->all() as $error)
+                                        <div>{{ $error }}</div>
+                                    @endforeach
+                                    --}}
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" id="btn-fechar" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" name="btn-salvar-perfil" id="btn-salvar-perfil" class="btn btn-primary">Salvar</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap core JavaScript-->
     <script src="{{asset('template/vendor/jquery/jquery.min.js')}}"></script>
     <script src="{{asset('template/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -372,11 +498,20 @@
         <script src="{{ URL::asset('template/js/mascaras.js') }}"></script>
 
 
+
+
         @yield('scripts')
 
     <!-- fim add marcio -->
 
 
+
+        <!-- Se os campos da modal do perfil não estiverem preenchidos, exime a modal, novamente com o respectivos erros -->
+        @if(Session::has('errors'))
+            <script>
+                $("#ModalPerfil").modal({ show: true });
+            </script>
+        @endif
 
 
 </body>

@@ -47,7 +47,8 @@ class AssociadoController extends Controller
             $companhias = Companhia::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
             $areas = Area::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
             $bairros = Bairro::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
-            $municipios = Municipio::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
+            //$municipios = Municipio::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
+            $municipios = Municipio::where('id', '=', Auth::user()->municipio_id)->get();
         }
 
         return view('admin.associado.create', compact('companhias','areas','bairros','municipios'));

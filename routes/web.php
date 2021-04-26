@@ -38,8 +38,11 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::resource('companhia', CompanhiaController::class)->middleware(['auth']);
     Route::resource('associado', AssociadoController::class)->middleware(['auth']);
     Route::resource('pontocoleta', PontocoletaController::class)->middleware(['auth']);
-    Route::resource('user', userController::class)->middleware(['auth']);
+    Route::resource('user', UserController::class)->middleware(['auth']);
+
+    Route::put('/user/{id}/updateprofile', [UserController::class, 'updateprofile'])->name('user.updateprofile')->middleware(['auth']);
 });
+
 
 // Retrato
 Route::get('admin/associado/{id}/retrato', [AssociadoController::class, 'retrato'])->name('admin.associado.retrato')->middleware(['auth']);
