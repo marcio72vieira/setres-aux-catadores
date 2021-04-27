@@ -14,7 +14,9 @@
         @foreach ($companhias as $companhia)
             <tr @if($loop->even) style="background-color: #e3e3e3;" @endif>
                 <td style="width: 50px;" class="dados-lista">{{$companhia->id}}</td>
-                <td style="width: 250px;" class="dados-lista">{{$companhia->nome}}</td>
+                <td style="width: 250px;" class="dados-lista">{{$companhia->nome}}
+                    @can('adm') - <small>{{ $companhia->municipio->nome }}</small>@endcan
+                </td>
                 <td style="width: 110px;" class="dados-lista">{{$companhia->cnpj}}</td>
                 <td style="width: 90px;" class="dados-lista">{{$companhia->foneum}}</td>
                 <td style="width: 200px;" class="dados-lista">{{$companhia->presidente}}</td>

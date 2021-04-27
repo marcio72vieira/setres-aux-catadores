@@ -12,6 +12,7 @@ use App\Models\Municipio;
 use Illuminate\Support\Facades\DB;
 use App\Exports\BairroExport;
 use Excel;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;   //Validação unique
 use Illuminate\Validation\Rule;             //Validação unique
@@ -21,10 +22,10 @@ class BairroController extends Controller
 
     public function index()
     {
-        if(Auth::user()->id == 1){
-            $bairros = Bairro::all();
+        if(Auth::user()->perfil == 'adm'){
+            $bairros = Bairro::orderBy('nome', 'ASC')->get();
         } else {
-            $bairros = Bairro::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
+            $bairros = Bairro::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
         }
 
         return view('admin.bairro.index', compact('bairros'));
@@ -33,13 +34,19 @@ class BairroController extends Controller
 
     public function create()
     {
-        $municipios = Municipio::orderBy('nome', 'ASC')->get();
+        if(Auth::user()->perfil == 'adm'){
+            $municipios = Municipio::orderBy('nome', 'ASC')->get();
+        } else {
+            $municipios = Municipio::where('id', '=', Auth::user()->municipio_id)->get();
+        }
+
         return view('admin.bairro.create', compact('municipios'));
     }
 
 
     public function store(BairroRequest $request)
     {
+        // Só salva um bairro se salvar uma área e vice-versa.
         DB::beginTransaction();
             Bairro::create($request->all());
             Area::create($request->all());
@@ -65,7 +72,12 @@ class BairroController extends Controller
     public function edit($id)
     {
         $bairro = Bairro::find($id);
-        $municipios = Municipio::orderBy('nome', 'ASC')->get();
+
+        if(Auth::user()->perfil == 'adm'){
+            $municipios = Municipio::orderBy('nome', 'ASC')->get();
+        } else {
+            $municipios = Municipio::where('id', '=', Auth::user()->municipio_id)->get();
+        }
 
         return view('admin.bairro.edit', compact('bairro', 'municipios'));
     }
@@ -97,20 +109,28 @@ class BairroController extends Controller
 
     public function destroy($id, Request $request)
     {
-        DB::beginTransaction();
-            Bairro::destroy($id);
-            Area::destroy($id);
-        DB::commit();
+        if(Gate::authorize('adm')){
+            DB::beginTransaction();
+                Bairro::destroy($id);
+                Area::destroy($id);
+            DB::commit();
 
-        $request->session()->flash('sucesso', 'Registro excluído com sucesso!');
+            $request->session()->flash('sucesso', 'Registro excluído com sucesso!');
 
-        return redirect()->route('admin.bairro.index');
+            return redirect()->route('admin.bairro.index');
+        }
     }
 
     // Configuração de Relatórios PDFs
     public function relatoriobairro()
     {
-        $bairros = Bairro::all();
+        //$bairros = Bairro::all();
+
+        if(Auth::user()->perfil == 'adm'){
+            $bairros = Bairro::orderBy('nome', 'ASC')->get();
+        } else {
+            $bairros = Bairro::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
+        }
 
         $fileName = ('Bairos_lista.pdf');
 
@@ -143,7 +163,8 @@ class BairroController extends Controller
             <table style="width:717px; border-collapse: collapse;">
                 <tr>
                     <td width="50px" class="col-header-table">ID</td>
-                    <td width="667px" class="col-header-table">NOME</td>
+                    <td width="400px" class="col-header-table">NOME</td>
+                    <td width="267px" class="col-header-table">MUNICÍPIO</td>
                 </tr>
             </table>
         ');
@@ -174,7 +195,9 @@ class BairroController extends Controller
     // Relatório Excel
     public function relatoriobairroexcel()
     {
-        return Excel::download(new BairroExport,'bairros.xlsx');
+        if(Gate::authorize('adm')){
+            return Excel::download(new BairroExport,'bairros.xlsx');
+        }
 
     }
 
@@ -182,7 +205,9 @@ class BairroController extends Controller
     // Relatório CSV
     public function relatoriobairrocsv()
     {
-        return Excel::download(new BairroExport,'bairros.csv');
+        if(Gate::authorize('adm')){
+            return Excel::download(new BairroExport,'bairros.csv');
+        }
 
     }
 }

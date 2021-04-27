@@ -12,6 +12,8 @@ use App\Models\Bairro;
 use App\Models\Municipio;
 use Illuminate\Support\Facades\DB;
 use App\Exports\CompanhiaExport;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Excel;
 
 use Illuminate\Support\Facades\Validator;   //Validação unique para cnpj na atualização
@@ -22,7 +24,11 @@ class CompanhiaController extends Controller
 
     public function index()
     {
-        $companhias = Companhia::all();
+        if(Auth::user()->perfil == 'adm'){
+            $companhias = Companhia::orderBy('nome', 'ASC')->get();
+        }else{
+            $companhias = Companhia::where('municipio_id', '=', Auth::user()->municipio_id)->get();
+        }
 
         return view('admin.companhia.index', compact('companhias'));
     }
@@ -31,8 +37,14 @@ class CompanhiaController extends Controller
     public function create()
     {
         $residuos = Residuo::orderBy('nome', 'ASC')->get();
-        $bairros = Bairro::orderBy('nome', 'ASC')->get();
-        $municipios = Municipio::orderBy('nome', 'ASC')->get();
+
+        if(Auth::user()->perfil == 'adm'){
+            $bairros = Bairro::orderBy('nome', 'ASC')->get();
+            $municipios = Municipio::orderBy('nome', 'ASC')->get();
+        }else{
+            $bairros = Bairro::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
+            $municipios = Municipio::where('id', '=', Auth::user()->municipio_id)->get();
+        }
 
         return view('admin.companhia.create', compact('residuos', 'bairros', 'municipios'));
     }
@@ -51,6 +63,7 @@ class CompanhiaController extends Controller
         DB::commit();
 
         $request->session()->flash('sucesso', 'Registro incluído com sucesso!');
+
         return redirect()->route('admin.companhia.index');
     }
 
@@ -71,8 +84,14 @@ class CompanhiaController extends Controller
     {
         $companhia = Companhia::find($id);
         $residuos = Residuo::orderBy('nome', 'ASC')->get();
-        $bairros = Bairro::orderBy('nome', 'ASC')->get();
-        $municipios = Municipio::orderBy('nome', 'ASC')->get();
+
+        if(Auth::user()->perfil == 'adm'){
+            $bairros = Bairro::orderBy('nome', 'ASC')->get();
+            $municipios = Municipio::orderBy('nome', 'ASC')->get();
+        }else{
+            $bairros = Bairro::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
+            $municipios = Municipio::where('id', '=', Auth::user()->municipio_id)->get();
+        }
 
         return view('admin.companhia.edit', compact('companhia', 'residuos', 'bairros', 'municipios'));
     }
@@ -106,18 +125,25 @@ class CompanhiaController extends Controller
 
     public function destroy($id, Request $request)
     {
-        Companhia::destroy($id);
+        if(Gate::authorize('adm')){
+            Companhia::destroy($id);
 
-        $request->session()->flash('sucesso', 'Registro excluído com sucesso!');
+            $request->session()->flash('sucesso', 'Registro excluído com sucesso!');
 
-        return redirect()->route('admin.companhia.index');
+            return redirect()->route('admin.companhia.index');
+        }
     }
 
 
     // Configuração de Relatórios PDFs
     public function relatoriocompanhia()
     {
-        $companhias = Companhia::all();
+
+        if(Auth::user()->perfil == 'adm'){
+            $companhias = Companhia::orderBy('nome', 'ASC')->get();
+        }else{
+            $companhias = Companhia::where('municipio_id', '=', Auth::user()->municipio_id)->get();
+        }
 
         $fileName = ('Companhias_lista.pdf');
 
@@ -188,15 +214,17 @@ class CompanhiaController extends Controller
     // Relatório Excel
     public function relatoriocompanhiaexcel()
     {
-        return Excel::download(new CompanhiaExport,'companhias.xlsx');
-
+        if(Gate::authorize('adm')){
+            return Excel::download(new CompanhiaExport,'companhias.xlsx');
+        }
     }
 
     // Relatório CSV
     public function relatoriocompanhiacsv()
     {
-        return Excel::download(new CompanhiaExport,'companhias.csv');
-
+        if(Gate::authorize('adm')){
+            return Excel::download(new CompanhiaExport,'companhias.csv');
+        }
     }
 
 

@@ -14,7 +14,8 @@
         @foreach ($bairros as $bairro)
             <tr @if($loop->even) style="background-color: #e3e3e3;" @endif>
                 <td style="width: 50px;" class="dados-lista">{{$bairro->id}}</td>
-                <td style="width: 667px;" class="dados-lista">{{$bairro->nome}}</td>
+                <td style="width: 400px;" class="dados-lista">{{$bairro->nome}}</td>
+                <td style="width: 267px;" class="dados-lista">{{$bairro->municipio->nome}}</td>
             </tr>
         @endforeach
 

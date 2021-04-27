@@ -120,14 +120,6 @@
                                     </div>
                                 </div>
 
-                                {{-- bairro
-                                <div class="col-lg-4">
-                                    <div class="form-group focused">
-                                        <label class="form-control-label" for="bairro">Bairro</label>
-                                        <input type="text" id="bairro" class="form-control" name="bairro" placeholder="Name" value="{{$companhia->bairro}}" readonly>
-                                    </div>
-                                </div>
-                                --}}
 
                                 {{-- bairro_id --}}
                                 <div class="col-lg-4">
@@ -155,19 +147,11 @@
                                     </div>
                                 </div>
 
-                                {{-- cidade
-                                <div class="col-lg-3">
-                                    <div class="form-group focused">
-                                        <label class="form-control-label" for="cidade">Cidade</label>
-                                        <input type="text" id="cidade" class="form-control" name="cidade" placeholder="Name" value="{{$companhia->cidade}}" readonly>
-                                    </div>
-                                </div>
-                                --}}
 
                                 {{-- municipio_id --}}
                                 <div class="col-lg-3">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="municipio_id">Cidade</label>
+                                        <label class="form-control-label" for="municipio_id">Município</label>
                                         <select name="municipio_id" id="municipio_id" class="form-control" disabled>
                                             <option value="" selected disabled>Escolha ...</option>
                                             @foreach($municipios  as $municipio)

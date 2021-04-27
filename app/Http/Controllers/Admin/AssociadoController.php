@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Exports\AssociadoExport;
 use App\Exports\AssociadoExportDois;
+use Illuminate\Support\Facades\Gate;
 use Excel;
 
 use Illuminate\Support\Facades\Validator;   //Validação unique para cnpj na atualização
@@ -27,7 +28,12 @@ class AssociadoController extends Controller
 
     public function index()
     {
-        $associados = Associado::all();
+        // Se ADMINISTRADOR, visualiza todos os ASSOCIADOS, caso contrário, OPERADOR, só os do seu município
+        if(Auth::user()->perfil == 'adm'){
+            $associados = Associado::orderBy('nome', 'ASC')->get();
+        } else {
+            $associados = Associado::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
+        }
 
         return view('admin.associado.index', compact('associados'));
 
@@ -133,18 +139,17 @@ class AssociadoController extends Controller
         //$associado = Associado::with(['companhia', 'bairros'])->find($id);
         $associado = Associado::with(['companhia', 'areas', 'bairro', 'municipio'])->find($id);
 
-        // Visualiza todos as companhias, áreas, bairros e municípios
-        if(Auth::user()->id == 1){
-            $companhias = Companhia::all();
-            $areas = Area::all();
-            $bairros = Bairro::all();
-            $municipios = Municipio::all();
+        // Se ADMINISTRADOR, visualiza todos os registros, caso contrário, OPERADOR, só os do seu município
+        if(Auth::user()->perfil == 'adm'){
+            $companhias = Companhia::orderBy('nome', 'ASC')->get();
+            $areas = Area::orderBy('nome', 'ASC')->get();
+            $bairros = Bairro::orderBy('nome', 'ASC')->get();
+            $municipios = Municipio::orderBy('nome', 'ASC')->get();
         } else {
-            // Só visualiza as companhias, áreas, bairros e municípios do seu município
-            $companhias = Companhia::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
-            $areas = Area::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
-            $bairros = Bairro::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
-            $municipios = Municipio::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
+            $companhias = Companhia::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
+            $areas = Area::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
+            $bairros = Bairro::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
+            $municipios = Municipio::where('id', '=', Auth::user()->municipio_id)->get();
         }
 
 
@@ -175,6 +180,7 @@ class AssociadoController extends Controller
         DB::commit();
 
         $request->session()->flash('sucesso', 'Registro alteado com sucesso!');
+
         return redirect()->route('admin.associado.index');
 
     }
@@ -182,12 +188,13 @@ class AssociadoController extends Controller
 
     public function destroy($id, Request $request)
     {
-        Associado::destroy($id);
+        if(Gate::authorize('adm')){
+            Associado::destroy($id);
 
-        $request->session()->flash('sucesso', 'Registro excluido com sucesso!');
+            $request->session()->flash('sucesso', 'Registro excluido com sucesso!');
 
-        return redirect()->route('admin.associado.index');
-
+            return redirect()->route('admin.associado.index');
+        }
 
     }
 
@@ -247,7 +254,12 @@ class AssociadoController extends Controller
     // Configuração de Relatórios PDFs
     public function relatorioassociado()
     {
-        $associados = Associado::orderBy('nome', 'ASC')->get();
+
+        if(Auth::user()->perfil == 'adm'){
+            $associados = Associado::orderBy('nome', 'ASC')->get();
+        } else {
+            $associados = Associado::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
+        }
 
         $fileName = ('Associados_lista.pdf');
 
@@ -317,21 +329,26 @@ class AssociadoController extends Controller
     // Relatório Excel
     public function relatorioassociadoexcel()
     {
-        return Excel::download(new AssociadoExport,'associados.xlsx');
+        if(Gate::authorize('adm')){
+            return Excel::download(new AssociadoExport,'associados.xlsx');
+        }
 
     }
 
     // Relatório CSV
     public function relatorioassociadocsv()
     {
-        return Excel::download(new AssociadoExport,'associados.csv');
-
+        if(Gate::authorize('adm')){
+            return Excel::download(new AssociadoExport,'associados.csv');
+        }
     }
 
     // Relatório HTML to Excel
     public function relatorioassociadoexceldois()
     {
-        return Excel::download(new AssociadoExportDois,'associadosdois.xlsx');
+        if(Gate::authorize('adm')){
+            return Excel::download(new AssociadoExportDois,'associadosdois.xlsx');
+        }
 
     }
 

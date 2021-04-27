@@ -205,18 +205,6 @@
                                     </div>
                                 </div>
 
-                                {{-- bairro
-                                <div class="col-lg-4">
-                                    <div class="form-group focused">
-                                        <label class="form-control-label" for="bairro">Bairro<span class="small text-danger">*</span></label>
-                                        <input type="text" id="bairro" class="form-control" name="bairro" value="{{old('bairro')}}" required>
-                                        @error('bairro')
-                                            <small style="color: red">{{$message}}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                                --}}
-
                                 {{-- bairro_id --}}
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
@@ -246,22 +234,11 @@
                                     </div>
                                 </div>
 
-                                {{-- cidade
-                                <div class="col-lg-3">
-                                    <div class="form-group focused">
-                                        <label class="form-control-label" for="cidade">Cidade<span class="small text-danger">*</span></label>
-                                        <input type="text" id="cidade" class="form-control" name="cidade" value="{{old('cidade')}}" required>
-                                        @error('cidade')
-                                            <small style="color: red">{{$message}}</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                                 --}}
 
                                 {{-- municipio_id --}}
                                 <div class="col-lg-3">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="municipio_id">Cidade<span class="small text-danger">*</span></label>
+                                        <label class="form-control-label" for="municipio_id">Município<span class="small text-danger">*</span></label>
                                         <select name="municipio_id" id="municipio_id" class="form-control" required>
                                             <option value="" selected disabled>Escolha...</option>
                                             @foreach($municipios  as $municipio)
