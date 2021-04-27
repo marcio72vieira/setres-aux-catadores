@@ -11,8 +11,9 @@ use App\Models\Companhia;
 use App\Models\Bairro;
 use App\Models\Municipio;
 use App\Models\Residuo;
-
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 use App\Exports\PontocoletaExport;
 use Excel;
@@ -23,7 +24,12 @@ class PontocoletaController extends Controller
 
     public function index()
     {
-        $pontocoletas = Pontocoleta::all();
+        // Se ADMINISTRADOR, visualiza todos os ASSOCIADOS, caso contrário, OPERADOR, só os do seu município
+        if(Auth::user()->perfil == 'adm'){
+            $pontocoletas = Pontocoleta::orderBy('nome', 'ASC')->get();
+        } else {
+            $pontocoletas = Pontocoleta::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
+        }
 
         return view('admin.pontocoleta.index', compact('pontocoletas'));
     }
@@ -31,10 +37,20 @@ class PontocoletaController extends Controller
 
     public function create()
     {
-        $companhias = Companhia::orderBy('nome', 'ASC')->get();
-        $bairros = Bairro::orderBy('nome', 'ASC')->get();
-        $municipios = Municipio::orderBy('nome', 'ASC')->get();
-        $residuos = Residuo::all();
+
+        // Se ADMINISTRADOR, visualiza todos os registros, caso contrário, OPERADOR, só os do seu município
+        if(Auth::user()->perfil == 'adm'){
+            $companhias = Companhia::orderBy('nome', 'ASC')->get();
+            $bairros = Bairro::orderBy('nome', 'ASC')->get();
+            $municipios = Municipio::orderBy('nome', 'ASC')->get();
+        } else {
+            $companhias = Companhia::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
+            $bairros = Bairro::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
+            $municipios = Municipio::where('id', '=', Auth::user()->municipio_id)->get();
+        }
+
+        // É resgatado todos os resíduos, independente de ser 'adm' ou 'ope'
+        $residuos = Residuo::orderBy('nome', 'ASC')->get();
 
         return view('admin.pontocoleta.create', compact('companhias','bairros','municipios','residuos'));
     }
@@ -42,8 +58,8 @@ class PontocoletaController extends Controller
 
     public function store(PontocoletaRequest $request)
     {
-        //dd($request->all());
 
+        //dd($request->all());
         DB::beginTransaction();
             $pontocoleta = Pontocoleta::create($request->all());
 
@@ -53,6 +69,7 @@ class PontocoletaController extends Controller
         DB::commit();
 
         $request->session()->flash('sucesso', 'Registro incluído com sucesso!');
+
         return redirect()->route('admin.pontocoleta.index');
     }
 
@@ -60,24 +77,38 @@ class PontocoletaController extends Controller
     public function show($id)
     {
         $pontocoleta = Pontocoleta::find($id);
-        $companhias = Companhia::orderBy('nome', 'ASC')->get();
-        $bairros = Bairro::orderBy('nome', 'ASC')->get();
-        $municipios = Municipio::orderBy('nome', 'ASC')->get();
-        $residuos = Residuo::all();
+        $residuos = Residuo::orderBy('nome', 'ASC')->get();
 
-        return view('admin.pontocoleta.show', compact('pontocoleta','companhias','bairros','municipios','residuos'));
+        if(Auth::user()->perfil == 'adm'){
+            $companhias = Companhia::orderBy('nome', 'ASC')->get();
+            $bairros = Bairro::orderBy('nome', 'ASC')->get();
+            $municipios = Municipio::orderBy('nome', 'ASC')->get();
+        } else {
+            $companhias = Companhia::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
+            $bairros = Bairro::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
+            $municipios = Municipio::where('id', '=', Auth::user()->municipio_id)->get();
+        }
+
+        return view('admin.pontocoleta.show', compact('pontocoleta','residuos','companhias','bairros','municipios'));
     }
 
 
     public function edit($id)
     {
         $pontocoleta = Pontocoleta::find($id);
-        $companhias = Companhia::orderBy('nome', 'ASC')->get();
-        $bairros = Bairro::orderBy('nome', 'ASC')->get();
-        $municipios = Municipio::orderBy('nome', 'ASC')->get();
-        $residuos = Residuo::all();
+        $residuos = Residuo::orderBy('nome', 'ASC')->get();
 
-        return view('admin.pontocoleta.edit',compact('pontocoleta', 'companhias','bairros','municipios','residuos'));
+        if(Auth::user()->perfil == 'adm'){
+            $companhias = Companhia::orderBy('nome', 'ASC')->get();
+            $bairros = Bairro::orderBy('nome', 'ASC')->get();
+            $municipios = Municipio::orderBy('nome', 'ASC')->get();
+        } else {
+            $companhias = Companhia::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
+            $bairros = Bairro::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
+            $municipios = Municipio::where('id', '=', Auth::user()->municipio_id)->get();
+        }
+
+        return view('admin.pontocoleta.edit',compact('pontocoleta','residuos', 'companhias','bairros','municipios'));
     }
 
 
@@ -94,22 +125,31 @@ class PontocoletaController extends Controller
         DB::commit();
 
         $request->session()->flash('sucesso', 'Registro editado com sucesso!');
+
         return redirect()->route('admin.pontocoleta.index');
     }
 
 
     public function destroy($id, Request $request)
     {
-        Pontocoleta::destroy($id);
+        if(Gate::authorize('adm')){
+            Pontocoleta::destroy($id);
 
-        $request->session()->flash('sucessco','Registro excluído com sucesso');
-        return redirect()->route('admin.pontocoleta.index');
+            $request->session()->flash('sucessco','Registro excluído com sucesso');
+
+            return redirect()->route('admin.pontocoleta.index');
+        }
 
     }
 
     public function relatoriopontocoleta()
     {
-        $pontoscoleta = Pontocoleta::all();
+
+        if(Auth::user()->perfil == 'adm'){
+            $pontoscoleta = Pontocoleta::orderBy('nome', 'ASC')->get();
+        } else {
+            $pontoscoleta = Pontocoleta::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
+        }
 
         $fileName = ('Pontoscoleta_lista.pdf');
 
@@ -179,15 +219,17 @@ class PontocoletaController extends Controller
     // Relatório Excel
     public function relatoriopontocoletaexcel()
     {
-        return Excel::download(new PontocoletaExport,'pontoscoleta.xlsx');
-
+        if(Gate::authorize('adm')){
+            return Excel::download(new PontocoletaExport,'pontoscoleta.xlsx');
+        }
     }
 
 
     // Relatório CSV
     public function relatoriopontocoletacsv()
     {
-        return Excel::download(new PontocoletaExport,'pontoscoleta.csv');
-
+        if(Gate::authorize('adm')){
+            return Excel::download(new PontocoletaExport,'pontoscoleta.csv');
+        }
     }
 }

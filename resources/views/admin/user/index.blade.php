@@ -48,6 +48,8 @@
             <tr>
                 <th>Id</th>
                 <th>Nome</th>
+                <th>Perfil</th>
+                <th>Município</th>
                 <th>Email</th>
                 <th>CPF</th>
                 <th style="width: 165px;">Ação</th>
@@ -59,6 +61,10 @@
              <tr>
                 <td scope="row">{{$user->id}}</th>
                 <td>{{$user->name}}</td>
+                <td>
+                    @if($user->perfil == 'adm') <b>ADMINISTRADOR</b> @else Operador @endif
+                </td>
+                <td>{{$user->municipio->nome}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{$user->cpf}}</td>
                 <td>
