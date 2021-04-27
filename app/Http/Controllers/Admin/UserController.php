@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Http\Requests\UserUpdateProfileRequest;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Municipio;
@@ -109,26 +110,34 @@ class UserController extends Controller
     }
 
 
-    public function updateprofile($id, UserUpdateProfileRequest $request)
+    public function updateprofile($id, Request $request)
     {
-        //dd($request->session()->all());
+        // Realiza o processo de validação in-loco. Se houver algum erro é criado na SESSION uma chave: 'errorperfil' com o
+        // valor 'true' que é irrelevante. Depois somos direcionado de volta para a rota anterior back() levando consigo
+        // todos os erros encontrados, juntamente com os valores dos campos que foram digitados anteriormente.
+        // Se não houver error, salva-se os campos normalmente e apaga-se eventualemente a SESSION com a chave 'errorperfil'
+        // caso exista. Logo depois somos redireionado para a routa de logout para que o usuário refaça novamente seu
+        // login.
 
-        /* if ($request->fails()) {
-            $request->session()->put('errorEdicaoPerfil', 'true');
-        } */
+        $validator = Validator::make($request->all(), [
+            'fullname'              => 'bail|required|string',
+            'cpf'                   => 'required',
+            'telefone'              => 'required',
+            'name'                  => 'bail|required|string',  // é o campo usuário
+            'email'                 => 'bail|required|string|email',
+            'perfil'                => 'bail|required',
+            'municipio_id'          => 'bail|required',
+            'password'              => 'bail|required_with:password_confirmation|confirmed',
+            'password_confirmation' => 'bail|required_with:password',
+        ]);
 
-
-        /*
-        if (isset($request->validator) && $request->validator->fails()) {
-            $request->session()->put('erroPerfil', true);
-        }else{
-            $request->session()->forget('erroPerfil');
-        }
-        */
+        if ($validator->fails()) {
+            $request->session()->put('errorperfil', true);
+            //dd($request->session()->all());
+            return back()->withErrors($validator)->withInput();
+        }else {
 
             $user = User::find($id);
-
-            //dd($request->all());
 
             $user->fullname     = $request->fullname;
             $user->cpf          = $request->cpf;
@@ -146,8 +155,10 @@ class UserController extends Controller
 
             $user->save();
 
-            return redirect()->route('front.logout');
+            $request->session()->forget('errorperfil');
 
+            return redirect()->route('front.logout');
+        }
 
     }
 

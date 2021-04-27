@@ -320,12 +320,16 @@
 
 
     <!--  Modal Perfil-->
-    <div class="modal fade" id="ModalPerfil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!--
+        data-backdrop="static" data-keyboard="false" Faz com que a modal só seja fechada se clicar no botão 'x' ou 'cancelar'.
+        Antes, a modal poderia ser fechada clicando-se fora da modal, ou seja, em qualquer parte da janela.
+    -->
+    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="ModalPerfil" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Editar Perfil</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close" onclick="dieSessionErrorPerfil();">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
@@ -421,6 +425,7 @@
                                     <input type="text" name="perfil" value="{{Auth()->user()->perfil}}" style="display: none">
                                     <input type="text" name="municipio_id" value="{{Auth()->user()->municipio_id}}" style="display: none">
 
+
                                     {{-- Exibe os erros se houver
                                     @foreach ($errors->all() as $error)
                                         <div>{{ $error }}</div>
@@ -430,7 +435,7 @@
                                 </div>
 
                                 <div class="modal-footer">
-                                    <button type="button" id="btn-fechar" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" id="btn-fechar" class="btn btn-secondary" data-dismiss="modal" onclick="dieSessionErrorPerfil();">Cancelar</button>
                                     <button type="submit" name="btn-salvar-perfil" id="btn-salvar-perfil" class="btn btn-primary">Salvar</button>
                                 </div>
                             </form>
@@ -500,17 +505,31 @@
 
 
         @yield('scripts')
+        <!-- Permite colocar os scripts diretamente no final da página baterfoto ao invés do arquvo my_script.js -->
 
     <!-- fim add marcio -->
 
 
 
-        <!-- Se os campos da modal do perfil não estiverem preenchidos, exime a modal, novamente com o respectivos erros -->
-        @if(Session::has('errors'))
+        <!-- Se os campos da modal do perfil não estiverem preenchidos, exibe a modal novamente com o respectivos erros -->
+        @if(Session::has('errorperfil'))
             <script>
                 $("#ModalPerfil").modal({ show: true });
             </script>
         @endif
+
+
+        <!--
+            Esse script será executado, 'matando' session errorperfil se o usuário resolver editar seu perfil, causar
+            algum error (ou seja, esquecer de completar algum campo) e depois desistir, clicando no botão 'cancelar'
+            ou no 'x' no canto superior direito da modal.
+         -->
+        <script>
+            function dieSessionErrorPerfil(){
+                alert('Seu perfil não será alterado!');
+                {{ Session::forget('errorperfil')}}
+            }
+        </script>
 
 
 </body>

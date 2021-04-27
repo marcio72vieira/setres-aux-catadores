@@ -36,18 +36,16 @@ class AssociadoController extends Controller
 
     public function create()
     {
-        // Visualiza todos as companhias, áreas, bairros e municípios
-        if(Auth::user()->id == 1){
-            $companhias = Companhia::all();
-            $areas = Area::all();
-            $bairros = Bairro::all();
-            $municipios = Municipio::all();
+        // Se ADMINISTRADOR, visualiza todos os registros, caso contrário, OPERADOR, só os do seu município
+        if(Auth::user()->perfil == 'adm'){
+            $companhias = Companhia::orderBy('nome', 'ASC')->get();
+            $areas = Area::orderBy('nome', 'ASC')->get();
+            $bairros = Bairro::orderBy('nome', 'ASC')->get();
+            $municipios = Municipio::orderBy('nome', 'ASC')->get();
         } else {
-            // Só visualiza as companhias, áreas, bairros e municípios do seu município
-            $companhias = Companhia::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
-            $areas = Area::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
-            $bairros = Bairro::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
-            //$municipios = Municipio::where('municipio_id', '=', Auth::user()->id)->orderBy('nome', 'ASC')->get();
+            $companhias = Companhia::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
+            $areas = Area::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
+            $bairros = Bairro::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
             $municipios = Municipio::where('id', '=', Auth::user()->municipio_id)->get();
         }
 
