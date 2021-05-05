@@ -39,7 +39,7 @@ class AssociadoRequest extends FormRequest
             //'complemento' => 'required',
             'municipio_id' => 'bail|required',
             'zona' => 'bail|required',
-            'foneum' => 'bail|required|regex:/^\([0-9]{2}\) [0-9][0-9]{3,4}\-[0-9]{4}$/',
+            //'foneum' => 'bail|required|regex:/^\([0-9]{2}\) [0-9][0-9]{3,4}\-[0-9]{4}$/',
             //'fonedois' => 'bail|required_without_all:celular,recado|regex:/^\([1-9]{2}\) [2-9][0-9]{3,4}\-[0-9]{4}$/',
             'companhia_id' => 'bail|required',
             'areas' => 'bail|required|array',
