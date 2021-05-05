@@ -14,15 +14,17 @@
             pdf
         </a>
 
-        <a class="btn btn-primary btn-success" href="{{route('admin.residuo.relatorioexcel')}}" role="button" style="margin-bottom: 10px">
-            <i class="far fa-file-excel"></i>
-            xlsx
-        </a>
+        @can('adm')
+            <a class="btn btn-primary btn-success" href="{{route('admin.residuo.relatorioexcel')}}" role="button" style="margin-bottom: 10px">
+                <i class="far fa-file-excel"></i>
+                xlsx
+            </a>
 
-        <a class="btn btn-primary btn-warning" href="{{route('admin.residuo.relatoriocsv')}}" role="button" style="margin-bottom: 10px">
-            <i class="fas fa-file-csv"></i>
-            csv
-        </a>
+            <a class="btn btn-primary btn-warning" href="{{route('admin.residuo.relatoriocsv')}}" role="button" style="margin-bottom: 10px">
+                <i class="fas fa-file-csv"></i>
+                csv
+            </a>
+        @endcan
 
 
         @if(session('sucesso'))
@@ -57,7 +59,7 @@
                 <td>
                     <a href="{{route('admin.residuo.show', $residuo->id)}}" title="exibir"><i class="fas fa-eye text-warning mr-2"></i></a>
                     <a href="{{route('admin.residuo.edit', $residuo->id)}}" title="editar"><i class="fas fa-edit text-info mr-2"></i></a>
-                    <a href="" data-toggle="modal" data-target="#formDelete{{$residuo->id}}" title="excluir"><i class="fas fa-trash text-danger mr-2"></i></a>
+                    @can('adm')<a href="" data-toggle="modal" data-target="#formDelete{{$residuo->id}}" title="excluir"><i class="fas fa-trash text-danger mr-2"></i></a>@endcan
 
                     <!-- MODAL FormDelete OBS: O id da modal para cada registro tem que ser diferente, senão ele pega apenas o primeiro registro-->
                     <div class="modal fade" id="formDelete{{$residuo->id}}" tabindex="-1" aria-labelledby="formDeleteLabel" aria-hidden="true">

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Municipio;
 use App\Exports\MunicipioExport;
 use Excel;
+use Illuminate\Support\Facades\Gate;
 
 use Illuminate\Support\Facades\Validator;   //Validação unique
 use Illuminate\Validation\Rule;             //Validação unique
@@ -79,11 +80,13 @@ class MunicipioController extends Controller
 
     public function destroy($id, Request $request)
     {
-        Municipio::destroy($id);
+        if(Gate::authorize('adm')){
+            Municipio::destroy($id);
 
-        $request->session()->flash('sucesso', 'Registro excluído com sucesso!');
+            $request->session()->flash('sucesso', 'Registro excluído com sucesso!');
 
-        return redirect()->route('admin.municipio.index');
+            return redirect()->route('admin.municipio.index');
+        }
     }
 
 
@@ -154,7 +157,9 @@ class MunicipioController extends Controller
     // Relatório Excel
     public function relatoriomunicipioexcel()
     {
-        return Excel::download(new MunicipioExport,'municipios.xlsx');
+        if(Gate::authorize('adm')){
+            return Excel::download(new MunicipioExport,'municipios.xlsx');
+        }
 
     }
 
@@ -162,7 +167,9 @@ class MunicipioController extends Controller
     // Relatório CSV
     public function relatoriomunicipiocsv()
     {
-        return Excel::download(new MunicipioExport,'municipios.csv');
+        if(Gate::authorize('adm')){
+            return Excel::download(new MunicipioExport,'municipios.csv');
+        }
 
     }
 }

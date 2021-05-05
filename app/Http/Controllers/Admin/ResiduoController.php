@@ -21,57 +21,57 @@ class ResiduoController extends Controller
 
     public function index()
     {
-        if(Gate::authorize('adm')){
+
             $residuos = Residuo::all();
             return view('admin.residuo.index', compact('residuos'));
-        }
+
 
     }
 
 
     public function create()
     {
-        if(Gate::authorize('adm')){
+
             return view('admin.residuo.create');
-        }
+
     }
 
 
     public function store(ResiduoRequest $request)
     {
-        if(Gate::authorize('adm')){
+
             Residuo::create($request->all());
 
             $request->session()->flash('sucesso', 'Registro incluído com sucesso!');
 
             return redirect()->route('admin.residuo.index');
-        }
+
     }
 
 
     public function show($id)
     {
-        if(Gate::authorize('adm')){
+
             $residuo = Residuo::find($id);
 
             return view('admin.residuo.show', compact('residuo'));
-        }
+
     }
 
 
     public function edit($id)
     {
-        if(Gate::authorize('adm')){
+
             $residuo = Residuo::find($id);
 
             return view('admin.residuo.edit', compact('residuo'));
-        }
+
     }
 
 
     public function update($id, ResiduoUpdateRequest $request)
     {
-        if(Gate::authorize('adm')){
+
             $residuo = Residuo::find($id);
 
             // Validação unique
@@ -88,7 +88,7 @@ class ResiduoController extends Controller
             $request->session()->flash('sucesso', 'Registro atualizado com sucesso!');
 
             return redirect()->route('admin.residuo.index');
-        }
+
     }
 
 
@@ -106,7 +106,7 @@ class ResiduoController extends Controller
     // Configuração de Relatórios PDFs
     public function relatorioresiduo()
     {
-        if(Gate::authorize('adm')){
+
             $residuos = Residuo::all();
 
             $fileName = ('Residuos_lista.pdf');
@@ -166,7 +166,7 @@ class ResiduoController extends Controller
             $mpdf->Output($fileName, 'I');
 
             //return view('admin.residuo.pdf.pdfresiduogeral', compact('residuos'));
-        }
+
     }
 
     // Relatório Excel

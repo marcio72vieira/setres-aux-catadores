@@ -61,9 +61,9 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                        @can('adm')<a class="collapse-item" href="{{route('admin.residuo.index')}}">Residuos Sólidos</a>@endcan
+                        <a class="collapse-item" href="{{route('admin.residuo.index')}}">Residuos Sólidos</a>
                         <a class="collapse-item" href="{{route('admin.bairro.index')}}">Bairros</a>
-                        @can('adm')<a class="collapse-item" href="{{route('admin.municipio.index')}}">Municipios</a>@endcan
+                        <a class="collapse-item" href="{{route('admin.municipio.index')}}">Municipios</a>
                         <a class="collapse-item" href="{{route('admin.companhia.index')}}">Companhias</a>
                         <a class="collapse-item" href="{{route('admin.pontocoleta.index')}}">Pontos de Coleta</a>
                         <a class="collapse-item" href="{{route('admin.associado.index')}}">Associados</a>
