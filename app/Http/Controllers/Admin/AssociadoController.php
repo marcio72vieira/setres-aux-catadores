@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Exports\AssociadoExport;
 use App\Exports\AssociadoExportDois;
+use App\Exports\AssociadoExportCssTable;
 use Illuminate\Support\Facades\Gate;
 use Excel;
 
@@ -351,6 +352,16 @@ class AssociadoController extends Controller
         }
 
     }
+
+
+    // Relatório from TABLE/HTML to CSV
+    public function relatorioassociadocsvtable()
+    {
+        if(Gate::authorize('adm')){
+            return Excel::download(new AssociadoExportCssTable,'associadoscrachas.csv');
+        }
+    }
+
 
 
     public function ficha($id)

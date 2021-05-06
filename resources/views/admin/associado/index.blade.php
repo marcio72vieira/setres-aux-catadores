@@ -19,16 +19,21 @@
             <i class="far fa-file-excel"></i>
             xlsx
         </a>
+
+        <a class="btn btn-primary btn-warning" href="{{route('admin.associado.relatoriocsv')}}" role="button" style="margin-bottom: 10px">
+                <i class="fas fa-file-csv"></i>
+                csv
+        </a>
         --}}
 
         @can('adm')
-            {{-- RELATÓRIO EXCEL A PARTIR DE UMA VIEW BLADE --}}
+            {{-- RELATÓRIO EXCEL E CSV A PARTIR DE UMA VIEW BLADE --}}
             <a class="btn btn-primary btn-success" href="{{route('admin.associado.relatorioexceldois')}}" role="button" style="margin-bottom: 10px">
                 <i class="far fa-file-excel"></i>
                 xlsx
             </a>
 
-            <a class="btn btn-primary btn-warning" href="{{route('admin.associado.relatoriocsv')}}" role="button" style="margin-bottom: 10px">
+            <a class="btn btn-primary btn-warning" href="{{route('admin.associado.relatoriocsvtable')}}" role="button" style="margin-bottom: 10px">
                 <i class="fas fa-file-csv"></i>
                 csv
             </a>
