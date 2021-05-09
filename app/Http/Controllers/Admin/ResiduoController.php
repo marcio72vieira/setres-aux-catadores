@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;   //Validação unique
 use Illuminate\Validation\Rule;             //Validação unique
 
+use chillerlan\QRCode\QRCode;
+use chillerlan\QRCode\QROptions;
+
 class ResiduoController extends Controller
 {
 
@@ -51,10 +54,27 @@ class ResiduoController extends Controller
 
     public function show($id)
     {
+        /* DEU CERTO
+        1 - Em um terminal, digitar: composer require chillerlan/php-qrcode
+        2 - Em um controller, importar:
+            use chillerlan\QRCode\QRCode;
+            use chillerlan\QRCode\QROptions;
+        3 - Definir a informação a ser armazenada
+            $dados = 'Marcio Nonato F. Vieira';
+        4 - Definir a variável que irá conter o qrcode a partir da informação $dados
+            $qrcode = (new QRCode)->render($dados).'" />';
+        5 - Enviar para a view, através do 'compact' a variável que possui o qrcode gerado
+            return view('admin.residuo.show', compact('residuo', 'qrcode'));
+        6 - Na view, em uma tag de imagem <img> exibir o QRCODE a partir da variável $qrcode
+            {{-- <img src="{{$qrcode}}" /> --}}
+        */
 
-            $residuo = Residuo::find($id);
+        $residuo = Residuo::find($id);
 
-            return view('admin.residuo.show', compact('residuo'));
+        $data = $residuo->nome;
+        $qrcode = (new QRCode)->render($data);
+
+        return view('admin.residuo.show', compact('residuo', 'qrcode'));
 
     }
 

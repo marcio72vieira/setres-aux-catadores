@@ -23,6 +23,9 @@ use Excel;
 use Illuminate\Support\Facades\Validator;   //Validação unique para cnpj na atualização
 use Illuminate\Validation\Rule;             //Validação unique para cnpm na atualização
 
+use chillerlan\QRCode\QRCode;
+use chillerlan\QRCode\QROptions;
+
 
 class AssociadoController extends Controller
 {
@@ -242,6 +245,39 @@ class AssociadoController extends Controller
 
                 // Atualizando apenas o campo image na tabela associados (este campo fica fica vazio na criação do associado)
                 Associado::where('id', $idassociado)->update(array('imagem' => $path));
+
+                //------INICIO QRCODE
+
+                    // Informação a ser gravada no QRCODE
+                    $informationqrcode = $nomeassociado;
+
+                    $options = new QROptions([
+                        'version'    => 5,
+                        'outputType' => QRCode::OUTPUT_IMAGE_PNG,   // see types click over CTRL + OUTPUT_IMAGE_PNG
+                        'eccLevel'   => QRCode::ECC_L,
+                    ]);
+
+                    // invocando uma nova instância de QRCODE
+                    $qrcode = new QRCode($options);
+
+                    // Gerando imagem do qrcode
+                    $imggenerated = $qrcode->render($informationqrcode);
+
+                    //echo "<img src='$imggenerated'/>";
+
+                    // Configurando a imagem a ser gravada na pasta
+                    $imggenerated = str_replace('data:image/png;base64,', '', $imggenerated);
+                    $imggenerated = str_replace(' ', '+', $imggenerated);
+                    $dataQR = base64_decode($imggenerated);
+
+                    // Configurando nome do arquivo e o caminho a ser gravado no banco (na coluna img_qr_code)
+                    $fileQR = "public/fotos/coletorQR". $idassociado . '.png';
+                    $pathQR = "fotos/coletorQR". $idassociado . '.png';
+
+                    // Armazenando fisicamente o arquivo na pasta
+                    Storage::put($fileQR, $dataQR);
+
+                //------ FIM QRCODE
 
             return  "Foto salva com sucesso!";
 

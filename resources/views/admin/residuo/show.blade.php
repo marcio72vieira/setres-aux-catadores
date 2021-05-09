@@ -19,6 +19,8 @@
                     <form method="" action="" autocomplete="off">
                         @csrf
 
+                        {{--<img src="{{$qrcode}}" />--}}
+
                         <div class="pl-lg-4">
                             <div class="row">
                                 <div class="col-lg-12">
