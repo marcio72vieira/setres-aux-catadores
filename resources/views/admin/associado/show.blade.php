@@ -279,9 +279,14 @@
                                     <h6><strong>Tempo de associado: {{mrc_calc_time($associado->filiacao)}}</strong></h6>
                                 </div>
 
-                                <div class="col-lg-5" style="text-align: center">
+                                <div class="col-lg-2" style="text-align: center">
                                     {{-- <img src="{{$associado->imagem}}" width="200" height="150"> modo anterior com dados binários--}}
                                     <img src="{{ asset('storage/'.$associado->imagem) }}" width="200">
+                                </div>
+
+                                <div class="col-lg-3" style="text-align: center">
+                                    @php $imgqrcode = str_replace('coletor', 'coletorQR', $associado->imagem) @endphp
+                                    <img src="{{ asset('storage/'.$imgqrcode) }}" width="200">
                                 </div>
 
                             </div>
