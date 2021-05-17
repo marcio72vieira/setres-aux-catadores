@@ -244,12 +244,14 @@ class AssociadoController extends Controller
                 'updated_at' => today() ]);
 
                 // Atualizando apenas o campo image na tabela associados (este campo fica fica vazio na criação do associado)
-                Associado::where('id', $idassociado)->update(array('imagem' => $path));
+                // Associado::where('id', $idassociado)->update(array('imagem' => $path));
 
                 //------INICIO QRCODE
 
                     // Informação a ser gravada no QRCODE
-                    $informationqrcode = $nomeassociado;
+                    // $informationqrcode = $nomeassociado;
+                    $informationqrcode = time().$idassociado;
+
 
                     $options = new QROptions([
                         'version'    => 5,
@@ -271,13 +273,16 @@ class AssociadoController extends Controller
                     $dataQR = base64_decode($imggenerated);
 
                     // Configurando nome do arquivo e o caminho a ser gravado no banco (na coluna img_qr_code)
-                    $fileQR = "public/fotos/coletorQR". $idassociado . '.png';
-                    $pathQR = "fotos/coletorQR". $idassociado . '.png';
+                    $fileQR = "public/fotos/coletor". $idassociado . 'qr.png';
+                    $pathQR = "fotos/coletor". $idassociado . 'qr.png';
 
                     // Armazenando fisicamente o arquivo na pasta
                     Storage::put($fileQR, $dataQR);
 
                 //------ FIM QRCODE
+
+                // Atualizando os campos imagem, imagemqrcode e idqrcode na tabela associados (estes campos ficam fica vazios na criação do associado)
+                Associado::where('id', $idassociado)->update(['imagem' => $path, 'imagemqrcode' => $pathQR, 'idqrcode' => $informationqrcode]);
 
             return  "Foto salva com sucesso!";
 

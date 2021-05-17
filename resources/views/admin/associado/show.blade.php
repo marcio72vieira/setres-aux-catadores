@@ -285,8 +285,8 @@
                                 </div>
 
                                 <div class="col-lg-3" style="text-align: center">
-                                    @php $imgqrcode = str_replace('coletor', 'coletorQR', $associado->imagem) @endphp
-                                    <img src="{{ asset('storage/'.$imgqrcode) }}" width="200">
+                                    {{-- @php $imgqrcode = str_replace('coletor', 'coletorQR', $associado->imagem) @endphp --}}
+                                    <img src="{{ asset('storage/'.$associado->imagemqrcode) }}" width="200">
                                 </div>
 
                             </div>
