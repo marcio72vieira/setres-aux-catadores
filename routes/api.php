@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AssociadoController;
+use App\Models\Associado;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,11 +21,14 @@ use App\Http\Controllers\Api\AssociadoController;
 //     return $request->user();
 // });
 
-
+/*
 Route::name('api.')->group(function() {
     Route::apiResource('associado', AssociadoController::class);
 });
+*/
 
+Route::get('associados', [AssociadoController::class, 'index']);
+Route::get('associado/{id}', [AssociadoController::class, 'show']);
 Route::get('associado/{qrcode}/dados', [AssociadoController::class, 'exibeassociado']);
 
 

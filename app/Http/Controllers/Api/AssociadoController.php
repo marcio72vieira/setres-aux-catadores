@@ -16,6 +16,8 @@ class AssociadoController extends Controller
      */
     public function index()
     {
+        // postman GET = http://localhost:8000/api/associados
+
         $associados = Associado::all();
         return response()->json($associados);
     }
@@ -39,7 +41,11 @@ class AssociadoController extends Controller
      */
     public function show($id)
     {
-        //
+
+        // postman GET = http://localhost:8000/api/associado/1
+
+        $associado = Associado::where('id', '=', $id)->get();
+        return response()->json($associado);
     }
 
     /**
@@ -67,6 +73,9 @@ class AssociadoController extends Controller
 
     public function exibeassociado($qrcode)
     {
+
+        // postman GET = http://localhost:8000/api/associado/16213427082/dados
+
         $associado = Associado::where('idqrcode', '=', $qrcode)->get();
         return response()->json($associado);
     }
