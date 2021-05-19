@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\AssociadoController;
 use App\Models\Associado;
 
@@ -27,8 +28,13 @@ Route::name('api.')->group(function() {
 });
 */
 
+Route::post('auth/login', [AuthController::class, 'login']);
+Route::post('auth/me', [AuthController::class, 'me'])->middleware(['apiJwt']);
+Route::post('auth/logout', [AuthController::class, 'logout'])->middleware(['apiJwt']);
+
+
 Route::get('associados', [AssociadoController::class, 'index']);
-Route::get('associado/{id}', [AssociadoController::class, 'show']);
+Route::get('associado/{id}', [AssociadoController::class, 'show'])->middleware(['apiJwt']);
 Route::get('associado/{qrcode}/dados', [AssociadoController::class, 'exibeassociado']);
 
 

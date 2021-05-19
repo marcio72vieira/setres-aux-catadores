@@ -11,65 +11,76 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Municipio;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
 
     public function index()
     {
-        $users = User::all();
+        if(Gate::authorize('adm')){
+            $users = User::all();
 
-        return view('admin.user.index', compact('users'));
+            return view('admin.user.index', compact('users'));
+        }
     }
 
 
     public function create()
     {
-        $municipios = Municipio::all();
+        if(Gate::authorize('adm')){
+            $municipios = Municipio::all();
 
-        return view('admin.user.create', compact('municipios'));
+            return view('admin.user.create', compact('municipios'));
+        }
     }
 
 
     public function store(UserRequest $request)
     {
 
-        $user = new User();
+        if(Gate::authorize('adm')){
+            $user = new User();
 
-        $user->fullname = $request->fullname;
-        $user->cpf = $request->cpf;
-        $user->telefone = $request->telefone;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->perfil = $request->perfil;
-        $user->municipio_id = $request->municipio_id;
-        $user->password = bcrypt($request->password);
+            $user->fullname = $request->fullname;
+            $user->cpf = $request->cpf;
+            $user->telefone = $request->telefone;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->perfil = $request->perfil;
+            $user->municipio_id = $request->municipio_id;
+            $user->password = bcrypt($request->password);
 
-        $user->save();
+            $user->save();
 
-        $request->session()->flash('sucesso', 'Registro incluído com sucesso!');
+            $request->session()->flash('sucesso', 'Registro incluído com sucesso!');
 
-        return redirect()->route('admin.user.index');
+            return redirect()->route('admin.user.index');
+        }
     }
 
 
     public function show($id)
     {
-        $user = User::find($id);
-        $municipios = Municipio::all();
+        if(Gate::authorize('adm')){
+            $user = User::find($id);
+            $municipios = Municipio::all();
 
-        return view('admin.user.show', compact('user', 'municipios'));
+            return view('admin.user.show', compact('user', 'municipios'));
+        }
     }
 
 
     public function edit($id)
     {
-        $user = User::find($id);
-        $municipios = Municipio::all();
+        if(Gate::authorize('adm')){
+            $user = User::find($id);
+            $municipios = Municipio::all();
 
-        $usuario = User::find($id);
+            $usuario = User::find($id);
 
-        return view('admin.user.edit', compact('user', 'municipios'));
+            return view('admin.user.edit', compact('user', 'municipios'));
+        }
     }
 
     public function atualizarmeusdados()
@@ -85,28 +96,29 @@ class UserController extends Controller
 
     public function update($id, UserUpdateRequest $request)
     {
-        $user = User::find($id);
+        if(Gate::authorize('adm')){
+            $user = User::find($id);
 
-        $user->fullname     = $request->fullname;
-        $user->cpf          = $request->cpf;
-        $user->telefone     = $request->telefone;
-        $user->name         = $request->name;
-        $user->email        = $request->email;
-        $user->perfil       = $request->perfil;
-        $user->municipio_id = $request->municipio_id;
+            $user->fullname     = $request->fullname;
+            $user->cpf          = $request->cpf;
+            $user->telefone     = $request->telefone;
+            $user->name         = $request->name;
+            $user->email        = $request->email;
+            $user->perfil       = $request->perfil;
+            $user->municipio_id = $request->municipio_id;
 
-        if($request->password == ''){
-            $user->password = $request->old_password_hidden;
-        }else{
-            $user->password = bcrypt($request->password);
+            if($request->password == ''){
+                $user->password = $request->old_password_hidden;
+            }else{
+                $user->password = bcrypt($request->password);
+            }
+
+            $user->save();
+
+            $request->session()->flash('sucesso', 'Registro incluído com sucesso!');
+
+            return redirect()->route('admin.user.index');
         }
-
-        $user->save();
-
-        $request->session()->flash('sucesso', 'Registro incluído com sucesso!');
-
-        return redirect()->route('admin.user.index');
-
     }
 
 
@@ -165,10 +177,12 @@ class UserController extends Controller
 
     public function destroy($id, Request $request)
     {
-        User::destroy($id);
+        if(Gate::authorize('adm')){
+            User::destroy($id);
 
-        $request->session()->flash('sucesso', 'Registro excluído com sucesso!');
+            $request->session()->flash('sucesso', 'Registro excluído com sucesso!');
 
-        return redirect()->route('admin.user.index');
+            return redirect()->route('admin.user.index');
+        }
     }
 }
