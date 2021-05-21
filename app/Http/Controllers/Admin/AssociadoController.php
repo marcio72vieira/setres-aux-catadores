@@ -250,7 +250,12 @@ class AssociadoController extends Controller
 
                     // Informação a ser gravada no QRCODE
                     // $informationqrcode = $nomeassociado;
-                    $informationqrcode = time().$idassociado;
+
+                    //$informationqrcode = time().$idassociado;
+                    //$informationqrcode = "http://localhost:8000/api/associado/".time().$idassociado."/dados";
+
+                    $idqrcode = time().$idassociado;
+                    $informationqrcode = "https://procatador.setres.ma.gov.br/api/associado/".$idqrcode."/eventos";
 
 
                     $options = new QROptions([
@@ -282,7 +287,7 @@ class AssociadoController extends Controller
                 //------ FIM QRCODE
 
                 // Atualizando os campos imagem, imagemqrcode e idqrcode na tabela associados (estes campos ficam fica vazios na criação do associado)
-                Associado::where('id', $idassociado)->update(['imagem' => $path, 'imagemqrcode' => $pathQR, 'idqrcode' => $informationqrcode]);
+                Associado::where('id', $idassociado)->update(['imagem' => $path, 'imagemqrcode' => $pathQR, 'idqrcode' => $idqrcode]);
 
             return  "Foto salva com sucesso!";
 
@@ -460,7 +465,10 @@ class AssociadoController extends Controller
         $mpdf->Output($fileName, 'I');
     }
 
-
-
+    public function consultaAssociadoIdqrcode($idqrcode)
+    {
+        $codigodoqrcode = $idqrcode;
+        return view('admin.associado.consultaqrcode', compact('codigodoqrcode'));
+    }
 
 }

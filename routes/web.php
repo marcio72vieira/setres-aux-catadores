@@ -85,3 +85,7 @@ Route::get('admin/associado/csv/relatorioassociado', [AssociadoController::class
 Route::get('admin/associado/excel/relatorioassociadodois', [AssociadoController::class, 'relatorioassociadoexceldois'])->name('admin.associado.relatorioexceldois')->middleware(['auth']);
 Route::get('admin/associado/csv/relatorioassociadocsvtable', [AssociadoController::class, 'relatorioassociadocsvtable'])->name('admin.associado.relatoriocsvtable')->middleware(['auth']);
 Route::get('admin/associado/pdf/{id}/fichaassociado', [AssociadoController::class, 'ficha'])->name('admin.associado.ficha')->middleware(['auth']);
+
+
+// ROTA PARA CONSULTAR ASSOCIADO PELO QRCODE
+Route::get('admin/associado/consultaqr/{idqrcode}', [AssociadoController::class, 'consultaAssociadoIdqrcode'])->name('admin.associado.consultaAssociadoIdqrcode');

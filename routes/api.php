@@ -35,6 +35,7 @@ Route::post('auth/logout', [AuthController::class, 'logout'])->middleware(['apiJ
 
 Route::get('associados', [AssociadoController::class, 'index']);
 Route::get('associado/{id}', [AssociadoController::class, 'show'])->middleware(['apiJwt']);
-Route::get('associado/{qrcode}/dados', [AssociadoController::class, 'exibeassociado'])->middleware(['apiJwt']);
+//Route::get('associado/{qrcode}/dados', [AssociadoController::class, 'exibeassociado'])->middleware(['apiJwt']);
+Route::get('associado/{qrcode}/eventos', [AssociadoController::class, 'exibeassociado']);
 
 
