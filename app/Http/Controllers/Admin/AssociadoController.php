@@ -255,7 +255,9 @@ class AssociadoController extends Controller
                     //$informationqrcode = "http://localhost:8000/api/associado/".time().$idassociado."/dados";
 
                     $idqrcode = time().$idassociado;
-                    $informationqrcode = "https://procatador.setres.ma.gov.br/api/associado/".$idqrcode."/eventos";
+                    //$informationqrcode = "https://procatador.setres.ma.gov.br/api/associado/".$idqrcode."/eventos";
+                    $informationqrcode = "https://procatador.setres.ma.gov.br/admin/associado/consultaqr/".$idqrcode;
+
 
 
                     $options = new QROptions([
