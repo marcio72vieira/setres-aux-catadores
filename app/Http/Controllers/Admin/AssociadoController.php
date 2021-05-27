@@ -195,6 +195,12 @@ class AssociadoController extends Controller
         if(Gate::authorize('adm')){
             Associado::destroy($id);
 
+            // Deletando foto e qrcode do disco
+            $imgfoto = 'fotos/coletor'.$id.'.png';
+            $imgqrcode = 'fotos/coletor'.$id.'qr.png';
+            Storage::disk('public')->delete([$imgfoto, $imgqrcode]);
+
+
             $request->session()->flash('sucesso', 'Registro excluido com sucesso!');
 
             return redirect()->route('admin.associado.index');
