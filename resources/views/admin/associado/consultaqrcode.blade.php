@@ -35,9 +35,11 @@
     <main id="registro"></main>
     </main>
 
-    <img src="{{ asset('storage/'.$associado->imagem) }}" width="200">
-    <h4>Nome: {{$associado->nome}}</h4>
-    <h4>Carteira: {{$associado->idqrcode}}</h4>
-    <h4>CHAVE QRCODE: {{$associado->nome}}</h4>
+    <div style="text-align: center;" >
+        <img src="{{ asset('storage/'.$associado->imagem) }}" width="200">
+        <h4>{{$associado->nome}}</h4>
+        <h4>{{$associado->idqrcode}}</h4>
+        <h4>{{$associado->nomecompanhia}}</h4>
+    </div>
 
 @endsection
