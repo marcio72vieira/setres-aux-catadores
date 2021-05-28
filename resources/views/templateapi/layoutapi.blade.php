@@ -19,6 +19,7 @@
 
         @yield('conteudo-principal')
 
-        <script src="{{asset('templateapi/js/script.js')}}"></script>
+        @yield('scripts')
+
 	</body>
 </html>

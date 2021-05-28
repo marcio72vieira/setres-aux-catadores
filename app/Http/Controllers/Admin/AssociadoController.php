@@ -475,44 +475,8 @@ class AssociadoController extends Controller
 
     public function consultaAssociadoIdqrcode($idqrcode)
     {
-        //$codigodoqrcode = $idqrcode;
-        //return view('admin.associado.consultaqrcode', compact('codigodoqrcode'));
-
-        $associado = DB::table('associados')
-        ->join('companhias', 'companhias.id', '=', 'associados.companhia_id')
-        ->join('municipios', 'municipios.id', '=', 'associados.municipio_id')
-        ->join('bairros', 'bairros.id', '=', 'associados.bairro_id')
-        ->select(
-            'associados.id',
-            'associados.nome',
-            'associados.nascimento',
-            'associados.rg',
-            'associados.rgorgaoemissor',
-            'associados.cpf',
-            'associados.sexo',
-            'associados.racacor',
-            'associados.filiacao',
-            'associados.quantidade',
-            'associados.endereco',
-            'associados.numero',
-            'associados.bairro_id',
-            'bairros.nome AS nomebairro',
-            'associados.complemento',
-            'associados.municipio_id',
-            'municipios.nome AS nomemunicipio',
-            'associados.zona',
-            'associados.foneum',
-            'associados.fonedois',
-            'associados.imagem',
-            'associados.idqrcode',
-            'associados.imagemqrcode',
-            'associados.companhia_id',
-            'companhias.nome AS nomecompanhia',
-            'associados.created_at',
-            'associados.updated_at',)
-        ->where('associados.idqrcode', '=', $idqrcode )->first();
-
-        return view('admin.associado.consultaqrcode', compact('associado'));
+        $codigodoqrcode = $idqrcode;
+        return view('admin.associado.consultaqrcode', compact('codigodoqrcode'));
 
     }
 
