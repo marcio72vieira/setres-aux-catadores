@@ -35,11 +35,13 @@
     <main id="registro"></main>
     </main>
 
-    <div style="text-align: center;" >
-        <img src="{{ asset('storage/'.$associado->imagem) }}" width="200">
-        <h4>{{$associado->nome}}</h4>
-        <h4>{{$associado->idqrcode}}</h4>
-        <h4>{{$associado->nomecompanhia}}</h4>
-    </div>
+    @if($associado != null)
+        <div style="text-align: center;" >
+            <img src="{{ asset('storage/'.$associado->imagem) }}" width="200">
+            <h4>{{$associado->nome}}</h4>
+            <h4>{{$associado->idqrcode}}</h4>
+            <h4>{{$associado->nomecompanhia}}</h4>
+        </div>
+    @endif
 
 @endsection
