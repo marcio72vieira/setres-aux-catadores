@@ -80,7 +80,7 @@
             bodyValidado();
 
             document.getElementById("nome").textContent = data[0].nome;
-            document.getElementById("carteira").textContent = data[0].filiacao;
+            document.getElementById("carteira").textContent = data[0].idqrcode;
             document.getElementById("cooperativa").textContent = data[0].nomecompanhia;
 
             // Consultar imagem na api
