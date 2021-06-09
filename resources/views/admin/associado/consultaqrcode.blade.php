@@ -43,6 +43,10 @@
     //https://procatador.setres.ma.gov.br/storage/fotos/
     // 16219928887 16219930988
 
+    @php
+        $codigodoqrcode = preg_replace("[^0-9]",'',$codigodoqrcode);
+    @endphp
+
     ///////////////////////////
     let search = {{$codigodoqrcode}};
     ///////////////////////////
