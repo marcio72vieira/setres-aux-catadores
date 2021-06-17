@@ -352,8 +352,8 @@ class AssociadoController extends Controller
                     <td width="110px" class="col-header-table">RG</td>
                     <td width="90px" class="col-header-table">CPF</td>
                     <td width="180px" class="col-header-table">TELEFFONES</td>
-                    <td width="200px" class="col-header-table">COMPANHIA</td>
-                    <td width="200px" class="col-header-table">ÁREA DE ATUAÇÃO</td>
+                    <td width="200px" class="col-header-table">COMPANHIA / INSTITUIÇÃO</td>
+                    <td width="200px" class="col-header-table">ÁREA DE ATUAÇÃO (MUNICÍPIO)</td>
                 </tr>
             </table>
         ');

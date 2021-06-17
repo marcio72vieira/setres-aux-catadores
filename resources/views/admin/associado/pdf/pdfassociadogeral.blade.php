@@ -25,6 +25,7 @@
                 <td style="width: 200px;" class="dados-lista">{{$associado->companhia->nome}}</td>
                 <td style="width: 200px;" class="dados-lista">
                     @foreach($associado->areas as $area) {{$area->nome}}; @endforeach
+                     - ({{$associado->municipio->nome}})
                 </td>
             </tr>
         @endforeach
