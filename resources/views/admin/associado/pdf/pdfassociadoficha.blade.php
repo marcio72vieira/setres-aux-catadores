@@ -10,7 +10,12 @@
 
 <body>
     <div style="width: 90px; float: left; text-align: center;" >
-        <img src="{{ base_path().'/storage/app/public/'.$associado->imagem}}" width="90" style="padding: 2px;">
+        <!-- { if (file_exists(public_path('img/dummy.jpg'))) { dd('File is Exists '); }else{ dd('File is Not Exists');}} -->
+        @if(file_exists(base_path().'/storage/app/public/'.$associado->imagem))
+                <img src="{{ base_path().'/storage/app/public/'.$associado->imagem}}" width="90" style="padding: 2px;">
+        @else
+                <img src="{{ base_path() }}/public/images/no-photo.png" width="90" style="padding: 2px;">
+        @endif
     </div>
 
     <div>
