@@ -61,6 +61,7 @@ Route::get('admin/bairro/excel/relatoriobairro', [BairroController::class, 'rela
 Route::get('admin/bairro/csv/relatoriobairro', [BairroController::class, 'relatoriobairrocsv'])->name('admin.bairro.relatoriocsv')->middleware(['auth']);
 
 // RELATÓRIOS MUNICÍPIOS
+Route::get('admin/municipio/pdf/{id}/relatorioassociadosmunicipio', [MunicipioController::class, 'relatorioassociadosmunicipio'])->name('admin.municipio.relatorioassociadosmunicipio')->middleware(['auth']);
 Route::get('admin/municipio/pdf/relatoriomunicipio', [MunicipioController::class, 'relatoriomunicipio'])->name('admin.municipio.relatorio')->middleware(['auth']);
 Route::get('admin/municipio/excel/relatoriomunicipio', [MunicipioController::class, 'relatoriomunicipioexcel'])->name('admin.municipio.relatorioexcel')->middleware(['auth']);
 Route::get('admin/municipio/csv/relatoriomunicipio', [MunicipioController::class, 'relatoriomunicipiocsv'])->name('admin.municipio.relatoriocsv')->middleware(['auth']);

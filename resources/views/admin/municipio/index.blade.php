@@ -59,6 +59,7 @@
                 <td>
                     <a href="{{route('admin.municipio.show', $municipio->id)}}" title="exibir"><i class="fas fa-eye text-warning mr-2"></i></a>
                     <a href="{{route('admin.municipio.edit', $municipio->id)}}" title="editar"><i class="fas fa-edit text-info mr-2"></i></a>
+                    <a href="{{route('admin.municipio.relatorioassociadosmunicipio', $municipio->id)}}" target="_blank" title="relatório .pdf"><i class="far fa-file-pdf text-danger mr-5"></i></a>
                     @can('adm')<a href="" data-toggle="modal" data-target="#formDelete{{$municipio->id}}" title="excluir"><i class="fas fa-trash text-danger mr-2"></i></a>@endcan
 
                     <!-- MODAL FormDelete OBS: O id da modal para cada registro tem que ser diferente, senão ele pega apenas o primeiro registro-->
