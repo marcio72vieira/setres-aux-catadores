@@ -9,14 +9,15 @@
 
 
 <body>
+
+
     <table style="width: 1080px;  border-collapse: collapse; font-size: 10px; font-family: Arial, Helvetica, sans-serif;">
-
         @foreach ($municipio->companhias as $companhia)
-            <tr style="background-color: #757171;">
-                <td style="width: 1080px;" class="dados-lista-titulo">{{$companhia->nome}}</td>
+            <tr style="background-color: #7f7f7f;">
+                <td colspan="7" class="dados-lista-titulo">{{$companhia->nome}}</td>
             </tr>
-
             @foreach($companhia->associados as $associado)
+
                 <tr @if($loop->even) style="background-color: #e3e3e3;" @endif>
                     <td style="width: 50px;" class="dados-lista">{{$associado->id}}</td>
                     <td style="width: 250px;" class="dados-lista">{{$associado->nome}}</td>
@@ -25,17 +26,14 @@
                     <td style="width: 180px;" class="dados-lista">{{$associado->foneum}}; {{$associado->foneum}} </td>
                     <td style="width: 200px;" class="dados-lista">{{$associado->companhia->nome}}</td>
                     <td style="width: 200px;" class="dados-lista">
-                        @foreach($associado->areas as $area)
-                            {{$area->nome}};
-                        @endforeach
-                        - ({{$associado->municipio->nome}})
+                        @foreach($associado->areas as $area)  {{$area->nome}} @endforeach - ({{$associado->municipio->nome}})
                     </td>
                 </tr>
             @endforeach
-
+            {{-- @php $mpdf->AddPage() @endphp --}}
         @endforeach
-
     </table>
+
 </body>
 </html>
 

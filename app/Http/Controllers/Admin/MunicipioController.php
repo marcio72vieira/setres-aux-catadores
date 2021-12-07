@@ -214,14 +214,15 @@ class MunicipioController extends Controller
         ');
 
 
-        $html = \View::make('admin.municipio.pdf.pdfassociadomunicipio', compact('municipio'));
+        $html = \View::make('admin.municipio.pdf.pdfassociadomunicipio', compact('municipio', 'mpdf'));
         $html = $html->render();
 
         $stylesheet = file_get_contents('pdf/mpdf.css');
         $mpdf->WriteHTML($stylesheet, 1);
 
         $mpdf->WriteHTML($html);
-        $mpdf->Output($fileName, 'I');
+        //$mpdf->Output($fileName, 'D');  // Salva o relatório em um arquivo e força o download
+        $mpdf->Output($fileName, 'I');  // Exibe o relatório diretamente no Browse
 
     }
 
