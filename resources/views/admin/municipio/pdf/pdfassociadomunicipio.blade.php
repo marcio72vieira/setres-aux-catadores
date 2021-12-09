@@ -14,7 +14,7 @@
     <table style="width: 1080px;  border-collapse: collapse; font-size: 10px; font-family: Arial, Helvetica, sans-serif;">
         @foreach ($municipio->companhias as $companhia)
             <tr style="background-color: #7f7f7f;">
-                <td colspan="7" class="dados-lista-titulo">{{$companhia->nome}}</td>
+                <td colspan="7" class="dados-lista-titulo">{{$companhia->nome}} ({{$companhia->associados()->count()}})</td>
             </tr>
             @foreach($companhia->associados as $associado)
 
