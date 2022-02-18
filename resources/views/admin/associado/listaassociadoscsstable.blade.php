@@ -4,6 +4,7 @@
             <th>Id</th>
             <th>Nome</th>
             <th>CPF</th>
+            <th>Carteira</th>
             <th>@</th>
             <th>@</th>
         </tr>
@@ -19,6 +20,7 @@
                 <td>{{$associado->id}}</td>
                 <td>{{$uppernome}}</td>
                 <td>{{$associado->cpf}}</td>
+                <td>{{$associado->idqrcode}}</td>
                 <td>{{$pathimagem}}</td>
                 <td>{{$pathqrcode}}</td>
              </tr>

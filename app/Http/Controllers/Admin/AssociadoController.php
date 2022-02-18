@@ -311,7 +311,8 @@ class AssociadoController extends Controller
     {
 
         if(Auth::user()->perfil == 'adm'){
-            $associados = Associado::orderBy('nome', 'ASC')->get();
+            //$associados = Associado::orderBy('nome', 'ASC')->get();
+            $associados = Associado::with(['companhia', 'municipio', 'areas'])->orderBy('nome', 'ASC')->get();
         } else {
             $associados = Associado::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
         }
