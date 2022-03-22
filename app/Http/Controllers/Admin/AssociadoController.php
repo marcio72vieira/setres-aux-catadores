@@ -26,6 +26,11 @@ use Illuminate\Validation\Rule;             //Validação unique para cnpm na at
 use chillerlan\QRCode\QRCode;
 use chillerlan\QRCode\QROptions;
 
+use Illuminate\Support\Collection;
+
+use File;
+use ZipArchive;
+
 
 class AssociadoController extends Controller
 {
@@ -479,6 +484,40 @@ class AssociadoController extends Controller
         $codigodoqrcode = $idqrcode;
         return view('admin.associado.consultaqrcode', compact('codigodoqrcode'));
 
+    }
+
+
+    public function baixararquivos($id)
+    {
+
+        // Baixa apenas o arquivo arquivo de foto
+    	$myFile = storage_path("app/public/fotos/coletor".$id.".png");
+        return response()->download($myFile);
+
+
+        /*
+        // TESTANDO DONWLOD DE MAIS DE UM ARQUIVO AO MESMO TEMPO
+        $fileFoto   = storage_path('app/public/fotos/coletor'.$id.'.png');
+        $fileQrcode = storage_path('app/public/fotos/coletor'.$id.'qr.png');
+
+        $arquivosFotoQrCcode = collect([$fileFoto, $fileQrcode]);
+    	return response()->download($arquivosFotoQrCcode);
+        */
+    }
+
+    public function zipdownload()
+    {
+        $zip      = new ZipArchive;
+        $fileName = 'fotoscracha.zip';
+        if ($zip->open(storage_path($fileName), ZipArchive::CREATE) === TRUE) {
+            $files = File::files(storage_path('app/public/fotos'));
+            foreach ($files as $key => $value) {
+                $relativeName = basename($value);
+                $zip->addFile($value, $relativeName);
+            }
+            $zip->close();
+        }
+        return response()->download(storage_path($fileName));
     }
 
 }

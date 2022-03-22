@@ -29,13 +29,17 @@
         --}}
 
         @can('adm')
+            <a class="btn btn-primary btn-danger" href="{{route('admin.associado.zipdownload')}}" role="button" style="margin-bottom: 10px" title="baixar pasta de fotos">
+                <i class="fas  fa-download mr-2"></i>
+                fotos
+            </a>
             {{-- RELATÓRIO EXCEL E CSV A PARTIR DE UMA VIEW BLADE --}}
-            <a class="btn btn-primary btn-success" href="{{route('admin.associado.relatorioexceldois')}}" role="button" style="margin-bottom: 10px">
+            <a class="btn btn-primary btn-success" href="{{route('admin.associado.relatorioexceldois')}}" role="button" style="margin-bottom: 10px"  title="baixar registros excel">
                 <i class="far fa-file-excel"></i>
                 xlsx
             </a>
 
-            <a class="btn btn-primary btn-warning" href="{{route('admin.associado.relatoriocsvtable')}}" role="button" style="margin-bottom: 10px">
+            <a class="btn btn-primary btn-warning" href="{{route('admin.associado.relatoriocsvtable')}}" role="button" style="margin-bottom: 10px"   title="baixar registros csv">
                 <i class="fas fa-file-csv"></i>
                 csv
             </a>
@@ -94,7 +98,8 @@
                     <a href="{{route('admin.associado.show', $associado->id)}}" title="exibir"><i class="fas fa-eye text-warning mr-2"></i></a>
                     <a href="{{route('admin.associado.edit', $associado->id)}}" title="editar"><i class="fas fa-edit text-info mr-2"></i></a>
                     <a href="{{route('admin.associado.retrato', $associado->id)}}" title="foto"><i class="fas fa-portrait text-primary mr-2"></i></a>
-                    <a href="{{route('admin.associado.ficha', $associado->id)}}" title="ficha" target="_blank"><i class="far fa-file-pdf text-danger mr-2"></i></a>
+                    <a href="{{route('admin.associado.ficha', $associado->id)}}" title="ficha" target="_blank"><i class="fas fa-file-pdf text-danger mr-2"></i></a>
+                    {{-- <a href="{{route('admin.associado.baixararquivos', $associado->id)}}" title="baixar_fotos"><i class="fas fa-solid fa-download text-info mr-2"></i></a>--}}
                     @can('adm')<a href="" data-toggle="modal" data-target="#formDelete{{$associado->id}}" title="excluir"><i class="fas fa-trash text-danger mr-2"></i></a>@endcan
 
                     <!-- MODAL FormDelete OBS: O id da modal para cada registro tem que ser diferente, senão ele pega apenas o primeiro registro-->

@@ -90,3 +90,8 @@ Route::get('admin/associado/pdf/{id}/fichaassociado', [AssociadoController::clas
 
 // ROTA PARA CONSULTAR ASSOCIADO PELO QRCODE
 Route::get('admin/associado/consultaqr/{idqrcode}', [AssociadoController::class, 'consultaAssociadoIdqrcode'])->name('admin.associado.consultaAssociadoIdqrcode');
+
+
+// BAIXANDO ARQUIVOS
+// Route::get('admin/associado/donwloadfile/{id}/baixararquivos', [AssociadoController::class, 'baixararquivos'])->name('admin.associado.baixararquivos')->middleware(['auth']);
+Route::get('admin/associado/downloadfolder/zipdownload', [AssociadoController::class, 'zipdownload'])->name('admin.associado.zipdownload')->middleware(['auth']);
