@@ -489,20 +489,33 @@ class AssociadoController extends Controller
 
     public function baixararquivos($id)
     {
-
+        /*
         // Baixa apenas o arquivo arquivo de foto
     	$myFile = storage_path("app/public/fotos/coletor".$id.".png");
         return response()->download($myFile);
-
-
-        /*
-        // TESTANDO DONWLOD DE MAIS DE UM ARQUIVO AO MESMO TEMPO
-        $fileFoto   = storage_path('app/public/fotos/coletor'.$id.'.png');
-        $fileQrcode = storage_path('app/public/fotos/coletor'.$id.'qr.png');
-
-        $arquivosFotoQrCcode = collect([$fileFoto, $fileQrcode]);
-    	return response()->download($arquivosFotoQrCcode);
         */
+
+        $zip      = new ZipArchive;
+        $fileName = 'fotocracha'.$id.'.zip';
+        if ($zip->open(storage_path($fileName), ZipArchive::CREATE) === TRUE) {
+            $files = File::files(storage_path('app/public/fotos'));
+            //dd($files);
+            foreach ($files as $key => $value) {
+                $relativeName = basename($value);
+                if($relativeName == 'coletor'.$id.'.png'){
+                    $zip->addFile($value, $relativeName);
+                }
+                if($relativeName == 'coletor'.$id.'qr.png'){
+                    $zip->addFile($value, $relativeName);
+                }
+            }
+            $zip->close();
+        }
+
+        Storage::delete($fileName);
+
+        return response()->download(storage_path($fileName));
+
     }
 
     public function zipdownload()
