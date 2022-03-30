@@ -512,8 +512,6 @@ class AssociadoController extends Controller
             $zip->close();
         }
 
-        Storage::delete($fileName);
-
         return response()->download(storage_path($fileName));
 
     }
