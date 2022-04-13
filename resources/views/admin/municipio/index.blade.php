@@ -47,6 +47,11 @@
             <tr>
               <th>Id</th>
               <th>Nome</th>
+              <th>Cooperativas</th>
+              <th>Pontos Coleta</th>
+              <th>Bairros</th>
+              <th>Associados</th>
+              <th>Operadores</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -56,11 +61,45 @@
              <tr>
                 <td>{{$municipio->id}}</td>
                 <td>{{$municipio->nome}}</td>
+                <td>{{$municipio->companhias()->count()}}</td>
+                <td>{{$municipio->pontocoletas()->count()}}</td>
+                <td>{{$municipio->bairros()->count()}}</td>
+                {{-- 
+                    Conta o múmero de Associados pelo Município no endereço do Associado.
+                    <td style="background-color: #f7f3f380">{{$municipio->associados()->count()}}</td>
+                --}}
+                
+                {{-- Conta o número de Associados pelo Município onde está localizada aCompanhia do Associado.--}}
+                @php 
+                    $totalAssociados = 0; 
+                    foreach($municipio->companhias as $companhia){
+                        $totalAssociados = $totalAssociados + $companhia->associados()->count();
+                    }
+                @endphp
+                <td style="background-color: #f7f3f380">  {{$totalAssociados}}</td>
+
+                {{--
+                    Exibe a quantidade de Associados em cada Companhia no Município
+                    <td style="background-color: #f7f3f380">
+                        @foreach($municipio->companhias as $companhia)
+                            {{ $companhia->associados()->count() }}
+                        @endforeach
+                    </td>
+                --}}
+
+                <td>{{$municipio->users()->count()}}</td>
                 <td>
                     <a href="{{route('admin.municipio.show', $municipio->id)}}" title="exibir"><i class="fas fa-eye text-warning mr-2"></i></a>
                     <a href="{{route('admin.municipio.edit', $municipio->id)}}" title="editar"><i class="fas fa-edit text-info mr-2"></i></a>
                     <a href="{{route('admin.municipio.relatorioassociadosmunicipio', $municipio->id)}}" target="_blank" title="relatório .pdf"><i class="far fa-file-pdf text-danger mr-5"></i></a>
-                    @can('adm')<a href="" data-toggle="modal" data-target="#formDelete{{$municipio->id}}" title="excluir"><i class="fas fa-trash text-danger mr-2"></i></a>@endcan
+                    @can('adm')
+                        {{-- Não permite a exclusão de um município se o mesmo possuir alguma Companhia, Ponto de Coleta, Bairro ou Associado vinculado ao mesmo --}}
+                        @if(($municipio->companhias()->count() == 0) && ($municipio->pontocoletas()->count() == 0) && 
+                            ($municipio->bairros()->count() == 0) && ($municipio->users()->count() == 0) && 
+                            ($totalAssociados == 0))
+                            <a href="" data-toggle="modal" data-target="#formDelete{{$municipio->id}}" title="excluir"><i class="fas fa-trash text-danger mr-2"></i></a>
+                        @endif
+                    @endcan
 
                     <!-- MODAL FormDelete OBS: O id da modal para cada registro tem que ser diferente, senão ele pega apenas o primeiro registro-->
                     <div class="modal fade" id="formDelete{{$municipio->id}}" tabindex="-1" aria-labelledby="formDeleteLabel" aria-hidden="true">
