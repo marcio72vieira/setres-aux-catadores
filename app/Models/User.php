@@ -8,7 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+/*class User extends Authenticatable implements JWTSubject LINHA ORIGINAL suprimindo a classe Tymon\JWTAuth\Providers\LaravelServiceProvider::class, no arquivo config/app.php*/
+class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
