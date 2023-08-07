@@ -459,12 +459,14 @@
     <!-- Custom scripts for all pages-->
     <script src="{{asset('template/js/sb-admin-2.min.js')}}"></script>
 
+    {{--
     <!-- Page level plugins -->
     <script src="{{asset('template/vendor/chart.js/Chart.min.js')}}"></script>
 
     <!-- Page level custom scripts -->
     <script src="{{asset('template/js/demo/chart-area-demo.js')}}"></script>
     <script src="{{asset('template/js/demo/chart-pie-demo.js')}}"></script>
+    --}}
 
     <!-- inicio add marcio -->
         <!-- Page level plugins -->

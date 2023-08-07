@@ -49,6 +49,166 @@ class AssociadoController extends Controller
     }
 
 
+    ////// Início - Ajax para datatable com paginação dinâmica
+    /*
+        AJAX request.
+        Este método é executado automaticamente pela linha: ajax: "{{route('admin.ajaxgetRestaurantes')}}", que se encontra no script da view: admin.restaurantes.index
+    */
+    public function ajaxgetAssociados(Request $request){
+
+        ## Read value
+        $draw = $request->get('draw');
+        $start = $request->get("start");
+        $rowperpage = $request->get("length"); // Rows display per page
+
+        $columnIndex_arr = $request->get('order');
+        $columnName_arr = $request->get('columns');
+        $order_arr = $request->get('order');
+        $search_arr = $request->get('search');
+
+        $columnIndex = $columnIndex_arr[0]['column']; // Column index
+        $columnName = $columnName_arr[$columnIndex]['data']; // Column name
+        $columnSortOrder = $order_arr[0]['dir']; // asc or desc
+        $searchValue = $search_arr['value']; // Search value
+
+        /***********************************************************************************************************
+        // RECUPERAÇÃO DE REGISTROS FEITO ATRAVÉS DO ELOQUENTE E SEUS RELACIONAMENTOS DIRETOS (TOTALMENTE FUNCIONAL)
+        // Total records
+        $totalRecords = Restaurante::select('count(*) as allcount')->count();
+        $totalRecordswithFilter = Restaurante::select('count(*) as allcount')->where('identificacao', 'like', '%' .$searchValue . '%')->count();
+
+        // Fetch records
+        $restaurantes = Restaurante::orderBy($columnName,$columnSortOrder)
+        ->where('restaurantes.identificacao', 'like', '%' .$searchValue . '%')
+        ->select('restaurantes.*')
+        ->skip($start)
+        ->take($rowperpage)
+        ->get();
+
+        $data_arr = array();
+
+        foreach($restaurantes as $restaurante){
+            // campos a serem exibidos
+            $id = $restaurante->id;
+            $municipio = $restaurante->municipio->nome;
+            $identificacao = $restaurante->identificacao;
+            $responsaveis = "<span style='font-size: 10px; color: blue'>SEDES: </span>".$restaurante->user->nomecompleto." / ". $restaurante->user->telefone." / ".$restaurante->user->email."<br> <span style='font-size: 10px; color: blue'>EMPRESA: </span>".$restaurante->nutricionista->nomecompleto." / ". $restaurante->nutricionista->telefone." / ".$restaurante->nutricionista->email;
+            $compras = $restaurante->qtdcomprasvinc($restaurante->id);
+            $ativo = ($restaurante->ativo == 1) ? "<b><i class='fas fa-check text-success mr-2'></i></b>" : "<b><i class='fas fa-times  text-danger mr-2'></i></b>";
+
+
+            // ações
+            $actionShow = "<a href='".route('admin.restaurante.show', $id)."' title='exibir'><i class='fas fa-eye text-warning mr-2'></i></a>";
+            $actionEdit = "<a href='".route('admin.restaurante.edit', $id)."' title='editar'><i class='fas fa-edit text-info mr-2'></i></a>";
+            // verifica se o restaurante possui compras vinculadas para não possibilitar sua exclusão acidental
+            if($restaurante->qtdcomprasvinc($restaurante->id) == 0){
+                $actionDelete = "<a href='' class='deleterestaurante' data-idrestaurante='".$id."' data-identificacaorestaurante='".$identificacao."'  data-toggle='modal' data-target='#formDelete' title='excluir'><i class='fas fa-trash text-danger mr-2'></i></a>";
+            }else{
+                $actionDelete = "<a title='há compras vinculadas!'><i class='fas fa-trash text-secondary mr-2'></i></a>";
+            }
+
+
+            $actions = $actionShow. " ".$actionEdit. " ".$actionDelete;
+
+            $data_arr[] = array(
+                "id" => $id,
+                "municipio" => $municipio,
+                "identificacao" => $identificacao,
+                "responsaveis" => $responsaveis,
+                "compras" => $compras,
+                "ativo" => $ativo,
+                "actions" => $actions,
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+        );
+
+        echo json_encode($response);
+        exit;
+        ***********************************************************************************************************/
+
+
+        // Total records.
+        // Obs: Como serão realizadas pesquisas apenas nos campos "nome e companhia" penso que não há a necessidade
+        //      de utilizarmos os joins: ->join('users', ....) e  ->join('nutricionistas', ...) mas, em todo caso...!!!,
+        $totalRecords = Associado::select('count(*) as allcount')->count();
+        $totalRecordswithFilter = DB::table('associados')
+            ->join('municipios', 'municipios.id', '=', 'associados.municipio_id')
+            ->join('companhias', 'companhias.id', '=', 'associados.companhia_id')
+            ->join('bairros', 'bairros.id', '=', 'associados.bairro_id')
+            ->join('area_associado', 'area_associado.associado_id', '=', 'associados.id')
+            ->join('areas', 'areas.id', '=', 'area_associado.area_id')
+            ->select('count(*) as allcount')
+            ->where('associados.nome', 'like', '%' .$searchValue . '%')
+            ->orWhere('companhias.nome', 'like', '%' . $searchValue . '%' )
+            ->count();
+
+        // Fetch records (associados)
+        $associados = DB::table('associados')
+        ->join('municipios', 'municipios.id', '=', 'associados.municipio_id')
+        ->join('companhias', 'companhias.id', '=', 'associados.companhia_id')
+        ->join('bairros', 'bairros.id', '=', 'associados.bairro_id')
+        ->join('area_associado', 'area_associado.associado_id', '=', 'associados.id')
+        ->join('areas', 'areas.id', '=', 'area_associado.area_id')
+        ->select('associados.id', 'associados.nome', 'associados.foneum', 'associados.fonedois',
+                 'companhias.nome AS companhia',
+                 'areas.nome AS areas')
+        ->where('associados.nome', 'like', '%' .$searchValue . '%')
+        ->orWhere('companhias.nome', 'like', '%' .$searchValue . '%')
+        ->orderBy($columnName,$columnSortOrder)
+        ->skip($start)
+        ->take($rowperpage)
+        ->get();
+
+
+        $data_arr = array();
+
+        foreach($associados as $associado){
+            // campos a serem exibidos
+            $id = $associado->id;
+            $nome = $associado->nome;
+            $telefones = $associado->foneum . " / " . $associado->fonedois;
+            $companhia = $associado->companhia;
+            $area = $associado->areas;
+            //foreach($associado->areas as $itemarea){ $area = $itemarea->nome;}
+
+            // ações
+            $actionShow = "<a href='".route('admin.associado.show', $id)."' title='exibir'><i class='fas fa-eye text-warning mr-2'></i></a>";
+            $actionEdit = "<a href='".route('admin.associado.edit', $id)."' title='editar'><i class='fas fa-edit text-info mr-2'></i></a>";
+            $actionDelete = "<a href='' class='deleteassociado' data-idassociado='".$id."' data-nomeassociado='".$nome."'  data-toggle='modal' data-target='#formDelete' title='excluir'><i class='fas fa-trash text-danger mr-2'></i></a>";
+
+            $actions = $actionShow. " ".$actionEdit. " ".$actionDelete;
+
+            $data_arr[] = array(
+                "id" => $id,
+                "nome" => $nome,
+                "telefones" => $telefones,
+                "companhia" => $companhia,
+                "area" => $area,
+                "actions" => $actions,
+            );
+        }
+
+        $response = array(
+            "draw" => intval($draw),
+            "iTotalRecords" => $totalRecords,
+            "iTotalDisplayRecords" => $totalRecordswithFilter,
+            "aaData" => $data_arr
+        );
+
+        echo json_encode($response);
+        exit;
+    }
+    ////// Fim - Ajax para datatable com paginação dinâmica
+
+
+
+
     public function create()
     {
         // Se ADMINISTRADOR, visualiza todos os registros, caso contrário, OPERADOR, só os do seu município

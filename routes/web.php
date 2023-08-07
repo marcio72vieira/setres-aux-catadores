@@ -37,6 +37,7 @@ Route::prefix('admin')->name('admin.')->group(function() {
     Route::resource('municipio', MunicipioController::class)->middleware(['auth']);
     Route::resource('companhia', CompanhiaController::class)->middleware(['auth']);
     Route::resource('associado', AssociadoController::class)->middleware(['auth']);
+    Route::get('ajaxgetAssociados',[AssociadoController::class,'ajaxgetAssociados'])->name('ajaxgetAssociados');    // Rota Ajax para datatable com paginação dinâmica
     Route::resource('pontocoleta', PontocoletaController::class)->middleware(['auth']);
     Route::resource('user', UserController::class)->middleware(['auth']);
 
