@@ -107,7 +107,7 @@
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-                                <form id="formdelete action=""" method="POST" style="display: inline">
+                                <form id="formdelete" action="" method="POST" style="display: inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger" role="button"> Confirmar</button>
@@ -151,7 +151,8 @@
                 language: {
                     "lengthMenu": "Mostrar _MENU_ registos",
                     "search": "Procurar:",
-                    "info": "Mostrando os registros _START_ a _END_ num total de _TOTAL_",
+                    /*"info": "Mostrando os registros _START_ a _END_ num total de _TOTAL_",*/
+                    "info": "Mostrando os registros de _START_ a _END_ num total de _MAX_",
                     "infoFiltered":   "(Filtrados _TOTAL_ de um total de _MAX_ registros)",
                     "paginate": {
                         "first": "Primeiro",
@@ -174,7 +175,7 @@
             // com o recurso de substituição: route = route.replace('id', idassociado);
             $('#dataTableAssociado').on('click', '.deleteassociado', function(event){
                 var idAssociado = $(this).data('idassociado');
-                var nomeAssociado = $(this).data('nomeAssociado');
+                var nomeAssociado = $(this).data('nomeassociado');
                 var route = "{{route('admin.associado.destroy', 'id')}}";
                     route = route.replace('id', idAssociado);
 

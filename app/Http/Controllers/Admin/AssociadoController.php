@@ -136,6 +136,10 @@ class AssociadoController extends Controller
         // Total records.
         // Obs: Como serão realizadas pesquisas apenas nos campos "nome e companhia" penso que não há a necessidade
         //      de utilizarmos os joins: ->join('users', ....) e  ->join('nutricionistas', ...) mas, em todo caso...!!!,
+        // Obs: https://www.pakainfo.com/group_concat-in-laravel-eloquent-raw/
+        // Obs: Substituir a configuração de conexão do mysql no arquivo config/database a propriedade: 'strict' => true para 'strict' => false, para o "group by" funcionar.
+        // Obs: DB::raw('GROUP_CONCAT(areas.nome SEPARATOR ", ") as areasDEatuacao')) juntamente com groupBy('associado.id), Agrupa em uma única coluna, todas as ocorrências das
+        //      áreas de atuação de um associado, separadas por uma vírgula.
         $totalRecords = Associado::select('count(*) as allcount')->count();
         $totalRecordswithFilter = DB::table('associados')
             ->join('municipios', 'municipios.id', '=', 'associados.municipio_id')
@@ -143,7 +147,7 @@ class AssociadoController extends Controller
             ->join('bairros', 'bairros.id', '=', 'associados.bairro_id')
             ->join('area_associado', 'area_associado.associado_id', '=', 'associados.id')
             ->join('areas', 'areas.id', '=', 'area_associado.area_id')
-            ->select('count(*) as allcount')
+            //->select('count(*) as allcount')
             ->where('associados.nome', 'like', '%' .$searchValue . '%')
             ->orWhere('companhias.nome', 'like', '%' . $searchValue . '%' )
             ->count();
@@ -157,7 +161,8 @@ class AssociadoController extends Controller
         ->join('areas', 'areas.id', '=', 'area_associado.area_id')
         ->select('associados.id', 'associados.nome', 'associados.foneum', 'associados.fonedois',
                  'companhias.nome AS companhia',
-                 'areas.nome AS areas')
+                 'areas.nome AS areas', DB::raw('GROUP_CONCAT(areas.nome SEPARATOR ", ") as areasDEatuacao'))
+        ->groupBy('associados.id')
         ->where('associados.nome', 'like', '%' .$searchValue . '%')
         ->orWhere('companhias.nome', 'like', '%' .$searchValue . '%')
         ->orderBy($columnName,$columnSortOrder)
@@ -174,15 +179,18 @@ class AssociadoController extends Controller
             $nome = $associado->nome;
             $telefones = $associado->foneum . " / " . $associado->fonedois;
             $companhia = $associado->companhia;
-            $area = $associado->areas;
-            //foreach($associado->areas as $itemarea){ $area = $itemarea->nome;}
+            $area = $associado->areasDEatuacao;
+            // $area = $associado->areas; Utilizar este, sem a função , DB::raw('GROUP_CONCAT(areas.nome SEPARATOR ", ") as areasDEatuacao')) ->groupBy('associados.id')
+
 
             // ações
             $actionShow = "<a href='".route('admin.associado.show', $id)."' title='exibir'><i class='fas fa-eye text-warning mr-2'></i></a>";
             $actionEdit = "<a href='".route('admin.associado.edit', $id)."' title='editar'><i class='fas fa-edit text-info mr-2'></i></a>";
+            $actionRetrato = "<a href='".route('admin.associado.retrato', $id)."' title='foto'><i class='fas fa-portrait text-primary mr-2'></i></a>";
+            $actionFicha = "<a href='".route('admin.associado.ficha', $id)."' title='ficha' target='_blank'><i class='fas fa-file-pdf text-danger mr-2'></i></a>";
             $actionDelete = "<a href='' class='deleteassociado' data-idassociado='".$id."' data-nomeassociado='".$nome."'  data-toggle='modal' data-target='#formDelete' title='excluir'><i class='fas fa-trash text-danger mr-2'></i></a>";
 
-            $actions = $actionShow. " ".$actionEdit. " ".$actionDelete;
+            $actions = $actionShow. " ".$actionEdit. " ".$actionRetrato. " ".$actionFicha. " ".$actionDelete;
 
             $data_arr[] = array(
                 "id" => $id,
