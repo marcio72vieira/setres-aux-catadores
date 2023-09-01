@@ -149,6 +149,7 @@ class AssociadoController extends Controller
             ->join('areas', 'areas.id', '=', 'area_associado.area_id')
             //->select('count(*) as allcount')
             ->where('associados.nome', 'like', '%' .$searchValue . '%')
+            ->orWhere('associados.tipo', 'like', '%' . $searchValue . '%' )
             ->orWhere('companhias.nome', 'like', '%' . $searchValue . '%' )
             ->count();
 
@@ -159,11 +160,12 @@ class AssociadoController extends Controller
         ->join('bairros', 'bairros.id', '=', 'associados.bairro_id')
         ->join('area_associado', 'area_associado.associado_id', '=', 'associados.id')
         ->join('areas', 'areas.id', '=', 'area_associado.area_id')
-        ->select('associados.id', 'associados.nome', 'associados.foneum', 'associados.fonedois',
+        ->select('associados.id', 'associados.nome', 'associados.foneum', 'associados.fonedois', 'associados.tipo',
                  'companhias.nome AS companhia',
                  'areas.nome AS areas', DB::raw('GROUP_CONCAT(areas.nome SEPARATOR ", ") as areasDEatuacao'))
         ->groupBy('associados.id')
         ->where('associados.nome', 'like', '%' .$searchValue . '%')
+        ->orWhere('associados.tipo', 'like', '%' .$searchValue . '%')
         ->orWhere('companhias.nome', 'like', '%' .$searchValue . '%')
         ->orderBy($columnName,$columnSortOrder)
         ->skip($start)
@@ -178,6 +180,7 @@ class AssociadoController extends Controller
             $id = $associado->id;
             $nome = $associado->nome;
             $telefones = $associado->foneum . " / " . $associado->fonedois;
+            $tipo = $associado->tipo;
             $companhia = $associado->companhia;
             $area = $associado->areasDEatuacao;
             // $area = $associado->areas; Utilizar este, sem a função , DB::raw('GROUP_CONCAT(areas.nome SEPARATOR ", ") as areasDEatuacao')) ->groupBy('associados.id')
@@ -196,6 +199,7 @@ class AssociadoController extends Controller
                 "id" => $id,
                 "nome" => $nome,
                 "telefones" => $telefones,
+                "tipo" => $tipo,
                 "companhia" => $companhia,
                 "area" => $area,
                 "actions" => $actions,

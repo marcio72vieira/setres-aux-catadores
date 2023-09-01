@@ -130,9 +130,30 @@
                                 </div>
                             </div>
 
+
                             <div class="row">
+                                {{-- tipo --}}
+                                <div class="col-lg-2">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="tipo">Tipo<span class="small text-danger">*</span></label>
+                                        <select name="tipo" id="tipo" class="form-control" required>
+                                            <option value="" selected disabled>Escolha ...</option>
+                                            <option value="associado" {{old('tipo') == 'branca' ? 'selected' : ''}}>Associado</option>
+                                            <option value="cooperado" {{old('tipo') == 'parda' ? 'selected' : ''}}>Cooperado</option>
+                                            <option value="avulso" {{old('tipo') == 'preta' ? 'selected' : ''}}>Avulso</option>
+                                            <option value="informal" {{old('tipo') == 'indigena' ? 'selected' : ''}}>Informal</option>
+                                            <option value="indefinido" {{old('tipo') == 'amarela' ? 'selected' : ''}}>Indefinido</option>
+                                        </select>
+                                        @error('tipo')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+
+
                                 {{-- companhia_id --}}
-                                <div class="col-lg-7">
+                                <div class="col-lg-5">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="companhia_id">Companhia / Associação<span class="small text-danger">*</span></label>
                                         <select name="companhia_id" id="companhia_id" class="form-control" required>

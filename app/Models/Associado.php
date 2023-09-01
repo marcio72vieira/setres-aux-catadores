@@ -29,6 +29,7 @@ class Associado extends Model
         'zona',
         'foneum',
         'fonedois',
+        'tipo',
         'companhia_id',
         'imagem'
     ];
@@ -142,6 +143,7 @@ class Associado extends Model
                         'associados.zona',
                         'associados.foneum',
                         'associados.fonedois',
+                        'associados.tipo',
                         'companhias.nome AS nomecompanhia',
                         'areas.nome AS nomearea',
                         'associados.imagem'

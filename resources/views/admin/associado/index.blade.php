@@ -73,6 +73,7 @@
                             <th>Id</th>
                             <th>Nome</th>
                             <th>Telefone(s)</th>
+                            <th>Tipo</th>
                             <th>Companhia</th>
                             <th>Áreas de atuação</th>
                             <th style="width: 165px;">Ação</th>
@@ -83,6 +84,7 @@
                             <th>Id</th>
                             <th>Nome</th>
                             <th>Telefone(s)</th>
+                            <th>Tipo</th>
                             <th>Companhia</th>
                             <th>Áreas de atuação</th>
                             <th style="width: 165px;">Ação</th>
@@ -144,6 +146,7 @@
                     { data: 'id' },
                     { data: 'nome' },
                     { data: 'telefones' },
+                    { data: 'tipo' },
                     { data: 'companhia' },
                     { data: 'area' },
                     { data: 'actions'}
@@ -152,7 +155,8 @@
                     "lengthMenu": "Mostrar _MENU_ registos",
                     "search": "Procurar:",
                     /*"info": "Mostrando os registros _START_ a _END_ num total de _TOTAL_",*/
-                    "info": "Mostrando os registros de _START_ a _END_ num total de _MAX_",
+                    /*"info": "Mostrando os registros de _START_ a _END_ num total de _MAX_",*/
+                    "info": "Mostrando os registros de _START_ a _END_ num total de _TOTAL_",
                     "infoFiltered":   "(Filtrados _TOTAL_ de um total de _MAX_ registros)",
                     "paginate": {
                         "first": "Primeiro",

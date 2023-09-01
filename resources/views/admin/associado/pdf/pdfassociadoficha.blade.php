@@ -25,12 +25,12 @@
     <div>
         <table style="width: 627px; border-collapse: collapse;">
             <tr>
-                <td style="width: 477px;" class="label-ficha">NOME</td>
+                <td style="width: 477px;" class="label-ficha">NOME (tipo)</td>
                 <td style="width: 100px;" class="label-ficha">DATA DE NASCIMENTO</td>
                 <td style="width: 50px;" class="label-ficha">SEXO</td>
             </tr>
             <tr>
-                <td style="width: 477px;" class="dados-ficha">{{$associado->nome}}</td>
+                <td style="width: 477px;" class="dados-ficha">{{$associado->nome}} ({{$associado->tipo}}) </td>
                 <td style="width: 100px;" class="dados-ficha">{{mrc_turn_data($associado->nascimento)}}</td>
                 <td style="width: 50px;" class="dados-ficha">{{Str::upper($associado->sexo)}}</td>
             </tr>
