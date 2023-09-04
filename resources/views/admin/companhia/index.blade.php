@@ -50,6 +50,7 @@
               <th>Município</th>
               <th>Pontos de Coletas</th>
               <th>Resíduos</th>
+              <th>Associados</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -62,11 +63,17 @@
                 <td>{{$companhia->municipio->nome}}</td>
                 <td>@foreach($companhia->pontocoletas as $pontocoleta) <small style="font-size: 9px; font-weight:bold">{{ $pontocoleta->nome}} </small>;@endforeach</td>
                 <td>@foreach($companhia->residuos as $residuo) <small style="font-size: 9px; font-weight:bold">{{ $residuo->nome}} </small>;@endforeach</td>
+                <td>{{ $companhia->associados()->count() }}</td>
                 <td>
                     <a href="{{route('admin.companhia.show', $companhia->id)}}" title="exibir"><i class="fas fa-eye text-warning mr-2"></i></a>
                     <a href="{{route('admin.companhia.edit', $companhia->id)}}" title="editar"><i class="fas fa-edit text-info mr-2"></i></a>
                     <a href="{{route('admin.companhia.ficha', $companhia->id)}}" title="ficha" target="_blank"><i class="far fa-file-pdf text-danger mr-2"></i></a>
-                    @can('adm')<a href="" data-toggle="modal" data-target="#formDelete{{$companhia->id}}" title="excluir"><i class="fas fa-trash text-danger mr-2"></i></a>@endcan
+                    @can('adm')
+                        {{-- Não permite a exclusão de uma companhia se a mesma possuir algum Associado ou Ponto de Coleta vinculado à mesma --}}
+                        @if(($companhia->associados()->count() == 0) && ($companhia->pontocoletas()->count() == 0))
+                            <a href="" data-toggle="modal" data-target="#formDelete{{$companhia->id}}" title="excluir"><i class="fas fa-trash text-danger mr-2"></i></a>
+                        @endif
+                    @endcan
 
                     <!-- MODAL FormDelete OBS: O id da modal para cada registro tem que ser diferente, senão ele pega apenas o primeiro registro-->
                     <div class="modal fade" id="formDelete{{$companhia->id}}" tabindex="-1" aria-labelledby="formDeleteLabel" aria-hidden="true">

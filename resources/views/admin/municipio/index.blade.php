@@ -64,14 +64,14 @@
                 <td>{{$municipio->companhias()->count()}}</td>
                 <td>{{$municipio->pontocoletas()->count()}}</td>
                 <td>{{$municipio->bairros()->count()}}</td>
-                {{-- 
+                {{--
                     Conta o múmero de Associados pelo Município no endereço do Associado.
                     <td style="background-color: #f7f3f380">{{$municipio->associados()->count()}}</td>
                 --}}
-                
+
                 {{-- Conta o número de Associados pelo Município onde está localizada aCompanhia do Associado.--}}
-                @php 
-                    $totalAssociados = 0; 
+                @php
+                    $totalAssociados = 0;
                     foreach($municipio->companhias as $companhia){
                         $totalAssociados = $totalAssociados + $companhia->associados()->count();
                     }
@@ -91,11 +91,11 @@
                 <td>
                     <a href="{{route('admin.municipio.show', $municipio->id)}}" title="exibir"><i class="fas fa-eye text-warning mr-2"></i></a>
                     <a href="{{route('admin.municipio.edit', $municipio->id)}}" title="editar"><i class="fas fa-edit text-info mr-2"></i></a>
-                    <a href="{{route('admin.municipio.relatorioassociadosmunicipio', $municipio->id)}}" target="_blank" title="relatório .pdf"><i class="far fa-file-pdf text-danger mr-5"></i></a>
+                    <a href="{{route('admin.municipio.relatorioassociadosmunicipio', $municipio->id)}}" target="_blank" title="relatório .pdf"><i class="far fa-file-pdf text-danger mr-2"></i></a>
                     @can('adm')
                         {{-- Não permite a exclusão de um município se o mesmo possuir alguma Companhia, Ponto de Coleta, Bairro ou Associado vinculado ao mesmo --}}
-                        @if(($municipio->companhias()->count() == 0) && ($municipio->pontocoletas()->count() == 0) && 
-                            ($municipio->bairros()->count() == 0) && ($municipio->users()->count() == 0) && 
+                        @if(($municipio->companhias()->count() == 0) && ($municipio->pontocoletas()->count() == 0) &&
+                            ($municipio->bairros()->count() == 0) && ($municipio->users()->count() == 0) &&
                             ($totalAssociados == 0))
                             <a href="" data-toggle="modal" data-target="#formDelete{{$municipio->id}}" title="excluir"><i class="fas fa-trash text-danger mr-2"></i></a>
                         @endif

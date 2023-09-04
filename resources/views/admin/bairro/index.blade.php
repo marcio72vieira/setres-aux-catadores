@@ -48,6 +48,9 @@
               <th>Id</th>
               <th>Nome</th>
               <th>Município</th>
+              <th>Companhias</th>
+              <th>Ponto Coleta</th>
+              <th>Associados</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -58,10 +61,18 @@
                 <td>{{$bairro->id}}</td>
                 <td>{{$bairro->nome}}</td>
                 <td>{{$bairro->municipio->nome}}</td>
+                <td>{{$bairro->companhias()->count()}}</td>
+                <td>{{$bairro->pontocoletas()->count()}}</td>
+                <td>{{$bairro->associados()->count()}}</td>
                 <td>
                     <a href="{{route('admin.bairro.show', $bairro->id)}}" title="exibir"><i class="fas fa-eye text-warning mr-2"></i></a>
                     <a href="{{route('admin.bairro.edit', $bairro->id)}}" title="editar"><i class="fas fa-edit text-info mr-2"></i></a>
-                    @can('adm')<a href="" data-toggle="modal" data-target="#formDelete{{$bairro->id}}" title="excluir"><i class="fas fa-trash text-danger mr-2"></i></a>@endcan
+                    @can('adm')
+                        {{-- Não permite a exclusão de um bairro se o mesmo possuir algum Associado, Ponto de Coleta ou Companhia vinculado ao mesmo --}}
+                        @if(($bairro->associados()->count() == 0) && ($bairro->companhias()->count() == 0) && ($bairro->pontocoletas()->count() == 0))
+                            <a href="" data-toggle="modal" data-target="#formDelete{{$bairro->id}}" title="excluir"><i class="fas fa-trash text-danger mr-2"></i></a>
+                        @endif
+                    @endcan
 
                     <!-- MODAL FormDelete OBS: O id da modal para cada registro tem que ser diferente, senão ele pega apenas o primeiro registro-->
                     <div class="modal fade" id="formDelete{{$bairro->id}}" tabindex="-1" aria-labelledby="formDeleteLabel" aria-hidden="true">
