@@ -145,8 +145,8 @@ class AssociadoController extends Controller
             ->join('municipios', 'municipios.id', '=', 'associados.municipio_id')
             ->join('companhias', 'companhias.id', '=', 'associados.companhia_id')
             ->join('bairros', 'bairros.id', '=', 'associados.bairro_id')
-            ->join('area_associado', 'area_associado.associado_id', '=', 'associados.id')
-            ->join('areas', 'areas.id', '=', 'area_associado.area_id')
+            //->join('area_associado', 'area_associado.associado_id', '=', 'associados.id') // Não há a necessidade, pois não se relaciona com a tabela associados. Este join, retorna a contagem de registros e sua paginação errados.
+            //->join('areas', 'areas.id', '=', 'area_associado.area_id')                    // Não há a necessidade, pois não se relaciona com a tabela associados. Este join, retorna a contagem de registros e sua paginação errados.
             //->select('count(*) as allcount')
             ->where('associados.nome', 'like', '%' .$searchValue . '%')
             ->orWhere('associados.tipo', 'like', '%' . $searchValue . '%' )
