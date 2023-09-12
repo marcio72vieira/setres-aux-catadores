@@ -27,6 +27,7 @@ use chillerlan\QRCode\QRCode;
 use chillerlan\QRCode\QROptions;
 
 use Illuminate\Support\Collection;
+use Illuminate\Database\Query\JoinClause;
 
 use File;
 use ZipArchive;
@@ -156,7 +157,11 @@ class AssociadoController extends Controller
         // Fetch records (associados)
         $associados = DB::table('associados')
         ->join('municipios', 'municipios.id', '=', 'associados.municipio_id')
-        ->join('companhias', 'companhias.id', '=', 'associados.companhia_id')
+        //->join('companhias', 'companhias.id', '=', 'associados.companhia_id')
+         ->join('companhias', function (JoinClause $join) {
+             $join->on('companhias.id', '=', 'associados.companhia_id')
+             ->where('associados.companhia_id', '=', 13);
+         })
         ->join('bairros', 'bairros.id', '=', 'associados.bairro_id')
         ->join('area_associado', 'area_associado.associado_id', '=', 'associados.id')
         ->join('areas', 'areas.id', '=', 'area_associado.area_id')
