@@ -38,15 +38,18 @@ class AssociadoController extends Controller
 
     public function index()
     {
+        /*
+        // Com a chamada do método: ajaxgetAssociados(Request $request) abaixo, não há a necessidade de passar nenhum parâmetro (compact('associados')) para a view, apenas a sua renderização.
         // Se ADMINISTRADOR, visualiza todos os ASSOCIADOS, caso contrário, OPERADOR, só os do seu município
         if(Auth::user()->perfil == 'adm'){
             $associados = Associado::orderBy('nome', 'ASC')->get();
         } else {
             $associados = Associado::where('municipio_id', '=', Auth::user()->municipio_id)->orderBy('nome', 'ASC')->get();
         }
-
         return view('admin.associado.index', compact('associados'));
+        */
 
+        return view('admin.associado.index');
     }
 
 
@@ -141,41 +144,80 @@ class AssociadoController extends Controller
         // Obs: Substituir a configuração de conexão do mysql no arquivo config/database a propriedade: 'strict' => true para 'strict' => false, para o "group by" funcionar.
         // Obs: DB::raw('GROUP_CONCAT(areas.nome SEPARATOR ", ") as areasDEatuacao')) juntamente com groupBy('associado.id), Agrupa em uma única coluna, todas as ocorrências das
         //      áreas de atuação de um associado, separadas por uma vírgula.
-        $totalRecords = Associado::select('count(*) as allcount')->count();
-        $totalRecordswithFilter = DB::table('associados')
-            ->join('municipios', 'municipios.id', '=', 'associados.municipio_id')
-            ->join('companhias', 'companhias.id', '=', 'associados.companhia_id')
-            ->join('bairros', 'bairros.id', '=', 'associados.bairro_id')
-            //->join('area_associado', 'area_associado.associado_id', '=', 'associados.id') // Não há a necessidade, pois não se relaciona com a tabela associados. Este join, retorna a contagem de registros e sua paginação errados.
-            //->join('areas', 'areas.id', '=', 'area_associado.area_id')                    // Não há a necessidade, pois não se relaciona com a tabela associados. Este join, retorna a contagem de registros e sua paginação errados.
-            //->select('count(*) as allcount')
-            ->where('associados.nome', 'like', '%' .$searchValue . '%')
-            ->orWhere('associados.tipo', 'like', '%' . $searchValue . '%' )
-            ->orWhere('companhias.nome', 'like', '%' . $searchValue . '%' )
-            ->count();
+        // Obs: Ver documenteção do Laravel o item: Advanced Join Clauses.
+        // Se o usuário é ADM ver todos os registros de Associados, caso contrário vê apenas os registros dos Associados, ligados às companhias cadastradas pelo usuário Operador, que
+        // naturalmente, só pode cadastrar Companhias do município do quel o mesmo faz parte, exemplo, Um usuário operador de São Jose de Ribamar, só pode cadastrar Companhias de São José
+        // de Ribamar e naturalmente, só poederá ver os Associados vinculados à estas Companhias.
+        // ACESSANDO TODOS OS REGISTROS DE ASSOCIADOS
+        if(Auth::user()->perfil == 'adm'){
+            $totalRecords = Associado::select('count(*) as allcount')->count();
+            $totalRecordswithFilter = DB::table('associados')
+                ->join('municipios', 'municipios.id', '=', 'associados.municipio_id')
+                ->join('companhias', 'companhias.id', '=', 'associados.companhia_id')
+                ->join('bairros', 'bairros.id', '=', 'associados.bairro_id')
+                ->where('associados.nome', 'like', '%' .$searchValue . '%')
+                ->orWhere('associados.tipo', 'like', '%' . $searchValue . '%' )
+                ->orWhere('companhias.nome', 'like', '%' . $searchValue . '%' )
+                ->count();
 
-        // Fetch records (associados)
-        $associados = DB::table('associados')
-        ->join('municipios', 'municipios.id', '=', 'associados.municipio_id')
-        //->join('companhias', 'companhias.id', '=', 'associados.companhia_id')
-         ->join('companhias', function (JoinClause $join) {
-             $join->on('companhias.id', '=', 'associados.companhia_id')
-             ->where('associados.companhia_id', '=', 13);
-         })
-        ->join('bairros', 'bairros.id', '=', 'associados.bairro_id')
-        ->join('area_associado', 'area_associado.associado_id', '=', 'associados.id')
-        ->join('areas', 'areas.id', '=', 'area_associado.area_id')
-        ->select('associados.id', 'associados.nome', 'associados.foneum', 'associados.fonedois', 'associados.tipo',
-                 'companhias.nome AS companhia',
-                 'areas.nome AS areas', DB::raw('GROUP_CONCAT(areas.nome SEPARATOR ", ") as areasDEatuacao'))
-        ->groupBy('associados.id')
-        ->where('associados.nome', 'like', '%' .$searchValue . '%')
-        ->orWhere('associados.tipo', 'like', '%' .$searchValue . '%')
-        ->orWhere('companhias.nome', 'like', '%' .$searchValue . '%')
-        ->orderBy($columnName,$columnSortOrder)
-        ->skip($start)
-        ->take($rowperpage)
-        ->get();
+            // Fetch records (associados)
+            $associados = DB::table('associados')
+                ->join('municipios', 'municipios.id', '=', 'associados.municipio_id')
+                ->join('companhias', 'companhias.id', '=', 'associados.companhia_id')
+                ->join('bairros', 'bairros.id', '=', 'associados.bairro_id')
+                ->join('area_associado', 'area_associado.associado_id', '=', 'associados.id')
+                ->join('areas', 'areas.id', '=', 'area_associado.area_id')
+                ->select('associados.id', 'associados.nome', 'associados.foneum', 'associados.fonedois', 'associados.tipo',
+                    'companhias.nome AS companhia',
+                    'areas.nome AS areas', DB::raw('GROUP_CONCAT(areas.nome SEPARATOR ", ") as areasDEatuacao'))
+                ->groupBy('associados.id')
+                ->where('associados.nome', 'like', '%' .$searchValue . '%')
+                ->orWhere('associados.tipo', 'like', '%' .$searchValue . '%')
+                ->orWhere('companhias.nome', 'like', '%' .$searchValue . '%')
+                ->orderBy($columnName,$columnSortOrder)
+                ->skip($start)
+                ->take($rowperpage)
+                ->get();
+        // ACESSANDO SÓ OS REGISTROS DE ASSOCIADOS DAS COMPANHIAS CADASTRADAS PELO USUÁRIO LOGADO COMO OPERADOR
+        } else {
+            $totalRecords = Associado::select('count(*) as allcount')->count();
+            $totalRecordswithFilter = DB::table('associados')
+                ->join('municipios', 'municipios.id', '=', 'associados.municipio_id')
+                ->join('companhias', function (JoinClause $join) {
+                    $join->on('companhias.id', '=', 'associados.companhia_id')
+                    ->where('companhias.municipio_id', '=', Auth::user()->municipio_id);
+                })
+                ->join('bairros', 'bairros.id', '=', 'associados.bairro_id')
+                //->join('area_associado', 'area_associado.associado_id', '=', 'associados.id') // Não há a necessidade, pois não se relaciona com a tabela associados. Este join, retorna a contagem de registros e sua paginação errados.
+                //->join('areas', 'areas.id', '=', 'area_associado.area_id')                    // Não há a necessidade, pois não se relaciona com a tabela associados. Este join, retorna a contagem de registros e sua paginação errados.
+                //->select('count(*) as allcount')
+                ->where('associados.nome', 'like', '%' .$searchValue . '%')
+                ->orWhere('associados.tipo', 'like', '%' . $searchValue . '%' )
+                ->orWhere('companhias.nome', 'like', '%' . $searchValue . '%' )
+                ->count();
+
+            // Fetch records (associados)
+            $associados = DB::table('associados')
+                ->join('municipios', 'municipios.id', '=', 'associados.municipio_id')
+                ->join('companhias', function (JoinClause $join) {
+                    $join->on('companhias.id', '=', 'associados.companhia_id') //->where('associados.companhia_id', '=', 13); //->where('associados.municipio_id', '=', Auth::user()->municipio_id);
+                    ->where('companhias.municipio_id', '=', Auth::user()->municipio_id);
+                })
+                ->join('bairros', 'bairros.id', '=', 'associados.bairro_id')
+                ->join('area_associado', 'area_associado.associado_id', '=', 'associados.id')
+                ->join('areas', 'areas.id', '=', 'area_associado.area_id')
+                ->select('associados.id', 'associados.nome', 'associados.foneum', 'associados.fonedois', 'associados.tipo',
+                    'companhias.nome AS companhia',
+                    'areas.nome AS areas', DB::raw('GROUP_CONCAT(areas.nome SEPARATOR ", ") as areasDEatuacao'))
+                ->groupBy('associados.id')
+                ->where('associados.nome', 'like', '%' .$searchValue . '%')
+                ->orWhere('associados.tipo', 'like', '%' .$searchValue . '%')
+                ->orWhere('companhias.nome', 'like', '%' .$searchValue . '%')
+                ->orderBy($columnName,$columnSortOrder)
+                ->skip($start)
+                ->take($rowperpage)
+                ->get();
+        }
 
 
         $data_arr = array();
