@@ -30,6 +30,8 @@ class Associado extends Model
         'foneum',
         'fonedois',
         'tipo',
+        'carteiraemitida',
+        'carteiravalidade',
         'companhia_id',
         'imagem'
     ];

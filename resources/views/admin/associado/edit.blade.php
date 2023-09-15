@@ -312,6 +312,40 @@
                                         <input type="text" id="fonedois" class="form-control" name="fonedois"  placeholder="(99) 9999-9999" value="{{old('fonedois', $associado->fonedois)}}">
                                     </div>
                                 </div>
+
+                                {{-- carteiraemitida --}}
+                                <div class="col-lg-3">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="carteiraemitida">Carteira Emitida ? <span class="small text-danger">*</span></label>
+                                        <div style="margin-top: 5px">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="carteiraemitida" id="carteiraemitidasim" value="1" {{old('carteiraemitida', $associado->carteiraemitida) == '1' ? 'checked' : ''}} required>
+                                                <label class="form-check-label" for="carteiraemitidasim">Sim</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="carteiraemitida" id="carteiraemitidanao" value="0" {{old('carteiraemitida', $associado->carteiraemitida) == '0' ? 'checked' : ''}} required>
+                                                <label class="form-check-label" for="carteiraemitidanao">Não</label>
+                                            </div>
+                                            @error('carteiraemitida')
+                                                <small style="color: red">{{$message}}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                {{-- carteiravalidade --}}
+                                <div class="col-lg-2">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="carteiravalidade">Data de Validade<span class="small text-danger">*</span></label>
+                                        <input type="date" id="carteiravalidade" class="form-control" name="carteiravalidade" value="{{old('carteiravalidade', $associado->carteiravalidade)}}" required>
+                                        @error('carteiravalidade')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
 

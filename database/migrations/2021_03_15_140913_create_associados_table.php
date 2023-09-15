@@ -34,6 +34,8 @@ class CreateAssociadosTable extends Migration
             $table->string('fonedois')->nullable();
             $table->longText('imagem')->nullable();
             $table->string('tipo')->default('indefinido');
+            $table->boolean('carteiraemitida')->default(0);
+            $table->date('carteiravalidade')->nullable();
 
             $table->foreignId('companhia_id')->constrained()->onDelete('cascade');
             $table->foreignId('bairro_id')->constrained()->onDelete('cascade');

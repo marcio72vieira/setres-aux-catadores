@@ -257,23 +257,63 @@
                                 </div>
 
                                 {{-- zona --}}
-                                <div class="col-lg-5">
+                                <div class="col-lg-1">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="zona" style="margin-top: 5px">Zona</label>
                                         <br>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="zona" id="zonaurbana" value="urbana" {{old('zona', $associado->zona) == 'urbana' ? 'checked' : ''}} disabled>
-                                            <label class="form-check-label" for="zonaurbana">Urbana</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="zona" id="zonarural" value="rural" {{old('zona', $associado->zona) == 'rural' ? 'checked' : ''}} disabled>
-                                            <label class="form-check-label" for="zonarural">Rural</label>
-                                        </div>
+                                        @if($associado->zona == 'urbana')
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="zona" id="zonaurbana" value="urbana" {{old('zona', $associado->zona) == 'urbana' ? 'checked' : ''}} disabled>
+                                                <label class="form-check-label" for="zonaurbana">Urbana</label>
+                                            </div>
+                                        @else
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="zona" id="zonarural" value="rural" {{old('zona', $associado->zona) == 'rural' ? 'checked' : ''}} disabled>
+                                                <label class="form-check-label" for="zonarural">Rural</label>
+                                            </div>
+                                        @endif
                                         @error('zona')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
                                     </div>
                                 </div>
+
+
+                                {{-- carteiraemitida --}}
+                                <div class="col-lg-2">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="carteiraemitida">Carteira Emitida ?</label>
+                                        <div style="margin-top: 5px">
+                                            @if($associado->carteiraemitida == 1)
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="carteiraemitida" id="carteiraemitidasim" value="1" {{old('carteiraemitida', $associado->carteiraemitida) == '1' ? 'checked' : ''}} disabled>
+                                                    <label class="form-check-label" for="carteiraemitidasim">Sim</label>
+                                                </div>
+                                            @else
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="carteiraemitida" id="carteiraemitidanao" value="0" {{old('carteiraemitida', $associado->carteiraemitida) == '0' ? 'checked' : ''}} disabled>
+                                                    <label class="form-check-label" for="carteiraemitidanao">Não</label>
+                                                </div>
+                                            @endif
+                                            @error('carteiraemitida')
+                                                <small style="color: red">{{$message}}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                {{-- carteiravalidade --}}
+                                <div class="col-lg-2">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="carteiravalidade">Data de Validade<span class="small text-danger">*</span></label>
+                                        <input type="date" id="carteiravalidade" class="form-control" name="carteiravalidade" value="{{old('carteiravalidade', $associado->carteiravalidade)}}" readonly>
+                                        @error('carteiravalidade')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
+
                             </div>
 
                             <div class="row">
@@ -297,16 +337,15 @@
                                     <h6><strong>Tempo de associado: {{mrc_calc_time($associado->filiacao)}}</strong></h6>
                                 </div>
 
-                                <div class="col-lg-2" style="text-align: center">
+                                <div class="offset-lg-1 col-lg-2" style="margin-top: 15px">
                                     {{-- <img src="{{$associado->imagem}}" width="200" height="150"> modo anterior com dados binários--}}
                                     <img src="{{ asset('storage/'.$associado->imagem) }}" width="200">
                                 </div>
 
-                                <div class="col-lg-3" style="text-align: center">
+                                <div class="col-lg-2" style="text-align: right">
                                     {{-- @php $imgqrcode = str_replace('coletor', 'coletorQR', $associado->imagem) @endphp --}}
                                     <img src="{{ asset('storage/'.$associado->imagemqrcode) }}" width="200">
                                 </div>
-
                             </div>
 
                         </div>
