@@ -20,7 +20,7 @@
 
                 <tr @if($loop->even) style="background-color: #e3e3e3;" @endif>
                     <td style="width: 50px;" class="dados-lista">{{$associado->id}}</td>
-                    <td style="width: 250px;" class="dados-lista">{{$associado->nome}}</td>
+                    <td style="width: 250px;" class="dados-lista">{{$associado->nome}}<br>{{$associado->carteiraemitida == 1 ? 'carteira'.'  ('.mrc_turn_data($associado->carteiravalidade).')' : ''}}</td>
                     <td style="width: 110px;" class="dados-lista">{{$associado->rg}}<br>{{$associado->rgorgaoemissor}}</td>
                     <td style="width: 90px;" class="dados-lista">{{$associado->cpf}}</td>
                     <td style="width: 180px;" class="dados-lista">{{$associado->foneum}}; {{$associado->foneum}} </td>

@@ -115,22 +115,24 @@
 
     <table style="width: 717px; border-collapse: collapse;">
         <tr>
-            <td colspan="3" style="width: 717px" class="titulo-secao">ASSOCIADOS</td>
+            <td colspan="4" style="width: 717px" class="titulo-secao">ASSOCIADOS</td>
         </tr>
         <tr>
             <td style="width: 50px;" class="label-ficha col-header-table">ID</td>
-            <td style="width: 467px;" class="label-ficha col-header-table">NOME</td>
+            <td style="width: 367px;" class="label-ficha col-header-table">NOME</td>
+            <td style="width: 100px;" class="label-ficha col-header-table">CARTEIRA (VALIDADE)</td>
             <td style="width: 200px;" class="label-ficha col-header-table">CONTATO(S)</td>
         </tr>
         @foreach ($companhia->associados as $associado)
             <tr @if($loop->even) style="background-color: #e3e3e3;" @endif>
                 <td style="width: 50px;" class="dados-ficha">{{$associado->id}}</td>
-                <td style="width: 467px;" class="dados-ficha">{{$associado->nome}}</td>
+                <td style="width: 367px;" class="dados-ficha">{{$associado->nome}}</td>
+                <td style="width: 100px;" class="dados-ficha">{{$associado->carteiraemitida == 1 ? 'sim'.'  ('.mrc_turn_data($associado->carteiravalidade).')' : ''}}</td>
                 <td style="width: 200px;" class="dados-ficha">{{$associado->foneum}} ; {{$associado->fonedois}}</td>
             </tr>
         @endforeach
         <tr>
-            <td colspan="3" style="width:717px;" class="close-ficha"></td>
+            <td colspan="4" style="width:717px;" class="close-ficha"></td>
         </tr>
     </table>
 </body>
