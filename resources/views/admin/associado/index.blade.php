@@ -71,6 +71,7 @@
                     <thead>
                         <tr>
                             <th>Id</th>
+                            <th>Foto</th>
                             <th>Nome</th>
                             <th>Telefone(s)</th>
                             <th>Tipo</th>
@@ -82,6 +83,7 @@
                     <tfoot>
                         <tr>
                             <th>Id</th>
+                            <th>Foto</th>
                             <th>Nome</th>
                             <th>Telefone(s)</th>
                             <th>Tipo</th>
@@ -132,8 +134,8 @@
             $('#dataTableAssociado').DataTable({
 
                 order: [[ 0, 'desc' ]],     // Exibe os registros em ordem decrescente pelo ID (coluna 0) (Regra de negócio: último registro cadastrado)
-                columnDefs: [               // Impede que as colunas 2, 4, e  5 sejam ordenadas pelo usuário
-                    { orderable: false, targets: [2, 4, 5] }
+                columnDefs: [               // Impede que as colunas 1, 3, 5, 6 e  7 sejam ordenadas pelo usuário
+                    { orderable: false, targets: [1, 3, 5, 6, 7] }
                 ],
                 //lengthMenu: [5, 10, 20, 50, 100, 200, 500], //Configura o número de entra de registro a serem exibido por pagina
 
@@ -144,6 +146,7 @@
                 // Obs: Para fazer a ordenação, o nome das colunas abaixo, devem conincidir com o nome dos campos retornados pela query na recuperação dos registros desejados
                 columns: [
                     { data: 'id' },
+                    { data: 'foto'},
                     { data: 'nome' },
                     { data: 'telefones' },
                     { data: 'tipo' },
