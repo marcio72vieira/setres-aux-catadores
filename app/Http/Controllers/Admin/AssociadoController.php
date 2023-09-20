@@ -167,7 +167,7 @@ class AssociadoController extends Controller
                 ->join('bairros', 'bairros.id', '=', 'associados.bairro_id')
                 ->join('area_associado', 'area_associado.associado_id', '=', 'associados.id')
                 ->join('areas', 'areas.id', '=', 'area_associado.area_id')
-                ->select('associados.id', 'associados.imagem', 'associados.nome', 'associados.foneum', 'associados.fonedois', 'associados.tipo',
+                ->select('associados.id', 'associados.imagem', 'associados.nome', 'associados.carteiraemitida', 'associados.carteiravalidade', 'associados.foneum', 'associados.fonedois', 'associados.tipo',
                     'companhias.nome AS companhia',
                     'areas.nome AS areas', DB::raw('GROUP_CONCAT(areas.nome SEPARATOR ", ") as areasDEatuacao'))
                 ->groupBy('associados.id')
@@ -206,7 +206,7 @@ class AssociadoController extends Controller
                 ->join('bairros', 'bairros.id', '=', 'associados.bairro_id')
                 ->join('area_associado', 'area_associado.associado_id', '=', 'associados.id')
                 ->join('areas', 'areas.id', '=', 'area_associado.area_id')
-                ->select('associados.id', 'associados.imagem', 'associados.nome', 'associados.foneum', 'associados.fonedois', 'associados.tipo',
+                ->select('associados.id', 'associados.imagem', 'associados.nome', 'associados.carteiraemitida', 'associados.carteiravalidade', 'associados.foneum', 'associados.fonedois', 'associados.tipo',
                     'companhias.nome AS companhia',
                     'areas.nome AS areas', DB::raw('GROUP_CONCAT(areas.nome SEPARATOR ", ") as areasDEatuacao'))
                 ->groupBy('associados.id')
@@ -226,6 +226,7 @@ class AssociadoController extends Controller
             // campos a serem exibidos
             $id = $associado->id;
             $foto = $associado->imagem != "" ? asset('/storage/'.$associado->imagem) : "";
+            $emitida = $associado->carteiraemitida == 1 ? mrc_turn_data($associado->carteiravalidade)." <b><i class='fas fa-check text-success mr-2' style='font-size:15px'></i></b>" : "";
             $nome = $associado->nome;
             $telefones = $associado->foneum . " / " . $associado->fonedois;
             $tipo = $associado->tipo;
@@ -246,8 +247,7 @@ class AssociadoController extends Controller
             $data_arr[] = array(
                 "id" => $id,
                 "foto" => '<img src="'. $foto .'" width="40" style="margin-left:7px">',
-                //"nome" => $nome."<br>".$foto,
-                "nome" => $nome,
+                "nome" => $nome."<br>".$emitida,
                 "telefones" => $telefones,
                 "tipo" => $tipo,
                 "companhia" => $companhia,

@@ -72,7 +72,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Foto</th>
-                            <th>Nome</th>
+                            <th>Nome /Carteira emitida</th>
                             <th>Telefone(s)</th>
                             <th>Tipo</th>
                             <th>Companhia</th>
@@ -84,7 +84,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Foto</th>
-                            <th>Nome</th>
+                            <th>Nome /Carteira emitida</th>
                             <th>Telefone(s)</th>
                             <th>Tipo</th>
                             <th>Companhia</th>
