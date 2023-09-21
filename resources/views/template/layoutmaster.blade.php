@@ -48,6 +48,18 @@
                 <div class="sidebar-brand-text mx-3">SETRES</div>
             </a>
 
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            <!-- Nav Item - Estatística -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('admin.dashboard.index')}}">
+                    <i class="fas fa-table"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 

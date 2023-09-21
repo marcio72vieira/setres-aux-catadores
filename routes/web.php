@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AssociadoController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\ResiduoController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Admin\BairroController;
 use App\Http\Controllers\Admin\MunicipioController;
 use App\Http\Controllers\Admin\PontocoletaController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,7 @@ Route::get('/front/logout', [MainController::class, 'logout'])->name('front.logo
 
 
 Route::prefix('admin')->name('admin.')->group(function() {
+    Route::resource('dashboard', DashboardController::class)->middleware(['auth']);
     Route::resource('residuo', ResiduoController::class)->middleware(['auth']);
     Route::resource('bairro', BairroController::class)->middleware(['auth']);
     Route::resource('municipio', MunicipioController::class)->middleware(['auth']);
