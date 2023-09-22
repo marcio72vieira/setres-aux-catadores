@@ -20,6 +20,7 @@ class CreateCompanhiasTable extends Migration
             $table->date('fundacao');
             $table->string('foneum');
             $table->string('fonedois')->nullable();
+            $table->string('tipo')->default('indefinido');
             $table->string('presidente');
             $table->string('fonepresidente');
             $table->string('vicepresidente');

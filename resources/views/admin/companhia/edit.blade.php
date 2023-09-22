@@ -82,6 +82,24 @@
                                         @enderror
                                     </div>
                                 </div>
+
+                                {{-- tipo --}}
+                                <div class="col-lg-5">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="tipo">Tipo<span class="small text-danger">*</span></label>
+                                        <select name="tipo" id="tipo" class="form-control" required>
+                                            <option value="" selected disabled>Escolha ...</option>
+                                            <option value="associacao" {{old('tipo', $companhia->tipo) == 'associacao' ? 'selected' : ''}}>Associção</option>
+                                            <option value="cooperativa" {{old('tipo', $companhia->tipo) == 'cooperativa' ? 'selected' : ''}}>Cooperativa</option>
+                                            <option value="grupoavulso" {{old('tipo', $companhia->tipo) == 'grupoavulso' ? 'selected' : ''}}>Grupo Avulso</option>
+                                            <option value="grupoinformal" {{old('tipo', $companhia->tipo) == 'grupoinformal' ? 'selected' : ''}}>Grupo Informal</option>
+                                            <option value="indefinido" {{old('tipo', $companhia->tipo) == 'indefinido' ? 'selected' : ''}}>Indefinido</option>
+                                        </select>
+                                        @error('tipo')
+                                            <small style="color: red">{{$message}}</small>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">

@@ -16,6 +16,7 @@ class Companhia extends Model
         'fundacao',
         'foneum',
         'fonedois',
+        'tipo',
         'presidente',
         'fonepresidente',
         'vicepresidente',

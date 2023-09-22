@@ -62,6 +62,21 @@
                                         <input type="text" id="fonedois" class="form-control" name="fonedois" placeholder="Name" value="{{$companhia->fonedois}}" readonly>
                                     </div>
                                 </div>
+
+                                {{-- tipo --}}
+                                <div class="col-lg-5">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="tipo">Tipo</label>
+                                        <select name="tipo" id="tipo" class="form-control" disabled>
+                                            <option value="" selected disabled>Escolha ...</option>
+                                            <option value="associacao" {{old('tipo', $companhia->tipo) == 'associacao' ? 'selected' : ''}}>Associção</option>
+                                            <option value="cooperativa" {{old('tipo', $companhia->tipo) == 'cooperativa' ? 'selected' : ''}}>Cooperativa</option>
+                                            <option value="grupoavulso" {{old('tipo', $companhia->tipo) == 'grupoavulso' ? 'selected' : ''}}>Grupo Avulso</option>
+                                            <option value="grupoinformal" {{old('tipo', $companhia->tipo) == 'grupoinformal' ? 'selected' : ''}}>Grupo Informal</option>
+                                            <option value="indefinido" {{old('tipo', $companhia->tipo) == 'indefinido' ? 'selected' : ''}}>Indefinido</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">

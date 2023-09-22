@@ -114,6 +114,22 @@
                 </div>
             </div>
 
+            <!-- Catadores Associados -->
+            <div class="col-xl-2 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Catadores<br>Associados</div>
+                                <div class="h5 mb-0 font-weight-bold text-black-800">{{ $qtdAssAssoc }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-users  fa-2x text-black-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
             <!-- Catadores Cooperados -->
@@ -134,24 +150,6 @@
             </div>
 
 
-            <!-- Catadores Associados -->
-            <div class="col-xl-2 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Catadores<br>Associados</div>
-                                <div class="h5 mb-0 font-weight-bold text-black-800">500</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-users  fa-2x text-black-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
              <!-- Catadores Avulsos -->
              <div class="col-xl-2 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
@@ -159,7 +157,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Catadores<br>Avulsos</div>
-                                <div class="h5 mb-0 font-weight-bold text-black-800">500</div>
+                                <div class="h5 mb-0 font-weight-bold text-black-800">{{ $qtdAssAvul }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-users  fa-2x text-black-300"></i>
@@ -177,7 +175,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Catadores<br>Informais</div>
-                                <div class="h5 mb-0 font-weight-bold text-black-800">500</div>
+                                <div class="h5 mb-0 font-weight-bold text-black-800">{{ $qtdAssInform}}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-users  fa-2x text-black-300"></i>
@@ -188,6 +186,26 @@
             </div>
 
 
+            <!-- Catadores Indefinidos -->
+            @if($qtdAssIndef > 0)
+                <div class="col-xl-2 col-md-6 mb-4">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Catadores<br>Indefinidos</div>
+                                    <div class="h5 mb-0 font-weight-bold text-danger-800" style="color: red">{{ $qtdAssIndef}}</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-users  fa-2x text-danger-300" style="color: red"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+
              <!-- Associações -->
              <div class="col-xl-2 col-md-6 mb-4">
                 <div class="card border-left-primary shadow h-100 py-2">
@@ -195,7 +213,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Associações</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdComphAssoc }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-building  fa-2x text-black-300"></i>
@@ -213,7 +231,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Cooperativas</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdComphCoop }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-building  fa-2x text-black-300"></i>
@@ -222,6 +240,59 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Grupos Avulsos -->
+            <div class="col-xl-2 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Grupos Avulsos</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdComphGrupAvuls }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-building  fa-2x text-black-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grupos Informais -->
+            <div class="col-xl-2 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Grupos Informais</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdComphGrupInfom }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-building  fa-2x text-black-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grupos Indefinidos -->
+            @if($qtdComphGrupIndef > 0)
+                <div class="col-xl-2 col-md-6 mb-4">
+                    <div class="card border-left-danger shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Grupos Indefinidos</div>
+                                    <div class="h5 mb-0 font-weight-bold text-danger-800"  style="color: red">{{ $qtdComphGrupIndef }}</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-building  fa-2x text-danger-300" style="color: red"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
 
         </div>
         <!-- FIM Content Row CARDS-->

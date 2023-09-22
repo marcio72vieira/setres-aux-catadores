@@ -53,10 +53,76 @@ class Dashboard extends Model
         return $qtdAssFemi;
     }
 
-    // Retorna a quantidade de Associados de Cooperativas
+    // Retorna a quantidade de Catadores Cooperados
     public static function quantidadeAssCooperados()
     {
         $qtdAssCoop = DB::table('associados')->where('tipo', '=', 'cooperado')->count();
         return $qtdAssCoop;
     }
+
+     // Retorna a quantidade de Catadores Associados
+     public static function quantidadeAssAssociados()
+     {
+         $qtdAssAssoc = DB::table('associados')->where('tipo', '=', 'associado')->count();
+         return $qtdAssAssoc;
+     }
+
+     // Retorna a quantidade de Catadores Avulsos
+     public static function quantidadeAssAvulsos()
+     {
+         $qtdAssAvul = DB::table('associados')->where('tipo', '=', 'avulso')->count();
+         return $qtdAssAvul;
+     }
+
+      // Retorna a quantidade de Catadores Informal
+      public static function quantidadeAssInformal()
+      {
+          $qtdAssInform = DB::table('associados')->where('tipo', '=', 'informal')->count();
+          return $qtdAssInform;
+      }
+
+      // Retorna a quantidade de Catadores Indefinido
+      public static function quantidadeAssIndefinido()
+      {
+          $qtdAssIndef = DB::table('associados')->where('tipo', '=', 'indefinido')->count();
+          return $qtdAssIndef;
+      }
+
+      //  indefinido
+
+      // Retorna a quantidade de Companhias Associações
+      public static function quantidadeComphassociacao()
+      {
+        $qtdCompAssociacao = DB::table('companhias')->where('tipo', '=', 'associacao')->count();
+        return $qtdCompAssociacao;
+      }
+
+      // Retorna a quantidade de Companhias Cooperativas
+      public static function quantidadeComphcooperativa()
+      {
+        $qtdCompCooperativa = DB::table('companhias')->where('tipo', '=', 'cooperativa')->count();
+        return $qtdCompCooperativa;
+     }
+
+     // Retorna a quantidade de Companhias Grupos avulsos
+     public static function quantidadeComphGrupoAvulso()
+     {
+       $qtdCompGrupoAvulso = DB::table('companhias')->where('tipo', '=', 'grupoavulso')->count();
+       return $qtdCompGrupoAvulso;
+    }
+
+    // Retorna a quantidade de Companhias Grupos informais
+    public static function quantidadeComphGrupoInformal()
+    {
+      $qtdCompGrupoInform = DB::table('companhias')->where('tipo', '=', 'grupoinformal')->count();
+      return $qtdCompGrupoInform;
+   }
+
+    // Retorna a quantidade de Companhias Grupos informais
+    public static function quantidadeComphGrupoIndefinido()
+    {
+      $qtdCompGrupoIndef = DB::table('companhias')->where('tipo', '=', 'indefinido')->count();
+      return $qtdCompGrupoIndef;
+   }
 }
+

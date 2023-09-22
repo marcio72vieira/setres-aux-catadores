@@ -29,6 +29,7 @@ class CompanhiaUpdateRequest extends FormRequest
             'fundacao' => 'bail|required',
             'foneum' => 'bail|required|regex:/^\([0-9]{2}\) [0-9][0-9]{3,4}\-[0-9]{4}$/',
             //'fonedois' => 'bail|required_without_all:celular,recado|regex:/^\([1-9]{2}\) [2-9][0-9]{3,4}\-[0-9]{4}$/',
+            'tipo' => 'bail|required',
             'presidente' => 'bail|required|min:3',
             'fonepresidente' => 'bail|required|regex:/^\([0-9]{2}\) [0-9][0-9]{3,4}\-[0-9]{4}$/',
             'vicepresidente' => 'bail|required|min:3',

@@ -18,9 +18,24 @@ class DashboardController extends Controller
         $qtdAssMasc = Dashboard::quantidadeAssMasculino();
         $qtdAssFemi = Dashboard::quantidadeAssFeminino();
         $qtdAssCoop = Dashboard::quantidadeAssCooperados();
+        $qtdAssAssoc = Dashboard::quantidadeAssAssociados();
+        $qtdAssAvul = Dashboard::quantidadeAssAvulsos();
+        $qtdAssInform = Dashboard::quantidadeAssInformal();
+        $qtdAssIndef = Dashboard::quantidadeAssIndefinido();
+        $qtdComphAssoc = Dashboard::quantidadeComphassociacao();
+        $qtdComphCoop = Dashboard::quantidadeComphcooperativa();
+        $qtdComphGrupAvuls = Dashboard::quantidadeComphGrupoAvulso();
+        $qtdComphGrupInfom =  Dashboard::quantidadeComphGrupoInformal();
+        $qtdComphGrupIndef =  Dashboard::quantidadeComphGrupoIndefinido();
 
 
-        return view('admin.dashboard.index', compact('qtdMunicipios', 'qtdBairros', 'qtdPontoColetas', 'qtdResiduos', 'qtdAssMasc', 'qtdAssFemi', 'qtdAssCoop'));
+        return view('admin.dashboard.index', compact(
+                'qtdMunicipios', 'qtdBairros', 'qtdPontoColetas', 'qtdResiduos',
+                'qtdAssMasc', 'qtdAssFemi',
+                'qtdAssCoop', 'qtdAssAssoc', 'qtdAssAvul', 'qtdAssInform', 'qtdAssIndef',
+                'qtdComphAssoc', 'qtdComphCoop', 'qtdComphGrupAvuls', 'qtdComphGrupInfom', 'qtdComphGrupIndef'
+            )
+        );
     }
 
 }
