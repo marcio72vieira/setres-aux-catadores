@@ -53,7 +53,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdPontoColetas }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-city fa-2x text-black-300"></i>
+                                <i class="fas fa-building  fa-2x text-black-300"></i>
                             </div>
                         </div>
                     </div>
@@ -216,7 +216,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdComphAssoc }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-building  fa-2x text-black-300"></i>
+                                <i class="fas fa-city fa-2x text-black-300"></i>
                             </div>
                         </div>
                     </div>
@@ -234,7 +234,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdComphCoop }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-building  fa-2x text-black-300"></i>
+                                <i class="fas fa-city fa-2x text-black-300"></i>
                             </div>
                         </div>
                     </div>
@@ -251,7 +251,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdComphGrupAvuls }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-building  fa-2x text-black-300"></i>
+                                <i class="fas fa-city fa-2x text-black-300"></i>
                             </div>
                         </div>
                     </div>
@@ -268,7 +268,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdComphGrupInfom }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-building  fa-2x text-black-300"></i>
+                                <i class="fas fa-city fa-2x text-black-300"></i>
                             </div>
                         </div>
                     </div>
@@ -286,7 +286,7 @@
                                     <div class="h5 mb-0 font-weight-bold text-danger-800"  style="color: red">{{ $qtdComphGrupIndef }}</div>
                                 </div>
                                 <div class="col-auto">
-                                    <i class="fas fa-building  fa-2x text-danger-300" style="color: red"></i>
+                                    <i class="fas fa-city fa-2x text-black-300"  style="color: red"></i>
                                 </div>
                             </div>
                         </div>
@@ -308,18 +308,6 @@
                                 <div class="col-md-3">
                                     <select id="selectRegional_id" class="form-control col-form-label-sm">
                                         <option value="0" selected>Município...</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <select id="selectMunicipio_id" class="form-control col-form-label-sm">
-                                        <option value="0" selected>Companhia...</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <select id="selectRestaurante_id" class="form-control col-form-label-sm">
-                                        <option  value="0" selected>Restaurante...</option>
                                     </select>
                                 </div>
                             </div>
@@ -348,11 +336,53 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="card-body">
                         <div style="width: 100%; height: 80%; background-color: white;">
-                            <div id="areaparagraficosmesamesmonitor">
-                                <canvas id="graficomesamesMonitor" width="200" height="40" style="padding: 10px 5px 5px 5px;"></canvas>
-                            </div>
+
+                            <!-- INICIO TABELA -->
+
+                            <table class="table table-sm table-bordered  table-hover">
+                                <thead  class="bg-gray-100">
+                                    <tr>
+                                        <th colspan="8">Município: </th>
+                                        <th style="text-align: right">
+                                            <a class="btn btn-primary btn-danger btn-sm" href="" role="button" target="_blank"><i class="far fa-file-pdf"  style="font-size: 15px;"></i>pdf</a>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        {{-- Se a consulta for mensal, exibe o label das semanas, se for semanal, exibe o label N/C, número da compra --}}
+                                        <th rowspan="2" scope="col" style="width: 300px; text-align: center">Companhia</th>
+                                        <th rowspan="2" scope="col" style="width: 100px; text-align: center">Tipo</th>
+                                        <th rowspan="2" scope="col" style="width: 100px; text-align: center">Catadores</th>
+                                        <th colspan="2" scope="col" style="width: 100px; text-align: center">Sexo</th>
+                                        <th colspan="2" scope="col" style="width: 100px; text-align: center">Carteira</th>
+                                        <th rowspan="2" scope="col" style="width: 100px; text-align: center">P. de Coleta</th>
+                                        <th rowspan="2" scope="col" style="text-align: center">Resíduos</th>
+                                    </tr>
+                                    <tr>
+                                        {{-- Se a consulta for mensal, exibe o label das semanas, se for semanal, exibe o label N/C, número da compra --}}
+                                        <th scope="col" style="width: 50px; text-align: center">Mas.</th>
+                                        <th scope="col" style="width: 50px; text-align: center">Fem.</th>
+                                        <th scope="col" style="width: 50px; text-align: center">Sim</th>
+                                        <th scope="col" style="width: 50px; text-align: center">Não</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        {{-- Se a consulta for mensal, exibe o label das semanas, se for semanal, exibe o label N/C, número da compra --}}
+                                        <td scope="col" style="width: 300px; text-align: left">Associação do catadores de Lixo do Jaracaty</td>
+                                        <td scope="col" style="width: 100px; text-align: center">Associação</td>
+                                        <td scope="col" style="width: 130px; text-align: center">30</td>
+                                        <td scope="col" style="width: 100px; text-align: center">10</td>
+                                        <td scope="col" style="width: 100px; text-align: center">20</td>
+                                        <td scope="col" style="width: 100px; text-align: center">15</td>
+                                        <td scope="col" style="width: 100px; text-align: center">30</td>
+                                        <td scope="col" style="width: 100px; text-align: center">5</td>
+                                        <td scope="col" style="text-align: left">jornal, lata, alumínio</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
