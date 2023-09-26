@@ -306,8 +306,11 @@
                         <div class="card-header ">
                             <div class="form-row">
                                 <div class="col-md-3">
-                                    <select id="selectRegional_id" class="form-control col-form-label-sm">
+                                    <select id="selectMunicipio_id" class="form-control col-form-label-sm">
                                         <option value="0" selected>Município...</option>
+                                        @foreach ($municipios as $municipio )
+                                            <option value="{{ $municipio->id }}">{{ $municipio->nome }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -342,7 +345,7 @@
 
                             <!-- INICIO TABELA -->
 
-                            <table class="table table-sm table-bordered  table-hover">
+                            <table id="dadosCompanhiasMunicipio" class="table table-sm table-bordered  table-hover">
                                 <thead  class="bg-gray-100">
                                     <tr>
                                         <th colspan="8">Município: </th>
@@ -352,13 +355,13 @@
                                     </tr>
                                     <tr>
                                         {{-- Se a consulta for mensal, exibe o label das semanas, se for semanal, exibe o label N/C, número da compra --}}
-                                        <th rowspan="2" scope="col" style="width: 300px; text-align: center">Companhia</th>
-                                        <th rowspan="2" scope="col" style="width: 100px; text-align: center">Tipo</th>
-                                        <th rowspan="2" scope="col" style="width: 100px; text-align: center">Catadores</th>
+                                        <th rowspan="2" scope="col" style="width: 400px; text-align: center; vertical-align: middle">Companhia</th>
+                                        <th rowspan="2" scope="col" style="width: 100px; text-align: center; vertical-align: middle">Tipo</th>
+                                        <th rowspan="2" scope="col" style="width: 100px; text-align: center; vertical-align: middle">Catadores</th>
                                         <th colspan="2" scope="col" style="width: 100px; text-align: center">Sexo</th>
                                         <th colspan="2" scope="col" style="width: 100px; text-align: center">Carteira</th>
-                                        <th rowspan="2" scope="col" style="width: 100px; text-align: center">P. de Coleta</th>
-                                        <th rowspan="2" scope="col" style="text-align: center">Resíduos</th>
+                                        <th rowspan="2" scope="col" style="width: 100px; text-align: center; vertical-align: middle">P. de Coleta</th>
+                                        <th rowspan="2" scope="col" style="width: 400px; text-align: center; vertical-align: middle">Resíduos</th>
                                     </tr>
                                     <tr>
                                         {{-- Se a consulta for mensal, exibe o label das semanas, se for semanal, exibe o label N/C, número da compra --}}
@@ -389,6 +392,33 @@
             </div>
         </div>
         <!-- FIM GRÁFICOS MONITOR MÊS A MÊS REGIONAL - MUNICIPIO - RESTAURANTE -->
+@endsection
 
+@section('scripts')
+    <script>
+        //Recuperação dinâmica das Companhias do Município escolhido
+        $('#selectMunicipio_id').on('change', function() {
 
+            var municipio_id = this.value;
+
+            $.ajax({
+                url:"{{route('admin.ajaxgetCompanhiasMunicipio')}}",
+                type: "GET",
+                data: {
+                    idMunicipio: municipio_id
+                },
+                dataType : 'json',
+
+                success: function(result){
+
+                    $.each(result.municipios,function(key,value){
+                        $("#selectMunicipio_id").append('<option value="'+value.id+'">'+value.nome+'</option>');
+                    });
+                },
+                error: function(result){
+                    alert("Error ao retornar dados!");
+                }
+            });
+        });
+    </script>
 @endsection

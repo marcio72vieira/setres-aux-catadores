@@ -88,7 +88,6 @@ class Dashboard extends Model
           return $qtdAssIndef;
       }
 
-      //  indefinido
 
       // Retorna a quantidade de Companhias Associações
       public static function quantidadeComphassociacao()
@@ -102,27 +101,34 @@ class Dashboard extends Model
       {
         $qtdCompCooperativa = DB::table('companhias')->where('tipo', '=', 'cooperativa')->count();
         return $qtdCompCooperativa;
-     }
+      }
 
      // Retorna a quantidade de Companhias Grupos avulsos
      public static function quantidadeComphGrupoAvulso()
      {
        $qtdCompGrupoAvulso = DB::table('companhias')->where('tipo', '=', 'grupoavulso')->count();
        return $qtdCompGrupoAvulso;
-    }
+     }
 
     // Retorna a quantidade de Companhias Grupos informais
     public static function quantidadeComphGrupoInformal()
     {
       $qtdCompGrupoInform = DB::table('companhias')->where('tipo', '=', 'grupoinformal')->count();
       return $qtdCompGrupoInform;
-   }
+    }
 
     // Retorna a quantidade de Companhias Grupos informais
     public static function quantidadeComphGrupoIndefinido()
     {
       $qtdCompGrupoIndef = DB::table('companhias')->where('tipo', '=', 'indefinido')->count();
       return $qtdCompGrupoIndef;
-   }
+    }
+
+    public static function municipios() {
+        $municipios = DB::table('municipios')->select('id', 'nome', )->orderBy('nome')->get();
+        return $municipios;
+    }
+
+
 }
 

@@ -35,6 +35,7 @@ Route::get('/front/logout', [MainController::class, 'logout'])->name('front.logo
 
 Route::prefix('admin')->name('admin.')->group(function() {
     Route::resource('dashboard', DashboardController::class)->middleware(['auth']);
+    Route::get('ajaxgetCompanhiasMunicipio',[DashboardController::class,'ajaxgetCompanhiasMunicipio'])->name('ajaxgetCompanhiasMunicipio');    // Rota Ajax para tabela Dados das Companhias do Município
     Route::resource('residuo', ResiduoController::class)->middleware(['auth']);
     Route::resource('bairro', BairroController::class)->middleware(['auth']);
     Route::resource('municipio', MunicipioController::class)->middleware(['auth']);
