@@ -178,7 +178,8 @@ class AssociadoController extends Controller
                 ->skip($start)
                 ->take($rowperpage)
                 ->get();
-        // ACESSANDO SÓ OS REGISTROS DE ASSOCIADOS DAS COMPANHIAS CADASTRADAS PELO USUÁRIO LOGADO COMO OPERADOR
+        // ACESSANDO SÓ OS REGISTROS DE ASSOCIADOS DAS COMPANHIAS CADASTRADAS PELO USUÁRIO LOGADO COMO OPERADOR.
+        // OBS: A "Advanced Join Clauses (ver documentação do Laravel)" empregada aqui, é para selecionar apenas as companhias pertencente ao munciípio do qual o usuário logado faz parte.
         } else {
             $totalRecords = Associado::select('count(*) as allcount')->count();
             $totalRecordswithFilter = DB::table('associados')
@@ -214,8 +215,8 @@ class AssociadoController extends Controller
                 ->orWhere('associados.tipo', 'like', '%' .$searchValue . '%')
                 ->orWhere('companhias.nome', 'like', '%' .$searchValue . '%')
                 ->orderBy($columnName,$columnSortOrder)
-                ->skip($start)
-                ->take($rowperpage)
+                ->skip($start)      // Ver: Limit & Offset na documentação do Laravel
+                ->take($rowperpage) // Ver: Limit & Offset na documentação do Laravel
                 ->get();
         }
 

@@ -87,11 +87,11 @@
                                         <label class="form-control-label" for="tipo">Tipo<span class="small text-danger">*</span></label>
                                         <select name="tipo" id="tipo" class="form-control" required>
                                             <option value="" selected disabled>Escolha ...</option>
-                                            <option value="associacao" {{old('tipo') == 'branca' ? 'selected' : ''}}>Associção</option>
-                                            <option value="cooperativa" {{old('tipo') == 'parda' ? 'selected' : ''}}>Cooperativa</option>
-                                            <option value="grupoavulso" {{old('tipo') == 'preta' ? 'selected' : ''}}>Grupo Avulso</option>
-                                            <option value="grupoinformal" {{old('tipo') == 'indigena' ? 'selected' : ''}}>Grupo Informal</option>
-                                            <option value="indefinido" {{old('tipo') == 'amarela' ? 'selected' : ''}}>Indefinido</option>
+                                            <option value="associacao" {{old('tipo') == 'associacao' ? 'selected' : ''}}>Associção</option>
+                                            <option value="cooperativa" {{old('tipo') == 'cooperativa' ? 'selected' : ''}}>Cooperativa</option>
+                                            <option value="grupoavulso" {{old('tipo') == 'grupoavulso' ? 'selected' : ''}}>Grupo Avulso</option>
+                                            <option value="grupoinformal" {{old('tipo') == 'grupoinformal' ? 'selected' : ''}}>Grupo Informal</option>
+                                            <option value="indefinido" {{old('tipo') == 'indefinido' ? 'selected' : ''}}>Indefinido</option>
                                         </select>
                                         @error('tipo')
                                             <small style="color: red">{{$message}}</small>

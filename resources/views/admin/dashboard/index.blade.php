@@ -307,7 +307,7 @@
                             <div class="form-row">
                                 <div class="col-md-3">
                                     <select id="selectMunicipio_id" class="form-control col-form-label-sm">
-                                        <option value="0" selected>Município...</option>
+                                        <option value="0" selected disabled>Município...</option>
                                         @foreach ($municipios as $municipio )
                                             <option value="{{ $municipio->id }}">{{ $municipio->nome }}</option>
                                         @endforeach
@@ -371,18 +371,17 @@
                                         <th scope="col" style="width: 50px; text-align: center">Não</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="dadosMunicipio">
                                     <tr>
-                                        {{-- Se a consulta for mensal, exibe o label das semanas, se for semanal, exibe o label N/C, número da compra --}}
-                                        <td scope="col" style="width: 300px; text-align: left">Associação do catadores de Lixo do Jaracaty</td>
-                                        <td scope="col" style="width: 100px; text-align: center">Associação</td>
-                                        <td scope="col" style="width: 130px; text-align: center">30</td>
-                                        <td scope="col" style="width: 100px; text-align: center">10</td>
-                                        <td scope="col" style="width: 100px; text-align: center">20</td>
-                                        <td scope="col" style="width: 100px; text-align: center">15</td>
-                                        <td scope="col" style="width: 100px; text-align: center">30</td>
-                                        <td scope="col" style="width: 100px; text-align: center">5</td>
-                                        <td scope="col" style="text-align: left">jornal, lata, alumínio</td>
+                                        <td scope="col" style="width: 300px; text-align: left">&nbsp;</td>
+                                        <td scope="col" style="width: 100px; text-align: center"></td>
+                                        <td scope="col" style="width: 130px; text-align: center"></td>
+                                        <td scope="col" style="width: 100px; text-align: center"></td>
+                                        <td scope="col" style="width: 100px; text-align: center"></td>
+                                        <td scope="col" style="width: 100px; text-align: center"></td>
+                                        <td scope="col" style="width: 100px; text-align: center"></td>
+                                        <td scope="col" style="width: 100px; text-align: center"></td>
+                                        <td scope="col" style="text-align: left"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -410,9 +409,23 @@
                 dataType : 'json',
 
                 success: function(result){
+                    $("#dadosMunicipio").html('');
 
-                    $.each(result.municipios,function(key,value){
-                        $("#selectMunicipio_id").append('<option value="'+value.id+'">'+value.nome+'</option>');
+                    $.each(result.dados,function(key,value){
+                        //$("#selectMunicipio_id").append('<option value="'+value.id+'">'+value.nome+'</option>');
+                        $("#dadosMunicipio").append(`
+                                <tr>
+                                    <td scope="col" style="width: 300px; text-align: left">${value.companhia_nome}</td>
+                                    <td scope="col" style="width: 100px; text-align: center">${value.companhia_tipo}</td>
+                                    <td scope="col" style="width: 130px; text-align: center"></td>
+                                    <td scope="col" style="width: 100px; text-align: center"></td>
+                                    <td scope="col" style="width: 100px; text-align: center"></td>
+                                    <td scope="col" style="width: 100px; text-align: center"></td>
+                                    <td scope="col" style="width: 100px; text-align: center"></td>
+                                    <td scope="col" style="width: 100px; text-align: center"></td>
+                                    <td scope="col" style="text-align: left"></td>
+                                </tr>
+                        `);
                     });
                 },
                 error: function(result){
