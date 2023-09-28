@@ -417,12 +417,12 @@
                                 <tr>
                                     <td scope="col" style="width: 300px; text-align: left">${value.companhia_nome}</td>
                                     <td scope="col" style="width: 100px; text-align: center">${value.companhia_tipo}</td>
-                                    <td scope="col" style="width: 130px; text-align: center"></td>
-                                    <td scope="col" style="width: 100px; text-align: center"></td>
-                                    <td scope="col" style="width: 100px; text-align: center"></td>
-                                    <td scope="col" style="width: 100px; text-align: center"></td>
-                                    <td scope="col" style="width: 100px; text-align: center"></td>
-                                    <td scope="col" style="width: 100px; text-align: center"></td>
+                                    <td scope="col" style="width: 130px; text-align: center">${value.companhia_totalcatadores}</td>
+                                    <td scope="col" style="width: 100px; text-align: center">${value.companhia_totalmasc}</td>
+                                    <td scope="col" style="width: 100px; text-align: center">${value.companhia_totalfeme}</td>
+                                    <td scope="col" style="width: 100px; text-align: center">${value.companhia_totalcomcarteira}</td>
+                                    <td scope="col" style="width: 100px; text-align: center">${value.companhia_totalsemcarteira}</td>
+                                    <td scope="col" style="width: 100px; text-align: center">${value.companhia_totalpontocoleta}</td>
                                     <td scope="col" style="text-align: left"></td>
                                 </tr>
                         `);
