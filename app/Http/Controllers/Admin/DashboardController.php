@@ -50,8 +50,10 @@ class DashboardController extends Controller
         $municipio = $request->idMunicipio;
         $data = [];
 
+        // Seleciona só as Companhias, com base no Município escolhido. O DB::raw(), fez-se necessário em função do tratamento
+        // a ser aplicado para cada tipo de companhia, ou seja, transformando a string retornada. 
         $companhias = DB::table('companhias')
-                   ->select('id','nome AS companhia_nome', DB::raw('CASE tipo
+                   ->select('id AS idCompanhia','nome AS companhia_nome', DB::raw('CASE tipo
                                                                 WHEN "associacao" THEN "Associação"
                                                                 WHEN "cooperativa" THEN "Cooperativa"
                                                                 WHEN "grupoavulso" THEN "Avulsa"
@@ -60,14 +62,41 @@ class DashboardController extends Controller
                                                                 END AS companhia_tipo'))
                    ->where('municipio_id', '=', $municipio);
 
+        // Seleciona os Associados de cada companhia resultante do select acima ($companhias)
+        // Obs: aliasCompanhia.idCompanhia, aliasCompanhia.companhia_nome e aliasCompanhia.companhia.tipo abaixo, 
+        //      devem está previamente selecionados na consulta anterior, no caso, $companhias
+        $associados = DB::table('associados')->joinSub($companhias, 'aliasCompanhia', function ($join) {
+            $join->on('associados.companhia_id', '=', 'aliasCompanhia.idCompanhia');
+        })->select(DB::raw('aliasCompanhia.idCompanhia, aliasCompanhia.companhia_nome, aliasCompanhia.companhia_tipo, COUNT(*) AS companhia_totalcatadores, 
+                            SUM(IF(associados.sexo = "m", 1, 0)) AS companhia_totalmasc, 
+                            SUM(IF(associados.sexo = "f", 1, 0)) AS companhia_totalfeme, 
+                            SUM(IF(associados.carteiraemitida = 1, 1, 0)) AS companhia_totalcomcarteira, 
+                            SUM(IF(associados.carteiraemitida = 0, 1, 0)) AS companhia_totalsemcarteira'))
+                    ->groupBy('aliasCompanhia.idCompanhia');
 
-        $associados = DB::table('associados')->joinSub($companhias, 'companhiaAlias', function ($join) {
-            $join->on('associados.companhia_id', '=', 'companhiaAlias.id');
-        })->select(DB::raw('companhiaAlias.companhia_nome, companhiaAlias.companhia_tipo, COUNT(*) AS companhia_totalcatadores, SUM(IF(associados.sexo = "m", 1, 0)) AS companhia_totalmasc, SUM(IF(associados.sexo = "f", 1, 0)) AS companhia_totalfeme, SUM(IF(associados.carteiraemitida = 1, 1, 0)) AS companhia_totalcomcarteira, SUM(IF(associados.carteiraemitida = 0, 1, 0)) AS companhia_totalsemcarteira'))->groupBy('companhiaAlias.id')->get();
+        // Seleciona os pontos de coletas de cada companhia (já retornada) acima, pelo campo, já previamente retornado em associado, idCompanhia
+        // Obs: Utilizou-se aqui righJoinSub, porque nem todas as companhias, possui um ponto de coleta associada a ela, então neste ponto teremos 
+        // que trazer a companhia (aqui representada pelo $associados RIGHT da relação pontocoleta X associados) do mesmo jeito 
+        // agrupdo pela companhia(aliasAssociados.idCompanhia)
+        $pontocoletas =  DB::table('pontocoletas')->rightJoinSub($associados, 'aliasAssociados', function ($join) {
+            $join->on('pontocoletas.companhia_id', '=', 'aliasAssociados.idCompanhia');
+        })->select(DB::raw('aliasAssociados.companhia_nome, aliasAssociados.companhia_tipo, 
+                            aliasAssociados.companhia_totalcatadores, aliasAssociados.companhia_totalmasc, aliasAssociados.companhia_totalfeme, 
+                            aliasAssociados.companhia_totalcomcarteira, aliasAssociados.companhia_totalsemcarteira, 
+                            COUNT(DISTINCT pontocoletas.id) AS pontocoleta_total'))
+                    ->groupBy('aliasAssociados.idCompanhia')->get();
 
 
-        $data['dados'] =  $associados;
+        $data['dados'] =  $pontocoletas;
         return response()->json($data);
+
+
+
+
+
+
+
+
 
 
         /*******************
