@@ -65,9 +65,15 @@ class DashboardController extends Controller
         // Seleciona os Associados de cada companhia resultante do select acima ($companhias)
         // Obs: aliasCompanhia.idCompanhia, aliasCompanhia.companhia_nome e aliasCompanhia.companhia.tipo abaixo, 
         //      devem está previamente selecionados na consulta anterior, no caso, $companhias
-        $associados = DB::table('associados')->joinSub($companhias, 'aliasCompanhia', function ($join) {
+        // Obs: "rightJoinSub" retorna todas as Companhias do Município, independente da companhia possuir Associado cadastrado ou não.
+        //      Substituir "rightJoinSub" por "joinSub" retorna só as Companhias que possui Associados cadastrados.
+        //      COUNT(*) AS companhia_totalcatadores em conjunto com rightJoinSub, retorna um (1) registro o que representa um ERRO LÓGICO 
+        //      pois se a companhia não possui Associados, não tem porque retornar um registro. Para evitar esse ERRO LÓGICO, substitua:
+        //      COUNT(*) AS companhia_totalcatadores por: COUNT(associados.id) AS companhia_totalcatadores.
+        $associados = DB::table('associados')->rightJoinSub($companhias, 'aliasCompanhia', function ($join) {
             $join->on('associados.companhia_id', '=', 'aliasCompanhia.idCompanhia');
-        })->select(DB::raw('aliasCompanhia.idCompanhia, aliasCompanhia.companhia_nome, aliasCompanhia.companhia_tipo, COUNT(*) AS companhia_totalcatadores, 
+        })->select(DB::raw('aliasCompanhia.idCompanhia, aliasCompanhia.companhia_nome, aliasCompanhia.companhia_tipo, 
+                            COUNT(associados.id) AS companhia_totalcatadores, 
                             SUM(IF(associados.sexo = "m", 1, 0)) AS companhia_totalmasc, 
                             SUM(IF(associados.sexo = "f", 1, 0)) AS companhia_totalfeme, 
                             SUM(IF(associados.carteiraemitida = 1, 1, 0)) AS companhia_totalcomcarteira, 
@@ -80,14 +86,37 @@ class DashboardController extends Controller
         // agrupdo pela companhia(aliasAssociados.idCompanhia)
         $pontocoletas =  DB::table('pontocoletas')->rightJoinSub($associados, 'aliasAssociados', function ($join) {
             $join->on('pontocoletas.companhia_id', '=', 'aliasAssociados.idCompanhia');
-        })->select(DB::raw('aliasAssociados.companhia_nome, aliasAssociados.companhia_tipo, 
+        })->select(DB::raw('aliasAssociados.idCompanhia, aliasAssociados.companhia_nome, aliasAssociados.companhia_tipo, 
                             aliasAssociados.companhia_totalcatadores, aliasAssociados.companhia_totalmasc, aliasAssociados.companhia_totalfeme, 
                             aliasAssociados.companhia_totalcomcarteira, aliasAssociados.companhia_totalsemcarteira, 
                             COUNT(DISTINCT pontocoletas.id) AS pontocoleta_total'))
-                    ->groupBy('aliasAssociados.idCompanhia')->get();
+                    ->groupBy('aliasAssociados.idCompanhia');
 
 
-        $data['dados'] =  $pontocoletas;
+        $residuostotal = DB::table('companhia_residuo')->rightJoinSub($pontocoletas, 'aliasPontocoletas', function ($join) {
+            $join->on('companhia_residuo.companhia_id', '=', 'aliasPontocoletas.idCompanhia');
+        })->select(DB::raw('aliasPontocoletas.idCompanhia, aliasPontocoletas.companhia_nome, aliasPontocoletas.companhia_tipo, aliasPontocoletas.companhia_totalcatadores,
+                            aliasPontocoletas.companhia_totalmasc, aliasPontocoletas.companhia_totalfeme,
+                            aliasPontocoletas.companhia_totalcomcarteira, aliasPontocoletas.companhia_totalsemcarteira,
+                            aliasPontocoletas.pontocoleta_total,
+                            companhia_residuo.residuo_id AS idResiduo,
+                            COUNT(companhia_residuo.companhia_id) AS residuo_total'))
+                    ->groupBy('aliasPontocoletas.idCompanhia');
+
+
+        $residuosdescricao = DB::table('residuos')->rightJoinSub($residuostotal, 'aliasResiduostotal', function ($join) {
+            $join->on('residuos.id', '=', 'aliasResiduostotal.idResiduo');  
+        })->select(DB::raw('aliasResiduostotal.idCompanhia, aliasResiduostotal.companhia_nome, aliasResiduostotal.companhia_tipo, aliasResiduostotal.companhia_totalcatadores,
+                            aliasResiduostotal.companhia_totalmasc, aliasResiduostotal.companhia_totalfeme,
+                            aliasResiduostotal.companhia_totalcomcarteira, aliasResiduostotal.companhia_totalsemcarteira,
+                            aliasResiduostotal.pontocoleta_total,
+                            aliasResiduostotal.residuo_total,
+                            residuos.nome AS nomeResiduo'))
+                    ->groupBy('aliasResiduostotal.idCompanhia')->get();
+        
+
+
+        $data['dados'] =  $residuosdescricao;
         return response()->json($data);
 
 
@@ -95,9 +124,9 @@ class DashboardController extends Controller
 
 
 
-
-
-
+        // COUNT(DISTINCT companhia_residuo.residuo_id) AS residuo_totalindividual
+        // ->where('aliasResiduostotal.companhia_id', '=', 5);
+        // GROUP_CONCAT(residuos.nome SEPARATOR ", ") as nomeResiduo
 
         /*******************
         $records = DB::table('companhias')

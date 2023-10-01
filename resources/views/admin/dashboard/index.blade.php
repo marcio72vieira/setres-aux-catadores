@@ -4,10 +4,11 @@
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+        <label id="ocultarExibirPaineldeCards" style="cursor: pointer; font-size: 20px;"><i id="iconeVisao" class="fas fa-eye-slash" style=" margin-right: 5px;"></i>Ocultar</label>
     </div>
 
         <!-- INICIO Content Row CARDS-->
-        <div class="row">
+        <div class="row" id="paineldeCards">
 
             <!-- Municípios -->
             <div class="col-xl-2 col-md-6 mb-4">
@@ -316,7 +317,7 @@
                             </div>
                         </div>
 
-
+                        {{--
                         <div class="card-header"  style="float: right; margin-top: -51px; border-bottom: 1px solid #f8f9fc;">
                             <div class="dropdown no-arrow">
                                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuDadosMesMesRestaurante"
@@ -338,6 +339,7 @@
                                 </div>
                             </div>
                         </div>
+                        --}}
                     </div>
 
                     <div class="card-body">
@@ -349,26 +351,28 @@
                                 <thead  class="bg-gray-100">
                                     <tr>
                                         <th colspan="8">Município: </th>
-                                        <th style="text-align: right">
+                                        <th colspan="2"style="text-align: right">
                                             <a class="btn btn-primary btn-danger btn-sm" href="" role="button" target="_blank"><i class="far fa-file-pdf"  style="font-size: 15px;"></i>pdf</a>
                                         </th>
                                     </tr>
                                     <tr>
                                         {{-- Se a consulta for mensal, exibe o label das semanas, se for semanal, exibe o label N/C, número da compra --}}
-                                        <th rowspan="2" scope="col" style="width: 400px; text-align: center; vertical-align: middle">Companhia</th>
+                                        <th rowspan="2" scope="col" style="width: 400px; text-align: center; vertical-align: middle">Companhias</th>
                                         <th rowspan="2" scope="col" style="width: 100px; text-align: center; vertical-align: middle">Tipo</th>
-                                        <th rowspan="2" scope="col" style="width: 100px; text-align: center; vertical-align: middle">Catadores</th>
+                                        <th rowspan="2" scope="col" style="width: 100px; text-align: center; vertical-align: middle">Nº Catadores</th>
                                         <th colspan="2" scope="col" style="width: 100px; text-align: center">Sexo</th>
-                                        <th colspan="2" scope="col" style="width: 100px; text-align: center">Carteira</th>
-                                        <th rowspan="2" scope="col" style="width: 100px; text-align: center; vertical-align: middle">P. de Coleta</th>
-                                        <th rowspan="2" scope="col" style="width: 400px; text-align: center; vertical-align: middle">Resíduos</th>
+                                        <th colspan="2" scope="col" style="width: 100px; text-align: center">Carteira Emitida</th>
+                                        <th rowspan="2" scope="col" style="width: 100px; text-align: center; vertical-align: middle">Pontos de Coleta</th>
+                                        <th colspan="2" scope="col" style="width: 400px; text-align: center; vertical-align: middle">Resíduos</th>
                                     </tr>
                                     <tr>
                                         {{-- Se a consulta for mensal, exibe o label das semanas, se for semanal, exibe o label N/C, número da compra --}}
-                                        <th scope="col" style="width: 50px; text-align: center">Mas.</th>
-                                        <th scope="col" style="width: 50px; text-align: center">Fem.</th>
+                                        <th scope="col" style="width: 50px; text-align: center">Masculino</th>
+                                        <th scope="col" style="width: 50px; text-align: center">Feminino</th>
                                         <th scope="col" style="width: 50px; text-align: center">Sim</th>
                                         <th scope="col" style="width: 50px; text-align: center">Não</th>
+                                        <th scope="col" style="width: 60px; text-align: center">Qtd</th>
+                                        <th scope="col" style="width: 320px; text-align: center">Descrição</th>
                                     </tr>
                                 </thead>
                                 <tbody id="dadosMunicipio">
@@ -381,7 +385,8 @@
                                         <td scope="col" style="width: 100px; text-align: center"></td>
                                         <td scope="col" style="width: 100px; text-align: center"></td>
                                         <td scope="col" style="width: 100px; text-align: center"></td>
-                                        <td scope="col" style="text-align: left"></td>
+                                        <td scope="col" style="width: 50px; text-align: left"></td>
+                                        <td scope="col" style="width: 350px; text-align: left"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -395,6 +400,23 @@
 
 @section('scripts')
     <script>
+        // Esconde/Exibe os cards para ampliar área de visualização
+        $("#ocultarExibirPaineldeCards").click(function(){
+            if($(this).text() == "Ocultar"){
+                //$(this).text("Exibir");
+                $("#ocultarExibirPaineldeCards").html("<i id='iconeVisao' class='fas fa-eye' style='margin-right: 5px;'></i>Exibir");
+            }else {
+                //$(this).text("Ocultar");
+                $("#ocultarExibirPaineldeCards").html("<i id='iconeVisao' class='fas fa-eye-slash' style='margin-right: 5px;'></i>Ocultar");
+            }
+
+            $("#paineldeCards").toggle();
+            //$("#iconeVisao", this).toggleClass("fas fa-eye-slash fas fa-eye");
+        });
+
+
+
+
         //Recuperação dinâmica das Companhias do Município escolhido
         $('#selectMunicipio_id').on('change', function() {
 
@@ -424,7 +446,8 @@
                                     <td scope="col" style="width: 100px; text-align: center">${value.companhia_totalcomcarteira}</td>
                                     <td scope="col" style="width: 100px; text-align: center">${value.companhia_totalsemcarteira}</td>
                                     <td scope="col" style="width: 100px; text-align: center">${value.pontocoleta_total}</td>
-                                    <td scope="col" style="text-align: left"></td>
+                                    <td scope="col" style="width: 50px; text-align: center">${value.residuo_total}</td>
+                                    <td scope="col" style="width: 350px; text-align: left">${value.nomeResiduo}</td>
                                 </tr>
                         `);
                     });
