@@ -125,21 +125,7 @@ class DashboardController extends Controller
         //  ->join('area_associado', 'area_associado.associado_id', '=', 'associados.id')
         //  ->join('areas', 'areas.id', '=', 'area_associado.area_id')
         //  DB::raw('GROUP_CONCAT(areas.nome SEPARATOR ", ") as areasDEatuacao')
-        /* 
-        SELECT 
-            tm.nome AS MUNICIPIO,
-            tc.nome AS CIDADE, 
-            tc.tipo AS TIPO,
-            tcr.residuo_id AS RESIDUO
-        FROM
-            companhias tc
-        INNER JOIN municipios tm 
-            ON tc.municipio_id = tm.id
-        INNER JOIN companhia_residuo tcr
-            ON tcr.companhia_id = tc.id
-        WHERE 
-            tm.id = 1
-        */
+
 
 
         // COUNT(DISTINCT companhia_residuo.residuo_id) AS residuo_totalindividual
