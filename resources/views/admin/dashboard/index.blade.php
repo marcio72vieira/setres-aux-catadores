@@ -4,7 +4,7 @@
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-        <label id="ocultarExibirPaineldeCards" style="cursor: pointer; font-size: 20px;"><i id="iconeVisao" class="fas fa-eye-slash" style=" margin-right: 5px;"></i>Ocultar</label>
+        <label id="ocultarExibirPaineldeCards" style="cursor: pointer; font-size: 17px;"><i id="iconeVisao" class="fas fa-eye-slash" style=" margin-right: 5px;"></i>ocultar</label>
     </div>
 
         <!-- INICIO Content Row CARDS-->
@@ -402,12 +402,12 @@
     <script>
         // Esconde/Exibe os cards para ampliar área de visualização
         $("#ocultarExibirPaineldeCards").click(function(){
-            if($(this).text() == "Ocultar"){
+            if($(this).text() == "ocultar"){
                 //$(this).text("Exibir");
-                $("#ocultarExibirPaineldeCards").html("<i id='iconeVisao' class='fas fa-eye' style='margin-right: 5px;'></i>Exibir");
+                $("#ocultarExibirPaineldeCards").html("<i id='iconeVisao' class='fas fa-eye' style='margin-right: 5px;'></i>exibir");
             }else {
                 //$(this).text("Ocultar");
-                $("#ocultarExibirPaineldeCards").html("<i id='iconeVisao' class='fas fa-eye-slash' style='margin-right: 5px;'></i>Ocultar");
+                $("#ocultarExibirPaineldeCards").html("<i id='iconeVisao' class='fas fa-eye-slash' style='margin-right: 5px;'></i>ocultar");
             }
 
             $("#paineldeCards").toggle();
