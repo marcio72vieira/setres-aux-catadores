@@ -433,7 +433,23 @@
                 success: function(result){
                     $("#dadosMunicipio").html('');
 
+                    let totCat = 0;
+                    let totMasc = 0;
+                    let totFeme = 0;
+                    let totComCart = 0;
+                    let totSemCart = 0;
+                    let totPColet = 0;
+
                     $.each(result.dados,function(key,value){
+
+                        totCat  += value.companhia_totalcatadores;
+                        totMasc += value.companhia_totalmasc;
+                        totFeme += value.companhia_totalfeme;
+                        totComCart += value.companhia_totalcomcarteira;
+                        totSemCart += value.companhia_totalsemcarteira;
+                        totPColet += value.pontocoleta_total;
+
+
                         //$("#selectMunicipio_id").append('<option value="'+value.id+'">'+value.nome+'</option>');
                         console.log(result);
                         $("#dadosMunicipio").append(`
@@ -451,6 +467,22 @@
                                 </tr>
                         `);
                     });
+
+
+                    $("#dadosMunicipio").append(`
+                                <tr style="background-color: #e3e6f0;">
+                                    <td scope="col" style="width: 300px; text-align: left">&nbsp;</td>
+                                    <td scope="col" style="width: 100px; text-align: center"></td>
+                                    <td scope="col" style="width: 130px; text-align: center">${totCat}</td>
+                                    <td scope="col" style="width: 100px; text-align: center">${totMasc}</td>
+                                    <td scope="col" style="width: 100px; text-align: center">${totFeme}</td>
+                                    <td scope="col" style="width: 100px; text-align: center">${totComCart}</td>
+                                    <td scope="col" style="width: 100px; text-align: center">${totSemCart}</td>
+                                    <td scope="col" style="width: 100px; text-align: center">${totPColet}</td>
+                                    <td scope="col" style="width: 50px; text-align: center"></td>
+                                    <td scope="col" style="width: 350px; text-align: left"></td>
+                                </tr>
+                        `);
                 },
                 error: function(result){
                     alert("Error ao retornar dados!");
