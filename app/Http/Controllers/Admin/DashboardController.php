@@ -63,7 +63,8 @@ class DashboardController extends Controller
                                                 WHEN "indefinido"       THEN "Indefinido"
                                             END AS companhia_tipo,
                                             COUNT(companhia_residuo.residuo_id) AS residuo_total,
-                                            GROUP_CONCAT(residuos.nome SEPARATOR ", ") as nomeResiduo'
+                                            GROUP_CONCAT(residuos.nome SEPARATOR ", ") as nomeResiduo,
+                                            COUNT(DISTINCT(companhias.tipo)) AS totalcompanhia_unica'
                                     )
                                 )
                                 ->where('municipios.id', '=', $municipio )
@@ -73,7 +74,7 @@ class DashboardController extends Controller
 
         $detalhespontocoletas = DB::table('pontocoletas')->rightJoinSub($detalhesresiduos, 'aliasResiduos', function ($join) {
                                     $join->on('pontocoletas.companhia_id', '=', 'aliasResiduos.idCompanhia');
-                                })->select(DB::raw('aliasResiduos.idCompanhia, aliasResiduos.companhia_nome, aliasResiduos.companhia_tipo,
+                                })->select(DB::raw('aliasResiduos.idCompanhia, aliasResiduos.companhia_nome, aliasResiduos.companhia_tipo, aliasResiduos.totalcompanhia_unica,
                                             aliasResiduos.residuo_total, aliasResiduos.nomeResiduo,
                                             COUNT(DISTINCT pontocoletas.id) AS pontocoleta_total'))
                                 ->groupBy('aliasResiduos.idCompanhia');
@@ -82,7 +83,7 @@ class DashboardController extends Controller
 
         $detalhesassociados = DB::table('associados')->rightJoinSub($detalhespontocoletas, 'aliasPontoscoletas', function ($join) {
                                     $join->on('associados.companhia_id', '=', 'aliasPontoscoletas.idCompanhia');
-                                })->select(DB::raw('aliasPontoscoletas.idCompanhia, aliasPontoscoletas.companhia_nome, aliasPontoscoletas.companhia_tipo,
+                                })->select(DB::raw('aliasPontoscoletas.idCompanhia, aliasPontoscoletas.companhia_nome, aliasPontoscoletas.companhia_tipo, aliasPontoscoletas.totalcompanhia_unica,
                                             aliasPontoscoletas.residuo_total, aliasPontoscoletas.nomeResiduo,
                                             aliasPontoscoletas.pontocoleta_total,
                                             COUNT(DISTINCT associados.id) AS companhia_totalcatadores,

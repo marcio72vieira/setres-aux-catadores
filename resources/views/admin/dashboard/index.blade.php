@@ -439,6 +439,7 @@
                     let totComCart = 0;
                     let totSemCart = 0;
                     let totPColet = 0;
+                    let totCompUnic = 0;
 
                     $.each(result.dados,function(key,value){
 
@@ -448,6 +449,7 @@
                         totComCart += value.companhia_totalcomcarteira;
                         totSemCart += value.companhia_totalsemcarteira;
                         totPColet += value.pontocoleta_total;
+                        totCompUnic += value.totalcompanhia_unica,
 
 
                         //$("#selectMunicipio_id").append('<option value="'+value.id+'">'+value.nome+'</option>');
@@ -463,16 +465,16 @@
                                     <td scope="col" style="width: 100px; text-align: center">${value.companhia_totalsemcarteira}</td>
                                     <td scope="col" style="width: 100px; text-align: center">${value.pontocoleta_total}</td>
                                     <td scope="col" style="width: 50px; text-align: center">${value.residuo_total}</td>
-                                    <td scope="col" style="width: 350px; text-align: left">${value.nomeResiduo}</td>
+                                    <td scope="col" style="width: 350px; text-align: left">${value.nomeResiduo == null ? '': value.nomeResiduo}</td>
                                 </tr>
                         `);
                     });
 
 
                     $("#dadosMunicipio").append(`
-                                <tr style="background-color: #e3e6f0;">
+                                <tr style="background-color: #e3e6f0; font-weight: bold; font-size:17px;">
                                     <td scope="col" style="width: 300px; text-align: left">&nbsp;</td>
-                                    <td scope="col" style="width: 100px; text-align: center"></td>
+                                    <td scope="col" style="width: 100px; text-align: center">${totCompUnic}</td>
                                     <td scope="col" style="width: 130px; text-align: center">${totCat}</td>
                                     <td scope="col" style="width: 100px; text-align: center">${totMasc}</td>
                                     <td scope="col" style="width: 100px; text-align: center">${totFeme}</td>
