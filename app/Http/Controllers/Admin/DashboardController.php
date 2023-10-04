@@ -50,21 +50,27 @@ class DashboardController extends Controller
         $municipio = $request->idMunicipio;
         $data = [];
 
+        // Obs: As consultas foram feitas levando em conta primeiramente os resíduos e depois os pontos de coletas, porque
+        //      a quantidade de porntos de coletas influencia na quantidade COUNT do sexo e carteira dos catadores, multimpli
+        //      cando a quantidade por sexo e carteira pela quantidade de pontos de coletas, não calculando a quantidade real
+        //      de catadores cadastrados na companhia.
         $detalhesresiduos =    DB::table('companhias')
                                     ->join('municipios', 'municipios.id', '=', 'companhias.municipio_id')
                                     ->leftJoin('companhia_residuo', 'companhia_residuo.companhia_id', '=', 'companhias.id')
                                     ->leftJoin('residuos', 'residuos.id', '=', 'companhia_residuo.residuo_id')
-                                    ->select(DB::RAW('companhias.id AS idCompanhia, companhias.nome AS companhia_nome,
-                                            CASE companhias.tipo
-                                                WHEN "associacao"       THEN "Associação"
-                                                WHEN "cooperativa"      THEN "Cooperativa"
-                                                WHEN "grupoavulso"      THEN "Avulsa"
-                                                WHEN "grupoinformal"    THEN "Informal"
-                                                WHEN "indefinido"       THEN "Indefinido"
-                                            END AS companhia_tipo,
-                                            COUNT(companhia_residuo.residuo_id) AS residuo_total,
-                                            GROUP_CONCAT(residuos.nome SEPARATOR ", ") as nomeResiduo,
-                                            COUNT(DISTINCT(companhias.tipo)) AS totalcompanhia_unica'
+                                    ->select(DB::RAW('companhias.id AS idCompanhia, 
+                                                      COUNT(DISTINCT(companhias.id)) AS companhia_total,
+                                                      COUNT(DISTINCT(companhias.tipo)) AS companhia_tipototal,
+                                                      companhias.nome AS companhia_nome,
+                                                      CASE companhias.tipo
+                                                        WHEN "associacao"       THEN "Associação"
+                                                        WHEN "cooperativa"      THEN "Cooperativa"
+                                                        WHEN "grupoavulso"      THEN "Avulsa"
+                                                        WHEN "grupoinformal"    THEN "Informal"
+                                                        WHEN "indefinido"       THEN "Indefinido"
+                                                      END AS companhia_tipo,
+                                                      COUNT(companhia_residuo.residuo_id) AS residuo_total,
+                                                      GROUP_CONCAT(residuos.nome SEPARATOR ", ") as nomeResiduo'
                                     )
                                 )
                                 ->where('municipios.id', '=', $municipio )
@@ -74,7 +80,7 @@ class DashboardController extends Controller
 
         $detalhespontocoletas = DB::table('pontocoletas')->rightJoinSub($detalhesresiduos, 'aliasResiduos', function ($join) {
                                     $join->on('pontocoletas.companhia_id', '=', 'aliasResiduos.idCompanhia');
-                                })->select(DB::raw('aliasResiduos.idCompanhia, aliasResiduos.companhia_nome, aliasResiduos.companhia_tipo, aliasResiduos.totalcompanhia_unica,
+                                })->select(DB::raw('aliasResiduos.idCompanhia, aliasResiduos.companhia_nome, aliasResiduos.companhia_tipo, aliasResiduos.companhia_total, aliasResiduos.companhia_tipototal,
                                             aliasResiduos.residuo_total, aliasResiduos.nomeResiduo,
                                             COUNT(DISTINCT pontocoletas.id) AS pontocoleta_total'))
                                 ->groupBy('aliasResiduos.idCompanhia');
@@ -83,7 +89,7 @@ class DashboardController extends Controller
 
         $detalhesassociados = DB::table('associados')->rightJoinSub($detalhespontocoletas, 'aliasPontoscoletas', function ($join) {
                                     $join->on('associados.companhia_id', '=', 'aliasPontoscoletas.idCompanhia');
-                                })->select(DB::raw('aliasPontoscoletas.idCompanhia, aliasPontoscoletas.companhia_nome, aliasPontoscoletas.companhia_tipo, aliasPontoscoletas.totalcompanhia_unica,
+                                })->select(DB::raw('aliasPontoscoletas.idCompanhia, aliasPontoscoletas.companhia_nome, aliasPontoscoletas.companhia_tipo, aliasPontoscoletas.companhia_total, aliasPontoscoletas.companhia_tipototal,
                                             aliasPontoscoletas.residuo_total, aliasPontoscoletas.nomeResiduo,
                                             aliasPontoscoletas.pontocoleta_total,
                                             COUNT(DISTINCT associados.id) AS companhia_totalcatadores,

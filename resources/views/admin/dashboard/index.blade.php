@@ -2,8 +2,8 @@
 
 @section('conteudo-principal')
 
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+    <div class="mb-4 d-sm-flex align-items-center justify-content-between">
+        <h1 class="mb-0 text-gray-800 h3">Dashboard</h1>
         <label id="ocultarExibirPaineldeCards" style="cursor: pointer; font-size: 17px;"><i id="iconeVisao" class="fas fa-eye-slash" style=" margin-right: 5px;"></i>ocultar</label>
     </div>
 
@@ -11,13 +11,13 @@
         <div class="row" id="paineldeCards">
 
             <!-- Municípios -->
-            <div class="col-xl-2 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
+            <div class="mb-4 col-xl-2 col-md-6">
+                <div class="py-2 shadow card border-left-primary h-100">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Municípios</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdMunicipios }}</div>
+                            <div class="mr-2 col">
+                                <div class="mb-1 text-xs font-weight-bold text-primary text-uppercase">Municípios</div>
+                                <div class="mb-0 text-gray-800 h5 font-weight-bold">{{ $qtdMunicipios }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-globe-americas fa-2x text-black-300"></i>
@@ -28,13 +28,13 @@
             </div>
 
             <!-- Bairros -->
-            <div class="col-xl-2 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
+            <div class="mb-4 col-xl-2 col-md-6">
+                <div class="py-2 shadow card border-left-primary h-100">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Bairros</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdBairros }}</div>
+                            <div class="mr-2 col">
+                                <div class="mb-1 text-xs font-weight-bold text-primary text-uppercase">Bairros</div>
+                                <div class="mb-0 text-gray-800 h5 font-weight-bold">{{ $qtdBairros }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-map-marked-alt fa-2x text-black-300"></i>
@@ -45,16 +45,16 @@
             </div>
 
             <!-- Pontos de Coleta -->
-            <div class="col-xl-2 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
+            <div class="mb-4 col-xl-2 col-md-6">
+                <div class="py-2 shadow card border-left-primary h-100">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Pontos de Coleta</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdPontoColetas }}</div>
+                            <div class="mr-2 col">
+                                <div class="mb-1 text-xs font-weight-bold text-primary text-uppercase">Pontos de Coleta</div>
+                                <div class="mb-0 text-gray-800 h5 font-weight-bold">{{ $qtdPontoColetas }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-building  fa-2x text-black-300"></i>
+                                <i class="fas fa-building fa-2x text-black-300"></i>
                             </div>
                         </div>
                     </div>
@@ -62,13 +62,13 @@
             </div>
 
             <!-- Resíduos -->
-            <div class="col-xl-2 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
+            <div class="mb-4 col-xl-2 col-md-6">
+                <div class="py-2 shadow card border-left-primary h-100">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Resíduos</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdResiduos }}</div>
+                            <div class="mr-2 col">
+                                <div class="mb-1 text-xs font-weight-bold text-primary text-uppercase">Resíduos</div>
+                                <div class="mb-0 text-gray-800 h5 font-weight-bold">{{ $qtdResiduos }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-recycle fa-2x text-black-300"></i>
@@ -81,13 +81,13 @@
 
 
             <!-- Masculino-->
-            <div class="col-xl-2 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
+            <div class="mb-4 col-xl-2 col-md-6">
+                <div class="py-2 shadow card border-left-primary h-100">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Catadores<br>Masculino</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdAssMasc }}</div>
+                            <div class="mr-2 col">
+                                <div class="mb-1 text-xs font-weight-bold text-primary text-uppercase">Catadores<br>Masculino</div>
+                                <div class="mb-0 text-gray-800 h5 font-weight-bold">{{ $qtdAssMasc }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-male fa-2x text-black-300"></i>
@@ -99,13 +99,13 @@
 
 
             <!-- Feminino-->
-            <div class="col-xl-2 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
+            <div class="mb-4 col-xl-2 col-md-6">
+                <div class="py-2 shadow card border-left-primary h-100">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Catadores<br>Feminino</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdAssFemi }}</div>
+                            <div class="mr-2 col">
+                                <div class="mb-1 text-xs font-weight-bold text-primary text-uppercase">Catadores<br>Feminino</div>
+                                <div class="mb-0 text-gray-800 h5 font-weight-bold">{{ $qtdAssFemi }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-female fa-2x text-black-300"></i>
@@ -116,16 +116,16 @@
             </div>
 
             <!-- Catadores Associados -->
-            <div class="col-xl-2 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
+            <div class="mb-4 col-xl-2 col-md-6">
+                <div class="py-2 shadow card border-left-primary h-100">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Catadores<br>Associados</div>
-                                <div class="h5 mb-0 font-weight-bold text-black-800">{{ $qtdAssAssoc }}</div>
+                            <div class="mr-2 col">
+                                <div class="mb-1 text-xs font-weight-bold text-primary text-uppercase">Catadores<br>Associados</div>
+                                <div class="mb-0 h5 font-weight-bold text-black-800">{{ $qtdAssAssoc }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-users  fa-2x text-black-300"></i>
+                                <i class="fas fa-users fa-2x text-black-300"></i>
                             </div>
                         </div>
                     </div>
@@ -134,16 +134,16 @@
 
 
             <!-- Catadores Cooperados -->
-            <div class="col-xl-2 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
+            <div class="mb-4 col-xl-2 col-md-6">
+                <div class="py-2 shadow card border-left-primary h-100">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Catadores<br>Cooperados</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdAssCoop }}</div>
+                            <div class="mr-2 col">
+                                <div class="mb-1 text-xs font-weight-bold text-primary text-uppercase">Catadores<br>Cooperados</div>
+                                <div class="mb-0 text-gray-800 h5 font-weight-bold">{{ $qtdAssCoop }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-users  fa-2x text-black-300"></i>
+                                <i class="fas fa-users fa-2x text-black-300"></i>
                             </div>
                         </div>
                     </div>
@@ -152,16 +152,16 @@
 
 
              <!-- Catadores Avulsos -->
-             <div class="col-xl-2 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
+             <div class="mb-4 col-xl-2 col-md-6">
+                <div class="py-2 shadow card border-left-primary h-100">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Catadores<br>Avulsos</div>
-                                <div class="h5 mb-0 font-weight-bold text-black-800">{{ $qtdAssAvul }}</div>
+                            <div class="mr-2 col">
+                                <div class="mb-1 text-xs font-weight-bold text-primary text-uppercase">Catadores<br>Avulsos</div>
+                                <div class="mb-0 h5 font-weight-bold text-black-800">{{ $qtdAssAvul }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-users  fa-2x text-black-300"></i>
+                                <i class="fas fa-users fa-2x text-black-300"></i>
                             </div>
                         </div>
                     </div>
@@ -170,16 +170,16 @@
 
 
             <!-- Catadores Informal -->
-            <div class="col-xl-2 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
+            <div class="mb-4 col-xl-2 col-md-6">
+                <div class="py-2 shadow card border-left-primary h-100">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Catadores<br>Informais</div>
-                                <div class="h5 mb-0 font-weight-bold text-black-800">{{ $qtdAssInform}}</div>
+                            <div class="mr-2 col">
+                                <div class="mb-1 text-xs font-weight-bold text-primary text-uppercase">Catadores<br>Informais</div>
+                                <div class="mb-0 h5 font-weight-bold text-black-800">{{ $qtdAssInform}}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-users  fa-2x text-black-300"></i>
+                                <i class="fas fa-users fa-2x text-black-300"></i>
                             </div>
                         </div>
                     </div>
@@ -189,16 +189,16 @@
 
             <!-- Catadores Indefinidos -->
             @if($qtdAssIndef > 0)
-                <div class="col-xl-2 col-md-6 mb-4">
-                    <div class="card border-left-danger shadow h-100 py-2">
+                <div class="mb-4 col-xl-2 col-md-6">
+                    <div class="py-2 shadow card border-left-danger h-100">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Catadores<br>Indefinidos</div>
-                                    <div class="h5 mb-0 font-weight-bold text-danger-800" style="color: red">{{ $qtdAssIndef}}</div>
+                                <div class="mr-2 col">
+                                    <div class="mb-1 text-xs font-weight-bold text-danger text-uppercase">Catadores<br>Indefinidos</div>
+                                    <div class="mb-0 h5 font-weight-bold text-danger-800" style="color: red">{{ $qtdAssIndef}}</div>
                                 </div>
                                 <div class="col-auto">
-                                    <i class="fas fa-users  fa-2x text-danger-300" style="color: red"></i>
+                                    <i class="fas fa-users fa-2x text-danger-300" style="color: red"></i>
                                 </div>
                             </div>
                         </div>
@@ -208,13 +208,13 @@
 
 
              <!-- Associações -->
-             <div class="col-xl-2 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
+             <div class="mb-4 col-xl-2 col-md-6">
+                <div class="py-2 shadow card border-left-primary h-100">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Associações</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdComphAssoc }}</div>
+                            <div class="mr-2 col">
+                                <div class="mb-1 text-xs font-weight-bold text-primary text-uppercase">Associações</div>
+                                <div class="mb-0 text-gray-800 h5 font-weight-bold">{{ $qtdComphAssoc }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-city fa-2x text-black-300"></i>
@@ -226,13 +226,13 @@
 
 
             <!-- Cooperativas -->
-            <div class="col-xl-2 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
+            <div class="mb-4 col-xl-2 col-md-6">
+                <div class="py-2 shadow card border-left-primary h-100">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Cooperativas</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdComphCoop }}</div>
+                            <div class="mr-2 col">
+                                <div class="mb-1 text-xs font-weight-bold text-primary text-uppercase">Cooperativas</div>
+                                <div class="mb-0 text-gray-800 h5 font-weight-bold">{{ $qtdComphCoop }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-city fa-2x text-black-300"></i>
@@ -243,13 +243,13 @@
             </div>
 
             <!-- Grupos Avulsos -->
-            <div class="col-xl-2 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
+            <div class="mb-4 col-xl-2 col-md-6">
+                <div class="py-2 shadow card border-left-primary h-100">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Grupos Avulsos</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdComphGrupAvuls }}</div>
+                            <div class="mr-2 col">
+                                <div class="mb-1 text-xs font-weight-bold text-primary text-uppercase">Grupos Avulsos</div>
+                                <div class="mb-0 text-gray-800 h5 font-weight-bold">{{ $qtdComphGrupAvuls }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-city fa-2x text-black-300"></i>
@@ -260,13 +260,13 @@
             </div>
 
             <!-- Grupos Informais -->
-            <div class="col-xl-2 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
+            <div class="mb-4 col-xl-2 col-md-6">
+                <div class="py-2 shadow card border-left-primary h-100">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Grupos Informais</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $qtdComphGrupInfom }}</div>
+                            <div class="mr-2 col">
+                                <div class="mb-1 text-xs font-weight-bold text-primary text-uppercase">Grupos Informais</div>
+                                <div class="mb-0 text-gray-800 h5 font-weight-bold">{{ $qtdComphGrupInfom }}</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-city fa-2x text-black-300"></i>
@@ -278,13 +278,13 @@
 
             <!-- Grupos Indefinidos -->
             @if($qtdComphGrupIndef > 0)
-                <div class="col-xl-2 col-md-6 mb-4">
-                    <div class="card border-left-danger shadow h-100 py-2">
+                <div class="mb-4 col-xl-2 col-md-6">
+                    <div class="py-2 shadow card border-left-danger h-100">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Grupos Indefinidos</div>
-                                    <div class="h5 mb-0 font-weight-bold text-danger-800"  style="color: red">{{ $qtdComphGrupIndef }}</div>
+                                <div class="mr-2 col">
+                                    <div class="mb-1 text-xs font-weight-bold text-danger text-uppercase">Grupos Indefinidos</div>
+                                    <div class="mb-0 h5 font-weight-bold text-danger-800"  style="color: red">{{ $qtdComphGrupIndef }}</div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fas fa-city fa-2x text-black-300"  style="color: red"></i>
@@ -302,7 +302,7 @@
         <!-- INÍCIO GRÁFICOS MONITOR MÊS A MÊS REGIONAL - MUNICIPIO - RESTAURANTE  -->
         <div class="row">
             <div class="col-xl-12 col-lg-12">
-                <div class="card shadow mb-4">
+                <div class="mb-4 shadow card">
                     <div class="pesquisaMonitor">
                         <div class="card-header ">
                             <div class="form-row">
@@ -322,10 +322,10 @@
                             <div class="dropdown no-arrow">
                                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuDadosMesMesRestaurante"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="text-decoration: none">
-                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                    <i class="text-gray-400 fas fa-ellipsis-v fa-sm fa-fw"></i>
                                 </a>
                                 <div class="psdmenu-mrc">
-                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                    <div class="shadow dropdown-menu dropdown-menu-right animated--fade-in"
                                         aria-labelledby="dropdownMenuDadosMesMes">
                                         <a class="dropdown-item psdlink entidademesamesmonitor" data-entidademesamesmonitor="Geral"  data-id="0">Geral</a>
 
@@ -347,7 +347,7 @@
 
                             <!-- INICIO TABELA -->
 
-                            <table id="dadosCompanhiasMunicipio" class="table table-sm table-bordered  table-hover">
+                            <table id="dadosCompanhiasMunicipio" class="table table-sm table-bordered table-hover">
                                 <thead  class="bg-gray-100">
                                     <tr>
                                         <th colspan="8">Município: </th>
@@ -433,27 +433,39 @@
                 success: function(result){
                     $("#dadosMunicipio").html('');
 
-                    let totCat = 0;
-                    let totMasc = 0;
-                    let totFeme = 0;
-                    let totComCart = 0;
-                    let totSemCart = 0;
-                    let totPColet = 0;
-                    let totCompUnic = 0;
+                    let totCompanhias = 0;
+                    let totCatadores = 0;
+                    let totMasculinos = 0;
+                    let totFemininos = 0;
+                    let totComCarteiras = 0;
+                    let totSemCarteiras = 0;
+                    let totPontosColetas = 0;
+
+                    let cadeiadeString = '';
+                    let finalResiduosUnicos; '';
+                    let arrStringResiduos = [];
+                    let arrResiduosUnicos = [];
+                    let totResiduosUnicos = 0;
+                    let arrTiposCompanhias = [];
+                    
 
                     $.each(result.dados,function(key,value){
 
-                        totCat  += value.companhia_totalcatadores;
-                        totMasc += value.companhia_totalmasc;
-                        totFeme += value.companhia_totalfeme;
-                        totComCart += value.companhia_totalcomcarteira;
-                        totSemCart += value.companhia_totalsemcarteira;
-                        totPColet += value.pontocoleta_total;
-                        totCompUnic += value.totalcompanhia_unica,
+                        totCompanhias += value.companhia_total,
+                        totCatadores  += value.companhia_totalcatadores;
+                        totMasculinos += value.companhia_totalmasc;
+                        totFemininos += value.companhia_totalfeme;
+                        totComCarteiras += value.companhia_totalcomcarteira;
+                        totSemCarteiras += value.companhia_totalsemcarteira;
+                        totPontosColetas += value.pontocoleta_total;
 
 
-                        //$("#selectMunicipio_id").append('<option value="'+value.id+'">'+value.nome+'</option>');
-                        console.log(result);
+                        // Adiciona ao array "arrStringResiduos" cada string formada pelo conjunto de residuos que foi retornado
+                        value.nomeResiduo != null ? arrStringResiduos.push(value.nomeResiduo) : ''; // OU arrStringResiduos.push(value.nomeResiduo);
+                        arrTiposCompanhias.push(value.companhia_tipo);
+
+
+                        // Exibindo os valores retornados em suas respectivas posições
                         $("#dadosMunicipio").append(`
                                 <tr>
                                     <td scope="col" style="width: 300px; text-align: left">${value.companhia_nome}</td>
@@ -470,19 +482,36 @@
                         `);
                     });
 
+                    // Transformando/Concatenando os elementos do array "arrStringResiduos" em uma única string, separada por ", "
+                    arrStringResiduosElementos =  arrStringResiduos.join(", ");
+                    
+
+                    // Transformando a string "arrStringResiduosElementos" em elementos de uma array, separados por ", "
+                    let arrNomesResiduos = arrStringResiduosElementos.split(', ');
+
+                    // Gerando um novo array só com elementos únicos com o método "Set"
+                    arrResiduosUnicos = Array.from(new Set(arrNomesResiduos));
+                    totResiduosUnicos = arrResiduosUnicos.length;
+                    
+                    arrTipoUnicos = Array.from(new Set(arrTiposCompanhias));
+                    totTiposUnicos = arrTipoUnicos.length;
+
+                    // Transformando novamente os elementos do array em uma string única, separada por ", "
+                    finalResiduosUnicos = arrResiduosUnicos.join(", ");
+                    
 
                     $("#dadosMunicipio").append(`
                                 <tr style="background-color: #e3e6f0; font-weight: bold; font-size:17px;">
-                                    <td scope="col" style="width: 300px; text-align: left">&nbsp;</td>
-                                    <td scope="col" style="width: 100px; text-align: center">${totCompUnic}</td>
-                                    <td scope="col" style="width: 130px; text-align: center">${totCat}</td>
-                                    <td scope="col" style="width: 100px; text-align: center">${totMasc}</td>
-                                    <td scope="col" style="width: 100px; text-align: center">${totFeme}</td>
-                                    <td scope="col" style="width: 100px; text-align: center">${totComCart}</td>
-                                    <td scope="col" style="width: 100px; text-align: center">${totSemCart}</td>
-                                    <td scope="col" style="width: 100px; text-align: center">${totPColet}</td>
-                                    <td scope="col" style="width: 50px; text-align: center"></td>
-                                    <td scope="col" style="width: 350px; text-align: left"></td>
+                                    <td scope="col" style="width: 300px; text-align: center">${totCompanhias}</td>
+                                    <td scope="col" style="width: 100px; text-align: center">${totTiposUnicos}</td>
+                                    <td scope="col" style="width: 130px; text-align: center">${totCatadores}</td>
+                                    <td scope="col" style="width: 100px; text-align: center">${totMasculinos}</td>
+                                    <td scope="col" style="width: 100px; text-align: center">${totFemininos}</td>
+                                    <td scope="col" style="width: 100px; text-align: center">${totComCarteiras}</td>
+                                    <td scope="col" style="width: 100px; text-align: center">${totSemCarteiras}</td>
+                                    <td scope="col" style="width: 100px; text-align: center">${totPontosColetas}</td>
+                                    <td scope="col" style="width: 50px; text-align: center">${totResiduosUnicos}</td>
+                                    <td scope="col" style="width: 350px; text-align: left">${finalResiduosUnicos}</td>
                                 </tr>
                         `);
                 },
