@@ -115,6 +115,43 @@
                 </div>
             </div>
 
+
+            <!-- Carteiras Emitidas-->
+            <div class="mb-4 col-xl-2 col-md-6">
+                <div class="py-2 shadow card border-left-primary h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="mr-2 col">
+                                <div class="mb-1 text-xs font-weight-bold text-primary text-uppercase">Carteiras<br>Emitidas</div>
+                                <div class="mb-0 text-gray-800 h5 font-weight-bold">{{ $qtdComCarteira }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="far fa-id-card fa-2x text-black-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Carteiras não Emitidas-->
+            <div class="mb-4 col-xl-2 col-md-6">
+                <div class="py-2 shadow card border-left-primary h-100">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="mr-2 col">
+                                <div class="mb-1 text-xs font-weight-bold text-primary text-uppercase">Carteiras<br>não Emitidas</div>
+                                <div class="mb-0 text-gray-800 h5 font-weight-bold">{{ $qtdSemCarteira }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="far fa-id-card fa-2x text-black-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Catadores Associados -->
             <div class="mb-4 col-xl-2 col-md-6">
                 <div class="py-2 shadow card border-left-primary h-100">
@@ -443,6 +480,7 @@
 
                     let cadeiadeString = '';
                     let finalResiduosUnicos; '';
+                    let arrNomesResiduos = '';
                     let arrStringResiduos = [];
                     let arrResiduosUnicos = [];
                     let totResiduosUnicos = 0;
@@ -485,9 +523,8 @@
                     // Transformando/Concatenando os elementos do array "arrStringResiduos" em uma única string, separada por ", "
                     arrStringResiduosElementos =  arrStringResiduos.join(", ");
                     
-
                     // Transformando a string "arrStringResiduosElementos" em elementos de uma array, separados por ", "
-                    let arrNomesResiduos = arrStringResiduosElementos.split(', ');
+                    arrNomesResiduos = arrStringResiduosElementos.split(', ');
 
                     // Gerando um novo array só com elementos únicos com o método "Set"
                     arrResiduosUnicos = Array.from(new Set(arrNomesResiduos));
@@ -510,7 +547,7 @@
                                     <td scope="col" style="width: 100px; text-align: center">${totComCarteiras}</td>
                                     <td scope="col" style="width: 100px; text-align: center">${totSemCarteiras}</td>
                                     <td scope="col" style="width: 100px; text-align: center">${totPontosColetas}</td>
-                                    <td scope="col" style="width: 50px; text-align: center">${totResiduosUnicos}</td>
+                                    <td scope="col" style="width: 50px; text-align: center">${finalResiduosUnicos == "" ? 0 : totResiduosUnicos}</td>
                                     <td scope="col" style="width: 350px; text-align: left">${finalResiduosUnicos}</td>
                                 </tr>
                         `);

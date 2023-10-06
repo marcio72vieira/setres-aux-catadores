@@ -29,6 +29,8 @@ class DashboardController extends Controller
         $qtdComphGrupAvuls = Dashboard::quantidadeComphGrupoAvulso();
         $qtdComphGrupInfom =  Dashboard::quantidadeComphGrupoInformal();
         $qtdComphGrupIndef =  Dashboard::quantidadeComphGrupoIndefinido();
+        $qtdComCarteira =  Dashboard::quantidadeComCarteira();
+        $qtdSemCarteira = Dashboard::quantidadeSemCarteira();
 
         $municipios = Dashboard::municipios();
 
@@ -38,7 +40,7 @@ class DashboardController extends Controller
                 'qtdAssMasc', 'qtdAssFemi',
                 'qtdAssCoop', 'qtdAssAssoc', 'qtdAssAvul', 'qtdAssInform', 'qtdAssIndef',
                 'qtdComphAssoc', 'qtdComphCoop', 'qtdComphGrupAvuls', 'qtdComphGrupInfom', 'qtdComphGrupIndef',
-                'municipios'
+                'municipios', 'qtdComCarteira', 'qtdSemCarteira'
             )
         );
     }

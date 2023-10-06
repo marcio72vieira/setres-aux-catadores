@@ -124,10 +124,26 @@ class Dashboard extends Model
       return $qtdCompGrupoIndef;
     }
 
+    // Retorna a quantidade de Associados com carteiras emitidas
+    public static function quantidadeComCarteira()
+    {
+        $qtdComCart = DB::table('associados')->where('carteiraemitida', '=', 1)->count();
+        return $qtdComCart;
+    }
+
+    // Retorna a quantidade de Associados sem carteiras emitidas
+    public static function quantidadeSemCarteira()
+    {
+        $qtdSemCart = DB::table('associados')->where('carteiraemitida', '=', 0)->count();
+        return $qtdSemCart;
+    }
+
+
     public static function municipios() {
         $municipios = DB::table('municipios')->select('id', 'nome', )->orderBy('nome')->get();
         return $municipios;
     }
+
 
 
 }
