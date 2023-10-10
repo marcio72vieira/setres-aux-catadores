@@ -138,11 +138,11 @@
                                         <label class="form-control-label" for="tipo">Tipo<span class="small text-danger">*</span></label>
                                         <select name="tipo" id="tipo" class="form-control" required>
                                             <option value="" selected disabled>Escolha ...</option>
-                                            <option value="associado" {{old('tipo') == 'branca' ? 'selected' : ''}}>Associado</option>
-                                            <option value="cooperado" {{old('tipo') == 'parda' ? 'selected' : ''}}>Cooperado</option>
-                                            <option value="avulso" {{old('tipo') == 'preta' ? 'selected' : ''}}>Avulso</option>
-                                            <option value="informal" {{old('tipo') == 'indigena' ? 'selected' : ''}}>Informal</option>
-                                            <option value="indefinido" {{old('tipo') == 'amarela' ? 'selected' : ''}}>Indefinido</option>
+                                            <option value="associado" {{old('tipo') == 'associado' ? 'selected' : ''}}>Associado</option>
+                                            <option value="cooperado" {{old('tipo') == 'cooperado' ? 'selected' : ''}}>Cooperado</option>
+                                            <option value="avulso" {{old('tipo') == 'avulso' ? 'selected' : ''}}>Avulso</option>
+                                            <option value="informal" {{old('tipo') == 'informal' ? 'selected' : ''}}>Informal</option>
+                                            <option value="indefinido" {{old('tipo') == 'indefinido' ? 'selected' : ''}}>Indefinido</option>
                                         </select>
                                         @error('tipo')
                                             <small style="color: red">{{$message}}</small>
@@ -337,7 +337,7 @@
                                 <div class="col-lg-2">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="carteiravalidade">Data de Validade<span class="small text-danger">*</span></label>
-                                        <input type="date" id="carteiravalidade" class="form-control" name="carteiravalidade" value="{{old('carteiravalidade')}}" required>
+                                        <input type="date" id="carteiravalidade" class="form-control" name="carteiravalidade" value="{{old('carteiravalidade')}}">
                                         @error('carteiravalidade')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
