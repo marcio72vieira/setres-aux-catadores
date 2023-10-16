@@ -100,3 +100,9 @@ Route::get('admin/associado/consultaqr/{idqrcode}', [AssociadoController::class,
 // BAIXANDO ARQUIVOS
 Route::get('admin/associado/donwloadfile/{id}/baixararquivos', [AssociadoController::class, 'baixararquivos'])->name('admin.associado.baixararquivos')->middleware(['auth']);
 Route::get('admin/associado/downloadfolder/zipdownload', [AssociadoController::class, 'zipdownload'])->name('admin.associado.zipdownload')->middleware(['auth']);
+
+
+
+// RELATÓRIOS DASHBOARD
+Route::get('admin/dashboard/pdf/{id?}/relatoriomunicipiogeral', [DashboardController::class, 'relatoriomunicipiogeral'])->name('admin.dashboard.relatoriomunicipiogeral')->middleware(['auth']);
+Route::get('admin/dashboard/pdf/relatoriomunicipioindividual', [DashboardController::class, 'relatoriomunicipioindividual'])->name('admin.dashboard.relatoriomunicipioindividual')->middleware(['auth']);

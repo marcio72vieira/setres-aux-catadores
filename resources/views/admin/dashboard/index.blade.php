@@ -3,7 +3,10 @@
 @section('conteudo-principal')
 
     <div class="mb-4 d-sm-flex align-items-center justify-content-between">
-        <h1 class="mb-0 text-gray-800 h3">Dashboard</h1>
+        <h1 class="mb-0 text-gray-800 h3">
+            Dashboard
+            <a href="{{route('admin.dashboard.relatoriomunicipiogeral', 0)}}" role="button" target="_blank" style="font-size: 15px; color: red" title="Relatório Geral" alt="Relatório Geral"><i class="far fa-file-pdf"  style="font-size: 22px; color: gray"></i></a>
+        </h1>
         <label id="ocultarExibirPaineldeCards" style="cursor: pointer; font-size: 17px;"><i id="iconeVisao" class="fas fa-eye-slash" style=" margin-right: 5px;"></i>ocultar</label>
     </div>
 
@@ -384,12 +387,12 @@
 
                             <!-- INICIO TABELA -->
 
-                            <table id="dadosCompanhiasMunicipio" class="table table-sm table-bordered table-hover">
+                            <table id="dadosCompanhiasMunicipio" class="table table-sm table-bordered table-hover" style="color: #101d7e;">
                                 <thead  class="bg-gray-100">
                                     <tr>
-                                        <th colspan="8">Município: </th>
+                                        <th colspan="8">Município: <span id="municipioSelecionado" style="font-weight: bold; font-size:20px;"></span></th>
                                         <th colspan="2"style="text-align: right">
-                                            <a class="btn btn-primary btn-danger btn-sm" href="" role="button" target="_blank"><i class="far fa-file-pdf"  style="font-size: 15px;"></i>pdf</a>
+                                            <a class="btn btn-sm" href="{{route('admin.dashboard.relatoriomunicipiogeral', 0)}}" role="button" target="_blank" style="font-size: 17px; color: gray;"  title="Relatório Individual" alt="Relatório Individual"><i class="far fa-file-pdf"  style="font-size: 17px; color: gray"></i> pdf</a>
                                         </th>
                                     </tr>
                                     <tr>
@@ -457,7 +460,12 @@
         //Recuperação dinâmica das Companhias do Município escolhido
         $('#selectMunicipio_id').on('change', function() {
 
+            // Recupera o valor do campo select
             var municipio_id = this.value;
+
+            // Recupera o texto do option do campo select, selecionado 
+            var nomeMunicipioSelecionado = $(this).children("option:selected").text();
+            $("#municipioSelecionado").text(nomeMunicipioSelecionado);
 
             $.ajax({
                 url:"{{route('admin.ajaxgetCompanhiasMunicipio')}}",

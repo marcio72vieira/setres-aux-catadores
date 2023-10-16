@@ -7,6 +7,7 @@ use App\Models\Dashboard;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Query\JoinClause;
+use App\Models\Municipio;
 
 class DashboardController extends Controller
 {
@@ -104,15 +105,152 @@ class DashboardController extends Controller
 
         $data['dados'] =  $detalhesassociados;
         return response()->json($data);
+    }
+
+
+
+    // Configuração de Relatórios PDFs
+    public function relatoriomunicipiogeral($id = null)
+    {
+        $municipios = Municipio::all();
+
+        $fileName = ('Municipios_geral.pdf');
+
+        $mpdf = new \Mpdf\Mpdf([
+            'orientation' => 'L',
+            'margin_left' => 10,
+            'margin_right' => 10,
+            'margin_top' => 32,
+            'margin_bottom' => 15,
+            'margin-header' => 10,
+            'margin_footer' => 5
+        ]);
+
+        $mpdf->SetHTMLHeader('
+            <table style="width:1080px; border-bottom: 1px solid #000000; margin-bottom: 3px;">
+                <tr>
+                    <td style="width: 108px">
+                        <img src="images/logo-ma.png" width="80"/>
+                    </td>
+                    <td style="width: 432px; font-size: 10px; font-family: Arial, Helvetica, sans-serif;">
+                        Governo do Estado do Maranhão<br>
+                        Secretaria de Governo<br>
+                        Secreatia Adjunta de Tecnologia da Informação/SEATI<br>
+                        Secretaria do Trabalho e Economia Solidaria/SETRES
+                    </td>
+                    <td style="width: 540px;" class="titulo-rel">
+                        INFORMAÇÕES GERAIS
+                    </td>
+                </tr>
+            </table>
+            <table style="width:1080px; border-collapse: collapse;">
+                <tr>
+                    <td width="50px" class="col-header-table">ID</td>
+                    <td width="250px" class="col-header-table">NOME</td>
+                    <td width="110px" class="col-header-table">RG</td>
+                    <td width="90px" class="col-header-table">CPF</td>
+                    <td width="180px" class="col-header-table">TELEFFONES</td>
+                    <td width="200px" class="col-header-table">COMPANHIA / INSTITUIÇÃO</td>
+                    <td width="200px" class="col-header-table">ÁREA DE ATUAÇÃO (MUNICÍPIO)</td>
+                </tr>
+            </table>
+        ');
+
+        $mpdf->SetHTMLFooter('
+            <table style="width:1080px; border-top: 1px solid #000000; font-size: 10px; font-family: Arial, Helvetica, sans-serif;">
+                <tr>
+                    <td width="360px">São Luis(MA) {DATE d/m/Y}</td>
+                    <td width="360px" align="center"></td>
+                    <td width="360px" align="right">{PAGENO}/{nbpg}</td>
+                </tr>
+            </table>
+        ');
 
 
 
 
+        $html = \View::make('admin.dashboard.pdf.pdfrelatoriomunicipiogeral', compact('municipios'));
+        $html = $html->render();
+
+        $stylesheet = file_get_contents('pdf/mpdf.css');
+        $mpdf->WriteHTML($stylesheet, 1);
+
+        $mpdf->WriteHTML($html);
+        $mpdf->Output($fileName, 'I');
+
+        //return view('admin.residuo.pdf.pdfresiduogeral', compact('residuos'));
+    }
 
 
+    // Relatorio PDF Associados por Municipio
+    public function relatoriomunicipioindividual($id)
+    {
+        $municipio = Municipio::find($id);
+
+        $fileName = ('Municipio_individual.pdf');
+
+        $mpdf = new \Mpdf\Mpdf([
+            'orientation' => 'L',
+            'margin_left' => 10,
+            'margin_right' => 10,
+            'margin_top' => 32,
+            'margin_bottom' => 15,
+            'margin-header' => 10,
+            'margin_footer' => 5
+        ]);
+
+        $mpdf->SetHTMLHeader('
+            <table style="width:1080px; border-bottom: 1px solid #000000; margin-bottom: 3px;">
+                <tr>
+                    <td style="width: 108px">
+                        <img src="images/logo-ma.png" width="80"/>
+                    </td>
+                    <td style="width: 432px; font-size: 10px; font-family: Arial, Helvetica, sans-serif;">
+                        Governo do Estado do Maranhão<br>
+                        Secretaria de Governo<br>
+                        Secreatia Adjunta de Tecnologia da Informação/SEATI<br>
+                        Secretaria do Trabalho e Economia Solidaria/SETRES
+                    </td>
+                    <td style="width: 540px;" class="titulo-rel">
+                        ASSOCIADOS: '.$municipio->nome.'
+                    </td>
+                </tr>
+            </table>
+            <table style="width:1080px; border-collapse: collapse;">
+                <tr>
+                    <td width="50px" class="col-header-table">ID</td>
+                    <td width="250px" class="col-header-table">NOME</td>
+                    <td width="110px" class="col-header-table">RG</td>
+                    <td width="90px" class="col-header-table">CPF</td>
+                    <td width="180px" class="col-header-table">TELEFFONES</td>
+                    <td width="200px" class="col-header-table">COMPANHIA / INSTITUIÇÃO</td>
+                    <td width="200px" class="col-header-table">ÁREA DE ATUAÇÃO (MUNICÍPIO)</td>
+                </tr>
+            </table>
+        ');
+
+        $mpdf->SetHTMLFooter('
+            <table style="width:1080px; border-top: 1px solid #000000; font-size: 10px; font-family: Arial, Helvetica, sans-serif;">
+                <tr>
+                    <td width="360px">São Luis(MA) {DATE d/m/Y}</td>
+                    <td width="360px" align="center"></td>
+                    <td width="360px" align="right">{PAGENO}/{nbpg}</td>
+                </tr>
+            </table>
+        ');
 
 
+        $html = \View::make('admin.municipio.pdf.pdfrelatoriomunicipioindividual', compact('municipio', 'mpdf'));
+        $html = $html->render();
+
+        $stylesheet = file_get_contents('pdf/mpdf.css');
+        $mpdf->WriteHTML($stylesheet, 1);
+
+        $mpdf->WriteHTML($html);
+        //$mpdf->Output($fileName, 'D');  // Salva o relatório em um arquivo e força o download
+        $mpdf->Output($fileName, 'I');  // Exibe o relatório diretamente no Browse
 
     }
+
 
 }
