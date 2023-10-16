@@ -63,6 +63,26 @@
 
     td.close-ficha {
         border-top: 0.5px solid #000000;
+    }
+
+
+    td.label-dashboard{
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 10px;
+      padding-left: 5px;
+      padding-top: 4px;
+      padding-bottom: 4px;
+      border: 0.5px solid #000000;
+      background-color: #d7d5d5;
+    }
+
+    td.dados-dashboard{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 10px;
+        padding-left: 5px;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        border: 0.5px solid #000000;
       }
 
 

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
 
 class Dashboard extends Model
 {
@@ -28,8 +29,8 @@ class Dashboard extends Model
     // Retorna a quantidade de Pontos de Coleta
     public static function quantidadePontosDeColeta()
     {
-        $qtdBairros = DB::table('pontocoletas')->count();
-        return $qtdBairros;
+        $qtdPontoColetas = DB::table('pontocoletas')->count();
+        return $qtdPontoColetas;
     }
 
     // Retorna a quantidade de Resíduos
@@ -142,6 +143,55 @@ class Dashboard extends Model
     public static function municipios() {
         $municipios = DB::table('municipios')->select('id', 'nome', )->orderBy('nome')->get();
         return $municipios;
+    }
+
+
+    public static function dadosGerais() {
+        $dadosGerais =  array();
+
+        $qtdMunicipios  = DB::table('municipios')->count();
+        $qtdBairros     = DB::table('bairros')->count();
+        $qtdPontoColetas   = DB::table('pontocoletas')->count();
+        $qtdResiduos = DB::table('residuos')->count();
+        $qtdAssMasc = DB::table('associados')->where('sexo', '=', 'm')->count();
+        $qtdAssFemi = DB::table('associados')->where('sexo', '=', 'f')->count();
+        $qtdComCart = DB::table('associados')->where('carteiraemitida', '=', 1)->count();
+        $qtdSemCart = DB::table('associados')->where('carteiraemitida', '=', 0)->count();
+        $qtdAssAssoc = DB::table('associados')->where('tipo', '=', 'associado')->count();
+        $qtdAssCoop = DB::table('associados')->where('tipo', '=', 'cooperado')->count();
+        $qtdAssAvul = DB::table('associados')->where('tipo', '=', 'avulso')->count();
+        $qtdAssInform = DB::table('associados')->where('tipo', '=', 'informal')->count();
+        $qtdAssIndef = DB::table('associados')->where('tipo', '=', 'indefinido')->count();
+        $qtdCompAssociacao = DB::table('companhias')->where('tipo', '=', 'associacao')->count();
+        $qtdCompCooperativa = DB::table('companhias')->where('tipo', '=', 'cooperativa')->count();
+        $qtdCompGrupoAvulso = DB::table('companhias')->where('tipo', '=', 'grupoavulso')->count();
+        $qtdCompGrupoInform = DB::table('companhias')->where('tipo', '=', 'grupoinformal')->count();
+        $qtdCompGrupoIndef = DB::table('companhias')->where('tipo', '=', 'indefinido')->count();
+
+        $dadosGerais = [
+            'qtdMunicipios'     => $qtdMunicipios,
+            'qtdBairros'        => $qtdBairros,
+            'qtdPontoColetas'   => $qtdPontoColetas,
+            'qtdResiduos'       => $qtdResiduos,
+            'qtdAssTotal'       => $qtdAssMasc + $qtdAssFemi,
+            'qtdAssMasc'        => $qtdAssMasc,
+            'qtdAssFemi'        => $qtdAssFemi,
+            'qtdComCart'        => $qtdComCart,
+            'qtdSemCart'        => $qtdSemCart,
+            'qtdAssAssoc'       => $qtdAssAssoc,
+            'qtdAssCoop'        => $qtdAssCoop,
+            'qtdAssAvul'        => $qtdAssAvul,
+            'qtdAssInform'      => $qtdAssInform,
+            'qtdAssIndef'       => $qtdAssIndef,
+            'qtdCompAssociacao' => $qtdCompAssociacao,
+            'qtdCompCooperativa' => $qtdCompCooperativa,
+            'qtdCompGrupoAvulso' => $qtdCompGrupoAvulso,
+            'qtdCompGrupoInform' => $qtdCompGrupoInform,
+            'qtdCompGrupoIndef' => $qtdCompGrupoIndef
+        ];
+
+        return $dadosGerais;
+
     }
 
 

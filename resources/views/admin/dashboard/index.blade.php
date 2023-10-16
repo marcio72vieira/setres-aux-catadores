@@ -5,7 +5,7 @@
     <div class="mb-4 d-sm-flex align-items-center justify-content-between">
         <h1 class="mb-0 text-gray-800 h3">
             Dashboard
-            <a href="{{route('admin.dashboard.relatoriomunicipiogeral', 0)}}" role="button" target="_blank" style="font-size: 15px; color: red" title="Relatório Geral" alt="Relatório Geral"><i class="far fa-file-pdf"  style="font-size: 22px; color: gray"></i></a>
+            <a href="{{route('admin.dashboard.relatoriodashboard', 0)}}" role="button" target="_blank" style="font-size: 15px; color: red" title="Relatório Geral" alt="Relatório Geral"><i class="far fa-file-pdf"  style="font-size: 22px; color: gray"></i></a>
         </h1>
         <label id="ocultarExibirPaineldeCards" style="cursor: pointer; font-size: 17px;"><i id="iconeVisao" class="fas fa-eye-slash" style=" margin-right: 5px;"></i>ocultar</label>
     </div>
@@ -463,7 +463,7 @@
             // Recupera o valor do campo select
             var municipio_id = this.value;
 
-            // Recupera o texto do option do campo select, selecionado 
+            // Recupera o texto do option do campo select, selecionado
             var nomeMunicipioSelecionado = $(this).children("option:selected").text();
             $("#municipioSelecionado").text(nomeMunicipioSelecionado);
 
@@ -493,7 +493,7 @@
                     let arrResiduosUnicos = [];
                     let totResiduosUnicos = 0;
                     let arrTiposCompanhias = [];
-                    
+
 
                     $.each(result.dados,function(key,value){
 
@@ -530,20 +530,20 @@
 
                     // Transformando/Concatenando os elementos do array "arrStringResiduos" em uma única string, separada por ", "
                     arrStringResiduosElementos =  arrStringResiduos.join(", ");
-                    
+
                     // Transformando a string "arrStringResiduosElementos" em elementos de uma array, separados por ", "
                     arrNomesResiduos = arrStringResiduosElementos.split(', ');
 
                     // Gerando um novo array só com elementos únicos com o método "Set"
                     arrResiduosUnicos = Array.from(new Set(arrNomesResiduos));
                     totResiduosUnicos = arrResiduosUnicos.length;
-                    
+
                     arrTipoUnicos = Array.from(new Set(arrTiposCompanhias));
                     totTiposUnicos = arrTipoUnicos.length;
 
                     // Transformando novamente os elementos do array em uma string única, separada por ", "
                     finalResiduosUnicos = arrResiduosUnicos.join(", ");
-                    
+
 
                     $("#dadosMunicipio").append(`
                                 <tr style="background-color: #e3e6f0; font-weight: bold; font-size:17px;">
