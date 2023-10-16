@@ -43,9 +43,16 @@ class AssociadoUpdateRequest extends FormRequest
             //'fonedois' => 'bail|required_without_all:celular,recado|regex:/^\([1-9]{2}\) [2-9][0-9]{3,4}\-[0-9]{4}$/',
             'tipo' => 'bail|required',
             'carteiraemitida' => 'bail|required',
-            'carteiravalidade' => 'bail|required',
+            'carteiravalidade' => 'bail|required_if:carteiraemitida,1',
             'companhia_id' => 'bail|required',
             'areas' => 'bail|required|array'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'carteiravalidade.required_if' => 'Este campo é obrigatório',
         ];
     }
 }

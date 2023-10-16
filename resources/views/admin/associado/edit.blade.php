@@ -338,7 +338,7 @@
                                 <div class="col-lg-2">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="carteiravalidade">Data de Validade<span class="small text-danger">*</span></label>
-                                        <input type="date" id="carteiravalidade" class="form-control" name="carteiravalidade" value="{{old('carteiravalidade', $associado->carteiravalidade)}}" required>
+                                        <input type="date" id="carteiravalidade" class="form-control" name="carteiravalidade" value="{{old('carteiravalidade', $associado->carteiravalidade)}}">
                                         @error('carteiravalidade')
                                             <small style="color: red">{{$message}}</small>
                                         @enderror
