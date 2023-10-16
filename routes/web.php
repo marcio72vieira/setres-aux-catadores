@@ -106,3 +106,4 @@ Route::get('admin/associado/downloadfolder/zipdownload', [AssociadoController::c
 // RELATÓRIOS DASHBOARD
 Route::get('admin/dashboard/pdf/{id?}/relatoriomunicipiogeral', [DashboardController::class, 'relatoriomunicipiogeral'])->name('admin.dashboard.relatoriomunicipiogeral')->middleware(['auth']);
 Route::get('admin/dashboard/pdf/relatoriomunicipioindividual', [DashboardController::class, 'relatoriomunicipioindividual'])->name('admin.dashboard.relatoriomunicipioindividual')->middleware(['auth']);
+

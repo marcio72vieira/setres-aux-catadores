@@ -139,7 +139,7 @@ class DashboardController extends Controller
                         Secretaria do Trabalho e Economia Solidaria/SETRES
                     </td>
                     <td style="width: 540px;" class="titulo-rel">
-                        INFORMAÇÕES GERAIS
+                        RELATÓRIO GERAL
                     </td>
                 </tr>
             </table>
@@ -212,7 +212,7 @@ class DashboardController extends Controller
                         Secretaria do Trabalho e Economia Solidaria/SETRES
                     </td>
                     <td style="width: 540px;" class="titulo-rel">
-                        ASSOCIADOS: '.$municipio->nome.'
+                        RELATÓRIO INDIVIDUAL: '.$municipio->nome.'
                     </td>
                 </tr>
             </table>
