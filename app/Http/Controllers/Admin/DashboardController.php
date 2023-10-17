@@ -170,12 +170,12 @@ class DashboardController extends Controller
 
 
 
-    public function relatoriomunicipiogeral($id = null)
+    public function relatoriomunicipioindividual($idMunicipio)
     {
-        $municipios = Municipio::all();
+        $municipio = Dashboard::dadosMunicipioIndividual($idMunicipio);
+        //dd($municipio);
 
-        $fileName = ('Municipios_geral.pdf');
-
+        $fileName = ('Municipio_individual.pdf');
 
         $mpdf = new \Mpdf\Mpdf([
             'orientation' => 'L',
@@ -200,32 +200,28 @@ class DashboardController extends Controller
                         Secretaria do Trabalho e Economia Solidaria/SETRES
                     </td>
                     <td style="width: 540px;" class="titulo-rel">
-                        RELATÓRIO GERAL
+                        RELATÓRIO:'.$municipio[0]->municipio_nome.'
                     </td>
                 </tr>
             </table>
             <table style="width:1080px; border-collapse: collapse;">
                 <tr>
                     <td rowspan="2" width="35px"  class="col-header-table">Id</td>
-                    <td rowspan="2" width="250px" class="col-header-table" style="text-align:center">Município</td>
-                    <td colspan="5" width="225px" class="col-header-table" style="text-align:center">Companhias</td>
-                    <td rowspan="2" width="90px"  class="col-header-table" style="text-align:center">P. Coleta</td>
-                    <td rowspan="2" width="100px" class="col-header-table" style="text-align:center">Bairros</td>
+                    <td rowspan="2" width="270px" class="col-header-table" style="text-align:center">Companhia</td>
+                    <td rowspan="2" width="80px" class="col-header-table" style="text-align:center">Tipo</td>
                     <td rowspan="2" width="80px"  class="col-header-table" style="text-align:center">Catadores</td>
                     <td colspan="2" width="100px" class="col-header-table" style="text-align:center">Sexo</td>
                     <td colspan="2" width="100px" class="col-header-table" style="text-align:center">Carteira Emitida</td>
-                    <td rowspan="2" width="100px" class="col-header-table" style="text-align:center">Resíduos</td>
+                    <td rowspan="2" width="60px"  class="col-header-table" style="text-align:center">P. Coleta</td>
+                    <td colspan="2" width="325px" class="col-header-table" style="text-align:center">Resíduos</td>
                 </tr>
                 <tr>
-                    <td width="45px" class="col-header-table" style="text-align:center">Associação</td>
-                    <td width="45px" class="col-header-table" style="text-align:center">Avulsa</td>
-                    <td width="45px" class="col-header-table" style="text-align:center">Cooperativa</td>
-                    <td width="45px" class="col-header-table" style="text-align:center">Informal</td>
-                    <td width="45px" class="col-header-table" style="text-align:center">Indefinida</td>
                     <td width="50px" class="col-header-table" style="text-align:center">masc</td>
                     <td width="50px" class="col-header-table" style="text-align:center">fem</td>
                     <td width="50px" class="col-header-table" style="text-align:center">sim</td>
                     <td width="50px" class="col-header-table" style="text-align:center">não</td>
+                    <td width="50px" class="col-header-table" style="text-align:center">Qtd</td>
+                    <td width="275px" class="col-header-table" style="text-align:center">Descricao</td>
                 </tr>
             </table>
         ');
@@ -243,7 +239,7 @@ class DashboardController extends Controller
 
 
 
-        $html = \View::make('admin.dashboard.pdf.pdfrelatoriomunicipiogeral', compact('municipios'));
+        $html = \View::make('admin.dashboard.pdf.pdfrelatoriomunicipioindividual', compact('municipio'));
         $html = $html->render();
 
         $stylesheet = file_get_contents('pdf/mpdf.css');
@@ -257,7 +253,7 @@ class DashboardController extends Controller
 
 
     // Relatorio PDF Associados por Municipio
-    public function relatoriomunicipioindividual($id)
+    public function relatoriomunicipioteste($id)
     {
         $municipio = Municipio::find($id);
 
@@ -314,7 +310,7 @@ class DashboardController extends Controller
         ');
 
 
-        $html = \View::make('admin.municipio.pdf.pdfrelatoriomunicipioindividual', compact('municipio', 'mpdf'));
+        $html = \View::make('admin.municipio.pdf.pdfrelatorioteste', compact('municipio', 'mpdf'));
         $html = $html->render();
 
         $stylesheet = file_get_contents('pdf/mpdf.css');

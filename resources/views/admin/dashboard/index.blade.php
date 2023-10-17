@@ -392,7 +392,7 @@
                                     <tr>
                                         <th colspan="8">Município: <span id="municipioSelecionado" style="font-weight: bold; font-size:20px;"></span></th>
                                         <th colspan="2"style="text-align: right">
-                                            <a class="btn btn-sm" href="{{route('admin.dashboard.relatoriomunicipiogeral', 0)}}" role="button" target="_blank" style="font-size: 20px; color: gray;"  title="Relatório Individual" alt="Relatório Individual"><i class="far fa-file-pdf"  style="font-size: 17px; color: gray"></i> pdf</a>
+                                            <a class="btn btn-sm" href="{{route('admin.dashboard.relatoriomunicipioindividual', 1)}}" role="button" target="_blank" style="font-size: 20px; color: gray;"  title="Relatório Individual" alt="Relatório Individual"><i class="far fa-file-pdf"  style="font-size: 17px; color: gray"></i> pdf</a>
                                         </th>
                                     </tr>
                                     <tr>
