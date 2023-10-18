@@ -206,22 +206,22 @@ class DashboardController extends Controller
             </table>
             <table style="width:1080px; border-collapse: collapse;">
                 <tr>
-                    <td rowspan="2" width="35px"  class="col-header-table">Id</td>
-                    <td rowspan="2" width="270px" class="col-header-table" style="text-align:center">Companhia</td>
-                    <td rowspan="2" width="80px" class="col-header-table" style="text-align:center">Tipo</td>
-                    <td rowspan="2" width="80px"  class="col-header-table" style="text-align:center">Catadores</td>
-                    <td colspan="2" width="100px" class="col-header-table" style="text-align:center">Sexo</td>
-                    <td colspan="2" width="100px" class="col-header-table" style="text-align:center">Carteira Emitida</td>
-                    <td rowspan="2" width="60px"  class="col-header-table" style="text-align:center">P. Coleta</td>
-                    <td colspan="2" width="325px" class="col-header-table" style="text-align:center">Resíduos</td>
+                    <td rowspan="2" class="col-header-table-dashboard" style="width: 35px;">Id</td>
+                    <td rowspan="2" class="col-header-table-dashboard" style="width: 300px; text-align:center">Companhia</td>
+                    <td rowspan="2" class="col-header-table-dashboard" style="width: 80px; text-align:center">Tipo</td>
+                    <td rowspan="2" class="col-header-table-dashboard" style="width: 80px; text-align:center">Catadores</td>
+                    <td colspan="2" class="col-header-table-dashboard" style="width: 100px; text-align:center">Sexo</td>
+                    <td colspan="2" class="col-header-table-dashboard" style="width: 100px; text-align:center">Carteira Emitida</td>
+                    <td rowspan="2" class="col-header-table-dashboard" style="width: 60px; text-align:center">P. Coleta</td>
+                    <td colspan="2" class="col-header-table-dashboard" style="width: 325px; text-align:center">Resíduos</td>
                 </tr>
                 <tr>
-                    <td width="50px" class="col-header-table" style="text-align:center">masc</td>
-                    <td width="50px" class="col-header-table" style="text-align:center">fem</td>
-                    <td width="50px" class="col-header-table" style="text-align:center">sim</td>
-                    <td width="50px" class="col-header-table" style="text-align:center">não</td>
-                    <td width="50px" class="col-header-table" style="text-align:center">Qtd</td>
-                    <td width="275px" class="col-header-table" style="text-align:center">Descricao</td>
+                    <td class="col-header-table-dashboard" style="width: 50px; text-align:center">masc</td>
+                    <td class="col-header-table-dashboard" style="width: 50px; text-align:center">fem</td>
+                    <td class="col-header-table-dashboard" style="width: 50px; text-align:center">sim</td>
+                    <td class="col-header-table-dashboard" style="width: 50px; text-align:center">não</td>
+                    <td class="col-header-table-dashboard" style="width: 50px; text-align:center">Qtd</td>
+                    <td class="col-header-table-dashboard" style="width: 275px; text-align:center">Descricao</td>
                 </tr>
             </table>
         ');
