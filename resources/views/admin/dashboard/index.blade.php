@@ -148,7 +148,7 @@
                                 <div class="mb-0 text-gray-800 h5 font-weight-bold">{{ $qtdSemCarteira }}</div>
                             </div>
                             <div class="col-auto">
-                                <i class="far fa-id-card fa-2x text-black-300"></i>
+                                <i class="fas fa-id-card fa-2x text-black-300"></i>
                             </div>
                         </div>
                     </div>
@@ -392,7 +392,7 @@
                                     <tr>
                                         <th colspan="8">Município: <span id="municipioSelecionado" style="font-weight: bold; font-size:20px;"></span></th>
                                         <th colspan="2"style="text-align: right">
-                                            <a class="btn btn-sm" href="{{route('admin.dashboard.relatoriomunicipioindividual', 1)}}" role="button" target="_blank" style="font-size: 20px; color: gray;"  title="Relatório Individual" alt="Relatório Individual"><i class="far fa-file-pdf"  style="font-size: 17px; color: gray"></i> pdf</a>
+                                            <a id="linkrelatoriopdfmunicipio" class="btn btn-sm" role="button" style="font-size: 20px; color: gray;"  title="Relatório Individual" alt="Relatório Individual"><i class="far fa-file-pdf"  style="font-size: 17px; color: gray"></i> pdf</a>
                                         </th>
                                     </tr>
                                     <tr>
@@ -463,7 +463,17 @@
             // Recupera o valor do campo select
             var municipio_id = this.value;
 
+            /* 
+            // Define a rota (URL) para o atributo href do link (linkrelatoriopdfmunicipio)
+            // A rota não é para uma requisição NORMAL
+            var route = "{{route('admin.dashboard.relatoriomunicipioindividual', 'id')}}";
+                route = route.replace('id', municipio_id);
+                $("#linkrelatoriopdfmunicipio").attr('href', route);
+             */
+
+
             // Recupera o texto do option do campo select, selecionado
+            // A rota é para uma requisição AJAX
             var nomeMunicipioSelecionado = $(this).children("option:selected").text();
             $("#municipioSelecionado").text(nomeMunicipioSelecionado);
 
@@ -559,6 +569,19 @@
                                     <td scope="col" style="width: 350px; text-align: left">${finalResiduosUnicos}</td>
                                 </tr>
                         `);
+
+                    // Define a rota (URL) para o atributo href do link (linkrelatoriopdfmunicipio)
+                    // A rota É para uma requisição NORMAL
+                    var route = "{{route('admin.dashboard.relatoriomunicipioindividual', 'id')}}";
+                        route = route.replace('id', municipio_id);
+                        if(totCompanhias > 0){
+                            $("#linkrelatoriopdfmunicipio").attr('href', route);
+                            $("#linkrelatoriopdfmunicipio").attr('target', '_blank');
+                        } else {
+                            $("#linkrelatoriopdfmunicipio").attr('href', '#');
+                            $("#linkrelatoriopdfmunicipio").attr('target', '_self');
+                        }
+
                 },
                 error: function(result){
                     alert("Error ao retornar dados!");
