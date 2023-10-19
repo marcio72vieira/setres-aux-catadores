@@ -21,7 +21,14 @@
             $total_catadoressemcarteiras = 0;
             $total_pontocoletas = 0;
 
-            $arrTipos = array();
+            $arrTiposCompanhias = array();
+            $arrTiposCompanhiasUnico = array();
+
+            $arrTiposResiduos =  array();
+            $stringTiposResiduos = '';
+            $arrTiposResiduosIndividualizado =  array();
+            $arrTiposResiduosUnico =  array();
+            $stringTiposResiduosUnicos =  '';
 
         @endphp
 
@@ -48,33 +55,47 @@
                 $total_catadoressemcarteiras = $total_catadoressemcarteiras + $dado->companhia_totalsemcarteira;
                 $total_pontocoletas =  $total_pontocoletas + $dado->pontocoleta_total;
 
-                $arrTipos[] = in_array($dado->companhia_tipo, $arrTipos) ? $dado->companhia_tipos : null;
+                // Acrescenta o tpo de companhia ao array
+                $arrTiposCompanhias[] = $dado->companhia_tipo;
+
+                // Acrescenta os tipos de resíduos ao array
+                $arrTiposResiduos[] = $dado->nomeResiduo;
             @endphp
-
-
-            {{--
-                @if(in_array($dado->companhia_tipo, $arrTipos))
-                $arrTipos[] = $dado->companhia_tipo;
-            @endif
-            --}}
-
-
 
         @endforeach
 
+        @php
+            // Acrescenta o tipo de companhia ao array com elementos únicos
+            $arrTiposCompanhiasUnico = array_unique($arrTiposCompanhias);
+
+            // Juntando os tipos de resíduos em uma única string
+            $stringTiposResiduos = join(', ', $arrTiposResiduos);
+
+            // Separando os tipos de resíduos em elementos separados
+            $arrTiposResiduosIndividualizado = explode(", ", $stringTiposResiduos);
+
+            // Acrescenta os tipos de residuos ao array com elementos únicos
+            $arrTiposResiduosUnico = array_unique($arrTiposResiduosIndividualizado);
+
+            // Juntando os tipos de resíduos únicos, em uma única string
+            $stringTiposResiduosUnicos = implode(', ', $arrTiposResiduosUnico);
+
+        @endphp
+
+        {{-- @dd($arrTiposResiduos, $stringTiposResiduos, $arrTiposResiduosIndividualizado, $arrTiposResiduosUnico); --}}
 
         <tr style="background-color: #e3e3e3">
-            <td style="width: 35px" class="dados-lista-dashboard"></td>
-            <td style="width: 300px; text-align:center; font-weight: bold;" class="dados-lista-dashboard">{{ $total_companhias }}</td>
-            <td style="width: 80px;  text-align:center; font-weight: bold;" class="dados-lista-dashboard">{{ count($arrTipos) }}</td>
-            <td style="width: 80px;  text-align:center; font-weight: bold;" class="dados-lista-dashboard">{{ $total_catadores }}</td>
-            <td style="width: 50px;  text-align:center; font-weight: bold;" class="dados-lista-dashboard">{{ $total_catadoresmasculinos }}</td>
-            <td style="width: 50px;  text-align:center; font-weight: bold;" class="dados-lista-dashboard">{{ $total_catadoresfemininos }}</td>
-            <td style="width: 50px;  text-align:center; font-weight: bold;" class="dados-lista-dashboard">{{ $totoal_catadorescomcarteiras }}</td>
-            <td style="width: 50px;  text-align:center; font-weight: bold;" class="dados-lista-dashboard">{{ $total_catadoressemcarteiras }}</td>
-            <td style="width: 60px;  text-align:center; font-weight: bold;" class="dados-lista-dashboard">{{ $total_pontocoletas }}</td>
-            <td style="width: 50px;  text-align:center; font-weight: bold;" class="dados-lista-dashboard"></td>
-            <td style="width: 275px;" class="dados-lista-dashboard">{{$dado->nomeResiduo}}</td>
+            <td style="width: 35px; border-top: 1px solid #5c5a5a;" class="dados-lista-dashboard"></td>
+            <td style="width: 300px; text-align:center; font-weight: bold; border-top: 1px solid #5c5a5a;" class="dados-lista-dashboard">{{ $total_companhias }}</td>
+            <td style="width: 80px;  text-align:center; font-weight: bold; border-top: 1px solid #5c5a5a;" class="dados-lista-dashboard">{{ count($arrTiposCompanhiasUnico) }}</td>
+            <td style="width: 80px;  text-align:center; font-weight: bold; border-top: 1px solid #5c5a5a;" class="dados-lista-dashboard">{{ $total_catadores }}</td>
+            <td style="width: 50px;  text-align:center; font-weight: bold; border-top: 1px solid #5c5a5a;" class="dados-lista-dashboard">{{ $total_catadoresmasculinos }}</td>
+            <td style="width: 50px;  text-align:center; font-weight: bold; border-top: 1px solid #5c5a5a;" class="dados-lista-dashboard">{{ $total_catadoresfemininos }}</td>
+            <td style="width: 50px;  text-align:center; font-weight: bold; border-top: 1px solid #5c5a5a;" class="dados-lista-dashboard">{{ $totoal_catadorescomcarteiras }}</td>
+            <td style="width: 50px;  text-align:center; font-weight: bold; border-top: 1px solid #5c5a5a;" class="dados-lista-dashboard">{{ $total_catadoressemcarteiras }}</td>
+            <td style="width: 60px;  text-align:center; font-weight: bold; border-top: 1px solid #5c5a5a;" class="dados-lista-dashboard">{{ $total_pontocoletas }}</td>
+            <td style="width: 50px;  text-align:center; font-weight: bold; border-top: 1px solid #5c5a5a;" class="dados-lista-dashboard">{{ count($arrTiposResiduosUnico) }}</td>
+            <td style="width: 275px; border-top: 1px solid #5c5a5a" class="dados-lista-dashboard">{{ $stringTiposResiduosUnicos }}</td>
         </tr>
     </table>
 </body>

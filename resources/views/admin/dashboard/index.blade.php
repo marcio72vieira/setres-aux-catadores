@@ -463,7 +463,7 @@
             // Recupera o valor do campo select
             var municipio_id = this.value;
 
-            /* 
+            /*
             // Define a rota (URL) para o atributo href do link (linkrelatoriopdfmunicipio)
             // A rota não é para uma requisição NORMAL
             var route = "{{route('admin.dashboard.relatoriomunicipioindividual', 'id')}}";

@@ -35,7 +35,8 @@ class MainController extends Controller
 
             //return redirect()->route('admin.residuo.index');
             //return redirect()->route('admin.bairro.index');
-            return view('admin.associado.index');
+            //return view('admin.associado.index');
+            return redirect()->route('admin.dashboard.index');
 
         }
 
